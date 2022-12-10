@@ -76,7 +76,7 @@ consider the type family of vectors of fixed length:
 ```
 
 Here `Vec[\T]` is not one type, but a whole _family of types_, one for each natural number `n`.
-The signature `: Nat → *` means roughly “a function mapping natural numbers to types“.
+The “type” `Nat → *` of `Vec[T]` means roughly “a function mapping natural numbers to types“.
 The generator `Empty` satisfies the type `Vec[T](0)`, vector of `T`s of zero length.
 Generators `(head ::)` take a vector `\tail : Vec[T](\n)` of _some_ length `\n` (notice the freshness marker) and
 generate a vector of length `n' = n + 1`.
@@ -622,25 +622,30 @@ Synthetic Expr:
 ----------------------------
 
 We came incredibly near to having a Construction Calculus expressive enough to accomodate not only the discrete
-mathematics (that has been there for decades), but also all of undergraduate mathematics, analysis, differential
-geometry, topology, homotopy theory, advanced algebra, algebraic geometry and category theory, while retaining
-desirable foundational properties: univalence (transportability of theorems and constructions between identifiable
-objects together with structural identity principle, lack of non-univalent “strong” equality), decidability of type
-checking, computability, compatibility with axiom of choice, relative consistency wrt to CZF/ZFC + suitable large
-cardinal axioms (CZF for the predicative intuitionistic version, ZFC for the version with AC). In future we hope to
-establish the language of this construction calculus as purely inductive type family inside of itself and bulid
-a hierarchy of inner models a la [“The Gentle art of levitation“](https://www.irif.fr/~dagand/papers/levitation.pdf)
-by J. Chapman, P.-E. Dagand, C. McBride and P. Morris, which would round up the journey.
+mathematics, but also all of undergraduate mathematics, analysis, differential geometry, topology, homotopy theory,
+advanced algebra, algebraic geometry, and category theory, while retaining
+desirable foundational properties:
+- univalence (transportability of theorems and constructions between identifiable
+objects together with structural identity principle, lack of non-univalent “strong” equality),
+- decidability of type checking,
+- computability,
+- compatibility with the Axiom of Choice,
+- relative consistency wrt to ZFC + large cardinal (CZF + large cardinal for the predicative version).
 
-Ultimately, we would also like to provide machinery to work with axiom of choice or its weaker versions (double
-negation elimination and ultrafilter lemma) in a fenced fashion, without compromising computational properties
-of the surroundings. Possibly, it would be a subtask of a larger goal to provide support for modal extensions
+In the future, we hope to establish the language of this construction calculus as purely inductive type family
+inside of itself and bulid a hierarchy of inner models a la [“The Gentle art of levitation“](https://www.irif.fr/~dagand/papers/levitation.pdf)
+by J. Chapman, P.-E. Dagand, C. McBride and P. Morris, completing the theory.
+
+Ultimately, we would also like to provide an apparatus to work with the Axiom of Choice or its weaker versions (double
+negation elimination and ultrafilter lemma) in a fenced fashion, without compromising computational properties of the
+parts outside of the scope where a constructive taboo was involved.
+Possibly, it would be a subtask of a larger goal to provide support for modal extensions
 like the [real-cohesive homotopy type theory](https://arxiv.org/abs/1509.07584) of Mike Shulman, as embedded DSLs.
 
-In our view, the next step would be to make the formal system comfortable to work with, in particular by developing
-nice machinery for ν-rules, ornaments, subtyping and derived implicits that include SMT-assisted proof term search.
+In our opinion, the next step would be to make the formal system comfortable to work with, in particular by developing
+machinery for ν-rules, ornaments, subtyping, and derived implicits that include SMT-assisted proof term search.
 
 That being done, one could consider adressing linear dependent types and quantum computations, as well as
 generalizing inductive and behavioral types to accomodate the quantum analogon of algebraic theories, namely
-[Partial Algebraic Theories](https://arxiv.org/pdf/2011.06644.pdf) and develop notion of their models over
+[Partial Algebraic Theories](https://arxiv.org/pdf/2011.06644.pdf), and develop a notion of their models over
 a partial field restoring the classical algebraic theories for the case of the “field with one element“ 𝔽₁.
