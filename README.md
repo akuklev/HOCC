@@ -22,7 +22,7 @@ This work heavily builds upon (mostly unpublished) ideas of C. McBride.
 We'll use the term _Construction Calculi_ for type theories intended to serve as general purpose structuralist
 foundations of mathematics and capable of expressing polymorphic constructions and theorems, i.e. constructions
 and theorems applying to all mathematical objects of certain kind (say, Groups or Categories) w/o size limitations.  
-Type theories not striving to be a general purpose mathematical foundations will be referred as _domain-specific
+Type theories not striving to serve as general purpose foundational frameworks will be referred as _domain-specific
 type theories_.
 
 Construction calculi must be able to express typed higher-order intuitionistic logic, constructive proof in natural
