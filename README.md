@@ -451,7 +451,7 @@ Synthetic Expr:
 ... теперь надо сделать STLC, на его примере ввести редукции и бидирекциональность
 -->
 
-§ Extended Algebraic Theories and their functorial semantics
+§ Extended Algebraic Theories and their Functorial Semantics
 ------------------------------------------------------------
 
 ...
