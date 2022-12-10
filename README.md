@@ -1,6 +1,8 @@
 Towards Higher Observational Calculus of Constructions
 ======================================================
 
+[author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
+
 We propose (a sketch of) an extension HOCC of the Higher Observational Type Theory (HOTT) by parametric quantifiers,
 a first-class notion of Reedy categories and inductive type families indexed and fibered above them. This combination
 enables flawless handling of higher categorical objects and naturally occuring large categories. In particular, HOCC
@@ -12,6 +14,7 @@ models. This justifies viewing type-theoretic presentations of weak ω-categorie
 and virtual equipments (by M. New, D. Licata) as extended algebraic definitions.
 
 This work heavily builds upon (mostly unpublished) ideas of C. McBride.
+
 
 § Introduction
 --------------
