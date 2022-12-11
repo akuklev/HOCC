@@ -156,10 +156,11 @@ The index `NatBound` ist not just a natural number. We want `FiniteVec[T,0][n]` 
 `FiniteVec[T,0][m]` whenever `n < m` and we want trailing zeroes to be ignored, i.e. sequences `(x :: y :: z)`
 and `(x :: y :: z :: 0)` to be equal.
 
----
 
-**WARNING: THE REST OF THIS SECTION HAS TO BE REWRITTEN AFTER THE PREVIOUS SECTION HAS BEEN COMPLETED
+**WARNING: THE REST OF THIS SECTION HAS TO BE REWRITTEN AFTER THE PREVIOUS SECTION HAS BEEN COMPLETED**
+
 <!--
+
   In order to get there let us define the following index:
   ```
   #Index NatBound
