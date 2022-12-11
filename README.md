@@ -12,8 +12,8 @@ non-univalent equality.
 
 Purely inductive type families indexed and fibered over simultaneously defined Reedy categories correspond precisely
 to bidirectional presentations of dependent type theories and allow to develop natural functorial semantics of their
-models. This justifies viewing type-theoretic presentations of weak ω-categories (by E. Finster, S. Mimram et al.)
-and virtual equipments (by M. New, D. Licata) as extended algebraic definitions.
+models. This justifies viewing type-theoretic presentations of [weak ω-categories](https://arxiv.org/abs/1706.02866)
+and [virtual equipments](https://arxiv.org/abs/2210.08663) as extended algebraic definitions.
 
 This work heavily builds upon (mostly unpublished) ideas of C. McBride.
 
