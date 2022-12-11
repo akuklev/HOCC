@@ -273,9 +273,9 @@ The canonical example of an infinite index is given by `Natⱽ`:
   0    : Natⱽ
   (_') : Natⱽ → Natⱽ → Natⱽ
   
-  (\n)'.|Field(\m : Fin[m])⟩ : m
+  (\n)' [Field(\m : Fin[m])⟩ m
   
-  |Field(_)⟩|Field(\n)⟩ : n
+  [Field(\m)⟩^: (_ ↦ [Field(m)⟩)
 ```
 
 For a given `T : Natⱽ → *` the restriction `T ↾ n` is the dependent record
