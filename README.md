@@ -82,7 +82,7 @@ Generators `(head ::)` take a vector `\tail : Vec[T](\n)` of _some_ length `\n` 
 freshness marker) and generate a vector of length `n' = n + 1`.
 
 In this work, we propose to introduce inductive types indexed over more general entities than
-inductive types themselves. We will call these entities indexes. Indexes are inductive types
+inductive types themselves. We will call these entities index types. Index types are inductive types
 endowed with a (correct by construction, inductively generated) structure of a Reedy category
 with connections.
 We built upon an unpublished idea of Conor McBride presented in his Topos Institute Lecture
@@ -90,7 +90,7 @@ We built upon an unpublished idea of Conor McBride presented in his Topos Instit
 the kind `I → *` for an index `I` will semantically correspond to type-valued presheaves on
 `I` as Reedy category.
 
-Using this notion, we be able to define various very useful indices:
+Using this notion, we will be able to construct various very useful indices:
 - The index CatCarrier so that `[\C : CatCarrier → *] ≡ [\Ob : *, \Mor : Ob → Ob → *]`;
 - For each notion of n-categories (globular, simplicial, cubical, etc) the index `nCatCarrier[n]` so that
 ```
@@ -108,6 +108,84 @@ precisely to semi-simplicial and simplicial types respectively, which allows to 
 various other interesting structures. In particular, one covers the notion of _very-dependent types_ as
 introduced by Jason J. Hickey and A. Kopylov, cf. [“Formal objects in type theory using very dependent
 types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
+
+§ Overview of available types
+-----------------------------
+
+Before proceeding to our contributions let us breefly chart the landscape of available types.
+
+In introduction we only mentioned inductive types. These are used in construction calculi to represent canonical
+mathematical objects such as natural numbers, real numbers, various combinatorial objects (e.g. graphs), and
+finitary collections of objects of known type, e.g. pairs of integers, couples (unordered pairs) of rationals,
+(finite) lists of reals, etc. For inductive types we exactly know what their values are and how are they built
+from ground up.
+
+The duals notion are behavioral types.
+
+§§ Behavioural types
+--------------------
+
+Behavioural types are described not in terms of generators, but in terms of _extractors_. For behavioral types
+one remains completely agnostic about nature of their values as long as they provide a given “interface“.
+Consider the type of possibly infinite streams:
+```
+#Structure Stream[\T]
+  head : T
+  tail : Maybe[ Stream[T] ]
+
+where
+#Inductive Maybe[\T]
+  Nothing      : Maybe[T]
+  Value(t : T) : Maybe[T]
+```
+
+Here the inhabitants of the type `Stream[T]` are defined as values with distinguished extractors `head`, yielding
+a value of the type `T`, and `tail` yielding either the rest of the stream or the value `Nothing` if the stream
+ends there.
+
+Values of behavioural types can be defined by specifying actions of their extractors (recursion is allowed):
+```
+#Defintion fibonacci-sequence(\current \previous : Nat) : Stream[Nat]
+  head ↦ current
+  tail ↦ fib((current + previous), current)
+
+#Default fibonacci-sequence
+  fibonacci-sequence(1, 1)
+```
+
+Yet we have to assume that a value `s : Stream[Nat]` might be a thing “living outside of the computer” that is
+“measured” by `head` and `tail`: it can be shown constructively inside HOCC that the type `Stream[Nat]` is not
+exhausted by values that can be written down inside the theory. The type of such streams is uncountably infinite.
+
+§§ Behavioural types and subtyping
+---------------------------------
+
+We can cause no problem by silently assuming that a natural number `n : Nat` is as well an integer number, that is `n`
+also satisfies `n : Int`. In fact we already have met expressions satisfying multiple type annotations without
+causing any harm: the generator `Empty` satisfies `Empty : List[T]` for any `T` and also `Empty : Vec[T](0)` for any
+`T`. It might be tempting to assume that any value of the type
+```
+#Structure
+   name : Text
+   description: Text
+
+There is no problem
+
+in silently assuming
+
+Contravariant subtyping messes up with equality
+
+§§ Behavioral types
+---------------------------
+
+
+or finite sets
+
+
+
+First of all, given two types `X Y : *` the type `X → Y` of functions from `X` to `Y` can be defined.
+For example
+
 
 § Indices
 ---------
