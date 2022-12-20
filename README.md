@@ -20,14 +20,12 @@ This work heavily builds upon (mostly unpublished) ideas of C. McBride.
 § Introduction
 --------------
 
-The term _Construction Calculi_ employed in the title of this paper refers to type theories that (1) are intended to
-serve as general purpose structuralist foundations of mathematics and (2) are capable of expressing polymorphic
-constructions and theorems, i.e. constructions and theorems applying to all mathematical objects of certain kind
-(say, Groups or Categories) w/o size limitations. At times we will also mention type theories not striving to serve
+The term _Construction Calculi_ employed in the title of this paper refers to type theories that are intended to
+serve as general purpose structuralist foundations of mathematics. At times we will also mention type theories not striving to serve
 as general purpose foundational frameworks, these will be referred to as _domain-specific type theories_.
 
 Construction calculi must be able to express typed higher-order intuitionistic logic, constructive proofs in natural
-deduction style, formal axiomatic structures (such as Eucledian geometry) together with formal constructions on them,
+deduction style, formal axiomatic theories (such as Eucledian geometry) together with formal constructions on them,
 and, last but not least, canonical mathematical objects such as natural and (analytic) real numers, lists, sequences,
 functions, relations, etc. Such canonical objects are introduced there as inductive types.
 
@@ -112,15 +110,17 @@ types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
 § Overview of available types
 -----------------------------
 
-Before proceeding to our contributions let us breefly chart the landscape of available types.
+Before proceeding to our contributions let us breefly chart the landscape of available types. This overview can
+be safely skipped by readers versed in type theory.
 
-In introduction we only mentioned inductive types. These are used in construction calculi to represent canonical
+The introduction only mentions inductive types. These are used in construction calculi to represent canonical
 mathematical objects such as natural numbers, real numbers, various combinatorial objects (e.g. graphs), and
 finitary collections of objects of known type, e.g. pairs of integers, couples (unordered pairs) of rationals,
-(finite) lists of reals, etc. For inductive types we exactly know what their values are and how are they built
-from ground up.
+(finite) lists of reals, etc. Inductive types are “built from below”, i.e. it is exactly knows what their values
+are and how are they built from ground up.
 
-The duals notion are behavioral types.
+However, inductive types are insufficient to describe everything of mathematical interest; one also needs the
+dual notion of behavioral types.
 
 §§ Behavioural types
 --------------------
@@ -133,7 +133,7 @@ Consider the type of possibly infinite streams:
   head : T
   tail : Maybe[ Stream[T] ]
 
-where
+ where
 #Inductive Maybe[\T]
   Nothing      : Maybe[T]
   Value(t : T) : Maybe[T]
@@ -143,69 +143,149 @@ Here the inhabitants of the type `Stream[T]` are defined as values with distingu
 a value of the type `T`, and `tail` yielding either the rest of the stream or the value `Nothing` if the stream
 ends there.
 
-Values of behavioural types can be defined by specifying actions of their extractors (recursion is allowed):
+Values of behavioural types can be defined by specifying actions of their extractors (recursion is allowed). To give
+an example, let us define the Fibonacci sequence. Fibonacci sequence is a sequence, in which each number is the sum
+of the two preceding ones. A Fibonacci sequence can be defined for any two initial elements, while _the_ Fibonacci
+sequence is a Fibonaccy sequence starting with 0 and 1:
+```
+(0,) 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ...
+```
+
+Here is how to define them:
 ```
 #Defintion fibonacci-sequence(\current \previous : Nat) : Stream[Nat]
   head ↦ current
-  tail ↦ fib((current + previous), current)
+  tail ↦ fibonacci-sequence((current + previous), current)
 
-#Default fibonacci-sequence
-  fibonacci-sequence(1, 1)
+#Default the-fibonacci-sequence
+  fibonacci-sequence(1, 0)
 ```
 
-Yet we have to assume that a value `s : Stream[Nat]` might be a thing “living outside of the computer” that is
-“measured” by `head` and `tail`: it can be shown constructively inside HOCC that the type `Stream[Nat]` is not
-exhausted by values that can be written down inside the theory. The type of such streams is uncountably infinite.
+The `fibonacci-sequence(n, m)` yields `n` when asked for a `head` and `fibonacci-sequence(n + m, n)` when asked for
+a tail.
 
-§§ Behavioural types and subtyping
----------------------------------
+In contrast to values of purely inductive types (which are exhausted by ones that can be explicitly written down),
+a value `s : Stream[Nat]` might be a thing “living outside of the computer” being “measured” by `head` and
+`tail`: it can be shown constructively that the type `Stream[Nat]` is not exhausted by values that can be written
+down inside the theory: the type of `Nat`-streams is uncountably infinite. Note that equality of two streams
+`s g : Stream[Nat]` cannot be in general verified in finite time. Verifying such equality would in general require
+checking equality for an infinite number of terms.
 
-We can cause no problem by silently assuming that a natural number `n : Nat` is as well an integer number, that is `n`
-also satisfies `n : Int`. In fact we already have met expressions satisfying multiple type annotations without
-causing any harm: the generator `Empty` satisfies `Empty : List[T]` for any `T` and also `Empty : Vec[T](0)` for any
-`T`. It might be tempting to assume that any value of the type
+§§ Functions
+------------
+
+Functions `f : X → Y` can be seen as a trivial case of behavioral types: behavioral types with a family
+of non-recursive extractors parametrized by values `x : X`:
+
 ```
-#Structure
-   name : Text
-   description: Text
+#Structure Function[\X \Y]
+  apply : X → Y
+```
 
-There is no problem
+While it is customary in computer science to use the word “function” for partial functions (that might sometimes
+fail to yield a result), in mathematics and type theories by “functions” one means total and deterministic
+functions.
 
-in silently assuming
+That's how one defines a function on `Nat`:
 
-Contravariant subtyping messes up with equality
+```
+#Define double : Nat → Nat
+  0 ↦ 0
+  (\n)' ↦ ( double(n) )''
+```
 
-§§ Behavioral types
----------------------------
+Functions on inductive types can be defined by exhaustive pattern matching on their generators. In case of recursive
+generators, definitions are allowed to be inductive. In the above example one performs an exhaustive pattern matching
+on natural numbers: natural number is either a zero `0`, or a successor `n'` of a natural number `n`. Thus one
+defines the value of the function `double` case by case first for zero `0` and then for successor `n'`, in the latter
+case the value `double(n)` is already “known”. The ability to define functions (terminating, total functions) on
+inductive types by pattern matching on their generators reflects the defining property of inductive types: their
+values are guaranteed to be finitary compositions of their generators.
+
+§§ Mixed and purely inductive types
+-----------------------------------
+
+Types are not either inductive or behavioral, but can be mixed. For example the types `List[ Stream[Nat] ]` and
+`Maybe[Nat → Nat]` are not purely inductive any more. Now let us define purely inductive types because of their
+remarkable properties.
+
+§Definition
+  Purely inductive types are inductive types that either a finite number of generators (like `Nat`) or
+  only generator families parametrized by other purely inductive types. For example, the types `Nat`,
+  `List[Nat]` and `List[List[Nat]]` are purely inductive, while the type `List[Nat → Nat]` is not pure.
+
+From within the type theory purely inductive types can be shown to be either finite, or countably infinite,
+that is, their values can be explicitly numbered by natural numbers `n : Nat` in one-to-one fasion.
+Equality of values of purely inductive types is decidable, that is checkable algorithmically in finite number
+of steps.
+
+§§ Dependent Functions
+----------------------
+
+For a type `X` and an inductive type family `Y : X -> *` indexed over it, there is also a type
+`∀(\x : X) Y(x)`, read “for each `x` of `X` a value of the type `Y(x)`”. For example the function
+&nbsp; `f : ∀(\n : Nat) Vec[Nat](n)`
+must yield a vector of length `n` for each number `n`.
 
 
-or finite sets
+; while defining the
+action of the function on a value one may assume the ac
+
+----
+
+If generators
+happen to be recursive (like the `(_') : Nat → Nat`), action
+and may employ
+recursion as long as it can be syntactically checked
+
+§§ Quotient inductive types and Identification types
+----------------------------------------------------
+
+Quotient inductive types are the types given in terms of generators and _relations_.
+Here is an example of unordered pair:
+```
+#Inductive UPair[\T]
+  ⦃_,_⦄ : T → T → UPair[T]
+  swap(\a \b : T) : ⦃a, b⦄ = ⦃b, a⦄
+```
+
+charged relations.
+
+decidable type checking -> decidable proof checking
+proof-relevant -> computationally relevant types
+proff-irrelevant -> computationally trivial types
+
+Correspondence `A → B → *` with given left and right inverses `lt : B -> A, rt ; A -> B`.
 
 
+and (2) are capable of expressing polymorphic
+constructions and theorems, i.e. constructions and theorems applying to all mathematical objects of certain kind
+(say, Groups or Categories) w/o size limitations.
 
-First of all, given two types `X Y : *` the type `X → Y` of functions from `X` to `Y` can be defined.
-For example
-
-
-§ Indices
----------
+§ Index types
+-------------
 
 As we've seen, some inductive types have only finite number of generators (like `Nat`) while some have
 generator families (like `(head ::) : List[T] → List[T]`) that can be infinite, possibly even uncountably infinite.
 
-Purely inductive types are inductive types that either a finite number of generators (like Nat) or only generator
+Purely inductive types are inductive types that either a finite number of generators (like `Nat`) or only generator
 families parametrized by other purely inductive types. For example, the types `Nat`, `List[Nat]` and `List[List[Nat]]`
 are purely inductive, while the type `List[Nat → Nat]` is not pure.
 
-Purely inductive types are discrete (have decidable equality) and either finite or countably infinite. Due to
-Hedberg's theorem, purely inductive types satisfy the uniqueness of identifications (UIP), which is very important
-in case we use these types as indices. Consider a purely inductive type `I` and a dependent type `P(\i : I) : *`.
-If we have `e : (i = j)`, we can cast values `x : P[i]` to `cast[P](e, x) : P[j]`, which is in general not possible
-for not purely inductive types in place of `I`.
+Purely inductive types have decidable equality and either finite or countably infinite. As types with decidable
+equality, they satisfy the UIP-condition `∀(a b : T) ∀(e o : a = b) e = o`, which is known as Hedberg's theorem.
+**[UIP Dicussed above]**
+This property is very useful for indexes. Consider a type `I` and an inductive type family
+`P : I -> *` indexed over it. If `I` is satisfies UIP by definition, and one establishes for two its elements
+`\a \b : I` that `\e : (a = b)`, values of `\x : P(a)` uniquely correspond to values `P(b)`. This correspondence is
+given by operator called `coerce[P](e, x) : P(b)`. Without UIP, one can show that `P(a) = P(b)` and ...
+
 
 Purely inductive types have one more important metatheoretical propery we'll make use of: inhabitants of each purely
-inductive type are naturally ordered lexicographically, and this order is guaranteed to be wellfounded. That is,
+inductive type are naturally ordered lexicographically, and this order is guaranteed to be well-founded. That is,
 metatheoretically we have a function `deg(i)` that maps inhabitants to a countable ordinal.
+
+... несколько слов о том, зачем следующее определение, а главное нафига
 
 An index type `I : Idx` is a purely inductive type `|I|` with additional structure of inductively generated
 correct-by-construction Reedy category, that is for each inhabitant `\i : I`,
@@ -451,13 +531,15 @@ Prop ⊂ Prop⁺ ⊂ Prop⁺⁺ ⊂ ···
 ```
 
 The universe Prop⁺ and all higher universes in this hierarchy taken together with maps between their types as
-categories are in fact elementary toposes: (2) guarantees them to have subobject classifier, (3) guarantees them
+categories are in fact elementary toposes*: (2) guarantees them to have subobject classifier, (3) guarantees them
 to have a natural number object, (3 + 5) guarantees them to have all finite limits `Σ(\x : X, \y : Y) f(x) = g(y)`,
 (5) makes them locally cartesian closed (`∀(\x : X) Y(x)`).
 All purely inductive types including `List[Nat]`, `List[List[Nat]]` and similar much more complicated ones land
 in the very first nontrivial universe `Prop⁺` since they are countable and discrete by construction which makes
 them isomorphic either to the type of natural numbers `Nat` or to a finite type `Fin(n)` which are already present
 in `Prop⁺`.
+
+[Except for the principle of Unique Choice]
 
 We can develop a system of codes for all inductive and coinductive types definable in our type definition language
 and adjust the closedness requirements (3) and (4), to ensure the following metatheoretic property:
