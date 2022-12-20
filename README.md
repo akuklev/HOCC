@@ -219,35 +219,107 @@ that is, their values can be explicitly numbered by natural numbers `n : Nat` in
 Equality of values of purely inductive types is decidable, that is checkable algorithmically in finite number
 of steps.
 
-§§ Dependent Functions
-----------------------
+§§ Predicates, Relations and Dependent Functions
+------------------------------------------------
 
-For a type `X` and an inductive type family `Y : X -> *` indexed over it, there is also a type
+In Construction Calculi logical propositions are represented by types inhabited by proofs of respective
+propositions. False propositions are the ones that can be shown to be empty, that is have not inhabitants
+(no proofs). Constructively true propositions are the ones for which one can exhibit an inhabitant (a proof).
+
+By means of indexed inductive types one can define predicates and propositions on inductive types:
+
+```
+#Inductive (_-is-even) : Nat → Ω
+  zero-is-even : (0)-is even
+  suc-of-suc-is-even(\n : Nat) : (n)-is even → (n'')-is even
+```
+
+Here, the predicate `-is-even` on natural numbers is defined. Equivalently, for each natural number `n`
+a type `(n)-is-even` is defined, which can be either empty (which stands for false) or have an inhabitant
+(which stands for true). Here the generator `zero-is-even` populates `(0)-is even`, and the generator
+`suc-of-suc-is-even(\n : Nat)` populates `(n + 2)-is even` whenever `(n)-is even`.
+
+While this particular predicate is decidable (one can easily check if a given number is even), in general
+inductively defined predicates are not. For example it is still unknown (cf. Collatz conjecture) if the following
+predicate is decidable:
+```
+#Inductive Collatz-Terminating : Nat → Ω
+  ct-zero : Collatz-Terminating(0)
+  ct-one : Collatz-Terminating(1)
+  ct-half(\n) : Collatz-Terminating(n) → Collatz-Terminating(2 · n)
+  ct-triple-plus-one(\n) : Collatz-Terminating(3 · n + 1) → Collatz-Terminating(n)
+```
+
+In dependent type theories there are so called dependent function types:
+For a type `X` and an inductive type family `Y : X -> *` indexed over it, there is a type
 `∀(\x : X) Y(x)`, read “for each `x` of `X` a value of the type `Y(x)`”. For example the function
 &nbsp; `f : ∀(\n : Nat) Vec[Nat](n)`
 must yield a vector of length `n` for each number `n`.
 
+When applied to predicates, dependent functions reassemble universal quantifier. The type
+```
+∀(\n : Nat) Collatz-Terminating(n)
+```
 
-; while defining the
-action of the function on a value one may assume the ac
+is populated precisely by functions yielding a proof of `Collatz-Terminating(n)` for each `n`,
+that is precisely by constructive proofs of the proposition `∀(\n : Nat) Collatz-Terminating(n)`.
 
-----
+To give an example how such proofs might look like consider an easier proposition:
+```
+∀(\n : Nat) ( double(n) )-is-even
+```
 
-If generators
-happen to be recursive (like the `(_') : Nat → Nat`), action
-and may employ
-recursion as long as it can be syntactically checked
+Functions are defined by pattern matching, and we are allowed to unfold the definition of `double` while matching:
+```
+#Define prf : ∀(\n : Nat) ( double(n) )-is-even
+  0 ↦ zero-is-even : ( double(0) )-is-even
+  (\n)' ↦ suc-of-suc-is-even( double(n) )(prf(n) : ( double(n) )-is-even) : ( double(n') )-is-even
+```
+
+Relations on a type can be defined as twice indexed inductive types:
+```
+#Inductive (≤) : Nat → Nat → Ω
+  ≤-refl(\n) : (n ≤ n)
+  ≤-succ(\n \m) : (n ≤ m) → (n ≤ m')
+```
+
+Each inductive automatically comes with an indictively defined equality relation that exactly follows the pattern
+of its generators. For example, for the type of natural numbers the equality relation can be given as:
+```
+#Inductive (=) : Nat → Nat → Ω
+  0= : (0 = 0)
+  (\n)'= : (n' = n')
+```
+
+For behavioral types, equality follows the pattern of their extractors and represents observational equivalence,
+that is two “things” are equal precisely if applying same extractors yields same values. In particular, for two
+functions `\f \g : X → Y` the equality is given by
+```
+pointwise : ∀(\x : X) f(x) = f(y)
+```
+
+In particular, in type theory two implementations of the same function are considered equal as functions if they
+yield equal results on equal arguments.
+
 
 §§ Quotient inductive types and Identification types
 ----------------------------------------------------
+
 
 Quotient inductive types are the types given in terms of generators and _relations_.
 Here is an example of unordered pair:
 ```
 #Inductive UPair[\T]
-  ⦃_,_⦄ : T → T → UPair[T]
-  swap(\a \b : T) : ⦃a, b⦄ = ⦃b, a⦄
+⦃_,_⦄ : T → T → UPair[T]
+swap(\a \b : T) : ⦃a, b⦄ = ⦃b, a⦄
 ```
+
+Functions on
+
+§§ Dependent Functions
+----------------------
+
+
 
 charged relations.
 
