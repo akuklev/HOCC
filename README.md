@@ -219,6 +219,12 @@ that is, their values can be explicitly numbered by natural numbers `n : Nat` in
 Equality of values of purely inductive types is decidable, that is checkable algorithmically in finite number
 of steps.
 
+Metatheoretically, that is from outside of the respective type theory, one strives to show two desirable
+computational properties of the type theory: normalization and canonicity. Normalization means that any
+expression of the type `T` eventually reduces to the normal form, while canonicity means that for purely
+inductive types `T` the only normal forms in empty context are given by finite compositions of respective
+generators.
+
 §§ Predicates, Relations and Dependent Functions
 ------------------------------------------------
 
@@ -315,13 +321,6 @@ swap(\a \b : T) : ⦃a, b⦄ = ⦃b, a⦄
 ```
 
 Functions on
-
-§§ Dependent Functions
-----------------------
-
-
-
-charged relations.
 
 decidable type checking -> decidable proof checking
 proof-relevant -> computationally relevant types
