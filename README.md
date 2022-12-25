@@ -3,17 +3,20 @@ Towards Higher Observational Construction Calculus
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 
-We propose (a sketch of) an extension HOCC (Higher Observational Construction Calculus) of the [Higher Observational
-Type Theory (HOTT)](https://ncatlab.org/nlab/show/higher+observational+type+theory) by parametric quantifiers,
-a first-class notion of Reedy categories and inductive type families indexed and fibered above them. This combination
-enables flawless handling of higher categorical objects and naturally occuring large categories. HOCC
-provides dependent session types, simplicial types and other Reedy presheafs without reccuring to any kind of
-non-univalent equality.
+We propose (a sketch of) an extension HOTT<sup>Reedy</sup> of the [Higher Observational Type
+Theory](https://ncatlab.org/nlab/show/higher+observational+type+theory) by a first-class notion of Reedy
+categories and inductive type families indexed over them. HOTT<sup>Reedy</sup> provides dependent
+session types, simplicial types and other Reedy presheafs without reccuring to any kind of non-univalent equality.
 
 Purely inductive type families indexed and fibered over simultaneously defined Reedy categories correspond precisely
-to bidirectional presentations of dependent type theories and allow developing natural functorial semantics for their
-models. This justifies viewing type-theoretic presentations of [weak ω-categories](https://arxiv.org/abs/1706.02866)
+to bidirectional presentations of dependent type theories, which allows developing natural functorial semantics for
+such theories in strong analogy with functorial semantics of algebraic theories. This justifies viewing
+type-theoretic presentations of [weak ω-categories](https://arxiv.org/abs/1706.02866)
 and [virtual equipments](https://arxiv.org/abs/2210.08663) as algebraic definitions.
+
+Further extending the theory by parametric quantifiers and a universe of computationally-irrelevant propositions,
+we obtain what could be called higher observational construction calculus (HOCC). This combination enables flawless
+handling of higher categorical objects and naturally occuring large categories.
 
 This work heavily builds upon (mostly unpublished) ideas of C. McBride.
 
