@@ -76,7 +76,9 @@ consider the type family of vectors of fixed length:
 ```
 
 Here `Vec[\T]` is not one type, but a whole _family of types_, one for each natural number `n`.
-The “type” `Nat → *` of `Vec[T]` means roughly “a function mapping natural numbers to types“.
+The “type” `Nat → *` of `Vec[T]` means “a function mapping natural numbers to types“ modulo issues stemming from
+the fact that the class of all types `*` is not really a type itself and requires somewhat careful handling to avoid
+running into the [barber issues](https://en.wikipedia.org/wiki/Barber_paradox).
 The generator `Empty` satisfies the type `Vec[T](0)`, vector of `T`s of zero length.
 Generators `(head ::)` take a vector `\tail : Vec[T](\n)` of _some_ length `\n` (notice the
 freshness marker) and generate a vector of length `n' = n + 1`.
