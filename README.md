@@ -26,8 +26,8 @@ capable of expressing constructions and theorems applying to all mathematical ob
 or Categories) w/o size limitations. At times we will also mention type theories not striving to serve as general
 purpose foundational frameworks, these will be referred to as _domain-specific type theories_.
 
-Construction calculi must be able to express typed higher-order intuitionistic logic, constructive proofs in natural
-deduction style, formal axiomatic theories (such as Eucledian geometry) together with formal constructions on them,
+Construction calculi must be able to express typed higher-order intuitionistic logic including proofs, formal
+axiomatic theories (such as Eucledian geometry) together with formal constructions on them,
 and, last but not least, canonical mathematical objects such as natural and (analytic) real numers, lists, sequences,
 functions, relations, etc. Such canonical objects are introduced there as inductive types.
 
