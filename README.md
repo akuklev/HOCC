@@ -21,8 +21,10 @@ This work heavily builds upon (mostly unpublished) ideas of C. McBride.
 --------------
 
 The term _Construction Calculi_ employed in the title of this paper refers to type theories that are intended to
-serve as general purpose structuralist foundations of mathematics. At times we will also mention type theories not striving to serve
-as general purpose foundational frameworks, these will be referred to as _domain-specific type theories_.
+serve as general purpose structuralist foundations of mathematics. Polymorphic Construction Calculi are additionally
+capable of expressing constructions and theorems applying to all mathematical objects of certain kind (say, Groups
+or Categories) w/o size limitations. At times we will also mention type theories not striving to serve as general
+purpose foundational frameworks, these will be referred to as _domain-specific type theories_.
 
 Construction calculi must be able to express typed higher-order intuitionistic logic, constructive proofs in natural
 deduction style, formal axiomatic theories (such as Eucledian geometry) together with formal constructions on them,
@@ -110,8 +112,10 @@ types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
 § Overview of available types
 -----------------------------
 
-Before proceeding to our contributions let us breefly chart the landscape of available types. This overview can
-be safely skipped by readers versed in type theory.
+Before proceeding to our contributions let us breefly chart the landscape of types and principles of
+Construction Calculi. This overview should be skipped by readers versed in type theory.
+
+***
 
 The introduction only mentions inductive types. These are used in construction calculi to represent canonical
 mathematical objects such as natural numbers, real numbers, various combinatorial objects (e.g. graphs), and
@@ -225,12 +229,71 @@ expression of the type `T` eventually reduces to the normal form, while canonici
 inductive types `T` the only normal forms in empty context are given by finite compositions of respective
 generators.
 
-§§ Predicates, Relations and Dependent Functions
-------------------------------------------------
+§§ Propositions
+---------------
+
+Consider the degenerate inductive type
+
+```
+#Inductive Empty : *
+  /- no constructors -/
+```
+
+This type has no constructors, and in a type theory enjoing normalization and canonicity there can be no expressions
+of the type `Empty` in empty context. At the same time, a function on this type can be defined (as it is the case
+for all inductive types) by pattern matching. Yet there are no constructors to match, such function has no body
+and still exists. In fact there is a unique function from `Empty` to any type `X`. Fortunatelly in cannot be ever
+applied because the type `Empty` has no inhabitants.
 
 In Construction Calculi logical propositions are represented by types inhabited by proofs of respective
-propositions. False propositions are the ones that can be shown to be empty, that is have not inhabitants
-(no proofs). Constructively true propositions are the ones for which one can exhibit an inhabitant (a proof).
+propositions. A function `P → Q` between two propositions by definition turns proofs of `P` into proofs of `Q` and
+therefore is a proof that `P` implies `Q`. The type `Empty` encodes the canonical false proposition: it has no
+proofs and if there were any proofs, (remember, there is a function form `Empty` into any type `X`) it would allow
+prove all propositions `P` (together with their negations `¬P`, because they are propositions as well) therefore
+trivializing the theory, which is known in logics as “ex falso quodlibet”. By the way, negation of an arbitrary
+proposition `P` can be defined as `P → Empty` (`P` is false exactly we we can derive contradiction by assuming it
+to be true).
+
+All provably false propositions can be shown to be equivalent to `Empty`. One direction (`X -> Empty`) comes from
+the definition of negation, the other direction (`Empty -> X`) comes from the fact that there is a function from
+`Empty` into any type. The same way, any true propoistion can be shown to be equivalent to the type `Unit` with
+exactly one element. Yet, one cannot show constructively that the class of all propositions `Ω` is exhausted by this
+two variants: besides provably false propositions and provably true ones there can be unsettled ones. To give a
+concrete example, existance of sets strictly larger than the set of natural numbers and strictly smaller than the
+set of natural number sequences is an example of such an unsettled proposition in the standard set theory. It is known
+as Continuum Hypothesis. Existence of such sets are neither implied nor ruled out by axioms of the set theory.
+There are models of set theory without such sets and there are other perfectly valid models where such sets exist.
+Futhermore, one cannot settle all propostions by adding more axioms. Gödel's incompleteness theorem states that any
+axiomatic theory (with finitely generated system of axioms) has unsettled propositions at least if is powerful enough
+to express natural numbers and multiplication on them as an operation.
+
+While all true propoistions are alike and all false propositions are alike, unsettled propositions are unsettled in
+their own way. It might be that one unsettled proposition is implied by another (e.g. Generalized Continuum
+Hypothesis implies the Continuum Hypothesis, yet both are independent of standard set theory), or they can be
+completely independent. Constructively, the class of all propositions `Ω` is bounded lattice ordered by implication
+`P → Q` with bottom element `Empty` (the false proposition) and top element `Unit` (the true proposition).
+
+The “class” of canonical propositions `Ω` is seen a as a type in most Construction Calculi. It is neither an
+inductive type, nor a behavioural one, and its inhabitants are themselves types (propositions are considered
+to be types inhabited by their respective proofs). Such types (types of types) are known as universes and form
+a third large group of types besides inductive and behavioral ones.
+For any type `X` there is a proposition “`X` is non-empty” that we'll denote `⁰X : Ω`.
+
+As it was already mentioned, the class of canonical propositions `Ω` contains `Empty` and `Unit` and is closed
+under forming functions: for `P Q : Ω`, `(P → Q) : Ω`. It is also closed under forming pairs: a pair of proofs,
+one for `P` and one for `Q` is precisely the proof of `P ‹and› Q`. Via implication and negation one can also define
+the logical conjunction `(‹or›)`. Together with these two logical conjunctions the type `Ω` forms a Heyting algebra,
+moreover a complete one as we will see in the next section.
+
+All constructive calculi of concern are compatible with axiom of double negation elimination `¬¬P → P` that
+trivializes all structure mentioned above to classical logic where every proposition has a definite truth value
+`true` or `false`, yet this axiom is not derivable constructively in general. Double negation elimination can be
+derived constructivly only for a very narrow class of propositions: namely, for decidable ones (these are the ones
+that can be at least in theory checked algorithmically).
+
+
+§§ Predicates, Relations and Dependent Functions
+------------------------------------------------
 
 By means of indexed inductive types one can define predicates and propositions on inductive types:
 
@@ -307,7 +370,6 @@ pointwise : ∀(\x : X) f(x) = f(y)
 In particular, in type theory two implementations of the same function are considered equal as functions if they
 yield equal results on equal arguments.
 
-
 §§ Quotient inductive types and Identification types
 ----------------------------------------------------
 
@@ -328,10 +390,6 @@ proff-irrelevant -> computationally trivial types
 
 Correspondence `A → B → *` with given left and right inverses `lt : B -> A, rt ; A -> B`.
 
-
-and (2) are capable of expressing polymorphic
-constructions and theorems, i.e. constructions and theorems applying to all mathematical objects of certain kind
-(say, Groups or Categories) w/o size limitations.
 
 § Index types
 -------------
