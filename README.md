@@ -300,7 +300,7 @@ that can be at least in theory checked algorithmically).
 §§ Predicates, Relations and Dependent Functions
 ------------------------------------------------
 
-By means of indexed inductive types one can define predicates and propositions on inductive types:
+By means of indexed inductive types one can define predicates on inductive types:
 
 ```
 #Inductive (_-is-even) : Nat → Ω
@@ -350,6 +350,12 @@ Functions are defined by pattern matching, and we are allowed to unfold the defi
   (\n)' ↦ suc-of-suc-is-even( double(n) )(prf(n) : ( double(n) )-is-even) : ( double(n') )-is-even
 ```
 
+The class of all propositions `Ω` is closed under forming arbitrary conjunctions:
+For any family of propositions `P : X → Ω` one can form `∀(\x : X) P(x) : Ω`, which means Ω is a complete Heyting
+algebra. Since `Ω` a complete Heyting algebra and contains any proposition definable within HOCC, subsets of any type
+`T` can be identified with predicates `P : T → Ω`. In fact, we can even introduce special syntax for subset types
+`{\t : T | P(t)}`, for example `{\n : Nat | (n)-is-even ‹and› (10 ≤ n) }`.
+
 Relations on a type can be defined as twice indexed inductive types:
 ```
 #Inductive (≤) : Nat → Nat → Ω
@@ -387,11 +393,7 @@ Here is an example of unordered pair:
 swap(\a \b : T) : ⦃a, b⦄ = ⦃b, a⦄
 ```
 
-Functions on
-
 decidable type checking -> decidable proof checking
-proof-relevant -> computationally relevant types
-proff-irrelevant -> computationally trivial types
 
 Correspondence `A → B → *` with given left and right inverses `lt : B -> A, rt ; A -> B`.
 
