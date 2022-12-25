@@ -111,8 +111,8 @@ various other interesting structures. In particular, one covers the notion of _v
 introduced by Jason J. Hickey and A. Kopylov, cf. [“Formal objects in type theory using very dependent
 types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
 
-§ Overview of available types
------------------------------
+§ Construction Calculi: An Overview
+-----------------------------------
 
 Before proceeding to our contributions let us breefly chart the landscape of types and principles of
 Construction Calculi. This overview should be skipped by readers versed in type theory.
