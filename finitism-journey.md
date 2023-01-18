@@ -1,6 +1,9 @@
 Why set theories? Programme for $IH_{<ω}$
 =========================================
 
+[author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
+[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
+
 In structuralist foundations of mathematics, there are objects of very different types:
 natural numbers and various combinatorial objects (e.g. finite strings of balanced brackets like
 `()((())())`), real numbers, tuples, lists, functions between any types, relations on any types
