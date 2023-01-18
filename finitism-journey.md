@@ -39,7 +39,7 @@ substrings.
 Finitary pure sets turn out to be convinient substrate do model any other finitary objects
 including natural numbers, finite sets of natural numbers, finite lists of natural numbers,
 rational numbers, graphs, finite groups, finite geometries, etc. There is even a non-Gödelian
-first order theory of finitary pure sets $H_{<ω}$ that proves its own consistency[Pakhomov2019].
+first order theory of finitary pure sets $H_{<ω}$ that proves its own consistency[[Pakhomov2019]](https://arxiv.org/abs/1907.00877).
 
 In this theory existence of infinitely growing functions cannot be shown unconditionally. For
 example, one cannot show “for any two integers `a` and `b`, there exists their product `a · b`”,
@@ -109,7 +109,7 @@ set theory. At the same time CZF, is a weak predicative theory that can be model
 a rather weak Martin-Löf type theory and amenable to proof theoretic analysis. Since CZF
 lacks the powerset operation (which is substituted by a much weaker subset collection
 axiom), the von Neumann hierarchy in its original form cannot be defined for CZF. However,
-recently [A.~Zieger, “Large Sets in Constructive Set Theory” (2014)] one managed to define
+recently [[Zieger2014]](https://core.ac.uk/download/pdf/30267838.pdf) one managed to define
 a modified von Neumann hierarchy that shares the property that all sets eventually enters
 the hierarchy, and thus gives the same foundational security CZF. Infinity axioms, both
 strong and weak can be stated as existance of modified von Neumann hierarchy stages being
