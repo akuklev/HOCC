@@ -9,28 +9,31 @@ natural numbers and various combinatorial objects (e.g. finite strings of balanc
 `()((())())`), real numbers, tuples, lists, functions between any types, relations on any types
 and so on. The vast zoo of types made structuralist foundations unatractive until 1990ies when
 the burden of type bookkeeping could be delegated to computers. Instead of dealing with a complex
-type theory underlying structuralist foundations, one could take a theory `S` of one particular
+type theory underlying structuralist foundations, one could take a theory $S$ of one particular
 type of objects that are rich enough to model all types of intrest (natural numbers, functions,
-relations, etc) and substitute all other types by their `S`-models.
+relations, etc) and substitute all other types by their $S$-models.
 
 That's precisely how Cantorian set theories were used as foundation for the whole mathematics
-for more than a century. Let me briefly remind whan Cantorian set theories are and how did they
-come to existence.
+for more than a century. Let me briefly remind whan Cantorian set theories are and how they
+came to existence.
 
 Any kind of foundations we necessarily deal with sets of natural numbers, sets of reals and other
-sets of objects of specified type. Finite sets are just lists modulo order and multiplicity. How
-could infinite sets be defined? The conventional approach is to identify them to predicates their
-element type: every predicate `P(x)` on the type `T` defines a set `{x : T | P(x) }`, while every
-set `S` defines a precidate `_ ∈ S` on the type `T`. Sets just reflect predicates.
+sets of objects of specified type. Finite sets are just lists modulo order and multiplicity, that
+is one takes lists, defines the predicate $(_ ∈ l)$ “_ is an element of $l$”, and defines finite
+sets as lists modulo $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$.  
+How could infinite sets be defined? The conventional approach is to identify them to predicates on
+their elements' type: every predicate $P(x)$ on the type $T$ defines a set ${x : T | P(x) }$, while
+every set $S$ defines a precidate $(_ ∈ S)$ on the type $T$, and sets with same elements are equal
+($(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$, which is known as extensionality). Sets just reflect predicates.
 
-It was early recodnized (in 19th centory), that one can also study pure sets, that is sets
+It was early recognized (19th centory), that one can also study pure sets, i.e sets
 consistung of sets, consisting of sets and so on. It might appear that this recursion has
 to lead ultimately to some fixed non-set type, but that's a false impression because there is
 at least one object that surely exists and qualifies as a pure set: the empty set.
 
 Finitary pure sets are nice combinatorial objects built by wrapping the empty set in various
-ways. For example one can consider the set containing the empty set as element `{∅}` and the
-set containing this set `{{∅}}` or the set containing both of them `{{∅}, {{∅}}}`. Finitary
+ways. For example one can consider the set containing the empty set as element ${∅}$ and the
+set containing this set ${{∅}}$ or the set containing both of them ${{∅}, {{∅}}}$. Finitary
 sets can be seen as unlabeled trees of finite width and depth, where the only “leaves” are
 the empty sets and order and multiplicity of branches is ignored. Equivalently they can be
 seen as finite strings of balanced brackets modulo reordering and duplication of balanded
@@ -42,10 +45,10 @@ rational numbers, graphs, finite groups, finite geometries, etc. There is even a
 first order theory of finitary pure sets $H_{<ω}$ that proves its own consistency[[Pakhomov2019]](https://arxiv.org/abs/1907.00877).
 
 In this theory existence of infinitely growing functions cannot be shown unconditionally. For
-example, one cannot show “for any two integers `a` and `b`, there exists their product `a · b`”,
+example, one cannot show “for any two integers $a$ and $b$, there exists their product $a · b$”,
 but one can prove all such statements conditionnaly on existence of what can be interpreted
 computationally as “availability of enough memory to carry out the construction”. In particular
-one can show that “for any two integers `a` and `b`, given enough memory, the integer `a · b`
+one can show that “for any two integers $a$ and $b$, given enough memory, the integer $a · b$
 exists”. Metatheoretically it can be shown that any true arithmetical or combinatorial statement
 can be proven in this theory, if an upper bound on the memory necessary to carry out the
 underlying constructions can be provided.
@@ -61,47 +64,48 @@ the community did not abandon the set theory as a possible unified single-sorted
 of type “pure set”) foundation for the whole body of mathematics, but found ways to get rid of
 inconsistencies by compromises.
 
-There are several ways to restrict the approach allowing every predicate to define a set, but
+There are several ways to restrict the approach allowing every predicate to define a set, and
 one of them leads to a foundationally attractive class of set theories. There, one looses the
 ability to reflect all predicates on sets by sets, but gains an insight how all sets are
 “constructed from below”, while still being able to provide models for essentially all objects
-of mathematical interest. These are ZF-type set theories, where one restricts the universe of
+of mathematical interest. These are the ZN-type[^1] set theories, where one restricts the universe of
 discourse to well-founded pure sets `S` that are not allowed to harbour infinite membership chains
-```
-S ∋ S₁ ∋ ··· ∋ S
-```
+
+$$S ∋ S_1 ∋ S_2 ∋ ···$$
+
+[^1]: Zermelo-von Neumann
 
 Wellfoundedness precludes existence of the set of all sets (as it would necessarily contain
-itself, `V ∋ V ∋ V ∋ ···`, in infinite membership chain). In this theories every set still
-defines a predicate `_ ∈ S` on all sets and is completely defined by this predicate (two sets
+itself, $V ∋ V ∋ V ∋ ···$, in infinite membership chain). In this theories every set still
+defines a predicate $(_ ∈ S)$ on all sets and is completely defined by this predicate (two sets
 containing the same elements are the same set), but it is not true anymore that every predicate
-defines a set, since the predicate `true` would define a non-wellfounded set `V` of all sets
-However, in ZF-type set theories one can still filter sets already proven to exist by arbitrary
+defines a set, since the predicate `true` would define a non-wellfounded set $V$ of all sets
+However, in ZN-type set theories one can still filter sets already proven to exist by arbitrary
 predicates.
 
-As already mentioned, most appealing foundational feature of ZFC and its extensions is the
-existence of von Neumann hierarchy of sets that approximates the class of all sets from
-below. It's a hierarchy of transitive sets indexed by ordinals
-
+As already mentioned, most appealing foundational feature of ZN-type set theories is that the
+universe of all sets does not seem to be an uncharted abyss anymore; instead it is a limit of
+a cummulative hierarchy of sets that are iteratively “made” from the sets lying below in the
+hierarchy. The von Neumann hierarchy $V_κ$ is a cummulative hierarchy of transitive sets indexed
+by ordinals (transfinite generalization of natural numbers)
 $$V₀ ∈ V₁ ∈ ··· ∈ V_ω ∈ ···$$
-
-such that set eventually lands in some stage of the hierarchy. This hierarchy is obtained
-by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
+with the property that every set eventually enters the hierarchy at some stage. This hierarchy is
+obtained by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
 for zero `V₀ := ∅`, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
-$V_{κ} = ⋃_{β < κ} V_β$.
+$V_κ = ⋃_{β < κ} V_β$.
 
-The non-Gödelian theory of finitary sets is the basic the ZF-type set theory where only the
+The non-Gödelian theory of finitary sets is the basic the ZN-type set theory where only the
 existance of finitary stages of the von Neumann hierarchy of sets is postulated. It turns
 into the Zermelo set theory if one adds the axiom of infinity postulating existance of the
-set of all finitary sets `V⍵`. Stronger variants of set theory are obtained by substituting
+set of all finitary sets $V_ω$. Stronger variants of set theory are obtained by substituting
 this axiom by some strong axiom of infinity. Strong axioms of infinity postulate existance
-of stages `Vᵦ` of cumulative hierarchy with specified closure properties which the class of
+of stages $V_κ$ of cumulative hierarchy with specified closure properties which the class of
 all sets can be thought to share as well.
 
-ZF-type set theories are the canonical substrate for modelling various mathematical objects,
+ZN-type set theories are the canonical substrate for modelling various mathematical objects,
 and that is precisely what makes them interesting for sturcturalists who do not treat them
-as a foundation of all mathematics anymore. In 1978 Peter Aczel defined a constructive
-counterpart CZF of the ZF set theory. CZF is a first order intuitionsitic theory that is
+as _the_ foundation of all mathematics anymore. In 1978 Peter Aczel defined a constructive
+counterpart CZF of the standard set theory ZFC. CZF is a first order intuitionsitic theory that is
 highly suitable for modelling various mathematical objects in constructive setting. If
 augmented by double negation elimination axiom, it immediatelly turns into the full to ZF
 set theory. If augmented by the full axiom of choice it immediatelly turins into the ZFC
@@ -125,6 +129,6 @@ We conjecture that much like primitive recrusive arithmetic PRA, the intuitionis
 of finitary sets $IH_{<ω}$ can be axiomatized first in quantifier-free and then in
 [logic-free manner](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
 with (∈) and (⊃) being the only types of judgements, class being the only type of terms
-and sets `S` being classes that belong to some other class `C ⊃ S`. This theory could turn
+and sets $S$ being classes that belong to some other class $C ⊃ S$. This theory could turn
 out to be replace PRA/EFA a the base theory where the consistincy proofs for other theories
-(conditionally on existence of suitably large `V(κ)`) are carried out.
+(conditionally on existence of suitably large $V_κ$) are carried out.
