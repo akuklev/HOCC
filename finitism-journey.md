@@ -22,8 +22,8 @@ sets of objects of specified type. Finite sets are just lists modulo order and m
 is one takes lists, defines the predicate (_ $∈ l$) «_ is an element of $l$», and defines finite
 sets as lists modulo $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$.  
 How could infinite sets be defined? The conventional approach is to identify them to predicates on
-their elements' type: every predicate $P(x)$ on the type $T$ defines a set $\{x : T | P(x) \}$, while
-every set $S$ defines a precidate $(_ ∈ S)$ on the type $T$, and sets with same elements are equal
+their elements' type: every predicate $P(x)$ on the type $T$ defines a set {$x : T | P(x)$}, while
+every set $S$ defines a precidate (_ $∈ S$) on the type $T$, and sets with same elements are equal
 ( $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$, which is known as extensionality). Sets just reflect predicates.
 
 It was early recognized (19th centory), that one can also study pure sets, i.e sets
