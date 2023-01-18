@@ -82,9 +82,9 @@ predicates.
 As already mentioned, most appealing foundational feature of ZFC and its extensions is the
 existence of von Neumann hierarchy of sets that approximates the class of all sets from
 below. It's a hierarchy of transitive sets indexed by ordinals
-```
-V₀ ∈ V₁ ∈ ··· ∈ V⍵ ∈ ···,
-```
+$$
+V₀ ∈ V₁ ∈ ··· ∈ V_ω ∈ ···,
+$$
 such that set eventually lands in some stage of the hierarchy. This hierarchy is obtained
 by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
 for zero `V₀ := ∅`, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
