@@ -1,6 +1,7 @@
 Towards Higher Observational Construction Calculus
 ==================================================
 
+[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 
 We propose (a sketch of) an extension HOTT<sup>Reedy</sup> of the [Higher Observational Type
@@ -24,9 +25,7 @@ This work heavily builds upon (mostly unpublished) ideas of C. McBride.
 --------------
 
 The term _Construction Calculi_ employed in the title of this paper refers to type theories that are intended to
-serve as general purpose structuralist foundations of mathematics. Polymorphic Construction Calculi are additionally
-capable of expressing constructions and theorems applying to all mathematical objects of certain kind (say, Groups
-or Categories) w/o size limitations. At times we will also mention type theories not striving to serve as general
+serve as general purpose structuralist foundations of mathematics. At times we will also mention type theories not striving to serve as general
 purpose foundational frameworks, these will be referred to as _domain-specific type theories_.
 
 Construction calculi must be able to express typed higher-order intuitionistic logic including proofs, formal
