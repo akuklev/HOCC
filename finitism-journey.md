@@ -113,7 +113,7 @@ set theory. At the same time CZF, is a weak predicative theory that can be model
 a rather weak Martin-Löf type theory and amenable to proof theoretic analysis. Since CZF
 lacks the powerset operation (which is substituted by a much weaker subset collection
 axiom), the von Neumann hierarchy in its original form cannot be defined for CZF. However,
-recently [[Zieger2014]](https://core.ac.uk/download/pdf/30267838.pdf) one managed to define
+recently[[Zieger2014]](https://core.ac.uk/download/pdf/30267838.pdf) one managed to define
 a modified von Neumann hierarchy that shares the property that all sets eventually enters
 the hierarchy, and thus gives the same foundational security CZF. Infinity axioms, both
 strong and weak can be stated as existance of modified von Neumann hierarchy stages being
