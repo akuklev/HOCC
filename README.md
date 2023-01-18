@@ -3,6 +3,7 @@ Towards Higher Observational Construction Calculus
 
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
+[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
 We propose (a sketch of) an extension HOTT<sup>Reedy</sup> of the [Higher Observational Type
 Theory](https://ncatlab.org/nlab/show/higher+observational+type+theory) by a first-class notion of Reedy
