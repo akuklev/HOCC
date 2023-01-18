@@ -129,6 +129,6 @@ We conjecture that much like primitive recrusive arithmetic PRA, the intuitionis
 of finitary sets $IH_{<ω}$ can be axiomatized first in quantifier-free and then in
 [logic-free manner](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
 with (∈) and (⊃) being the only types of judgements, class being the only type of terms
-and sets $S$ being classes that belong to some other class $C ⊃ S$. This theory could turn
+and sets $S$ being classes that belong to some other class $C ∋ S$. This theory could turn
 out to be replace PRA/EFA a the base theory where the consistincy proofs for other theories
 (conditionally on existence of suitably large $V_κ$) are carried out.
