@@ -19,7 +19,7 @@ came to existence.
 
 Any kind of foundations we necessarily deal with sets of natural numbers, sets of reals and other
 sets of objects of specified type. Finite sets are just lists modulo order and multiplicity, that
-is one takes lists, defines the predicate (_ $∈ l$) “_ is an element of $l$”, and defines finite
+is one takes lists, defines the predicate (_ $∈ l$) «_ is an element of $l$», and defines finite
 sets as lists modulo $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$.  
 How could infinite sets be defined? The conventional approach is to identify them to predicates on
 their elements' type: every predicate $P(x)$ on the type $T$ defines a set $\{x : T | P(x) \}$, while
