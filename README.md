@@ -1,7 +1,6 @@
 Towards Higher Observational Construction Calculus
 ==================================================
 
-[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
