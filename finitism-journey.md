@@ -105,15 +105,19 @@ all sets can be thought to share as well.
 ZN-type set theories are the canonical substrate for modelling various mathematical objects,
 and that is precisely what makes them interesting for sturcturalists who do not treat them
 as _the_ foundation of all mathematics anymore. In 1978 Peter Aczel defined a constructive
-counterpart CZF of the standard set theory ZFC. CZF is a first order intuitionsitic theory that is
-highly suitable for modelling various mathematical objects in constructive setting. If
-augmented by double negation elimination axiom, it immediatelly turns into the full to ZF
-set theory. If augmented by the full axiom of choice it immediatelly turins into the ZFC
-set theory. At the same time CZF, is a weak predicative theory that can be modelled in
-a rather weak Martin-Löf type theory and amenable to proof theoretic analysis. Since CZF
-lacks the powerset operation (which is substituted by a much weaker subset collection
-axiom), the von Neumann hierarchy in its original form cannot be defined for CZF. However,
-recently[[Zieger2014]](https://core.ac.uk/download/pdf/30267838.pdf) one managed to define
+counterpart CZF of the standard set theory ZFC, which is of a particular interest for those
+interested in foundations of mathematics.
+CZF is a first order intuitionsitic theory highly suitable for modelling various mathematical
+objects in constructive settings. To give an example, it is used to model constructive algebraic
+model strucutres in category theory and predicative constructive type theories.
+Being “constructive counterpart” of ZFC means the following: In presence of double negation
+elimination, is equivalent to the the full to ZF set theory. If augmented by the axiom of
+choice it turns equivalent the full ZFC, the standard set theory used as foundation for
+ordinary mathematics for almost a century. At the same time CZF, is a weak predicative theory
+that can be modelled in a rather weak Martin-Löf type theory and amenable to proof theoretic
+analysis. Since CZF lacks the powerset operation (which is substituted by a much weaker subset
+collection axiom), the von Neumann hierarchy in its original form cannot be defined for CZF.
+However, recently[[Zieger2014]](https://core.ac.uk/download/pdf/30267838.pdf) one managed to define
 a modified von Neumann hierarchy that shares the property that all sets eventually enters
 the hierarchy, and thus gives the same foundational security CZF. Infinity axioms, both
 strong and weak can be stated as existance of modified von Neumann hierarchy stages being
@@ -121,10 +125,11 @@ regular enough internal models of CZF (that is hierarchy stages having specified
 properties which the class of all sets can be thought to share as well). Modified hierarchy
 conicides with the usual one in classical settings (i.e. if on adds the double negation
 elimination axion or any other axiom that leads to double negation elimination, such as
-choice axiom). The only issue we still have with foundational status of CZF we still have
-is that of the constructive variant of the self-verifying finitary segment $IH_{<ω}$.
-This work has to be done and might lead to unexpected enlightning results.
+choice axiom).
 
+The only issue with foundational status of CZF we still have is that of the
+constructive variant of the self-verifying finitary segment $IH_{<ω}$.
+This work has to be done and might lead to unexpected enlightning results.
 We conjecture that much like primitive recrusive arithmetic PRA, the intuitionistic theory
 of finitary sets $IH_{<ω}$ can be axiomatized first in quantifier-free and then in
 [logic-free manner](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
