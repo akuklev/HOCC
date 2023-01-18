@@ -19,12 +19,12 @@ came to existence.
 
 Any kind of foundations we necessarily deal with sets of natural numbers, sets of reals and other
 sets of objects of specified type. Finite sets are just lists modulo order and multiplicity, that
-is one takes lists, defines the predicate $(_ ∈ l)$ “_ is an element of $l$”, and defines finite
+is one takes lists, defines the predicate (_ $∈ l$) “_ is an element of $l$”, and defines finite
 sets as lists modulo $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$.  
 How could infinite sets be defined? The conventional approach is to identify them to predicates on
-their elements' type: every predicate $P(x)$ on the type $T$ defines a set ${x : T | P(x) }$, while
+their elements' type: every predicate $P(x)$ on the type $T$ defines a set $\{x : T | P(x) \}$, while
 every set $S$ defines a precidate $(_ ∈ S)$ on the type $T$, and sets with same elements are equal
-($(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$, which is known as extensionality). Sets just reflect predicates.
+( $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$, which is known as extensionality). Sets just reflect predicates.
 
 It was early recognized (19th centory), that one can also study pure sets, i.e sets
 consistung of sets, consisting of sets and so on. It might appear that this recursion has
@@ -32,8 +32,8 @@ to lead ultimately to some fixed non-set type, but that's a false impression bec
 at least one object that surely exists and qualifies as a pure set: the empty set.
 
 Finitary pure sets are nice combinatorial objects built by wrapping the empty set in various
-ways. For example one can consider the set containing the empty set as element ${∅}$ and the
-set containing this set ${{∅}}$ or the set containing both of them ${{∅}, {{∅}}}$. Finitary
+ways. For example one can consider the set containing the empty set as element {∅} and the
+set containing this set {{∅}} or the set containing both of them {{∅}, {{∅}}}. Finitary
 sets can be seen as unlabeled trees of finite width and depth, where the only “leaves” are
 the empty sets and order and multiplicity of branches is ignored. Equivalently they can be
 seen as finite strings of balanced brackets modulo reordering and duplication of balanded
@@ -77,7 +77,7 @@ $$S ∋ S_1 ∋ S_2 ∋ ···$$
 
 Wellfoundedness precludes existence of the set of all sets (as it would necessarily contain
 itself, $V ∋ V ∋ V ∋ ···$, in infinite membership chain). In this theories every set still
-defines a predicate $(_ ∈ S)$ on all sets and is completely defined by this predicate (two sets
+defines a predicate (_ $∈ S$) on all sets and is completely defined by this predicate (two sets
 containing the same elements are the same set), but it is not true anymore that every predicate
 defines a set, since the predicate `true` would define a non-wellfounded set $V$ of all sets
 However, in ZN-type set theories one can still filter sets already proven to exist by arbitrary
@@ -88,10 +88,10 @@ universe of all sets does not seem to be an uncharted abyss anymore; instead it 
 a cummulative hierarchy of sets that are iteratively “made” from the sets lying below in the
 hierarchy. The von Neumann hierarchy $V_κ$ is a cummulative hierarchy of transitive sets indexed
 by ordinals (transfinite generalization of natural numbers)
-$$V₀ ∈ V₁ ∈ ··· ∈ V_ω ∈ ···$$
+$$V_0 ∈ V_1 ∈ ··· ∈ V_ω ∈ ···$$
 with the property that every set eventually enters the hierarchy at some stage. This hierarchy is
 obtained by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
-for zero `V₀ := ∅`, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
+for zero `V_0 := ∅`, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
 $V_κ = ⋃_{β < κ} V_β$.
 
 The non-Gödelian theory of finitary sets is the basic the ZN-type set theory where only the
