@@ -3,6 +3,7 @@ Why set theories? Programme for $IH_{<ω}$
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
+Date: 2023-01-18
 
 In structuralist foundations of mathematics, there are objects of very different types:
 natural numbers and various combinatorial objects (e.g. finite strings of balanced brackets like
@@ -91,7 +92,7 @@ by ordinals (transfinite generalization of natural numbers)
 $$V_0 ∈ V_1 ∈ ··· ∈ V_ω ∈ ···$$
 with the property that every set eventually enters the hierarchy at some stage. This hierarchy is
 obtained by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
-for zero `V_0 := ∅`, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
+for zero $V_0 := ∅$, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
 $V_κ = ⋃_{β < κ} V_β$.
 
 The non-Gödelian theory of finitary sets is the basic the ZN-type set theory where only the
