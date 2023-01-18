@@ -119,13 +119,11 @@ analysis. Since CZF lacks the powerset operation (which is substituted by a much
 collection axiom), the von Neumann hierarchy in its original form cannot be defined for CZF.
 However, recently[[Zieger2014]](https://core.ac.uk/download/pdf/30267838.pdf) one managed to define
 a modified von Neumann hierarchy that shares the property that all sets eventually enters
-the hierarchy, and thus gives the same foundational security CZF. Infinity axioms, both
-strong and weak can be stated as existance of modified von Neumann hierarchy stages being
-regular enough internal models of CZF (that is hierarchy stages having specified closure
-properties which the class of all sets can be thought to share as well). Modified hierarchy
-conicides with the usual one in classical settings (i.e. if on adds the double negation
-elimination axion or any other axiom that leads to double negation elimination, such as
-choice axiom).
+the hierarchy, and thus gives the same foundational security CZF. Modified hierarchy
+conicides with the usual one in presence of double negation elimination.
+Infinity axioms, both strong and weak can be stated as existance of modified von Neumann hierarchy
+stages being regular enough internal models of CZF (that is, hierarchy stages having specified closure
+properties which the class of all sets can be thought to share as well). 
 
 The only issue with foundational status of CZF we still have is that of the
 constructive variant of the self-verifying finitary segment $IH_{<ω}$.
