@@ -3,7 +3,6 @@ Why set theories? Programme for $IH_{<ω}$
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)  
-2023-01-18
 
 In structuralist foundations of mathematics, there are objects of very different types:
 natural numbers and various combinatorial objects (e.g. finite strings of balanced brackets like
