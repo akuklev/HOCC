@@ -51,7 +51,7 @@ can be proven in this theory, if an upper bound on the memory necessary to carry
 underlying constructions can be provided.
 
 Finitary pure sets are not enough to model real numbers or functions on natural numbers, but
-their infinite generalizations easily manage this task. Original idea due to G.~Cantor was to
+their infinite generalizations easily manage this task. Original idea due to G. Cantor was to
 identify pure sets and predicates on them as it is usually done for sets of objects of fixed
 type. Unfortunatelly, the recursivity of this definition leads to inconsistency of the theory.
 For a period of time (1884–1899) the mathematical community was not aware of this inconsistency,
@@ -86,9 +86,9 @@ below. It's a hierarchy of transitive sets indexed by ordinals
 V₀ ∈ V₁ ∈ ··· ∈ V⍵ ∈ ···,
 ```
 such that set eventually lands in some stage of the hierarchy. This hierarchy is obtained
-by iterating the powerset operation `V_κ := 𝓟^κ(∅)` finitely and transfinitely, that is
-for zero `V₀ := ∅`, for successor ordinals `V_{β + 1} := 𝓟(V_β)`, and for limit ordinals
-`V_{κ} = ⋃_{β < κ} V_β`.
+by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
+for zero `V₀ := ∅`, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
+$V_{κ} = ⋃_{β < κ} V_β$.
 
 The non-Gödelian theory of finitary sets is the basic the ZF-type set theory where only the
 existance of finitary stages of the von Neumann hierarchy of sets is postulated. It turns
