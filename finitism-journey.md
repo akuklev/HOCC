@@ -6,7 +6,7 @@ Why set theories? Programme for $IH_{<ω}$
 
 In structuralist foundations of mathematics, there are objects of very different types:
 natural numbers and various combinatorial objects (e.g. finite strings of balanced brackets like
-`()((())())`), real numbers, tuples, lists, functions between any types, relations on any types
+“()((())())”), real numbers, tuples, lists, functions between any types, relations on any types
 and so on. The vast zoo of types made structuralist foundations unatractive until 1990ies when
 the burden of type bookkeeping could be delegated to computers. Instead of dealing with a complex
 type theory underlying structuralist foundations, one could take a theory $S$ of one particular
