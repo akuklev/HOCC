@@ -95,12 +95,13 @@ for zero $V_0 := ∅$, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and fo
 $V_κ = ⋃_{β < κ} V_β$.
 
 The non-Gödelian theory of finitary sets is the basic the ZN-type set theory where only the
-existance of finitary stages of the von Neumann hierarchy of sets is postulated. It turns
-into the Zermelo set theory if one adds the axiom of infinity postulating existance of the
-set of all finitary sets $V_ω$. Stronger variants of set theory are obtained by substituting
-this axiom by some strong axiom of infinity. Strong axioms of infinity postulate existance
-of stages $V_κ$ of cumulative hierarchy with specified closure properties which the class of
-all sets can be thought to share as well.
+existance of finitary stages of the von Neumann hierarchy of sets is postulated. If an axiom
+of infinity postulating existance of the set of all finitary sets $V_ω$ is added, it turns 
+into a theory equivalent to the ordinary first order arithmetics.
+Stronger variants of set theory are obtained by substituting this axiom by some strong axiom
+of infinity. Strong axioms of infinity postulate existance of stages $V_κ$ of cumulative
+hierarchy with specified closure properties which the class of all sets can be thought to
+share as well.
 
 ZN-type set theories are the canonical substrate for modelling various mathematical objects,
 and that is precisely what makes them interesting for sturcturalists who do not treat them
