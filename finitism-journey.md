@@ -4,12 +4,13 @@ Why set theories? Programme for $IH_{<ω}$
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)  
 
-This text briefly summarizes the history of set theories, explaining why and how they were used as
+**SUMMARY**
+> This text briefly summarizes the history of set theories, explaining why and how they were used as
 foundational system for the whole of mathematics and why they still matter when modern type theory
-based systems take over their role as the foundations. At the end, I propose a programme to
-establish a constructive theory of finitary pure sets that comprises the common core of all
-set theories used to model mathematical objects, and can be used to carry out conditional
-consistency proofs.
+based systems take over their role as foundations. At the end, I sketch a programme to establish a
+constructive theory of finitary pure sets that comprises the common core of all set theories used
+to model mathematical objects, and can be used to carry out conditional consistency proofs instead
+of elementary recursive arithmetic EFA used for such proofs today.
 
 In structuralist foundations of mathematics, there are objects of very different types:
 natural numbers, various combinatorial objects (e.g. finite strings of balanced brackets like
