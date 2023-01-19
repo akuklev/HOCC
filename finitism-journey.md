@@ -120,7 +120,7 @@ is an inner model of ZFC).
 ZN-type set theories are the canonical substrate for modelling various mathematical objects,
 and that is precisely what makes them interesting for sturcturalists who do not treat them
 as _the_ foundation of all mathematics anymore. When a type theorist needs to prove consistency
-of an impredicative type theory (such as System F, System $\text{F}_ω$, or the observational calculus
+of an impredicative type theory (such as System F, System $ \text{F}_ω$, or the observational calculus
 of constructions $CC_{obs}$, they resort to ZN-type theories to build models.
 
 § Weak set theories
