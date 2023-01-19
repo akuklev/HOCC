@@ -129,7 +129,7 @@ $$V_0 ∈ V_1 ∈ ··· $$
 Each stage $V_β$ is a transitive set that is for every set it contains it does also contain all its elements:
 $$(S ∈ V_β) ⇒ (S ⊂ V_β)$$
 and closed under forming subsets of its elements by arbitrary predicates $φ(x)$:
-$$∀(S ∈ V_β) ⇒ \\{ $x ∈ S | φ(x)$ \\} ∈ V_β$$
+$$∀(S ∈ V_β) ⇒ \\{ x ∈ S | φ(x) \\} ∈ V_β$$
 
 The sequence $(V_0, V_1, ...)$ can be continued transifinitely: one can form the union $V_ω$ of these sets
 and show that it is also a transitive set closed under { $x ∈ S | φ(x)$ }, and contains all finite hierarchy
