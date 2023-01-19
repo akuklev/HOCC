@@ -87,7 +87,7 @@ One of such approaches, namely the one developed mainly by Zermelo and von Neuma
 to a foundationally attractive class of set theories. There, one looses the ability to reflect
 all predicates on pure sets by sets themselves, but gains an insight into how sets are “built
 from below” These are the ZN-type set theories, where one restricts the universe of discourse
-to well-founded pure sets `S` that are not allowed to harbour infinite membership chains
+to well-founded pure sets $S$ that are not allowed to harbour infinite membership chains
 
 $$S ∋ S_1 ∋ S_2 ∋ ···$$
 
@@ -157,7 +157,7 @@ substituting this axiom by some strong axiom of infinity, that is an axiom postu
 of stages $V_κ$ of von Neumann hierarchy with specified closure properties which the class of all
 sets can be thought to share as well.
 
-Instead of simply modelling a theory of interest `T` in some strong enough ZN-type set theory, one
+Instead of simply modelling a theory of interest $T$ in some strong enough ZN-type set theory, one
 can measure its consistency strength exactly by modelling it the theory $H_{<ω} + ∃V_κ$ (with
 specific closure properties) or $H_{<ω} + (∀S)(∃V_κ ∋ S)$ (with specific closure properties)
 and then modelling the used set theory inside of $T$, thus proving their equiconsistency.
@@ -175,7 +175,7 @@ language including double negation elimination $¬¬P ⇒ P$. In addition it has
 list of axioms postulating existance of the sets $V_n$ for each fixed $n$, the axiom of
 extensionality specifying equality between sets
 $$(a = b) ⇔ ∀x ( x ∈ a ⇔ x ∈ b )$$
-the axiom schema of separation that allows to filter any set `x` by any predicate `φ(z)`
+the axiom schema of separation that allows to filter any set $x$ by any predicate $φ(z)$
 $$∃y ∀z (z ∈ y) ⇔ (z ∈ x ∧ φ(z)) $$
 and the defining axiom for $V$
 $$y ∈ V(x) ⇔ (∃z ∈ x)(y ⊆ V(z))$$
