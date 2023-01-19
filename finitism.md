@@ -32,7 +32,7 @@ sets of objects of specified type. Finite sets are just finite lists ignoring or
 That is one takes finite lists, defines the predicate (_ $∈ l$) «_ is an element of $l$», and defines
 finite sets as lists modulo equality relation $(l_1 = l_2) := ∀(x) (x ∈ l_1) ⇔ (x ∈ l_2)$.
 How could infinite sets be defined? The conventional approach is to identify them to predicates on
-their elements' type: every predicate $P(x)$ on the type $T$ defines a set { $x : T | P(x)$ }, while
+their elements' type: every predicate $φ(x)$ on the type $T$ defines a set { $x : T | φ(x)$ }, while
 every set $S$ defines a precidate (_ $∈ S$) on the type $T$, and sets with same elements are equal
 ( $(a = b) := ∀(x) (x ∈ a) ⇔ (x ∈ b)$, which is known as extensionality).
 Thus, sets just reflect predicates.
@@ -59,22 +59,22 @@ natural numbers modelled by sets $n$ and $m$, one can model their ordered pair b
 { $n$, { $m$ } } which can be naturally extended to finite lists.
 
 The theory of finitary pure sets (where no infinite set can be shown to exist) was first
-developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It called $H_{<ω}$
+developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It is called $H_{<ω}$
 and it has quite remarkable foundational properties. It is an excemption to the infamous Gödel's
 second incompleteness theorem theorem that states that no strong enough mathematical theory can
 prove its own consistency. Pakhomov's set theory $H_{<ω}$ is weak enough to evade Gödel's theorem
-and does indeed prove its own consistency. Up to date it is the only natural example of such a
+and does indeed prove its own consistency. Up to date, it is the only natural example of such a
 theory.
 
 Yet, finitary pure sets are not enough to model real numbers or functions on natural numbers.
-How does one define infinite pure sets? The original idea due to G. Cantor was to try the same
+How does one define infinite pure sets? The original Cantor's idea was to try the same
 approach that works perfectly well for sets of integers, sets of reals and other “sets of $T$”
 within a typed framework, namely to identify sets and predicates on $T$. But pure sets are
 sets of pure sets, so the definition becomes recursive and leads to inconsistency of the theory.
 
 For a period of time (1884–1899) the mathematical community was not aware of this inconsistency,
 and learned how inconceivably effective it is for modelling all sorts of mathematical objects.
-There were “enough” pure sets to model every mathematical object one could think out. In a sense
+There were “enough” pure sets to model every mathematical object one could think out. In a sense,
 there were too much of them: the universe of sets was too huge to be charted in any useful way.
 Cantor himself compared it to an abyss way beyond comprehension.
 
@@ -86,94 +86,144 @@ found other approaches to define enough infinite pure sets without introducing i
 One of such approaches, namely the one developed mainly by Zermelo and von Neumann (ZN), leads
 to a foundationally attractive class of set theories. There, one looses the ability to reflect
 all predicates on pure sets by sets themselves, but gains an insight into how sets are “built
-from below” These are the ZN-type set theories, where one restricts the universe of discourse
+from below”. These are the ZN-type set theories, where one restricts the universe of discourse
 to well-founded pure sets $S$ that are not allowed to harbour infinite membership chains
 
 $$S ∋ S_1 ∋ S_2 ∋ ···$$
+
+(From this point in text I will use the word “set” to mean wellfounded pure sets only.)
 
 Wellfoundedness precludes existence of the set of all sets (as it would necessarily contain
 itself, $V ∋ V ∋ V ∋ ···$, in infinite membership chain). In this theories every set still
 defines a predicate (_ $∈ S$) on all sets and is completely defined by this predicate (two sets
 containing the same elements are the same set), but it is not true anymore that every predicate
 defines a set, since the predicate `true` would define a non-wellfounded set $V$ of all sets
-However, in ZN-type set theories one can still filter sets already proven to exist by arbitrary
-predicates.
+However, in ZN-type set theories one can still form subsets { $x ∈ S | φ(x)$ } of sets $S$
+already proven to exist by arbitrary predicates $φ(x)$.
 
 As already mentioned, most appealing foundational feature of ZN-type set theories is that the
-universe of all sets does not seem to be an uncharted abyss anymore; instead it is a limit of
-a cummulative hierarchy of sets that are iteratively “made” from the sets lying below in the
-hierarchy. The von Neumann hierarchy $V_κ$ is a cummulative hierarchy of transitive sets indexed
-by ordinals (transfinite generalization of natural numbers)
-$$V_0 ∈ V_1 ∈ ··· ∈ V_ω ∈ ···$$
-with the property that every set eventually enters the hierarchy at some stage. This hierarchy is
-obtained by iterating the powerset operation $V_κ := 𝓟^κ(∅)$ finitely and transfinitely, that is
-for zero $V_0 := ∅$, for successor ordinals $V_{β + 1} := 𝓟(V_β)$, and for limit ordinals
-$V_κ = ⋃_{β < κ} V_β$.
+universe of all sets can be better understood: Sets $S$ can be ordered by their complexity
+$rk(S)$, so that collection sets of complexity below $β$ forms a set $V_β$. Therefore one
+has an infinite hierarchy of ever growing sets (known as the von Neumann hierarchy)
+$$V_0 ⊂ V_1 ⊂ ··· ⊂ V_β ⊂ ···$$
+with the property that every set eventually enters the hierarchy (namely at the stage $rk(S)$ + 1).
+Therefore, the universe of all sets (which is not a set itself as it was discussed above) can be
+seen as the limit of this hierachy. Furthermore, all stages of the hierarchy can be explicitly
+described in terms of smaller stages.
+
+Let us first consider its finite stages. The set $V_0$ of sets of complexity below zero should
+be obviously empty:
+$$ V_0 := ∅ $$
+
+Given the set $V_β$ of sets of complexity below $β$ let
+$V_{β + 1} := 𝓟(V_β)$
+where $𝓟(V_β)$ denotes the power set $V_β$, i.e. set of all subsets of $V_β$ including $V_β$ itself.
+
+![The first four stages of the von Neumann hierarchy](https://upload.wikimedia.org/wikipedia/commons/8/83/Von_Neumann_universe_4.png)
+
+With these definitions one obtains an infinite sequence of sets satisfying
+$$V_0 ⊂ V_1 ⊂ ··· $$
+and
+$$V_0 ∈ V_1 ∈ ··· $$
+
+Each stage $V_β$ is a transitive set that is for every set it contains it does also contain all its elements:
+$$(S ∈ V_β) ⇒ (S ⊂ V_β)$$
+and closed under forming subsets of its elements by arbitrary predicates $φ(x)$:
+$$∀(S ∈ V_β) ⇒ { $x ∈ S | φ(x)$ } ∈ V_β$$
+
+The sequence $(V_0, V_1, ...)$ can be continued transifinitely: one can form the union $V_ω$ of these sets
+and show that it is also a transitive set closed under { $x ∈ S | φ(x)$ }, and contains all finite hierarchy
+stages both as elements and subsets. $V_ω$ is the set of all finitary wellfounded pure sets, but it is not
+end of the hierarhcy. One can iterate the powerset operation futher and to obtain $V_{ω + 1} := $𝓟(V_ω)$$,
+$V_{ω + 2} := $𝓟^2(V_ω)$$. This sequence as well has a limit given by the union of all its elements.
+This process can be iterated transinitely for all ordinal numbers:
+$$$V_κ := ⋃_{β < κ} 𝓟(V_β)$$
+
+Due to wellfoundness of all sets (in ZN-type set theories) one can now define the ordinal valued function
+$rk(x) := ⋃_{y ∈ x}$ { $rk(y)$ } on sets that determines minimal von Neumann hierachy stage containing or
+equal to $x$, proving the claim that every set eventually enters the hierarchy at some stage.
+
+Note that being a transitive set closed under { $x ∈ S | φ(x)$ } each $V_β$ is a model of a weak set
+theory where sets can only be made filtered by predicates. For each infinite ordinal $β$, $V_β$ models
+the theory of finitary sets $H_{<ω}$. For each limit ordinal $β$, $V_β$ is also closed under forming
+singleton sets ($x ↦ {x}$), ordered pairs ($(a, b) ↦ {{a}, {a, b}}$), and arbitrary unions, thus
+modelling an even stronger set theory. A ZN-type set theory capable of expressing $V_β$ for $β < κ$
+for some infinite $κ$ can be modelled (and thus shown consistent) in a ZN-type set theory capable of
+expressing $V_κ$, but not the other way round as it would allow the latter theory to prove its own
+consistency which violates the Gödel's theorem. Therefore the ability to exress $V_β$ up to certain
+limit linearly orders ZN-type set theories by their modelling capacity.
 
 The standard Zermelo-Fraenkel set theory ZFC is the canonical example of a ZN-type set theory, and
-is being as the foundation for the majority of mathematics since its develpment in 1925. For some
-branches of mathematics such as category theory and algebraic geometry its slight extension called
-Tarski–Grothendieck set theory: there one additionally assumes that for every set $S$ there is a
-stage $V_κ ∋ S$, such that $V_κ$ is closed under all possible set operations of ZFC (i.e. $V_κ$
-is an inner model of ZFC).
+is being used as the foundation for the majority of mathematics since its develpment in 1925. For some
+branches of mathematics such as category theory and algebraic geometry a slight extension of ZFC called
+Tarski–Grothendieck (TG) set theory is used instead: there, one additionally assumes that for every set
+$S$ is contained in a stage $V_κ ∋ S$ of von Neumann hierarhcy that is is closed under all possible set
+operations of ZFC (this property is technically refered as $V_κ$ being an inner model of ZFC).
 
 ZN-type set theories are the canonical substrate for modelling various mathematical objects,
 and that is precisely what makes them interesting for sturcturalists who do not treat them
 as _the_ foundation of all mathematics anymore. When a type theorist needs to prove consistency
-of an impredicative type theory (such as System F or the observational calculus
-of constructions $CC_{obs}$, they resort to ZN-type theories to build models.
+of a strongly impredicative type theory (such as System F or the observational calculus
+of constructions $CC_{obs}$), they resort to ZN-type theories to build models.
 
 § Weak set theories
 -------------------
 
-In early days of set theory everybody was primarily concerned about making theories general enough to
-model everyting of mathematical interest. Initially there was a hope that after such ultimate system
-would be discovered, one would be able to prove its consistency using a weak system dealing only with
+In the early days of set theory, everybody was primarily concerned about making theories general enough to
+model everyting of mathematical interest. Initially, there was a hope that after such an ultimate system
+is discovered, one would be able to prove its consistency using a weak system dealing only with
 finitary objects by means of minimalistic list of obviously non-problematic axioms. It was a part of
 a large [programm](https://en.wikipedia.org/wiki/Hilbert%27s_program) on developing secure foundations
 for mathematics proposed by D. Hilbert. Soon it was proven by K. Gödel, that no powerful mathematical
-theory could prove its own consistency let alone consistency of stronger systems. Around 1975
+theory could prove its own consistency let alone consistency of stronger systems. Around 1975,
 H. Friedman founded the [Reverse Mathematics](https://en.wikipedia.org/wiki/Reverse_mathematics)
 programm, that resorts to the second best option: one seeks to work in the weakest possible
 system that allows to express and prove the quintessential theorems of a particular branch of
 mathematics, and to gauge the strength of particular theorems and theories on a linear scale.
 
 While some of the modern mathematics requires an extension of the standard ZFC (mostly TG), the
-so called ordinary mathematics (which certainly includes all mathematics pursued until WW2) does
-not require the full power of ZFC; it is sufficient to work in a subsystem of ZFC, where existence
+so called ordinary mathematics, which certainly includes all mathematics pursued until the WW2, except
+the set theory inself, does not require the full power of ZFC. For ordinary mathematics,
+it is sufficient to work in a subsystem of ZFC, where the existence
 of von Neumann hierarchy stages beyond $V_{ω + n}$ (where $n$ is a fixed integer) cannot be shown.
-An even weaker subsystem with no constuctible stages beyond $V_{ω + 1}$ is sufficient to prove
+An even weaker subsystem with no constructible stages beyond $V_{ω + 1}$ is sufficient to prove
 theorems of algebra and combinatorics restricted to countable structures, and theorems of analysis
-and topology are restricted to separable spaces, it is in particular sufficient for the whole
-real analysis. Peano arithmetics is equivalent to a system where only $V_ω$ can be demonstrated
-to exist.
+and topology restricted to separable spaces. It is sufficient for the entire body of real analysis.
+Peano arithmetics is equivalent to a system where only $V_ω$ can be demonstrated to exist.
 
-The theory of finitary pure sets $H_{<ω}$ mentioned above is the basic the ZN-type set theory
+The theory of finitary pure sets $H_{<ω}$ mentioned above is the minimal ZN-type set theory
 where only the existance of finitary stages of the von Neumann hierarchy of sets is postulated.
-One can see all other ZV-type set theories as its extensions. If one additionally postulates
-existance of the set of all finitary sets $V_ω$ (this is known as axiom of infinity), $H_{<ω}$
-turns into a theory equivalent to the Peano arithmetics. Stronger ZV-theories can be obtained by
-substituting this axiom by some strong axiom of infinity, that is an axiom postulating existance
-of stages $V_κ$ of von Neumann hierarchy with specified closure properties which the class of all
-sets can be thought to share as well.
+One can see all other classical ZN-type set theories as its extensions. Adding the axiom of
+infinity (set $V_ω$ of all finitary sets exists) makes $H_{<ω} equivalent to Peano arithmetics.
+Stronger ZN-type theories can be obtained by using stronger axioms of infinity, that is, postulating
+existance of von Neumann hierarchy stages $V_κ$ with specified closure properties which the universe
+of all sets can be thought to share as well.
 
-Instead of simply modelling a theory of interest $T$ in some strong enough ZN-type set theory, one
-can measure its consistency strength exactly by modelling it the theory $H_{<ω} + ∃V_κ$ (with
-specific closure properties) or $H_{<ω} + (∀S)(∃V_κ ∋ S)$ (with specific closure properties)
-and then modelling the used set theory inside of $T$, thus proving their equiconsistency.
+When modelling a theory of interest $T$ using a set theory, instead of just using some strong enough
+ZN-type set theory, one can identify the weakest set theory $H_{κ}$ or $H_{<κ}$ sufficient for such
+modelling, where
+$H_{κ} := H_{<ω}$ + there exists a von Neuman hierarchy stage with some specific closure propertes given by $κ$
+$H_{<κ} := H_{<ω}$ + every set is an element of a von Neuman hierarchy stage with some specific closure properties  
+given by $κ$. To ensure the chosen set theory is indeed the minimal one one has to construct the reverse model.
+
+This way, one measures the minimal $κ$ required to show the consistency of $T$. It is called the consistency
+strength of $T$.
 
 §§ The theory of finitary pure sets $H_{<ω}$
 --------------------------------------------
 
-The first-order theory of finitary pure sets by F. Pakhomov $H_{<ω}$ stated in the language of
-single-sorted first order logic with equality extended by the relation (∈) and unary operator V with
-intended meaning «$V(x)$ is the smallest stage of von Neumann hierarchy being superset of $x$».
-To be specific, the language it has the usual logical operators (¬_), (⇒), (∧), (∨), as well as
-quantifiers ∀ and ∃ binding variables of the single type (being “wellfounded pure sets” in this
-case) as well as equality (=) and the theory has all axioms governing these elements of the
-language including double negation elimination $¬¬P ⇒ P$. In addition it has a countably infinite
-list of axioms postulating existance of the sets $V_n$ for each fixed $n$, the axiom of
-extensionality specifying equality between sets
+The theory of finitary pure sets by F. Pakhomov $H_{<ω}$ is stated in the language of single-sorted
+first order logic with equality extended by the binary relation (∈) and the unary operator $V$.
+To be specific, the language of the first order logic with equality consists of usual logical operators
+(¬_), (⇒), (∧), (∨), the quantifiers ∀ and ∃, and the equality (=).
+Being single sorted means that all variables have the same type (“well-founded pure set”, in this case).
+Besides these basic parts of syntax, the language of $H_{<ω}$ has a binary relation $a ∈ b$ (“a is element of b”)
+and a unary operator $V(x)$ “the smallest stage of von Neumann hierarchy containing or equal to $x$“.
+
+The theory has all the axioms governing the logical elements of the language (¬_, ⇒, ∧, ∨, ∀, ∃, and =)
+including double negation elimination $¬¬P ⇒ P$. In addition, it has a countably infinite list of axioms
+postulating the existance of the sets $V_n$ for each fixed $n$, the axiom of extensionality specifying
+equality between sets
 $$(a = b) ⇔ ∀x ( x ∈ a ⇔ x ∈ b )$$
 the axiom schema of separation that allows to filter any set $x$ by any predicate $φ(z)$
 $$∃y ∀z (z ∈ y) ⇔ (z ∈ x ∧ φ(z)) $$
@@ -185,22 +235,23 @@ that at least one strictly monotonly growing function on them can be proven inje
 not prove its own consistency. The theory $H_{<ω}$ is carefully formulated to be non-Gödelian:
 it does not provide a way to show existence of infinitely growing functions unconditionally. For
 example, one cannot show “for any two integers $a$ and $b$, there exists their product $a · b$”.
-Yet one still can prove all such statements conditionnaly on existence of what can be interpreted
-computationally as “availability of enough memory to carry out the construction”. In particular
+Yet, one can still prove all such statements conditionnaly on existence of what can be interpreted
+computationally as “availability of enough memory to carry out the construction”. In particular,
 one can show that “for any two integers $a$ and $b$, given enough memory, the integer $a · b$
 exists”. Metatheoretically, it can be shown that any true arithmetical or combinatorial statement
 can be proven in this theory, if an upper bound on the memory required to carry out the
 underlying constructions can be provided.
 
-To date, the theory $H_{<ω}$ the best candidate for the finitistic trusted core theory seeked by
-Hilbert in his program: a weak system dealing only with finitary objects by means of minimalistic
-list of axioms. It cannot be used to prove other theories consistent unconditionally but it at
-least recognizes its own consistency. It can be used to prove other theories consistent if extended
-by suitable infinity axioms, but not fine-grained enough for gauging consistency strength of weak
-predicative theories. Already the weakest infinity axiom $∃V_ω$ makes it as strong as Peano
-arithmetic, which is way stronger than two of the basic systems used in reverse mathematics, the
-next strongest infinity axiom $∃V_(ω + 1)$ makes it stronger than all predicative systems studied
-in reverse mathematics and proof theory.
+To date, the theory $H_{<ω}$ the best candidate for the finitistic core for metamathematical
+reasoning seeked by Hilbert in his program: a weak system dealing only with finitary objects by means
+of minimalistic list of axioms. Due to Gödel's theorem it cannot be used to prove other theories
+consistency unconditionally but it at least proves its own consistency. It can be used to prove other
+theories consistency conditionaly on existence of suitable infinite stages of von Neumann hierarchy.
+It is, however, unclear if it is suitable for more fine-grained conditional consistency proofs used
+in reverse mathematics. There, one deals with theories with consistency strength below $H_{ω}$ and
+between $H_{ω}$ and $H_{ω + 1}$. Their consistency proofs are currently carried out in a weak system
+called ERA (elementary recursive arithmetic) and are conditional on termination of suitable recursive
+algorithms rather than existence of suitable infinite sets.
 
 §§ Weak set theories: The constructive set theory CZF
 -----------------------------------------------------
@@ -252,28 +303,28 @@ classes $S$ that belong to at least one other class $C ∋ S$. Such modification
 all objects of interest without resorting to second-order extensions used in the original
 paper by F. Pakhomov.
 
-The resulting theory (let us denote it by $CNG_{<ω}$) would be even more suitable for the role
-of trusted finitistic core.
+The resulting theory (let us denote it by $CGB_{<ω}$) would be even more suitable for the role
+of finitistic core.
 
 When proving that two theories are equiconsistent or one theory being consistent conditionally
 on certain ordinal notation being well-founded, one seeks to use the weakest system possible.
 Today most metatheoretical proofs are carried out in the system known as Elementary Recursive
 Arithmetic (ERA). Until recently it was the weakest known system that allows comfortable handling
-of arithmetically encoded syntax. The conjectural theory $CNG_{<ω}$ should be a better replacement:
+of arithmetically encoded syntax. The conjectural theory $CGB_{<ω}$ should be a better replacement:
 it is weaker, it only involves dealing with finitary objects and it seems to be at least equally
 comfortable to work with.
 
 ERA can be formulated not only above the language and basic rules of first order logic, but also
 as a stanalone [quantifer-free and logic-free calculus](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
 involving only functional symbols and judgements of the form “$P = Q$”. If one manages to state
-the definitional axioms for $V$ in ∀∃-form, it will be also possible to formulate $СNG_{<ω}$ as
+the definitional axioms for $V$ in ∀∃-form, it will be also possible to formulate $CGB_{<ω}$ as
 a standalone quantifier-free and logic-free calculus with “P ∈ Q“ and “P ⊃ Q“ being the only
 types of judgements.
 
 § Machine-checkable metatheoretical proofs
 ------------------------------------------
 
-Both ERA and conjectural $CNG_{<ω}$ are not directly suitable for carrying out metatheoretical
+Both ERA and conjectural $CGB_{<ω}$ are not directly suitable for carrying out metatheoretical
 proofs because the syntax of the respective theories is only accessible via arithmetical/set
 theoretical encoding, rules of which external to the theories. In sturcturalist foundational
 systems known construction calculi, languages generated by syntactic rules are accessible directly
