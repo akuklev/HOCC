@@ -149,7 +149,7 @@ equal to $x$, proving the claim that every set eventually enters the hierarchy a
 Note that being a transitive set closed under { $x ∈ S | φ(x)$ } each $V_β$ is a model of a weak set
 theory where sets can only be made filtered by predicates. For each infinite ordinal $β$, $V_β$ models
 the theory of finitary sets $H_{<ω}$. For each limit ordinal $β$, $V_β$ is also closed under forming
-singleton sets ( $x$ ↦ { $x$ } ), ordered pairs (( $a$, $b$ ) ↦ {{ $a$ }, { $a, b$ }}$), and arbitrary unions, thus
+singleton sets ( $x$ ↦ { $x$ } ), ordered pairs (( $a$, $b$ ) ↦ {{ $a$ }, { $a, b$ }}), and arbitrary unions, thus
 modelling an even stronger set theory. A ZN-type set theory capable of expressing $V_β$ for $β < κ$
 for some infinite $κ$ can be modelled (and thus shown consistent) in a ZN-type set theory capable of
 expressing $V_κ$, but not the other way round as it would allow the latter theory to prove its own
@@ -319,9 +319,9 @@ comfortable to work with.
 
 ERA can be formulated not only above the language and basic rules of first order logic, but also
 as a stanalone [quantifer-free and logic-free calculus](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
-involving only functional symbols and judgements of the form “$P = Q$”. If one manages to state
+involving only functional symbols and judgements of the form “ $P = Q$ ”. If one manages to state
 the definitional axioms for $V$ in ∀∃-form, it will be also possible to formulate $CGB_{<ω}$ as
-a standalone quantifier-free and logic-free calculus with “P ∈ Q“ and “P ⊃ Q“ being the only
+a standalone quantifier-free and logic-free calculus with “ $P ∈ Q$ “ and “ $P ⊃ Q$ “ being the only
 types of judgements.
 
 § Machine-checkable metatheoretical proofs
