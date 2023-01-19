@@ -158,8 +158,8 @@ of stages $V_κ$ of von Neumann hierarchy with specified closure properties whic
 sets can be thought to share as well.
 
 Instead of simply modelling a theory of interest `T` in some strong enough ZN-type set theory, one
-can measure its consistency strength exactly by modelling it the theory $H_{<ω} + ∃V_κ$ with
-specific closure properties or $H_{<ω} + (∀S)(∃V_κ ∋ S)$ with specific closure properties
+can measure its consistency strength exactly by modelling it the theory $H_{<ω} + ∃V_κ$ (with
+specific closure properties) or $H_{<ω} + (∀S)(∃V_κ ∋ S)$ (with specific closure properties)
 and then modelling the used set theory inside of $T$, thus proving their equiconsistency.
 
 §§ The theory of finitary pure sets $H_{<ω}$
