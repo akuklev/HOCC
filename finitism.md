@@ -59,10 +59,10 @@ natural numbers modelled by sets $n$ and $m$, one can model their ordered pair b
 { $n$, { $m$ } } which can be naturally extended to finite lists.
 
 The theory of finitary pure sets (where no infinite set can be shown to exist) was first
-developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It is called $H_{<ω}$
+developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It is called $\\text{H}_{<ω}$
 and it has quite remarkable foundational properties. It is an excemption to the infamous Gödel's
 second incompleteness theorem theorem that states that no strong enough mathematical theory can
-prove its own consistency. Pakhomov's set theory $H_{<ω}$ is weak enough to evade Gödel's theorem
+prove its own consistency. Pakhomov's set theory $\\text{H}_{<ω}$ is weak enough to evade Gödel's theorem
 and does indeed prove its own consistency. Up to date, it is the only natural example of such a
 theory.
 
@@ -103,7 +103,7 @@ already proven to exist by arbitrary predicates $φ(x)$.
 
 As already mentioned, most appealing foundational feature of ZN-type set theories is that the
 universe of all sets can be better understood: Sets $S$ can be ordered by their complexity
-$rk(S)$, so that collection sets of complexity below $β$ forms a set $V_β$. Therefore one
+$\\text{rk}(S)$, so that collection sets of complexity below $β$ forms a set $V_β$. Therefore one
 has an infinite hierarchy of ever growing sets (known as the von Neumann hierarchy)
 $$V_0 ⊂ V_1 ⊂ ··· ⊂ V_β ⊂ ···$$
 with the property that every set eventually enters the hierarchy (namely at the stage $rk(S)$ + 1).
@@ -145,7 +145,7 @@ equal to $x$, proving the claim that every set eventually enters the hierarchy a
 
 Note that being a transitive set closed under { $x ∈ S | φ(x)$ } each $V_β$ is a model of a weak set
 theory where sets can only be made filtered by predicates. For each infinite ordinal $β$, $V_β$ models
-the theory of finitary sets $H_{<ω}$. For each limit ordinal $β$, $V_β$ is also closed under forming
+the theory of finitary sets $\\text{H}_{<ω}$. For each limit ordinal $β$, $V_β$ is also closed under forming
 singleton sets ($x ↦ {x}$), ordered pairs ($(a, b) ↦ {{a}, {a, b}}$), and arbitrary unions, thus
 modelling an even stronger set theory. A ZN-type set theory capable of expressing $V_β$ for $β < κ$
 for some infinite $κ$ can be modelled (and thus shown consistent) in a ZN-type set theory capable of
@@ -164,7 +164,7 @@ ZN-type set theories are the canonical substrate for modelling various mathemati
 and that is precisely what makes them interesting for sturcturalists who do not treat them
 as _the_ foundation of all mathematics anymore. When a type theorist needs to prove consistency
 of a strongly impredicative type theory (such as System F or the observational calculus
-of constructions $CC_{obs}$), they resort to ZN-type theories to build models.
+of constructions $\\text{CC}_{obs}$), they resort to ZN-type theories to build models.
 
 § Weak set theories
 -------------------
