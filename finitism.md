@@ -266,7 +266,9 @@ theories with equality extended by the relation (∈), but it is an intuitionsit
 theory: axioms governing logical operators to not include double negation elimination (DNE)
 $¬¬P ⇒ P$. CZF is a weak predicative theory that can be modelled in a rather weak Martin-Löf
 type theory and amenable to proof theoretic analysis, but if one extends it by an axiom
-enabling DNE, its power skyrockets; CZF + DNE = ZF, CZF + Axiom of Choice = ZFC.
+enabling DNE, its power skyrockets:
+$$ CZF + DNE = ZF $$
+$$ CZF + \\text{Axiom of Choice} = ZFC $$.
 
 CZF designed to be perfectly suitable for modelling mathematical objects in the constructive
 setting. To give an example, it is used to model constructive algebraic model strucutres in
