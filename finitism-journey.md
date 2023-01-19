@@ -56,10 +56,10 @@ rational numbers, graphs, finite groups, finite geometries, etc. For example, na
 can be modelled by sets containing models of all smaller natural numbers. Thus, zero is modelled
 as the empty set ∅, the number one by the set {∅}, the number two by {∅, {∅}}, etc. Given two
 natural numbers modelled by sets $n$ and $m$, one can model their ordered pair by the set
-{$n$, {$m$}} which can be naturally extended to finite lists.
+{ $n$, { $m$ }} which can be naturally extended to finite lists.
 
 The theory of finitary pure sets (where no infinite set can be shown to exist) was first
-developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It called $H_{<ω}$
+developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It called $\text{H}_{<ω}$
 and it has quite remarkable foundational properties. It is an excemption to the infamous Gödel's
 second incompleteness theorem theorem that states that no strong enough mathematical theory can
 prove its own consistency. Pakhomov's set theory $H_{<ω}$ is weak enough to evade Gödel's theorem
