@@ -103,7 +103,7 @@ already proven to exist by arbitrary predicates $φ(x)$.
 
 As already mentioned, most appealing foundational feature of ZN-type set theories is that the
 universe of all sets can be better understood: Sets $S$ can be ordered by their complexity
-$\\text{rk}(S)$, so that collection sets of complexity below $β$ forms a set $V_β$. Therefore one
+$ \\text{rk}(S)$, so that collection sets of complexity below $β$ forms a set $V_β$. Therefore one
 has an infinite hierarchy of ever growing sets (known as the von Neumann hierarchy)
 $$V_0 ⊂ V_1 ⊂ ··· ⊂ V_β ⊂ ···$$
 with the property that every set eventually enters the hierarchy (namely at the stage $rk(S)$ + 1).
@@ -113,6 +113,7 @@ described in terms of smaller stages.
 
 Let us first consider its finite stages. The set $V_0$ of sets of complexity below zero should
 be obviously empty:
+
 $$ V_0 := ∅ $$
 
 Given the set $V_β$ of sets of complexity below $β$ let
