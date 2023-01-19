@@ -129,7 +129,7 @@ $$V_0 ∈ V_1 ∈ ··· $$
 Each stage $V_β$ is a transitive set that is for every set it contains it does also contain all its elements:
 $$(S ∈ V_β) ⇒ (S ⊂ V_β)$$
 and closed under forming subsets of its elements by arbitrary predicates $φ(x)$:
-$$∀(S ∈ V_β) ⇒ \{ $x ∈ S | φ(x)$ \} ∈ V_β$$
+$$∀(S ∈ V_β) ⇒ \\{ $x ∈ S | φ(x)$ \\} ∈ V_β$$
 
 The sequence $(V_0, V_1, ...)$ can be continued transifinitely: one can form the union $V_ω$ of these sets
 and show that it is also a transitive set closed under { $x ∈ S | φ(x)$ }, and contains all finite hierarchy
@@ -137,7 +137,7 @@ stages both as elements and subsets. $V_ω$ is the set of all finitary wellfound
 end of the hierarhcy. One can iterate the powerset operation futher and to obtain $V_{ω + 1} := $𝓟(V_ω)$,
 $V_{ω + 2} := 𝓟^2(V_ω)$. This sequence as well has a limit given by the union of all its elements.
 This process can be iterated transinitely for all ordinal numbers:
-$$$V_κ := ⋃_{β < κ} 𝓟(V_β)$$
+$$V_κ := ⋃_{β < κ} 𝓟(V_β)$$
 
 Due to wellfoundness of all sets (in ZN-type set theories) one can now define the ordinal valued function
 $rk(x) := ⋃_{y ∈ x}$ { $rk(y)$ } on sets that determines minimal von Neumann hierachy stage containing or
