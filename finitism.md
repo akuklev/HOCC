@@ -149,7 +149,7 @@ equal to $x$, proving the claim that every set eventually enters the hierarchy a
 Note that being a transitive set closed under { $x ∈ S | φ(x)$ } each $V_β$ is a model of a weak set
 theory where sets can only be made filtered by predicates. For each infinite ordinal $β$, $V_β$ models
 the theory of finitary sets $H_{<ω}$. For each limit ordinal $β$, $V_β$ is also closed under forming
-singleton sets ($x ↦ {x}$), ordered pairs ($(a, b) ↦ {{a}, {a, b}}$), and arbitrary unions, thus
+singleton sets ( $x$ ↦ { $x$ } ), ordered pairs (( $a$, $b$ ) ↦ {{ $a$ }, { $a, b$ }}$), and arbitrary unions, thus
 modelling an even stronger set theory. A ZN-type set theory capable of expressing $V_β$ for $β < κ$
 for some infinite $κ$ can be modelled (and thus shown consistent) in a ZN-type set theory capable of
 expressing $V_κ$, but not the other way round as it would allow the latter theory to prove its own
