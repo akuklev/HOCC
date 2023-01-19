@@ -113,11 +113,10 @@ described in terms of smaller stages.
 
 Let us first consider its finite stages. The set $V_0$ of sets of complexity below zero should
 be obviously empty:
-
 $$ V_0 := ∅ $$
 
 Given the set $V_β$ of sets of complexity below $β$ let
-$V_{β + 1} := 𝓟(V_β)$
+$$ V_{β + 1} := 𝓟(V_β) $$
 where $𝓟(V_β)$ denotes the power set $V_β$, i.e. set of all subsets of $V_β$ including $V_β$ itself.
 
 ![The first four stages of the von Neumann hierarchy](https://upload.wikimedia.org/wikipedia/commons/8/83/Von_Neumann_universe_4.png)
@@ -135,7 +134,7 @@ $$∀(S ∈ V_β) ⇒ \\{ x ∈ S | φ(x) \\} ∈ V_β$$
 The sequence $(V_0, V_1, ...)$ can be continued transifinitely: one can form the union $V_ω$ of these sets
 and show that it is also a transitive set closed under { $x ∈ S | φ(x)$ }, and contains all finite hierarchy
 stages both as elements and subsets. $V_ω$ is the set of all finitary wellfounded pure sets, but it is not
-end of the hierarhcy. One can iterate the powerset operation futher and to obtain $V_{ω + 1} := $𝓟(V_ω)$,
+end of the hierarhcy. One can iterate the powerset operation futher and to obtain $V_{ω + 1} := 𝓟(V_ω)$,
 $V_{ω + 2} := 𝓟^2(V_ω)$. This sequence as well has a limit given by the union of all its elements.
 This process can be iterated transinitely for all ordinal numbers:
 $$V_κ := ⋃_{β < κ} 𝓟(V_β)$$
