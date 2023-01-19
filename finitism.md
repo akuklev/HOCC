@@ -113,10 +113,13 @@ described in terms of smaller stages.
 
 Let us first consider its finite stages. The set $V_0$ of sets of complexity below zero should
 be obviously empty:
+
 $$ V_0 := ∅ $$
 
 Given the set $V_β$ of sets of complexity below $β$ let
+
 $$ V_{β + 1} := 𝓟(V_β) $$
+
 where $𝓟(V_β)$ denotes the power set $V_β$, i.e. set of all subsets of $V_β$ including $V_β$ itself.
 
 ![The first four stages of the von Neumann hierarchy](https://upload.wikimedia.org/wikipedia/commons/8/83/Von_Neumann_universe_4.png)
@@ -194,7 +197,7 @@ Peano arithmetics is equivalent to a system where only $V_ω$ can be demonstrate
 The theory of finitary pure sets $H_{<ω}$ mentioned above is the minimal ZN-type set theory
 where only the existance of finitary stages of the von Neumann hierarchy of sets is postulated.
 One can see all other classical ZN-type set theories as its extensions. Adding the axiom of
-infinity (set $V_ω$ of all finitary sets exists) makes $H_{<ω} equivalent to Peano arithmetics.
+infinity (set $V_ω$ of all finitary sets exists) makes $H_{<ω}$ equivalent to Peano arithmetics.
 Stronger ZN-type theories can be obtained by using stronger axioms of infinity, that is, postulating
 existance of von Neumann hierarchy stages $V_κ$ with specified closure properties which the universe
 of all sets can be thought to share as well.
