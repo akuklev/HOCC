@@ -59,7 +59,7 @@ natural numbers modelled by sets $n$ and $m$, one can model their ordered pair b
 { $n$, { $m$ } } which can be naturally extended to finite lists.
 
 The theory of finitary pure sets (where no infinite set can be shown to exist) was first
-developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It is called $p \\text{H}_{<ω}$
+developed very recently [[Pakhomov2019]](https://arxiv.org/abs/1907.00877). It is called $H_{<ω}$
 and it has quite remarkable foundational properties. It is an excemption to the infamous Gödel's
 second incompleteness theorem theorem that states that no strong enough mathematical theory can
 prove its own consistency. Pakhomov's set theory $H_{<ω}$ is weak enough to evade Gödel's theorem
