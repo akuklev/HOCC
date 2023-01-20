@@ -362,8 +362,8 @@ with bound variables are tedious and error prone: by resorting to a quantifier f
 greatly reduces the complexity of the language.
 
 Appendix I we outline that $CGB_{<ω}$ (without the V operation and its yet unknown defining axioms)
-can be also presented in quantifier-free and logic-free form with “ $P ∈ Q$ “ and “ $P ⊃ Q$ “ being
-the only judgements. Unfortunatlly, the system as presented there is far from being minimalistic.
+can be also presented in quantifier-free and logic-free all judgements of the form “ $P ⊃ Q$ “.
+Unfortunatlly, the system as presented there is far from being minimalistic.
 However, the initial standalone formulation of primitive recursive arithmetic was also far from
 being optimal; it took another decade to streamline it to the present aesthetically pleasing form.
 It might work out for $CGB_{<ω}$ as well.
@@ -407,8 +407,8 @@ within minimalistic foundationally secure theory.
 
 First let us formalize the theory $CGB_{<ω}$ without $V$ operator and its definitional axioms
 as a standalone logic-free calculus. In this setting, all terms will represend class-valued
-functions of zero or more variables, all judgements will be of the form `X ∈ Y` or `X ⊃ Y`,
-where `X` and `Y` are terms.
+operators of zero or more variables, all judgements will be of the form `X ⊃ Y`, where `X`
+and `Y` are terms.
 
 There is no equality judgement in this formalism, so there will be no axiom of extensionality.
 Instead, every proposition requiring two classes `X` and `Y` to be equal will be explicitly
@@ -439,9 +439,14 @@ also mention it for sake of completness:
       X ⊃ Z
 ```
 
-To provide rules and axioms for intuitionsitic logic, we'll first need to define
-the empty set 0 and singleton set 1 := {0} that will represent the false and the
-true proposition respectively
+Now we need to introduce the constants 0 = {}, 1 = {0}, and a binary operator
+𝔼(x, y) = { $x ∈ 1 | x ∈ y $ }. The proposed definitions are not how we introduce
+them, they are there only to explain the intended meaning of those symbols.
+We'll also introduce the following two judgement abbrevations:
+`1 ⊃ 𝔼(x, y)` will be denoted by x ∈ y.
+`𝔼(x, y) ⊃ 0` will be denoted by x ∉ y.
+
+Now let's give the rules for those three objects.
 
 ```
 ----- Empty set is subclass of every other class
@@ -449,73 +454,55 @@ S ⊃ 0
 
 x ∈ 0
 ----- ex falso quodlibet (if empty class contains something, than anything contains everyting)
-y ∈ z
-```
+y ⊃ z
 
-In general, the class {x} is introduced by rules
-```
--------
-x ∈ {x}
+----- 1 contains 0
+0 ∈ 1
 
-y ∈ {x}
--------
- y ⊃ x
+x ∈ 1
+----- 1 contains only subsets of zero (thus only zero)
+0 ⊃ x
 
-y ∈ {x}
--------
- x ⊃ y
-```
-
-Note that by stating existence of the class `{x}` we also state that `x` is a set. For this
-reason we don't postulate existance of all `{x}`s, but do this only for particular instances.
-We'll do so for the class
-
-Now let's introduce reflection of the membership predicate, the class function 𝔼(x, y) to be
-equal to {x ∈ 1 | x ∈ y}.
-
-```
-    x ∈ y
-=============
- 0 ∈ 𝔼(x, y)
-
- S ∈ 𝔼(x, y)
 -------------
-   0 ⊃ S
+ 1 ⊃ 𝔼(x, y)
+
+     X ⊃ Y
+-----------------
+𝔼(s, X) ⊃ 𝔼(s, Y)
 ```
 
-Now we express complement of a class.
+The last axiom does not characterize the relation between membership and being superset completely.
+We need to express the inversion. We'll only be able to express this property later, after we learn
+how to introduce quantifiers. So first we have to introduce propositional logic. We already can
+encode propositions `false`, `true` and (x ∈ y) as subsets of 1, now we have to introduce conjunction
+`A ∩ B`, disjunction `A ∪ B` and implication `A ⇒ B` operators producing subsets of 1 if `A` and `B` are.
 
+As for implication, we can simply take
 ```
- 𝔼(x, y) ⊃ 0
-=============
-  x ∈ ∁(y)
-```
+------------
+(A ⇒ B) ⊃ 1
 
-The judgements (∈) and (⊃) are not independent. Their relation can be completely specified by the following two axioms:
-```
-       x ⊃ y
-===================
- 𝔼(z, x) ⊃ 𝔼(z, y)
-
-  x ∈ P   P ⊃ Q
----------------- Modus ponens
-      x ∈ Q
+   X ⊃ Y
+============
+1 ⊃ (A => B)
 ```
 
-Let us also introduce the reflecion of the superset predicate:
-```
-       x ⊃ y
-====================
- 0 ∈ SUPERSET(x, y)
+Together with transitivity this definition implies modus ponens. If we now state the 8 Hilbert style axioms for
+intuitionsitic logic, we obtain the full intuitionsitic propositional logic.
 
- S ∈ SUPERSET(x, y)
---------------------
-      0 ⊃ S
+We are also ready to generalize the conjunction and disjunction from subsingletons to any classes by the
+following rules:
+```
+     x ∈ (A ∪ B)
+=========================
+1 ⊃ ( 𝔼(x, A) ∪ 𝔼(x, B) )
+
+     x ∈ (A ∩ B)
+=========================
+1 ⊃ ( 𝔼(x, A) ∩ 𝔼(x, B) )
 ```
 
-Now simply by adding the binary union and intersection together with 8 Hilbert style axioms for intuitionsitic logic,
-we obtain the intuitionsitic propositional calculus with equality. Now we want to ensure that all predicates definable
-with connectives defined so far can be represented as classes.
+Now we want to ensure that all predicates definable so far can be represented as classes.
 
 TODO: Pairing axiom, existence of cartesian product of classes, operations of circular permutation and transposition,
 the class E
