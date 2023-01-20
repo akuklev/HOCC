@@ -282,7 +282,7 @@ enabling DNE, its power skyrockets:
 
 $$ CZF + DNE = ZF $$
 
-$$ CZF + \\text{Axiom of Choice} = ZFC $$
+$$ CZF + \text{Axiom of Choice} = ZFC $$
 
 CZF was designed as a system for modelling mathematical objects in the constructive
 setting. It is used to model constructive algebraic model strucutres in
