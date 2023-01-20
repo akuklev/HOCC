@@ -126,13 +126,19 @@ where $𝓟(V_β)$ denotes the power set of $V_β$, i.e. set of all subsets of $
 ![The first four stages of the von Neumann hierarchy](https://upload.wikimedia.org/wikipedia/commons/8/83/Von_Neumann_universe_4.png)
 
 With these definitions, one obtains an infinite sequence of sets satisfying
+
 $$V_0 ⊂ V_1 ⊂ ··· $$
+
 and
+
 $$V_0 ∈ V_1 ∈ ··· $$
 
 Each stage $V_β$ is a transitive set, that is it contains all the elements of its elements
+
 $$(S ∈ V_β) ⇒ (S ⊂ V_β)$$
+
 and is closed under restricting its elements by arbitrary predicates $φ(x)$:
+
 $$∀(S ∈ V_β) ⇒ \\{ x ∈ S | φ(x) \\} ∈ V_β$$
 
 The sequence $(V_0, V_1, ...)$ can be continued transifinitely: one can form the union $V_ω$ of all these stages
@@ -147,8 +153,10 @@ Due to wellfoundness of all sets one can now define the ordinal valued function 
 
 $$ \text{rk}(x) := ⋃_{y ∈ x} \\{ \text{rk}(y) \\} $$
 
-It determines the minimal von Neumann hierachy stage containing or equal to $x$. One can show
-$$∀(S) S ∈ V_{\text{rk}(x)}$$
+It determines the stage of the von Neumann hierachy containing or equal to $x$. One can show
+
+$$∀(S) S ∈ V_{\text{rk}(x) + 1}$$
+
 which proves the claim that every set eventually enters the hierarchy at some stage.
 
 Each $V_β$ is a model of a weak set theory because it is a transitive set of wellfounded sets closed
@@ -210,18 +218,19 @@ set theories are extensions of the $H_{<ω}$.
 Extensions of $H_{<ω}$ by axioms postulating existence of specific infinite von Neuman hierarhcy
 stages seem to be the perfect base for reverse mathematics above $V_{ω + 1}$. All mathematical
 theories known to date can be modelled in some theory $H_{κ}$ of the form
-“H_{<ω}$ + there exists a von Neuman hierarchy stage with some specific closure propertes
-which the universe of all sets can be thought to share as well”. The ordinal $κ$ used in the names
+“ $H_{<ω}$ + there exists a von Neuman hierarchy stage with some specific closure propertes
+which the universe of all sets can be thought to share as well ”. The ordinal $κ$ used in the names
 $H_{κ}$ of these theories is not a fixed ordinal, but an ordinal capturing the desired closure
 propertes for each specific theory. As it was already mentioned, theories $H_{κ}$ are linearly
 ordered by their modelling capacity $κ$.
 
 By providing a model of an arbitrary theory $T$ inside some theory $H_{κ}$ one obtains a strict
-upper bound $κ$ for its modelling capacity. By modelling the set theory $H_{<η}$[^1] inside $T$ one
-a strict lower bound $η$. By establishing bi-interpretability with some $H_{<κ}$ one determines
-the exact modelling capacity in one stroke.
+upper bound $κ$ for its modelling capacity. By modelling the set theory
 
-[^1]: $H_{<κ} := H_{<ω} + ∃V_η$ for each $η < κ$
+$$ H_{<η} := H_{<ω} + ∃V_β \text{ for each } β < η $$
+
+inside $T$ one obtains a strict lower bound $η$. By establishing bi-interpretability with some $H_{<κ}$ one determines
+the exact modelling capacity in one stroke.
 
 §§ The theory of finitary pure sets $H_{<ω}$
 --------------------------------------------
@@ -343,99 +352,123 @@ theory $CGB_{<ω}$ should be a better replacement:
 it is weaker, it only involves dealing with finitary objects and it seems to be at least equally
 comfortable to work with.
 
-ERA can be formulated not only above the language and basic rules of first order logic, but also
-as a stanalone [quantifer-free and logic-free calculus](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
-involving only functional symbols and judgements of the form “ $P = Q$ ”. If one manages to state
-the definitional axioms for $V$ in ∀∃-form, it will be also possible to formulate $CGB_{<ω}$ as
-a standalone quantifier-free and logic-free calculus with “ $P ∈ Q$ “ and “ $P ⊃ Q$ “ being the only
-types of judgements. See Appendix one for the implementation details.
 
-§ Future work: Machine-checkable metatheoretical proofs
--------------------------------------------------------
+While being equivalent to a first-order theory, ERA can be formulated as a stanalone
+[quantifer-free and logic-free calculus](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
+involving only functional symbols and judgements of the form “ $P = Q$ ” in an aesthetically
+pleasing and minimalistic way, involving only four inference rules besides defining equations
+for all definable elementary arithmetic functions. Arithmetic encodings of formalized languages
+with bound variables are tedious and error prone: by resorting to a quantifier free calculus one
+greatly reduces the complexity of the language.
+
+Appendix I we outline that $CGB_{<ω}$ (without the V operation and its yet unknown defining axioms)
+can be also presented in quantifier-free and logic-free form with “ $P ∈ Q$ “ and “ $P ⊃ Q$ “ being
+the only judgements. Unfortunatlly, the system as presented there is far from being minimalistic.
+However, the initial standalone formulation of primitive recursive arithmetic was also far from
+being optimal; it took another decade to streamline it to the present aesthetically pleasing form.
+It might work out for $CGB_{<ω}$ as well.
+
+
+
+§ Mechanizing metatheoretical proofs
+------------------------------------
 
 Both ERA and conjectural $CGB_{<ω}$ are not directly suitable for carrying out metatheoretical
-proofs because the syntax of the respective theories is only accessible via arithmetical/set
-theoretical encoding, rules of which external to the theories. In sturcturalist foundational
-systems known construction calculi, languages generated by syntactic rules are accessible directly
-as purely inductive types (indexed purely inductive types in case of languages with variables, in
-particular languages of first-order theories). As a matter of fact inductive type definitions
-for such languages can be seen as a kind of macros that define these types in any category
-with sufficient additional structure, namely an algebraic operator `W` that produces and initial
-algebra for any given dependent polynomial endofunctor on that category. Our great hope is that
-we will be able to define the category of $CGB_{<ω}$ sets and functions, equip it with enough
-structure to interpret languages of first-order theories, and carry out proofs of interpretability,
-conservativity and consistency conditionally on existence of certain infinite von Neumann hierarchy
-stage or termination of certain recursive algorithm in mechanized, machine-checkable fashion.
+proofs because the syntax of the respective theories is only accessible through some kind of
+arithmetical encoding which is itself nontrivial and error proneю
+
+In our work on [Higher Observational Constuction Calculus](https://akuklev.github.io/HOCC)
+we show how formalized languages containing bound variables can be naturally and directly
+represented by indexed purely inductive types: these are types freely generated by a set of
+grammar rules.
+This approach covers both the languages of first-order theories (both single-sorted
+and multisorted), and languages capturing (natural deduction) proofs in those theories.
+The latter languages are necessarily dependently-typed, where proof terms are typed by
+propositions they prove. The ability to capture languages and manipulate their terms
+in a direct and convenient manner makes construction calculi the best framework to carry
+out metamathematical proofs. The apperent downside is that construction calculi are very
+far from being minimalist.
+
+Yet, as we outline in [* is more than Type](https://akuklev.github.io/HOCC/star-is-more),
+inductive definitions can be also seen as a kind of macros defining objects in any category
+$C$ with sufficient structure that can be defined in the underlying construction calculus.
+Within this approach also manipulations involving terms get decoded (“macro expanded”) into
+elementary constructions available in the category $C$. We hope to be able to define the
+category exactly corresponding to the set theory the $CGB_{<ω}$, and show that it has enough
+structure to model enough indexed purely inductive types. That way direct style metamathematical
+proofs in HOCC (where one manipulates the real syntax and not its arithmetic encoding) get
+compiled into $CGB_{<ω}$ proofs where finitary objects of obvious structure are manipulated
+within minimalistic foundationally secure theory.
 
 ***
 
 § Appendix I: Logic-free Calculus for $CGB_{<ω}$ without V-operation
 -------------------------------------------------------------------
 
-First let us formalize the theory $CGB_{<ω}$ without definitional axioms for $V$ in a form without
-any predefined logical connectives or quantifiers. In this setting, all terms will be class-valued
-functions of zero or more variables.
+First let us formalize the theory $CGB_{<ω}$ without $V$ operator and its definitional axioms
+as a standalone logic-free calculus. In this setting, all terms will represend class-valued
+functions of zero or more variables, all judgements will be of the form `X ∈ Y` or `X ⊃ Y`,
+where `X` and `Y` are terms.
 
-In our formalizm we don't have equality symbol, so there will be no axiom of extensionality.
-Instead, every axiom and proposition requiring two classes X and Y to be equal will be explicitly
-stating both `X ⊃ Y` and `Y ⊃ X` as requirements.
+There is no equality judgement in this formalism, so there will be no axiom of extensionality.
+Instead, every proposition requiring two classes `X` and `Y` to be equal will be explicitly
+requiring both `X ⊃ Y` and `Y ⊃ X`.
 
-In particular we'll have the equality axioms in the following form:
+Let us start by listing the inference rules governing equality and substitution:
 
 ```
+------- Reflexivity
+ P ⊃ P
+
  P ⊃ Q    Q ⊃ P
 ---------------- Inner substitution rule
   F(P) ⊃ F(Q)
 ```
 
 ```
- F(x) ⊃ G(x)    G(x) ⊃ F(x)
----------------------------- Outer substitution rule
-        F(x) ⊃ F(x)
+ F(x) ⊃ G(x)   G(y) ⊃ F(y)
+--------------------------- Outer substitution rule
+        F(z) ⊃ F(z)
 ```
 
-```
-------- Reflexivity
- P ⊃ P
-```
-
+The transitivity rule will turn out to be derivable form others, but let us
+also mention it for sake of completness:
 ```
  X ⊃ Y     Y ⊃ Z
 ----------------- Transitivity
       X ⊃ Z
 ```
 
-Now let us define the empty class 0 and the class 1 containing only the empty set up to equality,
-```
------ The class 1 contains empty set
-0 ∈ 1
+To provide rules and axioms for intuitionsitic logic, we'll first need to define
+the empty set 0 and singleton set 1 := {0} that will represent the false and the
+true proposition respectively
 
+```
 ----- Empty set is subclass of every other class
 S ⊃ 0
-
-x ∈ 1
------ (Together with previous axiom) every element of 1 is equal to 0.
-0 ⊃ x
 
 x ∈ 0
 ----- ex falso quodlibet (if empty class contains something, than anything contains everyting)
 y ∈ z
 ```
 
-In general, for any set `x ∈ y` we may introduce the class {x} by rules
+In general, the class {x} is introduced by rules
 ```
 -------
 x ∈ {x}
 
 y ∈ {x}
-------
-y ⊃ x
+-------
+ y ⊃ x
 
 y ∈ {x}
-------
-x ⊃ y
+-------
+ x ⊃ y
 ```
 
+Note that by stating existence of the class `{x}` we also state that `x` is a set. For this
+reason we don't postulate existance of all `{x}`s, but do this only for particular instances.
+We'll do so for the class
 
 Now let's introduce reflection of the membership predicate, the class function 𝔼(x, y) to be
 equal to {x ∈ 1 | x ∈ y}.
