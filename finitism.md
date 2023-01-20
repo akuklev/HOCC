@@ -220,7 +220,7 @@ strength of $T$. Actually there
 The theory of finitary pure sets by F. Pakhomov $H_{<ω}$ is stated in the language of single-sorted
 first order logic with equality extended by the binary relation (∈) and the unary operator $V$.
 To be specific, the language of the first order logic with equality consists of usual logical operators
-(¬_), (⇒), (∧), (∨), the quantifiers ∀ and ∃, and the equality (=).
+(¬\_), (⇒), (∧), (∨), the quantifiers ∀ and ∃, and the equality (=).
 Being single sorted means that all variables have the same type (“well-founded pure set”, in this case).
 Besides these basic parts of syntax, the language of $H_{<ω}$ has a binary relation $a ∈ b$ (“a is element of b”)
 and a unary operator $V(x)$ “the smallest stage of von Neumann hierarchy containing or equal to $x$“.
