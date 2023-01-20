@@ -281,7 +281,7 @@ $$ CZF + DNE = ZF $$
 $$ CZF + \text{Axiom of Choice} = ZFC $$
 
 CZF was designed as a system for modelling mathematical objects in the constructive
-setting. It is used to model constructive algebraic model strucutres in
+setting. It is used to model algebraic model strucutres on simplicial and cubical sets in
 category theory and predicative constructive type theories.
 
 Since CZF lacks the powerset operation (which is substituted by a much weaker subset collection
