@@ -327,10 +327,7 @@ and intriguing task. The axiom of extensionality and axioms postulating existenc
 finite level stages of von Neumann hierarchy can be taken over literally. The axiom schema of
 separation can be substituted by [predicative separation](https://en.wikipedia.org/wiki/Axiom_schema_of_predicative_separation)
 (which is known to be implementable by a finite number of axions instead of a schema). The tricky
-part is the definitional axiom for $V$. It is far from obvious how to restate it to obtain all the
-desired consequences without DLE. It is surely even less clear how to adapt it to represent the
-modified von Neumann hierarchy so that the theory does not get trivialized when extended by strong
-infinity axioms.
+part is the definitional axiom for $V$ (see below).
 
 Following the approach of [NBG](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory),
 such theory can be conservatively (i.e. without introducing new theorems or increasing strength)
@@ -363,7 +360,7 @@ greatly reduces the complexity of the language.
 
 Appendix I we outline that $CGB_{<ω}$ (without the V operation and its yet unknown defining axioms)
 can be also presented in quantifier-free and logic-free all judgements of the form “ $P ⊃ Q$ “.
-Unfortunatlly, the system as presented there is far from being minimalistic.
+Unfortunatelly, the system as presented there is far from being minimalistic.
 However, the initial standalone formulation of primitive recursive arithmetic was also far from
 being optimal; it took another decade to streamline it to the present aesthetically pleasing form.
 It might work out for $CGB_{<ω}$ as well.
@@ -469,6 +466,7 @@ x ∈ 1
      X ⊃ Y
 -----------------
 𝔼(s, X) ⊃ 𝔼(s, Y)
+
 ```
 
 The last axiom does not characterize the relation between membership and being superset completely.
@@ -502,93 +500,79 @@ following rules:
 1 ⊃ ( 𝔼(x, A) ∩ 𝔼(x, B) )
 ```
 
-Now we want to ensure that all predicates definable so far can be represented as classes.
-
-TODO: Pairing axiom, existence of cartesian product of classes, operations of circular permutation and transposition,
-the class E
-```
-   x ∈ y
-============
- <x, y> ∈ E
-```
-
-If the class R represents a total functional relation, by Val(R, x) let us represent its value at x:
-```
-  <x, y> ∈ R
----------------
- y ⊃ Val(R, x)
-
-   <x, y> ∈ R
----------------
- Val(R, x) ⊃ y
-
- y ⊃ Val(R, x)    Val(R, x) ⊃ y
---------------------------------
-        <x, y> ∈ R
-```
-
-Now we can state the rules for quantifiers
-```
- C ⊃ 𝔼(0, Val(R, x))
---------------------- ∀-Intro
-   C ⊃ 𝔼(0, ∀R)
-
-
----------------- ∀-Elim
- ∀R ⊃ Val(R, x)
-
- 𝔼(0, Val(R, x)) ⊃ C
---------------------- ∃-Elim
-    𝔼(0, ∃R) ⊃ C
-
----------------- ∃-Intro
- Val(R, x) ⊃ ∃R
-```
-
-Now let us the operators Q(A, y) and Dom by:
-```
- 0 ∈ Val(Q(A, x), y)
-=======================
-     <x, y> ∈ A
-
-  x ∈ Dom(A)
-==============
- 0 ∈ ∃Q(A, x)
-```
-
-With all these definitions we now finaly can represent any first order predicates in the standard set theoretical
-language (without operator V specific for H) and also have all rules and axioms of first order intuitionistic logic
-with equality.
-
-We already have constants 0 and 1 with their defing axioms. We can also introduce constants for all other
-finite ordinals by stating each n equal to {0} ∪ {1} ∪ ···<n.
-
-Now it's time to define the finite stages of the von Neumann hierarchy.
+Now we can define the finite ordinals, that is constants 2, 3, 4, etc in addition to 0 and 1 which we
+already have defined. The ordinals will by an axiom scheme that also defines sets {0}, {1}, {2}, etc.
+We treat these `{n}` as names of constants, we do not define the operation `{_}` as it would ruin the
+non-Gödelianess of the theory.
 
 ```
--------------- Every Vn is a set
- V_n ∈ V_(n')
+-------
+n ∈ {n}
 
- S ∈ V_(n')
------------- Elements of the next stage are subsets of the previous stage (A4)
-  V_n ⊃ S
+x ∈ {n}
+-------
+ x ⊃ n
+
+x ∈ {n}
+-------
+ n ⊃ x
+
+------------------
+ n' ⊃ ( {n} ∪ n )
+
+-----------------
+ ( {n} ∪ n ) ⊃ n'
 ```
 
-In the classic variant we would also have “Any subset of the previous stage is a member of the next stage”:
+Finaly let's deal with classes and predicates. Let us define unary operators ∀ and ∃ as well,
+and for any term φ(x,..,z) of our system with (n + 1) variables define the n-ary operator
+{ x | φ(x,..,z) } together with following axioms
 ```
-  V_n ⊃ S
-------------
- S ∈ V_(n')
+    C ⊃ φ(x,..,z)
+------------------------ ∀-Intro
+ C ⊃ ∀{ t | φ(t,..,z) }
+
+------------------------------- ∀-Elim
+∀{ t | φ(t,..,z) } ⊃ φ(x,..,z)
+
+     φ(x,..,z) ⊃ C
+------------------------ ∃-Elim
+ ∃{ t | φ(t,..,z) } ⊃ C
+
+------------------------------- ∃-Intro
+φ(x,..,z) ⊃ ∃{ t | φ(t,..,z) }
 ```
 
-In the constructive setting we have to be more cautious:
+Now we can finally fix the relation between being member and subset:
+```
+-------------------
+X ⊃ { x | 𝔼(s, X) }
+
+-------------------
+{x | 𝔼(s, X) } ⊃ X
 
 ```
- V_n ⊃ S   (V_n ∪ 2) ⊃ 𝔼(x, S)
-------------------------------- n-definite subsets of the previous stage n belong to the next stage
-        S ∈ V_(n')
+
+Now let us try to define the V operator inverting the definition of modified von Neumann hierarchy
+from “Large Sets in Constructive Set Theory” by Albert Zieger along the lines of axiom 3 on the page
+3 of “A weak set theory that proves its own consistency” by Fedor Pakhomov:
+
+```
+                   y ∈ V(x)
+==============================================================
+ ∃{z| 𝔼(z, x) ∩ (V(z) => y) ∩ ∀{t | ( V(z) ∪ 2) => 𝔼(t, y)} }
 ```
 
-By stating that sets (i.e. classes belonging at least to one other class) are closed under
-[Gödel operations](https://en.wikipedia.org/wiki/G%C3%B6del_operation) we obtain a finite
-axiomatization of $Δ_0$-separation.
+For Δ₀ formulas φ(x,..,z) we additionally postulate separation in the following form
+```
+        y ∈ V(x)
+-------------------------------
+ (y ∩ { t | φ(t,..,z)}) ∈ V(x)
+```
+
+Next steps:
+- Show that this theory proves set induction or add it as an axiom
+- Ensure this theory proves excluded middle for finitary sets and establish connection with $H_{<ω}$
+- Show that for each A, B ∈ V(x) ∈ V(y), their subset collection C can be defined and C ∈ V(y)
+- Explore what kind of set theory emerges if an infinity axiom is added
+- Explore the relationships with strong collection
