@@ -182,7 +182,7 @@ theory could prove its own consistency let alone consistency of stronger systems
 H. Friedman founded the [Reverse Mathematics](https://en.wikipedia.org/wiki/Reverse_mathematics)
 programm, that resorts to the second best option: one seeks to work in the weakest possible
 system that allows to express and prove the quintessential theorems of a particular branch of
-mathematics, and to gauge the strength of particular theorems and theories on a linear scale.
+mathematics, and to gauge the modelling capacity of particular theorems and theories on a linear scale.
 
 While some of the modern mathematics requires an extension of the standard ZFC (mostly TG), the
 so called ordinary mathematics, which certainly includes all mathematics pursued until the WW2, except
@@ -209,10 +209,8 @@ $H_{κ} := H_{<ω}$ + there exists a von Neuman hierarchy stage with some specif
 $H_{<κ} := H_{<ω}$ + every set is an element of a von Neuman hierarchy stage with some specific closure properties  
 given by $κ$. To ensure the chosen set theory is indeed the minimal one one has to construct the reverse model.
 
-By establishing bi-interpretability with $H_{κ}$ or $H_{<κ}$ on measures the minimal §capable of modelling $T$ the modelling
-
-This way, one measures the minimal $κ$ required to show the consistency of $T$. It is called the consistency
-strength of $T$. Actually there
+The theory $H_{κ}$ or $H_{<κ}$ (or rather $κ$ itself) established to be bi-interpretable with $T$
+is called modelling capacity of $T$.
 
 §§ The theory of finitary pure sets $H_{<ω}$
 --------------------------------------------
@@ -258,10 +256,11 @@ of minimalistic list of axioms. Due to Gödel's theorem it cannot be used to pro
 consistency unconditionally but it at least proves its own consistency. It can be used to prove other
 theories consistency conditionaly on existence of suitable infinite stages of von Neumann hierarchy.
 It is, however, unclear if it is suitable for more fine-grained conditional consistency proofs used
-in reverse mathematics. There, one deals with theories with consistency strength below $H_{ω}$ and
+in reverse mathematics. There, one deals with theories with modelling capacity below $H_{ω}$ and
 between $H_{ω}$ and $H_{ω + 1}$. Their consistency proofs are currently carried out in a weak system
 called ERA (elementary recursive arithmetic) and are conditional on termination of suitable recursive
-algorithms rather than existence of suitable infinite sets.
+algorithms rather than existence of suitable infinite sets, which provides required granularity
+for theories with modelling capacity below $H_{ω + 1}$.
 
 §§ Weak set theories: The constructive set theory CZF
 -----------------------------------------------------
@@ -271,14 +270,11 @@ set theory CZF. It was introduced in 1978 by P. Aczel as the constructive counte
 the standard set theory ZFC. It is formulated in the language of single-sorted first order
 theories with equality extended by the relation (∈), but it is an intuitionsitic first order
 theory: axioms governing logical operators to not include double negation elimination (DNE)
-$¬¬P ⇒ P$. CZF is a weak predicative theoty; its consistency strength of lies strictly
-between $H_{ω}$ and $H_{ω + 1}$,
-
-CZF is  that can be modelled in a rather weak Martin-Löf
-type theory
-
-and amenable to proof theoretic analysis, but if one extends it by an axiom
-enabling DNE, its power skyrockets:
+$¬¬P ⇒ P$. CZF is a weak predicative theory; its modelling capacity of lies strictly
+between $H_{ω}$ and $H_{ω + 1}$. CZF is that can be modelled in a rather weak Martin-Löf
+type theory and proven consistent relative to termination of algorithms defined by
+[$ψ(ε_{Ω+1})$-recursion](https://en.wikipedia.org/wiki/Bachmann%E2%80%93Howard_ordinal).
+In presence of double negation elimination modelling capacity of CZF skyrockets:
 
 $$ CZF + DNE = ZF $$
 
@@ -294,10 +290,10 @@ axiom), the von Neumann hierarchy in its original form cannot be defined for CZF
 von Neumann hierarchy that shares the property that all sets eventually enters the hierarchy,
 and thus gives the same foundational security CZF. Modified hierarchy conicides with the usual one
 in presence of double negation elimination. With this result one can consider CZF to be ZN-type
-set theory. Much like in the case of $H_{<ω}$, the strength of CZF itself is not always sufficient
-for modelling all objects of interest, but the strengh can be enhanced by postulating existence of
-modified von Neumann hierarchy stages having specified closure properties which the class of all
-sets can be thought to share as well.
+set theory. Much like in the case of $H_{<ω}$, the modelling capacity of CZF itself is not always
+sufficient for modelling all objects of interest, but the can be extended can be enhanced by postulating
+existence of modified von Neumann hierarchy stages $V_κ$ having specified closure properties which the
+universe of all sets can be thought to share as well.
 
 § Towards Constructive Theory of Finitary Pure Sets
 ---------------------------------------------------
