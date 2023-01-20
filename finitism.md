@@ -44,7 +44,7 @@ at least one object that surely exists and qualifies as a pure set: the empty se
 
 Finitary pure sets are simple combinatorial objects built by wrapping the empty set in various
 ways. For example one can consider the set containing the empty set as element {∅} and the
-set containing this set {{∅}} or the set containing both of them {{∅}, {{∅}}}. Finitary
+set containing this set { {∅} } or the set containing both of them { {∅}, { {∅} } }. Finitary
 sets can be seen as unlabeled trees of finite width and depth, where the only leaves are
 the empty sets and order and multiplicity of branches is ignored. Equivalently, they can be
 seen as finite strings of balanced brackets modulo reordering and duplication of balanded
