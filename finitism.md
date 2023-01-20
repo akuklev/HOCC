@@ -229,10 +229,15 @@ The theory has all the axioms governing the logical elements of the language (¬
 including double negation elimination $¬¬P ⇒ P$. In addition, it has a countably infinite list of axioms
 postulating the existance of the sets $V_n$ for each fixed $n$, the axiom of extensionality specifying
 equality between sets
+
 $$(a = b) ⇔ ∀x ( x ∈ a ⇔ x ∈ b )$$
+
 the axiom schema of separation that allows to filter any set $x$ by any predicate $φ(z)$
+
 $$∃y ∀z (z ∈ y) ⇔ (z ∈ x ∧ φ(z)) $$
+
 and the defining axiom for $V$
+
 $$y ∈ V(x) ⇔ (∃z ∈ x)(y ⊆ V(z))$$
 
 By Gödel's second incompletness theorem, if a theory $T$ is capable of modelling natural numbers so
@@ -274,11 +279,13 @@ type theory
 
 and amenable to proof theoretic analysis, but if one extends it by an axiom
 enabling DNE, its power skyrockets:
-$$ CZF + DNE = ZF $$
-$$ CZF + \\text{Axiom of Choice} = ZFC $$.
 
-CZF designed to be perfectly suitable for modelling mathematical objects in the constructive
-setting. To give an example, it is used to model constructive algebraic model strucutres in
+$$ CZF + DNE = ZF $$
+
+$$ CZF + \\text{Axiom of Choice} = ZFC $$
+
+CZF was designed as a system for modelling mathematical objects in the constructive
+setting. It is used to model constructive algebraic model strucutres in
 category theory and predicative constructive type theories.
 
 Since CZF lacks the powerset operation (which is substituted by a much weaker subset collection
