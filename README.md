@@ -210,8 +210,8 @@ case the value `double(n)` is already “known”. The ability to define functio
 inductive types by pattern matching on their generators reflects the defining property of inductive types: their
 values are guaranteed to be finitary compositions of their generators.
 
-§§ Mixed and purely inductive types
------------------------------------
+§§ Mixed Inductive Types and Purely Inductive Types
+---------------------------------------------------
 
 Types are not either inductive or behavioral, but can be mixed. For example the types `List[ Stream[Nat] ]` and
 `Maybe[Nat → Nat]` are not purely inductive any more. Now let us define purely inductive types because of their
@@ -362,7 +362,7 @@ Relations on a type can be defined as twice indexed inductive types:
   ≤-succ(\n \m) : (n ≤ m) → (n ≤ m')
 ```
 
-Each inductive automatically comes with an indictively defined equality relation that exactly follows the pattern
+Each inductive type automatically comes with an indictively defined equality relation that exactly follows the pattern
 of its generators. For example, for the type of natural numbers the equality relation can be given as:
 ```
 #Inductive (=) : Nat → Nat → Ω
