@@ -217,20 +217,28 @@ set theories are extensions of the $H_{<ω}$.
 
 Extensions of $H_{<ω}$ by axioms postulating existence of specific infinite von Neuman hierarhcy
 stages seem to be the perfect base for reverse mathematics above $V_{ω + 1}$. All mathematical
-theories known to date can be modelled in some theory $H_{κ}$ of the form
-“ $H_{<ω}$ + there exists a von Neuman hierarchy stage with some specific closure propertes
-which the universe of all sets can be thought to share as well ”. The ordinal $κ$ used in the names
-$H_{κ}$ of these theories is not a fixed ordinal, but an ordinal capturing the desired closure
-propertes for each specific theory. As it was already mentioned, theories $H_{κ}$ are linearly
-ordered by their modelling capacity $κ$.
+theories known to date can be modelled in some theory $H_{κ}$ of the form $H_{<ω}$ + «there exists a
+von Neuman hierarchy stage with some specific closure propertes which the universe of all sets can be
+thought to share as well». The ordinal $κ$ used in the names $H_{κ}$ of these theories is not a fixed
+ordinal, but an ordinal capturing the desired closure propertes for each specific theory. As it was
+already mentioned, theories $H_{κ}$ are linearly ordered by their modelling capacity $κ$.
+
+To give a specific example, consider the set theory ZFC. ZFC without axiom of infinity $∃ω$ can be
+modelled in $H_{ω} = H_{<ω} + ∃ω$, i.e. axioms of ZFC - $∃ω$ only require such closure properties
+that the set of all finitary sets has, and we assume that ZFC (including $∃ω$) only requires
+closure properties that the class of all (wellfounded pure) sets can be thought to share as well.
+Now we by $H_{κ_{ZFC}}$ let us denote $H_{<ω}$ + «there is a set that models ZFC». This theory
+models by ZFC definition. The theory $H_{<κ_{ZFC}}$ = $H_{<ω}$ + «there is a set that models each
+finite set of formulas derivable in ZFC» is by definition bi-interpretable with ZFC. Instead of
+ZFC we could have taken any recursively enumerable set of formulas admissible in $H_{<ω}$.
 
 By providing a model of an arbitrary theory $T$ inside some theory $H_{κ}$ one obtains a strict
 upper bound $κ$ for its modelling capacity. By modelling the set theory
 
 $$ H_{<η} := H_{<ω} + ∃V_β \text{ for each } β < η $$
 
-inside $T$ one obtains a strict lower bound $η$. By establishing bi-interpretability with some $H_{<κ}$ one determines
-the exact modelling capacity in one stroke.
+inside $T$ one obtains a strict lower bound $η$. By establishing bi-interpretability with some
+$H_{<κ}$ one determines the exact modelling capacity in one stroke.
 
 §§ The theory of finitary pure sets $H_{<ω}$
 --------------------------------------------
