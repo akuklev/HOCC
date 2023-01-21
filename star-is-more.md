@@ -22,9 +22,11 @@ To model the equivelence φ ⇔ $φ^𝕊$ let us first split it into two princip
 - generalization $φ^𝕊$ ⇒ φ
 - specialization φ ⇔ $φ^𝕊$
 
-We will also need a typed version of unbounded quantifiers. First recall that the bounded
-universal quantifier is represented in Martin-Löf type theory by the dependent product type
-П:
+We will introduce typed version of unbounded quantifiers: their introduction rules correspond
+to generalization and their elimination rules to specialization.
+
+First recall that the bounded universal quantifier is represented in Martin-Löf type theory by
+the dependent product type П:
 
 ```
 Γ ⊢ X : 𝒰    Γ, x : X ⊢ Y(x) : 𝒰
@@ -40,19 +42,25 @@ The typed unbounded quantifier ⋂(\x : X)Y(x) will be defined the same way
 with only difference that x is only allowed to be used only in the type
 signatures of the terms of type ⋂(\x : X)Y(x), but not in their body:
 ```
-Γ ⊢ X : 𝒰    Γ, x : X ⊢ Y(x) : 𝒰
+ Γ ⊢ X : 𝒰ⁿ    Γ, x : X ⊢ Y(x) : 𝒰ᵐ
 ---------------------------------
-       ⋂(\x : X)Y(x) : 𝒰
+    ⋂(\x : X°)Y(x) : 𝒰ⁿᵔᵐ
 
-Γ ⊢ X : 𝒰    Γ, x : X ⊢ y : Y(x)
----------------------------------
-  ([\x : X] y) : ⋂(\x : X)Y(x)
+      Γ, x : X ⊢ y : Y(x)
+--------------------------------
+ ([\x : X] y) : ⋂(\x : X°) Y(x)
 ```
 
-How can such quantifiers be used? For example we may define
-the polymorphic identity function `id` by
+Here, the `X°` is an expression that is allowed to contain a special symbol *, turns into
+a wellformed expression of type `𝒰ⁿ⁺ᵏ` whenever `𝒰ᵏ` is substituted for *. Such expressions
+will be also called signatures. Signatures of the form `K → *` (including `*` which is
+equivalent to `1 → *`) including will be called kinds because they describe kinds of
+polymorphic typeformers (see below).
+
+How can such quantifiers be used? For example we may define the polymorphic identity
+function `id : ⋂(\T : *) T → T` by
 ```
-([\T : 𝒰] (\x : T) ↦ x) : ⋂(\T : 𝒰) T → T
+([\T : *] (\x : T) ↦ x)
 ```
 
 Given a type `List : 𝒰 → 𝒰` one can define the function
@@ -60,58 +68,50 @@ Given a type `List : 𝒰 → 𝒰` one can define the function
 map : ⋂(\T : 𝒰) (T → T) → (List T) → (List T)
 ```
 
-(Both of these types live in 𝒰⁺)
+While the inhabitants of `П(\x : X)Y(x)` are called (dependent) functions, the inhabitants of
+`⋂(\x : K)Y(x)` will be called polymorphic constructions.
 
 Bounds of the variables ⋂ is not necessarly universes. We will often encounter examples
-such as `⋂(\T : 𝒰⁺)`, `⋂(\T : 𝒰 → 𝒰)`, `⋂(\T : ℕ → 𝒰)`, `⋂(\T : C → C → 𝒰)` for some fixed
-`T : 𝒰`, and so on. To make quantifiers ⋂(\X : K)Y(X) act as unbounded quantifiers we have
-to postulate that it is allowed to replace all instances of 𝒰 in K (or a covariant
-sub-expression of K) by 𝒰⁺.
-
-Let us call terms of the type `⋂(\x : K)Y(x)` polymorphic constructions. The replacability of
-𝒰 by 𝒰⁺ means that the same term (same polymorphic construction) defines a construction for
-all native universes above at the same time.
+such as `⋂(\T : * → *)`, `⋂(\T : ℕ → *)`, `⋂(\T : X → X → *)` and so on.
 
 Since native universes 𝒰 only have generators but no extractors, any expression of the type
 `П(\x : X)Y(x)` with `Y(x) : 𝒰` is up to a syntactical conversion an expression of the type
-`⋂(\x : X)Y(x)`. That's the type theoretical counterpart of the generalization rule.
-CAVEAT: without the restriction `Y(x) : 𝒰`, that is not true. If we only require `Y(x) : 𝒰⁺`,
+`⋂(\x : X)Y(x)`. This metathoretical fact is the type theoretical counterpart of
+the generalization rule.
+
+> CAVEAT: without the restriction `Y(x) : 𝒰`, that is not true. If we only require `Y(x) : 𝒰⁺`,
 we allow the expression `(\t : 𝒰 ↦ t) : П(\t : 𝒰) 𝒰` that uses its argument t not only in
 type annotations but also in the body, and thus cannot be transformed into expression of the
 form `([\t : 𝒰] expr) : ⋂(\t : 𝒰) 𝒰`.
 
-Generalization guarantees that if we can prove some lemma about categories in the universe 𝒰,
-it automatically generalizes into a polymorphic lemma that can be applied to categories in all
-larger universes.
+Now let us consider the elimination rule for ⋂-quantifiers. Specialization allows to apply
+polymorphic constructions to both all native universes `𝒰ⁿ` and to the “user-defined” à la
+Tarski universes `U : 𝒰`. Specialization $c : ⋂(\x : K) Y(x)$, and a type `U : 𝒰ⁿ` equiped
+with a structure of a universe (that is, codes for types 0, 1, and 𝔹, operations Π, Σ, and Ẅ
+on codes, coherency conditions and a decoding operator). Then it replaces the unbounded quantifier
+`⋂` by `П` by replacing all instances of * in K by U and “compiling” the body of the polymorphic
+construction term into primitives provided the inner unverse U is equipped with. Since native
+universes 𝒰ⁿ also can be used for specialization (each of those is just a type 𝒰ⁿ : 𝒰ⁿ⁺¹, and
+is equiped with required structure).
 
-Type theoretic counterpart of specialization is more intricate. It would allow to apply the
-same lemma (with unbounded quantifiers) to small à la Tarski universes `U : 𝒰`.
-
-Specialization takes a polymorphic construction $c : ⋂(\x : K)Y(x)$, and a type `U : 𝒰` equiped
-with a structure of a universe (that is, codes for types 0, 1, and 𝔹, operations Π, Σ, and Ẅ on
-codes, coherency conditions and a decoding operator). Then it replaces the unbounded quantifier
-by the bounded one replacing 𝒰 in K (either in the whole K or in a covariant subexpression thereof)
-by U and “compiling” the polymorphic construction term into primitives provided with the inner
-unverse U. The interesting thing is that U does not actually have to be a universe: if U is a
-topos (or rather ПW-pretopos, if we're working in a theory without propositional resizing),
-any definable expression can be compiled into U. Above we stated that unbounded quantifiers
-are unbounded precisely because one is allowed to exchange 𝒰 for 𝒰⁺. Now we can see that this
-is just a special case of specialization. Also note that for any universe U and index type I
-(see below) the type I -> U is naturally a presheaf topos where all polymorphic constructions
-can be interpreted as well.
+The interesting thing is that U does not actually have to be a universe: if U is a topos (or
+rather ПW-pretopos, if we're working in a background theory without propositional resizing),
+any definable expression can be compiled into U. In particular, for any universe U and index
+type I (see below) the type I -> U is naturally a presheaf topos where all polymorphic
+constructions can be interpreted as well and thus can be used for specialization.
 
 For polymorphic constructions `c` not involving particular constructions we might relax the
 requirements on the structure U has to be equiped with to be used as a microcosm `c` can be
 specialized into. For instance, most constructions are interpretable in arbitrary locally
 cartesian closed categories, most inductive types in arbitrary W-pretoposes and so on.
 
-Let us denote the type theory with generalization and specialization limited to universes
-(both native or internal á la Tarksi) and presheaf toposes by `ITT/S` and the variant
-where polymorphic constructions can be interpreted in various weaker microcosms depending
-on what primitives they actually require by `ITT/S_ncatlab`.
+Let us denote the type theory with generalization and specialization limited to native
+universes and presheaf topoi by `ITT/S` and the variant where polymorphic constructions
+can be interpreted in user-defined á la Tarski universes and  various weaker microcosms
+depending on what primitives they actually require by `ITT/S_ncatlab`.
 
-The goal of present project is to define the syntax of the theory `ITT/S` and its interpretation
-into the set theory ZMC/S.
+The goal of present project is to define the syntax of the theory `ITT/S` and its
+interpretation into the set theory ZMC/S.
 
 § Inductive types as polymorphic constructions
 ----------------------------------------------
