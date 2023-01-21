@@ -1,16 +1,19 @@
-Towards Constructive Theory of Finitary Pure Sets
-=================================================
+Towards Constructive Theory of Finitary Pure Sets (draft)
+=========================================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)  
 
-> This text briefly summarizes the history of set theories, explaining why and how they were used as
+First we briefly summarize the history of set theories, explaining why and how they were used as
 foundational system for the whole of mathematics and why they still matter when modern type theory
-based systems take over their role as foundations. At the end, I sketch a programme to establish a
-constructive theory of finitary pure sets that comprises the common core of all set theories used
-to model mathematical objects, and can be used to carry out conditional consistency proofs instead
-of elementary recursive arithmetic ERA used for such proofs today.
+based systems take over their role as foundations. Then we introduce a constructive variant of the
+non-Gödelian set theory $H_{<ω}$ [Pakhomov2019] of finitary pure sets that comprises the common core
+of all set theories used to model mathematical objects, including CZF, and can be used to carry out
+conditional consistency proofs instead of weak arithmetic theories ($S_1^2$, ERA) while being strictly
+weaker and able to proove its own consistency.
 
+§ Introduction
+--------------
 In structuralist foundations of mathematics, there are objects of very different types:
 natural numbers, various combinatorial objects (e.g. finite strings of balanced brackets like
 “()((())())”), real numbers, tuples, lists, functions between any types, relations on any types,
@@ -24,8 +27,8 @@ That is precisely how Cantorian set theories were used as foundation for the who
 for more than a century. Let me briefly remind what Cantorian set theories are and how they
 came to existence.
 
-§ From Cantor's Naïve Set Theory to ZFC
----------------------------------------
+§§ From Cantor's Naïve Set Theory to ZFC
+----------------------------------------
 
 Any kind of foundations necessarily deals with sets of natural numbers, sets of reals, and other
 sets of objects of specified type. Finite sets are just finite lists ignoring order and multiplicity.
@@ -184,8 +187,8 @@ as _the_ foundation of all mathematics anymore. When a type theorist needs to pr
 of a strongly impredicative type theory, such as System F or the observational calculus
 of constructions $CC_{obs}$, they resort to ZN-type theories to build models.
 
-§ Weak set theories
--------------------
+§§ Weak set theories
+--------------------
 
 In the early days of set theory, everybody was primarily concerned about making theories general enough to
 model everyting of mathematical interest. Initially, there was a hope that after such an ultimate system
@@ -292,8 +295,8 @@ provides required granularity. We still have to try out how to state recursion t
 and carry out consistency proofs conditional on them in $H_{<ω}$. We conjecture that its refinement
 based on intuitionsitic logic might prove to be a better candidate.
 
-§§ Weak set theories: The constructive set theory CZF
------------------------------------------------------
+§§ The constructive set theory CZF
+----------------------------------
 
 Other weak set theory extensively used for modelling mathematical objects is the constructive
 set theory CZF. It was introduced in 1978 by P. Aczel as the constructive counterpart CZF of
