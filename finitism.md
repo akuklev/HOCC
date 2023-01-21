@@ -329,42 +329,34 @@ separation can be substituted by [predicative separation](https://en.wikipedia.o
 (which is known to be implementable by a finite number of axions instead of a schema). The tricky
 part is the definitional axiom for $V$ (see below).
 
-Following the approach of [NBG](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory),
+Following the approach of [von Neumann-Gödel-Bernays set theory](https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory),
 such theory can be conservatively (i.e. without introducing new theorems or increasing strength)
-extended to include not only sets but also classes of sets. The resulting theory remains
-single-sorted, with every variable being of type “class of sets”, and sets being recovered as
-classes $S$ that belong to at least one other class $C ∋ S$. Such modification allows to handle
-all objects of interest without resorting to second-order extensions used in the original
-paper by F. Pakhomov.
-
-The resulting theory (let us denote it by $CGB_{<ω}$) would be even more suitable for the role
-of finitistic core.
+extended to include not only sets but also classes of sets that directly reflect predicates.
+The resulting theory remains single-sorted, with every variable being of type “class of sets”,
+and sets being recovered as such classes $S$ that belong to at least one other class $C ∋ S$.
+Such modification allows to handle all objects of interest without resorting to second-order
+extension of the theory used in the original paper by F. Pakhomov. We conjecture that the
+resulting theory (let us call it $CGB_{<ω}$) would be even more suitable for the role of
+finitistic core for metamathematical proofs.
 
 When proving that two theories are equiconsistent or one theory being consistent conditionally
 on certain ordinal notation being well-founded, one seeks to use the weakest system possible.
 Today most metatheoretical proofs are carried out in the system known as Elementary Recursive
-Arithmetic (ERA). Until $H_{<ω}$ was introduced in 2019 it was used to be the weakest known
-system that allows comfortable handling of arithmetically encoded syntax. The conjectural
-theory $CGB_{<ω}$ should be a better replacement:
-it is weaker, it only involves dealing with finitary objects and it seems to be at least equally
-comfortable to work with.
+Arithmetic (ERA). $CGB_{<ω}$ it is much weaker while still allowing reasonably comfortable
+manipulations with finitary data (like derivation trees) encoded as finitary sets and
+recursive algorithms (such as cut elimination).
 
-
-While being equivalent to a first-order theory, ERA can be formulated as a stanalone
-[quantifer-free and logic-free calculus](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
+While being equivalent to a first-order theory, ERA can be formulated as a stanalone [logic-free
+calculus](https://en.wikipedia.org/wiki/Primitive_recursive_arithmetic#Logic-free_calculus)
 involving only functional symbols and judgements of the form “ $P = Q$ ” in an aesthetically
-pleasing and minimalistic way, involving only four inference rules besides defining equations
-for all definable elementary arithmetic functions. Arithmetic encodings of formalized languages
-with bound variables are tedious and error prone: by resorting to a quantifier free calculus one
-greatly reduces the complexity of the language.
+pleasing and minimalistic way: it has only four inference rules besides symbols and defining
+equations for all definable elementary arithmetic functions.
 
-Appendix I we outline that $CGB_{<ω}$ (without the V operation and its yet unknown defining axioms)
-can be also presented in quantifier-free and logic-free all judgements of the form “ $P ⊃ Q$ “.
-Unfortunatelly, the system as presented there is far from being minimalistic.
+Appendix I we outline how to present $CGB_{<ω}$ in logic-free all judgements of the form `P ⊃ Q`.
+Unfortunatelly, the system as presented there is far from being as minimalistic as ERA.
 However, the initial standalone formulation of primitive recursive arithmetic was also far from
 being optimal; it took another decade to streamline it to the present aesthetically pleasing form.
 It might work out for $CGB_{<ω}$ as well.
-
 
 
 § Mechanizing metatheoretical proofs
@@ -399,8 +391,8 @@ within minimalistic foundationally secure theory.
 
 ***
 
-§ Appendix I: Logic-free Calculus for $CGB_{<ω}$ without V-operation
--------------------------------------------------------------------
+§ Appendix I: Logic-free Calculus for $CGB_{<ω}$
+------------------------------------------------
 
 First let us formalize the theory $CGB_{<ω}$ without $V$ operator and its definitional axioms
 as a standalone logic-free calculus. In this setting, all terms will represend class-valued
