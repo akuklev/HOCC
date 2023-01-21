@@ -1,5 +1,5 @@
-* is more than Type: A type theory for ncatlab
-==============================================
+$\ast$ is more than Type: A type theory for ncatlab
+===================================================
 
 In his seminal paper “Set Theory for Category Theory” Mike Shulman [Shulman08] introduces
 a set theory ZMC/S, which is an extension of the standard set theory ZFC by a strong reflection
