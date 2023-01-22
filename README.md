@@ -380,6 +380,7 @@ pointwise : ∀(\x : X) f(x) = f(y)
 In particular, in type theory two implementations of the same function are considered equal as functions if they
 yield equal results on equal arguments.
 
+<!--
 §§ Quotient inductive types and Identification types
 ----------------------------------------------------
 
@@ -396,7 +397,7 @@ decidable type checking -> decidable proof checking
 
 Correspondence `A → B → *` with given left and right inverses `lt : B -> A, rt ; A -> B`.
 
-
+-->
 § Index types
 -------------
 
@@ -420,7 +421,7 @@ Purely inductive types have one more important metatheoretical propery we'll mak
 inductive type are naturally ordered lexicographically, and this order is guaranteed to be well-founded. That is,
 metatheoretically we have a function `deg(i)` that maps inhabitants to a countable ordinal.
 
-... несколько слов о том, зачем следующее определение, а главное нафига
+... несколько слов о том, зачем следующее определение
 
 An index type `I : Idx` is a purely inductive type `|I|` with additional structure of inductively generated
 correct-by-construction Reedy category, that is for each inhabitant `\i : I`,
@@ -521,7 +522,7 @@ More advanced mathematical structures seem not to have a single carrier:
    : (h ∘ g) ∘ f = h ∘ (g ∘ f)
 ```
 
-For a multitude of reasond it is desirable to represent the cast the whole parameter
+For a multitude of reasons it is desirable to represent the whole parameter
 list `[\Ob : *, \Mor : Ob → Ob → *]` as a single carrier `[C : CatCarrier → *]`.
 
 For this purpose we'll need an index type `CatCarrier` with dependency arrows:
