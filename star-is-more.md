@@ -84,6 +84,42 @@ we allow the expression `(\t : 𝒰 ↦ t) : П(\t : 𝒰) 𝒰` that uses its a
 type annotations but also in the body, and thus cannot be transformed into expression of the
 form `([\t : 𝒰] expr) : ⋂(\t : 𝒰) 𝒰`.
 
+Example 1.
+
+Suppose you have a polymorphic type, endowing any type `T : *` with a desired mathematical structure
+(see below, how polymorphic types can be handled), for example
+```
+Pointed[T : *]
+  unit : T
+```
+
+Now, the universe 𝒰⁺ contains the type of all 𝒰-small pointed types
+```
+Σ(\T : 𝒰) Pointed[T] : 𝒰⁺
+```
+
+Likewise it has types of all 𝒰-small monoids, 𝒰-small groups, 𝒰-small categories, etc.
+Now pretend you have proven something for all 𝒰-small groups:
+```
+prf : (G : Σ(\T : 𝒰) Group[T]) → ...
+```
+
+You can uncurry the first argument to obtain
+```
+pr : (\G-carrier : 𝒰) → (\G-structure : Group[G-carrier]) → ...
+```
+
+Now you can generalize to obtain the polymorphic construction proving it for all groups
+instead of 𝒰-small ones:
+
+```
+p : ⋂(\G : *) (\g : Group[G]) → ...
+
+# which also can be written as
+
+p[\G : *](\g : Group[G]) : ...
+```
+
 Now let us consider the elimination rule for ⋂-quantifiers. Specialization allows to apply
 polymorphic constructions to both all native universes `𝒰ⁿ` and to the “user-defined” à la
 Tarski universes `U : 𝒰`. Specialization $c : ⋂(\x : K) Y(x)$, and a type `U : 𝒰ⁿ` equiped
@@ -105,13 +141,15 @@ requirements on the structure U has to be equiped with to be used as a microcosm
 specialized into. For instance, most constructions are interpretable in arbitrary locally
 cartesian closed categories, most inductive types in arbitrary W-pretoposes and so on.
 
-Let us denote the type theory with generalization and specialization limited to native
-universes and presheaf topoi by `ITT/S` and the variant where polymorphic constructions
-can be interpreted in user-defined á la Tarski universes and  various weaker microcosms
-depending on what primitives they actually require by `ITT/S_ncatlab`.
+Let us denote the type theory without induction-recursion and with generalization and
+specialization limited to native universes and presheaf topoi by `MLTT/S_{ps}`. The variant
+where polymorphic constructions can be interpreted in user-defined á la Tarski universes
+and various weaker microcosms depending on what primitives they actually require will be
+denoted by `MLTT^{IR}/S_{ncatlab}`. We argue that `MLTT^{IR}/S_{ncatlab}` can be implemented
+over `MLTT/S_{ps}` with PN-inductive-recursive types without extending its strength.
 
-The goal of present project is to define the syntax of the theory `ITT/S` and its
-interpretation into the set theory ZMC/S.
+The goal of present project is to define the syntax of the theory `MLTT/S_{ps}` and its
+interpretation into the set theory.
 
 § Inductive types as polymorphic constructions
 ----------------------------------------------

@@ -15,6 +15,81 @@ inaccessables. By adapting the argument of [Rathjen-Tupailo06] we show that $V_n
 ‖_‖ᶜ-conservative over ZFC for CC sentences which include all “(generalised) mathematical
 formulae” as argued by Rathjen and Tupailo.
 
+<!--
+
+In Werner's model, sets are defined as
+```
+#Inductive Vᵢ
+sup : Π(T : 𝒰ⁱ) (T -> Vᵢ) -> Vᵢ
+```
+
+Thus in $CC_{obs}$ with infinitely many universes we still don't have a model of set Theory
+with infinitely many inaccessables, but only a family of models Vᵢ, that have (i-1) inaccessables.
+
+Let us try to develop an entirely impredicative model V that has infinitely many inaccessables.
+
+Let us imagine we could have subtypes of the impredicative type Ω, in particular the type
+V ⊂ Ω of propositions that represent sets.
+
+Let's define the relation (∈) : Ω -> Ω -> Ω:
+```
+X ∈ Y := (X ≠ Y) ∧ (Y -> X)
+```
+
+Every set defines a class C(S) : Ω -> Ω:
+```
+C(S : Ω) := _∈ X
+```
+
+Now if we have a collection of sets `col : I -> Ω` indexed by a type I. By sup(col) let us denote
+set containing all sets from this collection. Then
+```
+X ∈ sup(col) := ∃(\i : I)(col(I) = X)
+```
+
+Now let's expand the left hand side:
+```
+(X ≠ sup(col)) ∧ (sup(col) -> X) := ∃(\i : I)(col(I) = X)
+```
+
+Can we find such combinations of universal quantifiers and logical operations
+that `sup` can be represented?
+
+For all `I` define
+if i
+
+The type `Ω -> Ω` will have two distinct roles in this model:
+at the same time it will represent sets and predicate on sets.
+If `P : Ω -> Ω` and `S : Ω -> Ω`
+
+
+
+
+Now function S : Ω -> Ω` represents a collection of sets indexed by sets.
+A set Y belongs to this collection precisely if ther is such a set X :
+
+X ∈ Y is represented as X -> Y
+
+  predicate on sets such
+that for `P : Ω -> Ω` and `S : Ω -> Ω`
+
+Let `V := Σ(\P : Ω -> Ω) ∃(\P' : (Ω -> Ω) -> Ω) ‖∀P'(P)‖ᶜ = ‖∀P`‖ᶜ
+
+For every element of some s : V_i we have
+
+Define globalize(s : Vᵢ) : V
+sup(\f : Π(T : 𝒰ⁱ) (T -> Vᵢ)) => (
+(\set : Ω ↦ ??),
+(\pred : (Ω -> Ω) ↦ ??),
+??
+)
+
+
+[X : Ω (as set) ∈ Y : (Ω -> Ω) (as class)] := Y(X)
+[X : Ω (as set) ∈ Y : (Ω -> Ω) -> Ω (as set)]
+:= ∃(set A : Ω) Eq ()
+
+  --->
 
 § The Non-Constructive Modality
 -------------------------------
@@ -36,9 +111,12 @@ in particular include all univalent type theories), a refined definition is requ
          Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
-where `‖_‖` is the propositional truncation operator and `‖_‖ᵁᴵᴾ` is the 0-truncation operator.
+where `‖_‖ : 𝒰ⁿ → 𝒰ⁿ` is the propositional truncation operator (NB: it does not move types into Ω!)
+and `‖_‖ᵁᴵᴾ : 𝒰ⁿ → 𝒰ⁿ` is the 0-truncation operator.
 This is necessary for two reasons: firstly, otherwise it would be possible to derive a contradiction
-between choice and univalence in the context containing ε's. Secondly, so that is possible to derive
+between choice and univalence in the context containing ε's, thus rendering the sub-universe ‖_‖ᶜ of
+non-constructively valid propositions inconsistent (every two of them would be equal than, including
+‖1‖ᶜ = ‖0‖ᶜ). Secondly, so that is possible to derive
 ```
     prf : ∃(\x : X) P(x)
 ----------------------------
