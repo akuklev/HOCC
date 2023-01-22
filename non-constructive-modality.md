@@ -2,7 +2,7 @@ Non-constructive Reasoning in Computational Dependent Type Theory (draft)
 =========================================================================
 
 We extend the observational calculus of constructions $CC_{obs}$ of Pujet and Tabareau by
-a non-constructive modality ‖_‖ᶜ: an idempotent monad on the universe of definitionally
+a non-constructive modality ‖_‖ᶜ: an idempotent monad into the universe of definitionally
 proof-irrelevant types Ω allowing for non-constructive an ε operator in a fenced fragment of the calculus
 without compromising its good computational properties. We extend the proofs of normalization,
 canonicity and decidability of type- and proof checking by original authors as well as their
@@ -27,31 +27,13 @@ The non-constructive modality is a type-former `‖_‖ᶜ : ∗ → Ω` with th
          Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
-The non-constructive modality is defined precisely as to validate the axiom of choice:
-
-```
-∀(x : X) ∃(y : Y) P(x, y)   →   ‖∃(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
-```
-
-which reads in words, “if for each `x : X` there is `y : Y` such that `P(x, y)` holds,
-non-constructively there is a function `y : X -> Y` that assigns to each `x` a value `y(x)`
-such that `P(x, y(x))` holds”. In type theory we interpret ∀ as dependent products and ∃
-as (propositional truncation) of dependent sums.
-
-Let us prove this claim:
-```
-prf : Π(\x : X) ∃(\y : Y) P(x, y)
--------------------------------------------
- TODO : ‖Σ(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
-```
-
 In type theories not validating the uniqueness of identifications (UIP) for all types (these
 in particular include all univalent type theories), a refined definition is required:
 
 ```
-Γ ⊢ T    Γ, εᵀ : ‖T‖ᶜ → ‖T‖ᵁᴵᴾ ⊢ prf : ‖P‖
+ Γ ⊢ T    Γ, εᵀ : ‖T‖ᶜ → ‖T‖ᵁᴵᴾ ⊢ prf : ‖P‖
 ──────────────────────────────────────────
-Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
+         Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
 where `‖_‖` is the propositional truncation operator and `‖_‖ᵁᴵᴾ` is the 0-truncation operator.
@@ -63,8 +45,35 @@ between choice and univalence in the context containing ε's. Secondly, so that 
  |prf|ᶜ : ‖Σ(\x : X) P(x)‖ᶜ
 ```
 
-Note that the proof of choice above holds for both the refined and the non-refined definition.
-The same applies to all proofs below.
+Note that all proofs below hold for both the refined and the non-refined definition.
+
+The non-constructive modality is defined precisely as to validate the axiom of choice. Let's
+derive choice under the ‖_‖ᶜ modality in its shortest form (The HoTT Book, Lemma 3.8.2). Assume
+`X` satisfies `X = ‖X‖ᵁᴵᴾ` and `Y(x)` a type family over `X` satisfying `Y(x) = ‖Y(x)‖ᵁᴵᴾ` (the last
+proposition can be only stated in this simple form because `X` satisfies UIP). Now observe
+```
+ac : ‖Π(\x : X) ‖Y(x)‖ -> ‖Π(\x : X)Y(x)‖‖ᶜ
+ac := | \f ↦ |\x ↦ ε (f x)| |ᶜ
+```
+Actually, we can either remove the requirement that `Y(x) = ‖Y(x)‖ᵁᴵᴾ` is or remove the
+propositional truncation on the right side, but not both.
+
+Consider another form of axiom of choice (`X` and `Y(x)` are again required to satisfy
+UIP)
+
+```
+∀(x : X) ∃(y : Y) P(x, y)   →   ‖∃(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
+```
+
+which reads in words, “if for each `x : X` there is `y : Y` such that `P(x, y)` holds,
+non-constructively there is a function `y : X -> Y` that assigns to each `x` a value `y(x)`
+such that `P(x, y(x))` holds”.
+
+```
+prf : Π(\x : X) ∃(\y : Y) P(x, y)
+--------------------------------------------------------------------------------------------
+|\x : X ↦ (ε |(prf x).fst|ᶜ), \x : X ↦ (prf x).snd|ᶜ : ‖Σ(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
+```
 
 Let us show that ‖_‖ᶜ is idempotent and a monad:
 ```
@@ -77,11 +86,17 @@ Let us show that ‖_‖ᶜ is idempotent and a monad:
  |ε (ε p)|ᶜ : ‖X‖ᶜ
 
 Since `‖X‖ᶜ : Ω`, these conversions are automatically inverses to each other
-
-TODO: write down monad laws
 ```
 
-TODO: Does it define a reflexive sub-universe?
+
+The map `(\x : T ↦ |x|ᶜ)` is the modal unit. The induction principle is given by
+```
+            f : Π(\x : A) ‖B(|x|ᶜ)‖ᶜ
+-------------------------------------------------
+ (\u : ‖A‖ᶜ ↦ |f(ε u)|ᶜ ) : Π(\u : ‖A‖ᶜ) ‖B(u)‖ᶜ
+
+Since ‖_‖ᶜ : Ω, unit and induction vacously satisfy monadic unit laws
+```
 
 It is quite easy to show that ‖_‖ᶜ validates modus ponens and generalization inference rules:
 
@@ -106,10 +121,39 @@ The only remaining axiom is P4. Its proof is essentially the Diaconescu's theore
 
 ```
 
-Let us additionally show that
+Let us additionally show that for propositional `P` (does not work for non-propositional `P`)
 ```
- ‖¬Π(\x : T) ¬P(x)‖ᶜ
-=====================
-  ‖Σ(\x : T) P(x)‖ᶜ
+ ‖Σ(\x : T) ¬P(x)‖ᶜ
+ -------------------QL
+ ‖¬Π(\x : T) P(x)‖ᶜ
 
+and
+
+ ‖Π(\x : T) ¬P(x)‖ᶜ
+ --------------------QR
+ ‖¬Σ(\x : T) P(x)‖ᶜ
+
+QL := (\s : ‖Σ(\x : T) ¬P(x)‖ᶜ) ↦
+|(\p : Π(\x : T) P(x)) ↦
+(ε s) match (\x, \y) ↦ y p(x)|ᶜ
+
+QR := (\p : ‖Π(\x : T) ¬P(x)‖ᶜ) ↦
+|(\s : Σ(\x : T) P(x)) ↦
+\s match (\x, \p) ↦ (ε p) x p|ᶜ
 ```
+
+By composing QL, QR and DNE (double negation elimination) we make the full circle,
+thus both QL and QR are in fact isomorphisms.
+
+In the theory we propose so far, there is no way to extract anything from the fenced
+non-constructive fragment. Conjecture: no problems would be introduced by the rule
+```
+Г, x y : I ⊢ prf : ‖x = y‖ᶜ
+---------------------------
+     ↡prf : (x = y)
+```
+for purely inductive types `I`. This rule is certainly not admissible for universes
+including Ω without ruining canonicity, and probably also not admissible for function
+types. But we don't yet see how it could ruin computational properties if only applicable
+for the types for which we know in advance (that is can observe from the type definition)
+they have decidable equality.
