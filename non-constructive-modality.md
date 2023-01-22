@@ -3,18 +3,18 @@ Non-constructive Reasoning in Computational Dependent Type Theory (draft)
 
 We extend the observational calculus of constructions $CC_{obs}$ of Pujet and Tabareau by
 a non-constructive modality ‖_‖ᶜ: an idempotent monad into the universe of definitionally
-proof-irrelevant types Ω allowing for non-constructive an ε operator in a fenced fragment of the calculus
-without compromising its good computational properties. We extend the proofs of normalization,
-canonicity and decidability of type- and proof checking by original authors as well as their
-set theoretical model, so that $CC_{obs}$ + ‖_‖ᶜ with $n$ universes can be modelled and proven
-consistent in the set theory ZFC with $n$ inaccessables. We also show that the a particular
-model $V$ of the set theory inside $CC_{obs}$ + ‖_‖ᶜ with $n$ universes models ZFC with $n$
-inaccessables. By providing interleaving modellability we establish bi-interpretablity of
-$CC_{obs}$ + ‖_‖ᶜ with a countably infinite hierarchy of universes and Tarski-Grothendieck
-set theory. At least in theory we could develop mechanized translations between proofs in
-a proof assistant based on $CC_{obs}$ + ‖_‖ᶜ and TG-based proof assistants Mizar and Metamath.
+proof-irrelevant types Ω allowing for non-constructive an ε operator in a fenced fragment
+of the calculus without compromising its good computational properties. We extend the proofs
+of normalization, canonicity and decidability of type- and proof checking by original authors
+as well as their set theoretical model, so that $CC_{obs}$ + ‖_‖ᶜ with $n$ universes can be
+modelled and proven consistent in the set theory ZFC with $n$ inaccessables. We also show
+that the a particular model $V_n$ of the set theory [Werner97] inside $CC_{obs}$ + ‖_‖ᶜ with
+$n + 1$ universes models ZFC with $n$ inaccessables. Interleaving modellability establishes
+equiconsistency of $CC_{obs}$ + ‖_‖ᶜ with a countably infinite hierarchy and ZFC with ω
+inaccessables. By adapting the argument of [Rathjen-Tupailo06] we show that $V_n$ is
+‖_‖ᶜ-conservative over ZFC for CC sentences which include all “(generalised) mathematical
+formulae” as argued by Rathjen and Tupailo.
 
-We are currently examining if bi-interpretablity can be strenthened to a conservativity result.
 
 § The Non-Constructive Modality
 -------------------------------
@@ -59,7 +59,7 @@ Actually, we can either remove the requirement that `Y(x) = ‖Y(x)‖ᵁᴵᴾ`
 propositional truncation on the right side, but not both.
 
 Consider another form of axiom of choice (`X` and `Y(x)` are again required to satisfy
-UIP)
+UIP, `P` to be propositional)
 
 ```
 ∀(x : X) ∃(y : Y) P(x, y)   →   ‖∃(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
@@ -74,6 +74,14 @@ prf : Π(\x : X) ∃(\y : Y) P(x, y)
 --------------------------------------------------------------------------------------------
 |\x : X ↦ (ε |(prf x).fst|ᶜ), \x : X ↦ (prf x).snd|ᶜ : ‖Σ(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
 ```
+
+Let us denote the above term as `ac2`. Let
+```
+ttdi := |\prf ↦ ε ac|ᶜ
+ttdo : ‖Π(\x : X) ∃(\y : Y) P(x, y) → Σ(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
+```
+
+`ttdi` is the so called Type-theoretical Description Axiom from [Werner97]
 
 Let us show that ‖_‖ᶜ is idempotent and a monad:
 ```
@@ -144,6 +152,21 @@ QR := (\p : ‖Π(\x : T) ¬P(x)‖ᶜ) ↦
 
 By composing QL, QR and DNE (double negation elimination) we make the full circle,
 thus both QL and QR are in fact isomorphisms.
+
+Now we have all required results to state that for every theorem φ provable in ZFC
+there is a proof `prf : ‖φⱽ‖ᶜ`, where is φⱽ the translation of the theorem φ into
+the type-theoretic model of set theory model as proposed by Benjamin Werner in
+[Werner97].
+
+§ Conservativity
+----------------
+
+A formula of set theory is called a CC formula if and only if whenever an unbounded quantifier
+appears in an implication, it appears only in the conclusion of the implication. We can adapt
+the argument
+
+§ Extracting equalities from non-constructive proofs
+----------------------------------------------------
 
 In the theory we propose so far, there is no way to extract anything from the fenced
 non-constructive fragment. Conjecture: no problems would be introduced by the rule
