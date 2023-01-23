@@ -202,8 +202,8 @@ Note that with this definition `(X ∈ X) -> WLEM₀`.
 With this relation, the propositions LEMₙ model sets, representing finite ordinals.
 ```
 WLEM₀ ⋍ {}
-WLEM₁ ⋍ {{}}
-WLEM₂ ⋍ {{}, {{}}}
+WLEM₁ ⋍ { {} }
+WLEM₂ ⋍ { {}, { {} } }
 ```
 
 We hope to extend this construction for infinite sets. Note that for any family `q : I -> Ω` of
