@@ -199,7 +199,7 @@ X ∈ Y := (X -> Y) ∧ ((Y -> X) -> WLEM₀)
 
 Note that with this definition `(X ∈ X) -> WLEM₀`.
 
-With this relation, the propositions LEMₙ and their disjunctions model finitary (= hereditary finite) sets.
+With this relation, the propositions LEMₙ model sets, representing finite ordinals.
 ```
 WLEM₀ ⋍ {}
 WLEM₁ ⋍ {{}}

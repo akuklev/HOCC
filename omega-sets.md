@@ -2,10 +2,7 @@
 
 For any family `q : I -> Ω` of propositions we can build:
 ```
-sup(q) := ∀(\P : Ω) (P ∨ P -> ¬∀(\i : I) ¬q(i))   -- lem based candidate
-sup(q) := ∀(\P : Ω) (¬P ∨ ¬P -> ¬∀(\i : I) ¬q(i))   -- wlem based candidate
-sup(q) := ¬∀(\i : I) ¬q(i)   -- wlem based candidate2
-
+sup(q) := ∀(\P : Ω) P ∨ (P -> ¬∀(\i : I) ¬q(i))   -- lem based candidate
 ```
 
 Intuitionistically we can show each of `q(i)`'s implies `sup(q)`:
@@ -19,13 +16,19 @@ element S we get
 sup((_ ↦ X)) := ∀(\P : Ω) (P ∨ (P -> ¬¬X))
 ```
 
-Let us denote this case by `{X}`. Note that we get
+Let us define TABOO by `¬∀(\X : Ω) ¬(sup((_ ↦ X)) -> X)`, that is
 ```
-{LEM} = ∀(\P : Ω) (P ∨ (P -> ¬¬∀(\P2 : Ω) (P2 ∨ ¬P2)))
+TABOO := ¬∀(\X : Ω) ¬((∀(\P : Ω) (P ∨ (P -> ¬¬X))) -> X)
 ```
 
+
+Any instance of `(∀(\P : Ω) (P ∨ (P -> ¬¬X))) -> X`
+Proves `(∀(\P : Ω) (P ∨ (P -> ¬¬X))) -> X`
+
+∀(\P : Ω) (P ∨ (P -> ¬¬X))
+
 Let us show that `X ∈ sup((_ ↦ X))`. We have already shown that `X -> {X}`, it only
-remains to show that `({X} -> X) -> LEM`.
+remains to show that `({X} -> X) -> TABOO`.
 ```
 Assume we have
 p : (∀(\P : Ω) (P ∨ (P -> ¬¬X))) -> X
