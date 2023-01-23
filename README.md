@@ -44,14 +44,14 @@ guaranteed to terminate in a finite time and produce a specific result. Addition
 results of B. Werner, M. Ratjen and S. Tupailo to show that the theory $CC_{obs}$ + `‖_‖ᶜ`
 has a model of the standard set theory ZFC, that is faithful for all (generalized) mathematical
 formulae in the sense of Rathjen and Tupailo: a  (generalized) mathematical formula φ can be
-proven in ZFC + n if and only if there is a proof of `‖φ‖ᶜ` in $CC_{obs}$.
+proven in ZFC if and only if there is a proof of `‖φ‖ᶜ` in $CC_{obs}$.
 
 It is well known that the ZFC set theory alone poorly captures category theory. For many
 applications in modern mathematics (algebraic geometry, algebraic number theory, higher
 homological algebra) one has to extend ZFC by additional axioms postulating existence of
 enough Grothendieck universed. But even then the language of ZFC is incapable of expressing
 large concrete categories (such as the category of all groups). This issue was first solved
-by extended set theories ZFC/S and ZMC/S with strong reflection principles[Shulman2008]
+by extended set theories ZFC/S and ZMC/S with appropriate reflection principles[Shulman2008]
 
 - The next contribution is the development of polymorphic quantifiers exactly mimicking
 the Shulman reflection principle. This extension that allows to handle large concrete
