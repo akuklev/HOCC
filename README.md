@@ -9,6 +9,9 @@ Dmitriev was envisioning a project to establish a database of mathematical resul
 conjectures, constructions and proofs that would in particular allow content-based search, connect
 related results into a web, and automatically search for mathematical objects of equivalent or
 simular structure even when their relatedness is not apparent and unknown to the respective authors.
+These ideas got some traction inside the mathematical community, as exemplified by the
+[Formal Abstracts Project](https://formalabstracts.github.io/) by Thomas C. Hales.
+
 
 The prerequisite for such a database is a common formalized language for mathematical results, that
 has to have a pleasing syntax and satisfy needs of the vast majority of mathematicians. Modern proof
@@ -64,6 +67,14 @@ in the respective microcosms.
 
 TODO: Metamathematics
 
+
+Unfortunatelly, the theory $CC_{obs}$ fails to faithfully capture the equality between types,
+as well as types endowed with some additional structure (e.g. groups, rings and topological
+spaces). It was the great achievement of V. Voevodsky to discover the very possiblity to
+capture typal equality formally. (...)
+
 TODO: HOCC
 
 TODO: Higher index types
+
+gained tracktion
