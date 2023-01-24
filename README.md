@@ -4,22 +4,22 @@ Towards Higher Observational Construction Calculus (draft)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
-Since at least a decade, the co-founder of JetBrains and president of JetBrains Research Sergey
+For at least a decade, the co-founder of JetBrains and president of JetBrains Research Sergey
 Dmitriev was envisioning a project to establish a database of mathematical results, definitions,
-conjectures, constructions and proofs that would in particular allow content-based search, connect
-related results into a web, and automatically search for mathematical objects of equivalent or
-simular structure even when their relatedness is not apparent and unknown to the respective authors.
+conjectures, constructions and proofs. This database should allow content-based search, connect
+related results into a web, and search for mathematical objects of equivalent or similar structure
+even when their relatedness is not apparent and unknown to the respective authors.
 These ideas got some traction inside the mathematical community, as exemplified by the
 [Formal Abstracts Project](https://formalabstracts.github.io/) by Thomas C. Hales.
 
 
-The prerequisite for such a database is a common formalized language for mathematical results, that
-has to have a pleasing syntax and satisfy needs of the vast majority of mathematicians. Modern proof
-assistants made a huge progress in this direction in the last few years. In 2020-2021 fields medalist
+The prerequisite for such a database is a common formalized language for mathematical results that
+has to have a pleasing syntax and satisfy the needs of the vast majority of mathematicians. Modern proof
+assistants made huge progress in this direction in the last few years. In 2020-2021 fields medalist
 and one of the top world mathematicians initiated a large community effort project of formalizing an
-entirely new result in modern mathamatics by means of Lean Proof Assistant. This project, known as
-the Liquid Tensor Experiment, ran unexpectedly well, and has indeed managed to subdue scepticism on
-proof formalization in large parts of mathematical community.
+entirely new result in modern mathematics by means of Lean Proof Assistant. This project, known as
+the Liquid Tensor Experiment, ran unexpectedly well and has indeed managed to subdue skepticism on
+proof formalization in large parts of the mathematical community.
 
 However, modern proof assistants are still afflicted with unsufficient expressivity and excessive
 verbosity, the latter being not only the problem of syntax but also of their foundational system.
@@ -27,7 +27,7 @@ verbosity, the latter being not only the problem of syntax but also of their fou
 § The HOCC Project
 ------------------
 
-Over the course of the last five years in JetBrains Research I've been intensely working solving
+Over the course of the last five years in JetBrains Research I've been intensely working on solving
 the expressivity problems of the foundational systems modern proof assistants are based on, as well
 as on their syntax while taking considerations of most flexible extensibility and interoperability
 with computer algebra systems and STM solvers into account. In present series of drafts I present
