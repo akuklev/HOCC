@@ -95,6 +95,8 @@ aforementioned type theoretical counterparts to unbounded quantifiers. The suppo
 theory should be called Higher Observational Construction Calculus and gives the name to this
 whole project.
 
+There is a longstanding problem of interpreting the syntax of type theories within themselves.
+
 * The fourth draft is concerned by interpreting dependent type theories inside dependent
 type theories. Continuing the line of research I pursued even before entering JetBrains
 Research, I propose introducing the notion of higher index types and inductive type families
