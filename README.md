@@ -4,11 +4,12 @@ Towards Higher Observational Construction Calculus (draft)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
-For at least a decade, the co-founder of JetBrains and president of JetBrains Research Sergey
-Dmitriev was envisioning a project to establish a database of mathematical results, definitions,
-conjectures, constructions and proofs. This database should allow content-based search, connect
-related results into a web, and search for mathematical objects of equivalent or similar structure
-even when their relatedness is not apparent and unknown to the respective authors.
+
+Some 6 years ago the JetBrains co-founder Sergey Dmitriev told me about his long standing hope to
+establish a database of mathematical results, definitions, conjectures, constructions and proofs.
+This database should allow content-based search and connect related results into a web. Ideally,
+it should also connect results on mathematical objects of similar structure even if their
+relatedness is not apparent and unknown to the respective authors.
 These ideas got some traction inside the mathematical community, as exemplified by the
 [Formal Abstracts Project](https://formalabstracts.github.io/) by Thomas C. Hales.
 
@@ -21,21 +22,19 @@ entirely new result in modern mathematics by means of Lean Proof Assistant. This
 the Liquid Tensor Experiment, ran unexpectedly well and has indeed managed to subdue skepticism on
 proof formalization in large parts of the mathematical community.
 
-However, modern proof assistants are still afflicted with unsufficient expressivity and excessive
-verbosity, the latter being not only the problem of syntax but also of their foundational system.
+However, modern proof assistants are still afflicted with insufficient expressivity and excessive
+verbosity.
 
 § The HOCC Project
 ------------------
 
-Over the course of the last five years in JetBrains Research I've been intensely working on solving
-the expressivity problems of the foundational systems modern proof assistants are based on, as well
-as on their syntax while taking considerations of most flexible extensibility and interoperability
-with computer algebra systems and STM solvers into account. In present series of drafts I present
-the solutions to the most important expressivity problems.
+Over the last five years in JetBrains Research, I've been intensely working on solving
+the expressivity problems of the foundational systems underlying modern proof assistants. In the present
+series of drafts, I outline the solutions to the most critical expressivity problems.
 
 Traditionally, set theories were used as the foundational system for mathematics. However, in late
 1970s a new approach based on higher-order constructive logics started to gain momentum. This
-approach was first plagued by problems handling equality and the universe reflecting all
+approach was first plagued by problems handling the equality and the universe of
 propositions. A series of more than a dozen incremental improvements over the last 30 years
 recently culminated into the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022].
 This remarkable foundational system is the first one to perfectly handle the universe `Ω`
