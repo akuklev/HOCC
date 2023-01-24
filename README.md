@@ -5,7 +5,7 @@ Towards Higher Observational Construction Calculus (draft)
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
 
-Some 6 years ago the JetBrains co-founder Sergey Dmitriev told me about his long standing hope to
+Some 6 years ago JetBrains co-founder Sergey Dmitriev told me about his long standing hope to
 establish a database of mathematical results, definitions, conjectures, constructions and proofs.
 This database should allow content-based search and connect related results into a web. Ideally,
 it should also connect results on mathematical objects of similar structure even if their
@@ -14,12 +14,12 @@ These ideas got some traction inside the mathematical community, as exemplified 
 [Formal Abstracts Project](https://formalabstracts.github.io/) by Thomas C. Hales.
 
 
-The prerequisite for such a database is a common formalized language for mathematical results that
-has to have a pleasing syntax and satisfy the needs of the vast majority of mathematicians. Modern proof
-assistants made huge progress in this direction in the last few years. In 2020-2021 fields medalist
-and one of the top world mathematicians initiated a large community effort project of formalizing an
-entirely new result in modern mathematics by means of Lean Proof Assistant. This project, known as
-the Liquid Tensor Experiment, ran unexpectedly well and has indeed managed to subdue skepticism on
+The prerequisite for such a database is a common formalized language for mathematics with a pleasing
+syntax and enough expressivity to satisfy the needs of almost all mathematicians. Modern proof
+assistants made huge progress in this direction in the last few years. In 2021, Fields medalist and
+one of the top world mathematicians Peter Scholze started a project on formalizing an entirely new
+result in modern mathematics by means of Lean Proof Assistant. This project - the Liquid Tensor Experiment -
+ran unexpectedly well and has indeed managed to subdue skepticism on
 proof formalization in large parts of the mathematical community.
 
 However, modern proof assistants are still afflicted with insufficient expressivity and excessive
@@ -36,15 +36,15 @@ Traditionally, set theories were used as the foundational system for mathematics
 1970s a new approach based on higher-order constructive logics started to gain momentum. This
 approach was first plagued by problems handling the equality and the universe of
 propositions. A series of more than a dozen incremental improvements over the last 30 years
-recently culminated into the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022].
-This remarkable foundational system is the first one to perfectly handle the universe `Ω`
-reflecting all propositions, and equalities between elements of setlike types.
+recently culminated in the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022].
+This remarkable foundational system is the first one to flawlessly handle both the universe `Ω`
+reflecting all propositions, and the equality between inhabitants of setlike types.
 
-* The first draft in the series introduces the non-constructive modality `‖_‖ᶜ` for $CC_{obs}$.
-This modality allows to make sandboxed use of non-constructive principles including the Axiom of
-Choice inside a fenced fragment of the otherwise constructive framework of $CC_{obs}$, without
-compromising decidability of typechecking and effectiveness of evaluation. That is, both the
-algorithm verifying proofs and the algorithm evaluating a closed expression of the type `ℕ`
+* [The first draft](./non-constructive-modality) in the series introduces the non-constructive
+modality `‖_‖ᶜ` for $CC_{obs}$. This modality allows to employ non-constructive methods, including
+the Axiom of Choice, inside a fenced fragment of the otherwise constructive framework of $CC_{obs}$.
+Non-constructive modality does not compromise decidability of typechecking and effectiveness of evaluation.
+That is, both the algorithm verifying proofs and the algorithm evaluating a closed expression of the type `ℕ`
 (or any other purely inductive type) are guaranteed to terminate in a finite time and produce
 a specific result. By adapting the results of B. Werner, M. Ratjen and S. Tupailo it can be show
 that the theory $CC_{obs}$ + `‖_‖ᶜ` has a model of the standard set theory ZFC, that is faithful
@@ -58,7 +58,7 @@ enough Grothendieck universes. But even then the language of ZFC is incapable of
 large concrete categories (such as the category of all groups). This issue was first solved
 by extended set theories ZFC/S and ZMC/S with appropriate reflection principles[Shulman2008]
 
-* The second draft in the series introduces the type-theoretic counterpart of unbounded universal
+* [The second draft](./star-is-more) in the series introduces the type-theoretic counterpart of unbounded universal
 quantifiers with introduction and elimination rules reproducing the Shulman reflection principle.
 This extension that allows to handle large concrete categories and similar objects. If used in
 conjunction with inductive-recursive types it also captures the categorical approach to
@@ -96,7 +96,7 @@ whole project.
 
 There is a longstanding problem of interpreting the syntax of type theories within themselves.
 
-* The fourth draft is concerned by interpreting dependent type theories inside dependent
+* [The fourth draft](./higher-index-types) is concerned by interpreting dependent type theories inside dependent
 type theories. Continuing the line of research I pursued even before entering JetBrains
 Research, I propose introducing the notion of higher index types and inductive type families
 indexed over them. Higher index types are the type-theoretical counterpart of Reedy categories,
@@ -129,7 +129,7 @@ resulting theory for metamathematical applications, e.g. to prove cut-eliminatio
 theories. Yet the theory is very far from being a weak finitistic core, one strives to use, when
 deriving metamathematical results. Fortunatelly, with the approach mentioned in the draft on
 unbounded quantifiers, proofs can be “compiled” into a weaker microcosm, given they don't use
-any primitives not available there. The fifth draft in series is concerned by defining such a
+any primitives not available there. [The fifth draft](./finitistic-core) in series is concerned by defining such a
 microcosm, namely a finitistic core system metamathematical proofs are compiled into.
 There I develop a constructive version of the non-Gödelian theory of hereditary finite sets by
 F. Pakhomov, the only known example of a natural axiomatic system that is able to prove its
