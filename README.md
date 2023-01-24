@@ -24,6 +24,9 @@ proof formalization in large parts of mathematical community.
 However, modern proof assistants are still afflicted with unsufficient expressivity and excessive
 verbosity, the latter being not only the problem of syntax but also of their foundational system.
 
+§ The HOCC Project
+------------------
+
 Over the course of the last five years in JetBrains Research I've been intensely working solving
 the expressivity problems of the foundational systems modern proof assistants are based on, as well
 as on their syntax while taking considerations of most flexible extensibility and interoperability
