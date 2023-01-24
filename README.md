@@ -5,7 +5,7 @@ Towards Higher Observational Construction Calculus (draft)
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
 
-Some 6 years ago JetBrains co-founder Sergey Dmitriev told me about his long standing hope to
+Some 6 years ago, JetBrains co-founder Sergey Dmitriev told me about his long-standing hope to
 establish a database of mathematical results, definitions, conjectures, constructions and proofs.
 This database should allow content-based search and connect related results into a web. Ideally,
 it should also connect results on mathematical objects of similar structure even if their
@@ -17,8 +17,8 @@ These ideas got some traction inside the mathematical community, as exemplified 
 The prerequisite for such a database is a common formalized language for mathematics with a pleasing
 syntax and enough expressivity to satisfy the needs of almost all mathematicians. Modern proof
 assistants made huge progress in this direction in the last few years. In 2021, Fields medalist and
-one of the top world mathematicians Peter Scholze started a project on formalizing an entirely new
-result in modern mathematics by means of Lean Proof Assistant. This project - the Liquid Tensor Experiment -
+one of the top world mathematicians Peter Scholze, started a project on formalizing an entirely new
+result in modern mathematics using Lean Proof Assistant. This project - the Liquid Tensor Experiment -
 ran unexpectedly well and has indeed managed to subdue skepticism on
 proof formalization in large parts of the mathematical community.
 
@@ -33,12 +33,12 @@ the expressivity problems of the foundational systems underlying modern proof as
 series of drafts, I outline the solutions to the most critical expressivity problems.
 
 Traditionally, set theories were used as the foundational system for mathematics. However, in late
-1970s a new approach based on higher-order constructive logics started to gain momentum. This
-approach was first plagued by problems handling the equality and the universe of
+1970s, a new approach based on higher-order categorical logic started to gain momentum. This
+approach was first plagued by problems handling equality and the universe of
 propositions. A series of more than a dozen incremental improvements over the last 30 years
 recently culminated in the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022].
 This remarkable foundational system is the first one to flawlessly handle both the universe `Ω`
-reflecting all propositions, and the equality between inhabitants of setlike types.
+reflecting all propositions and the equality between inhabitants of setlike types.
 
 * [The first draft](./non-constructive-modality) in the series introduces the non-constructive
 modality `‖_‖ᶜ` for $CC_{obs}$. This modality allows to employ non-constructive methods, including
@@ -46,25 +46,25 @@ the Axiom of Choice, inside a fenced fragment of the otherwise constructive fram
 Non-constructive modality does not compromise decidability of typechecking and effectiveness of evaluation.
 That is, both the algorithm verifying proofs and the algorithm evaluating a closed expression of the type `ℕ`
 (or any other purely inductive type) are guaranteed to terminate in a finite time and produce
-a specific result. By adapting the results of B. Werner, M. Ratjen and S. Tupailo it can be show
+a specific result. By adapting the results of B. Werner, M. Ratjen and S. Tupailo it can be shown
 that the theory $CC_{obs}$ + `‖_‖ᶜ` has a model of the standard set theory ZFC, that is faithful
 for all mathematical formulae in the sense of Rathjen and Tupailo: a (generalized) mathematical
 formula φ can be proven in ZFC if and only if there is a proof of `‖φ‖ᶜ` in $CC_{obs}$.
 
 It is well known that the ZFC set theory alone poorly captures the category theory. For many
 applications in modern mathematics (algebraic geometry, algebraic number theory, higher
-homological algebra) ZFC has to be extended by additional axioms postulating existence of
-enough Grothendieck universes. But even then the language of ZFC is incapable of expressing
+homological algebra) ZFC has to be extended by additional axioms postulating the existence of
+enough Grothendieck universes. But even then, the language of ZFC is incapable of expressing
 large concrete categories (such as the category of all groups). This issue was first solved
 by extended set theories ZFC/S and ZMC/S with appropriate reflection principles[Shulman2008]
 
 * [The second draft](./star-is-more) in the series introduces the type-theoretic counterpart of unbounded universal
 quantifiers with introduction and elimination rules reproducing the Shulman reflection principle.
-This extension that allows to handle large concrete categories and similar objects. If used in
-conjunction with inductive-recursive types it also captures the categorical approach to
+This extension allows to handle large concrete categories and similar objects. If used in
+conjunction with inductive-recursive types, it also captures the categorical approach to
 mathematical structures. That is, proofs and constructions regarding objects of particular kind
 (say, groups) can be automatically applied to group objects in arbitrary microcosms (say, finitely
-complete categories) as long as both definitions of objects and all elements of proofs and
+complete categories) as long as both the definitions of objects and the elements of the proofs and
 constructions use only the primitives available in the respective microcosms.
 
 Unfortunatelly, the theory $CC_{obs}$ fails to faithfully capture the equality between types, as
