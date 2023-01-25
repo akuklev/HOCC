@@ -5,7 +5,7 @@ Towards Higher Observational Construction Calculus (draft)
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
 
-Some 6 years ago, JetBrains co-founder Sergey Dmitriev told me about his long-standing hope to
+Some 6 years ago, co-founder and former CEO of JetBrains Sergey Dmitriev told me about his long-standing hope to
 establish a database of mathematical results, definitions, conjectures, constructions and proofs.
 This database should allow content-based search and connect related results into a web. Ideally,
 it should also connect results on mathematical objects of similar structure even if their
