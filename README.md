@@ -5,22 +5,21 @@ Towards Higher Observational Construction Calculus (draft)
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
 
-Some 6 years ago, co-founder and former CEO of JetBrains Sergey Dmitriev told me about his long-standing hope to
-establish a database of mathematical results, definitions, conjectures, constructions and proofs.
-This database should allow content-based search and connect related results into a web. Ideally,
-it should also connect results on mathematical objects of similar structure even if their
-relatedness is not apparent and unknown to the respective authors.
+Some 6 years ago, co-founder and former CEO of JetBrains Sergey Dmitriev told me about his
+long-standing hope to establish a database of mathematical results, definitions, conjectures,
+constructions and proofs. This database should allow content-based search and connect related
+results into a web. Ideally, it should also connect results on mathematical objects of similar
+structure even if their relatedness is not apparent and unknown to the respective authors.
 These ideas got some traction inside the mathematical community, as exemplified by the
 [Formal Abstracts Project](https://formalabstracts.github.io/) by Thomas C. Hales.
-
 
 The prerequisite for such a database is a common formalized language for mathematics with a pleasing
 syntax and enough expressivity to satisfy the needs of almost all mathematicians. Modern proof
 assistants made huge progress in this direction in the last few years. In 2021, Fields medalist and
 one of the top world mathematicians Peter Scholze, started a project on formalizing an entirely new
 result in modern mathematics using Lean Proof Assistant. This project - the Liquid Tensor Experiment -
-ran unexpectedly well and has indeed managed to subdue skepticism on
-proof formalization in large parts of the mathematical community.
+ran unexpectedly well and has indeed managed to subdue skepticism on proof formalization in substantial
+parts of the mathematical community.
 
 However, modern proof assistants are still afflicted with insufficient expressivity and excessive
 verbosity.
@@ -29,16 +28,20 @@ verbosity.
 ------------------
 
 Over the last five years in JetBrains Research, I've been intensely working on solving
-the expressivity problems of the foundational systems underlying modern proof assistants. In the present
-series of drafts, I outline the solutions to the most critical expressivity problems.
+the expressivity problems of the foundational systems underlying modern proof assistants.
+In the present series of drafts, I outline the solutions to the most critical expressivity
+problems.
+
+§§ Incorporating non-constructive reasoning
+-------------------------------------------
 
 Traditionally, set theories were used as the foundational system for mathematics. However, in late
 1970s, a new approach based on higher-order categorical logic started to gain momentum. This
-approach was first plagued by problems handling equality and the universe of
-propositions. A series of more than a dozen incremental improvements over the last 30 years
-recently culminated in the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022].
-This remarkable foundational system is the first one to flawlessly handle both the universe `Ω`
-reflecting all propositions and the equality between inhabitants of setlike types.
+approach was first plagued by problems handling equality and the universe of propositions.
+A series of more than a dozen incremental improvements over the last 30 years recently culminated
+in the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022]. This remarkable
+foundational system is the first one to flawlessly handle both the universe `Ω` reflecting all
+propositions and the equality on setlike types.
 
 * [The first draft](./non-constructive-modality) in the series introduces the non-constructive
 modality `‖_‖ᶜ` for $CC_{obs}$. This modality allows to employ non-constructive methods, including
@@ -50,6 +53,11 @@ a specific result. By adapting the results of B. Werner, M. Ratjen and S. Tupail
 that the theory $CC_{obs}$ + `‖_‖ᶜ` has a model of the standard set theory ZFC, that is faithful
 for all mathematical formulae in the sense of Rathjen and Tupailo: a (generalized) mathematical
 formula φ can be proven in ZFC if and only if there is a proof of `‖φ‖ᶜ` in $CC_{obs}$.
+
+The construction carries over to theories validating univalence axiom (see below).
+
+§ Typed Unbounded Quantifiers: Handling Large Concrete Categories
+-----------------------------------------------------------------
 
 It is well known that the ZFC set theory alone poorly captures the category theory. For many
 applications in modern mathematics (algebraic geometry, algebraic number theory, higher
@@ -66,6 +74,9 @@ mathematical structures. That is, proofs and constructions regarding objects of 
 (say, groups) can be automatically applied to group objects in arbitrary microcosms (say, finitely
 complete categories) as long as both the definitions of objects and the elements of the proofs and
 constructions use only the primitives available in the respective microcosms.
+
+§ Univalent Identification Types for $CC_{obs}$
+-----------------------------------------------
 
 Unfortunatelly, the theory $CC_{obs}$ fails to faithfully capture the equality between types, as
 well as types endowed with some additional structure (e.g. groups, rings and topological spaces).
