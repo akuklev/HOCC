@@ -32,14 +32,14 @@ the expressivity problems of the foundational systems underlying modern proof as
 In the present series of drafts, I outline the solutions to the most critical expressivity
 problems.
 
-§§ Incorporating non-constructive reasoning
--------------------------------------------
+§§ Backwards Compatibility: The Non-Constructive Modality
+---------------------------------------------------------
 
 Traditionally, set theories were used as the foundational system for mathematics. However, in late
-1970s, a new approach based on higher-order categorical logic started to gain momentum. This
-approach was first plagued by problems handling equality and the universe of propositions.
-A series of more than a dozen incremental improvements over the last 30 years recently culminated
-in the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022]. This remarkable
+1970s, the modern approach based on higher-order categorical logic started to gain momentum. This
+approach was first plagued by issues handling equality and the universe of propositions. A series
+of more than a dozen incremental improvements over the last 30 years recently culminated in the
+Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022]. This remarkable
 foundational system is the first one to flawlessly handle both the universe `Ω` reflecting all
 propositions and the equality on setlike types.
 
@@ -56,8 +56,8 @@ formula φ can be proven in ZFC if and only if there is a proof of `‖φ‖ᶜ`
 
 The construction carries over to theories validating univalence axiom (see below).
 
-§ Typed Unbounded Quantifiers: Handling Large Concrete Categories
------------------------------------------------------------------
+§ Handling Large Categories and Internalization: Typed Unbounded Quantifiers
+----------------------------------------------------------------------------
 
 It is well known that the ZFC set theory alone poorly captures the category theory. For many
 applications in modern mathematics (algebraic geometry, algebraic number theory, higher
@@ -75,8 +75,8 @@ mathematical structures. That is, proofs and constructions regarding objects of 
 complete categories) as long as both the definitions of objects and the elements of the proofs and
 constructions use only the primitives available in the respective microcosms.
 
-§ Univalent Identification Types for $CC_{obs}$
------------------------------------------------
+§ Eeconciling Equality and Identifiability
+------------------------------------------
 
 Unfortunatelly, the theory $CC_{obs}$ fails to faithfully capture the equality between types, as
 well as types endowed with some additional structure (e.g. groups, rings and topological spaces).
@@ -85,10 +85,13 @@ everyone assumed that the respective notions of equivalence for various kinds of
 structures have to be defined by hand for each kind: isomorphisms for groups, homeomorphsisms
 for topological spaces, equivalences for categories, bisimularity for automata, etc.
 
-In 2010 V. Voevodsky made a buffling discovery that a concise principle governing equality for
-types only, implies the natural notion of equality for topological spaces, groups, rings,
-categories, graphs, automata, functions and even propositions. Discovery of this principle,
-known as Univalence Axiom, led to a mathematical revolution not only in the field of type
+In 2010 V. Voevodsky made a buffling discovery. There is no need to specify them manually for
+each type of mathematical objects separately: they are automatically implied by definitions of
+those objects and a concise principle governing equality for the universes of types. This
+principle - the Univalence Axiom - implies the natural notion of equality for topological
+spaces, groups, rings, categories, graphs, automata, functions and even propositions.
+
+Discovery of this principle led to a mathematical revolution not only in the field of type
 theories, but also in higher category theory and foundations of mathematics. As a result of
 large collaborative program the so called Homotopy Type Theory was born in 2014. As a byproduct
 one solved the longstanding problem of dealing constructively with analytic notion of real numbers.
@@ -96,7 +99,7 @@ one solved the longstanding problem of dealing constructively with analytic noti
 Unfortunatelly, the Homotopy Type Theory as defined in 2014 lacked good computational properties,
 in particular it lacks effective evaluation. After a multitude of developments (in particular,
 by Valery Isaev) an exceptionally elegant computational variant of the theory was presented in
-early 2022 in a series of talks M. Shulman. They author coin the name Higher Observational Type
+early 2022 in a series of talks M. Shulman. The authors coined the name Higher Observational Type
 Theory (HOTT). While still unpublished and not yet implemented in any proof assistant, HOTT
 seems perfectly feasible.
 
@@ -104,6 +107,9 @@ seems perfectly feasible.
 aforementioned type theoretical counterparts to unbounded quantifiers. The supposed resulting
 theory should be called Higher Observational Construction Calculus and gives the name to this
 whole project.
+
+§ Eating itself
+---------------
 
 There is a longstanding problem of interpreting the syntax of type theories within themselves.
 
@@ -134,6 +140,9 @@ languages of dependent type theories where types are terms. By allowing small in
 one allows to define type-theories with computational rules using the doctrine of bi-directional
 typing. If one allows large induction-recursion, it become possible for the theory to represent
 its own syntax internally, as pioneered by the “The Gentle Art of Levitation”.
+
+§ Finitistic Core
+-----------------
 
 * Now that it is possible to represent languages of proofs directly, it makes sense to use the
 resulting theory for metamathematical applications, e.g. to prove cut-elimination for specific

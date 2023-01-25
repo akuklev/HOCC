@@ -84,3 +84,17 @@ for them. ATM, it seems that weak model categories are precisely what one needs 
 
 Note that since we can have both large XATs and the finitistic core set theory, we can build set
 theoretic model of the theory in the theory itself.
+
+Annotations:
+
+@Decidable
+@Inductive Nat
+
+@Algebraic
+@Inductive GroupPrototype -- decidable index, but is allowed to be quotient type, thus have verifiable but
+not falsifieable equality
+
+Operation on morphism uses its shadow operation on objects
+how can we state the requirement for shadow operation to be functorial?
+
+MonoidalCategory[\Ob : *, (⊗) : Monoid[Ob], ...]
