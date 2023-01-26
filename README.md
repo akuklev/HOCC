@@ -137,21 +137,20 @@ case) and formulas they prove: `ProofTerm(\ctx : Δ⁺[S], \statement : Formula(
 we want to generalize this approach to first-order theories with dependent sorts (FOLDS). To
 manage dependencies in the type of contexts, instead of `Δ⁺` one needs the type of indexes to be
 an inductively generated Reedy category tracking both thinnings and dependencies:
-`ProofTerm(\ctx : Δ[S], \statement : Formula(ctx))`, where `S : Δ⁻ → *` is the signature of the
+`ProofTerm(\ctx : Δ[𝓢], \statement : Formula(ctx))`, where the index type `𝓢 : *ᴵ` is the signature of the
 respective FOLDS. The possibility to express sort signatures with dependencies (both finitary
-and infinitary, like in case of theory of ω-categories) as presheaves `S : 𝒞 → *` for appropriate
-inductively-generated Reedy category `𝒞` allow to define FOLDS-theories and H(igher)OLDS-theories
-as polymorphic structures with a single parameter `\Carrier : S` (see unbounded quantifers above).
+and infinitary, like in case of theory of ω-categories) as Reedy index types allow to define
+FOLDS-theories and H(igher)OLDS-theories as polymorphic structures with a single parameter `\Carrier : S` (see unbounded quantifers above).
 
 * [The fourth draft](./index-cats) is concerned by interpreting dependent type theories
 inside dependent type theories. Continuing the line of research I pursued even before entering
-JetBrains Research, I propose introducing the notion of index categories and inductive type
+JetBrains Research, I propose introducing the notion of Reedy index types and inductive type
 families indexed over them. Higher index types are the type-theoretical counterpart of Reedy categories,
 functions defined on them are required to specify their actions not only on the indices themselves
 but also on the arrows between them, thus being functors by definition. Inductive type families
 over higher index types turn out to be presheaves.
 
-By allowing index categories and functions on them to be defined simultaneously (and mutially
+By allowing Reedy index types and functions on them to be defined simultaneously (and mutially
 recursively) with inductive type family indexed by them one gains the ability to interpret dependent
 type theories (in bi-directional presentation) as inductive types. This can be further generalized
 two-fold:
