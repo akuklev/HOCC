@@ -579,7 +579,7 @@ For Δ₀ formulas φ(x,..,z) we additionally postulate separation in the follow
 ```
 
 Next steps:
-- Show that this theory proves set induction or add it as an axiom
+- Show that this theory proves set induction or add it
 - Ensure this theory proves excluded middle for finitary sets and establish connection with $H_{<ω}$
 - Show that for each A, B ∈ V(x) ∈ V(y), their subset collection C can be defined and C ∈ V(y)
 - Explore what kind of set theory emerges if an infinity axiom is added

@@ -52,7 +52,7 @@ of utilizing literal equality and type casts within proofs.
 
 The type `Ω°` has a remarkable property that the logical power of impredicativity is locked inside.
 
-* [The first draft](./non-constructive-modality) in the series utilizes this property to introduces
+* [The first draft](./choice) in the series utilizes this property to introduces
 the non-constructive modality `‖_‖ᶜ`. This modality allows to employ non-constructive methods,
 including the Axiom of Choice, inside a fenced fragment of the otherwise constructive framework.
 Non-constructive modality does not compromise decidability of typechecking and effectiveness of
