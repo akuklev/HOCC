@@ -155,13 +155,14 @@ By allowing index categories and functions on them to be defined simultaneously 
 recursively) with inductive type family indexed by them one gains the ability to interpret dependent
 type theories (in bi-directional presentation) as inductive types. This can be further generalized
 two-fold:
-* * by large induction-recursion to allow the theory to represent its own syntax by utilizing
-“external” termination checking à la “The Gentle Art of Levitation”, or
-* * by allowing higher constructors for the type family (but not for the index): this way we obtain
-extended algebraic theories XAT (in case, the resulting family quotient-inductive) or higher XATs
-otherwise. We conjecture that XATs have natural functorial semantics in the doctrine of weak model
-categories, while higher XATs require ∞-categories. We speculate about possible generalization to
-directed higher XATs with natural semantics in ω-categories.
+* * Extension by large induction-recursion to allow the theory to represent its own syntax by
+utilizing “external” termination checking à la “The Gentle Art of Levitation”.
+* * Extension by path constructors for the type family (but not for the index) makes recursion
+motives for those types form an extension of GAT⁻ (Generalized Algebraic Theories without
+equations on sorts) we'd like to call XATs (Extended Algebraic Theories) or higher XATs depending
+on their set-truncatedness. We conjecture that XATs have natural functorial semantics in the
+doctrine of weak model categories, while higher XATs require ∞-categories. We speculate about
+possible generalization to directed higher XATs with natural semantics in ω-categories.
 
 § Finitistic Core
 -----------------
@@ -171,9 +172,9 @@ resulting theory for metamathematical applications, e.g. to prove cut-eliminatio
 theories. Yet the theory is very far from being a weak finitistic core, one strives to use, when
 deriving metamathematical results. Fortunatelly, with the approach mentioned in the draft on
 unbounded quantifiers, proofs can be “compiled” into a weaker microcosm, given they don't use
-any primitives not available there. [The fifth draft](./finitistic-core) in series is concerned by defining such a
-microcosm, namely a finitistic core system metamathematical proofs are compiled into.
-There I develop a constructive version of the non-Gödelian theory of hereditary finite sets by
-F. Pakhomov, the only known example of a natural axiomatic system that is able to prove its
+any primitives not available there. [The fifth draft](./finitistic-core) in series is concerned
+by defining such a microcosm, namely a finitistic core system metamathematical proofs are compiled
+into. There I develop a constructive version of the non-Gödelian theory of hereditary finite sets
+by F. Pakhomov, the only known example of a natural axiomatic system that is able to prove its
 own consistency. I develop a logic-free (type-theory like) calculus for this theory to implement
 its by-construction faithful model inside HOCC.
