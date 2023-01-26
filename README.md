@@ -47,8 +47,8 @@ types for every type. The universe `Ω°` fails to reflect all propositions, but
 relation of “literal” equality between types and observational equality on their elements. In the
 original formulation, `Ω°` is the subuniverse of all other universes, which makes possible to
 require “literal equality” as a condition for theorems and constructions violating the Structure
-Identity Principle (SIP). By removing `Ω° ⊂ 𝒰ⁿ` one restores the SIP, while retaining the comfort
-of utilizing literal equality and type casts within proofs.
+Identity Principle (SIP). By removing `Ω° ⊂ 𝒰ⁿ` (thus making it an isolate universe) one restores
+the SIP, while retaining the comfort of utilizing literal equality and type casts within proofs.
 
 The type `Ω°` has a remarkable property that the logical power of impredicativity is locked inside.
 
@@ -142,7 +142,7 @@ respective FOLDS. The possibility to express sort signatures with dependencies (
 and infinitary, like in case of theory of ω-categories) as Reedy index types allow to define
 FOLDS-theories and H(igher)OLDS-theories as polymorphic structures with a single parameter `\Carrier : S` (see unbounded quantifers above).
 
-* [The fourth draft](./index-cats) is concerned by interpreting dependent type theories
+* [The fourth draft](./reedy-types) is concerned by interpreting dependent type theories
 inside dependent type theories. Continuing the line of research I pursued even before entering
 JetBrains Research, I propose introducing the notion of Reedy index types and inductive type
 families indexed over them. Higher index types are the type-theoretical counterpart of Reedy categories,
