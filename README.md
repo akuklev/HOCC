@@ -138,7 +138,10 @@ we want to generalize this approach to first-order theories with dependent sorts
 manage dependencies in the type of contexts, instead of `Δ⁺` one needs the type of indexes to be
 an inductively generated Reedy category tracking both thinnings and dependencies:
 `ProofTerm(\ctx : Δ[S], \statement : Formula(ctx))`, where `S : Δ⁻ → *` is the signature of the
-respective FOLDS.
+respective FOLDS. The possibility to express sort signatures with dependencies (both finitary
+and infinitary, like in case of theory of ω-categories) as presheaves `S : 𝒞 → *` for appropriate
+inductively-generated Reedy category `𝒞` allow to define FOLDS-theories and H(igher)OLDS-theories
+as polymorphic structures with a single parameter `\Carrier : S` (see unbounded quantifers above).
 
 * [The fourth draft](./index-cats) is concerned by interpreting dependent type theories
 inside dependent type theories. Continuing the line of research I pursued even before entering
