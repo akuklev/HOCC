@@ -65,6 +65,18 @@ a (generalized) mathematical formula φ can be proven in ZFC if and only if ther
 `‖φ‖ᶜ` in $CC_{obs}$. We also describe how to define `‖_‖ᶜ` so that it no incompatibility with
 univalence principle can arize.
 
+It also does not seem out of the reach to demonstrate `‖_‖ᶜ`-conservativity of $CC_{obs}$ with
+a $n$ universes over ZFC(n) (ZFC with a $n$ inaccessibles). In order to achieve that, we will be
+constructing a model of the $CC_{obs}(n)$ in ZFC(n). `Ω°` has a structure of Heyting algebra, and
+every Heyting algebra can be embedded (Kripke Representation) into the Heyting algebra of up-sets
+of some posets. Thus we'll be striving to interpret $CC_{obs}(n)$ in ZFC(n) in such a way that
+the propositions `p : Ω°` will be modeled by up-sets of the inaccessible cardinal $V_κ$. On the
+type-theoretic side we'll have the type of Aczel sets `V` modelling ZFC(n - 1). Utilizing the
+impredicative universal quantifier of `Ω°` to represent both finitary and infinitary conjuntions,
+it seems possible to translate each `s : V` into the respective Zakharyaschev subframe canonical
+formula `φₛ : Ω°` (see “Axiomatization Techniques for Intermediate Logics” [Bezhanishvili2022]),
+that will be in interpreted precisely by the set $s ∈ V_κ$ in the model.
+
 § Handling Large Categories and Internalization: Typed Unbounded Quantifiers
 ----------------------------------------------------------------------------
 
