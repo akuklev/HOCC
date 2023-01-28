@@ -199,57 +199,95 @@ practical proof assistants.
 §§ Expressing Dependently Typed Languages
 -----------------------------------------
 
-A structuralist foundational system has to be able to handle formalized languages both of other
-theories and of its own. inductive types That is the only way to carry out metamathematical
-proofs and construct models. The language of proof terms in any first-order theory is already
-too complex to be naturally expressable by means of basic inductive types. The language of
-__formulas__ of single-sorted first-order theories can be expressed as an inductive type family
-`Formula(\n : Nat)`, where `n` is the number of free variables. However, even in this case the
-index begs to be not just a type, but an inductively generated direct category `Δ⁺`, which
-greatly simplifies the variable management[McBride2021]. For a multi-sorted first-order theory
-one needs the type `Formula(\context : Δ⁺[S])`, where `S` is the type of sorts. The language of
-proof terms needs to be indexed over both contexts (number of free variables in single-sorted
-case) and formulas they prove: `ProofTerm(\ctx : Δ⁺[S], \statement : Formula(ctx))`. Now assume
-we want to generalize this approach to first-order theories with dependent sorts (FOLDS). To
-manage dependencies in the type of contexts, instead of `Δ⁺` one needs the type of indexes to be
-an inductively generated Reedy category tracking both thinnings and dependencies:
-`ProofTerm(\ctx : Δ[𝓢], \statement : Formula(ctx))`, where the index type `𝓢 : *ᴵ` is the signature of the
-respective FOLDS. The possibility to express sort signatures with dependencies (both finitary
-and infinitary, like in case of theory of ω-categories) as Reedy index types allow to define
-FOLDS-theories and H(igher)OLDS-theories as polymorphic structures with a single parameter `\Carrier : S` (see unbounded quantifers above).
+Higher algebra and higher category theory in particular are the branches of mathematics that could
+probably benefit the most from HOTT-based proof assistants. In recent years, two higher algebraic
+notions of extreme importance have been described as domain-specific type theories, namely the
+Grothendieck-Maltsiniotis [weak ω-categories](https://arxiv.org/abs/1706.02866) [Finster-Mimram207]
+and [virtual equipments](https://arxiv.org/abs/2210.08663)[New-Licata2022]. HOTT has to be extended
+to enable handling of such domain-specific type theories as internal objects. Optimally, it should
+also be able to capture its own syntax as an inductive type internally, which is known under the
+slogan “Type Theory should eat itself”.
 
-[Our fourth draft](./reedy-types) is concerned by interpreting dependent type theories
-inside dependent type theories. Continuing the line of research I pursued even before entering
-JetBrains Research, I propose introducing the notion of Reedy index types and inductive type
-families indexed over them. Higher index types are the type-theoretical counterpart of Reedy categories,
-functions defined on them are required to specify their actions not only on the indices themselves
-but also on the arrows between them, thus being functors by definition. Inductive type families
-over higher index types turn out to be presheaves.
+Proof assistants should also be able to handle metamathematical proofs which are carried out by
+structural indution over formulas and derivations of theories being studied. Thus, those formulas
+and derivations have to be expressable as inductive types.
+
+The language of proof terms in any first-order theory is already too complex to be naturally
+expressable by means of basic inductive types. The language of __formulas__ of single-sorted
+first-order theories can be expressed as an inductive type family `Formula(\n : Nat)`, where
+`n` is the number of free variables. However, even in this case the index begs to be not just
+a type, but an inductively generated direct category `Δ⁺`, which greatly simplifies the context
+and variable management[McBride2021]. For a multi-sorted first-order theory one needs the type
+family `Formula(\context : Δ⁺[S])`, where `S` is the type of sorts. The language of proof terms
+needs to be indexed over both contexts (number of free variables in single-sorted case) and
+formulas they prove: `ProofTerm(\ctx : Δ⁺[S], \statement : Formula(ctx))`. Now assume we want
+to generalize this approach to first-order theories with dependent sorts (FOLDS). To manage
+dependencies in the type of contexts, instead of `Δ⁺` one needs the type of indexes to be
+an inductively generated Reedy category tracking both thinnings and dependencies:
+`ProofTerm(\ctx : Δ[𝓢], \statement : Formula(ctx))`, where the index type `𝓢 : *ᴵ` is the sort
+signature of the respective FOLDS. The possibility to express sort signatures with dependencies
+(both finitary and infinitary, like in case of theory of ω-categories) as Reedy inductive types
+allow to define FOLDS-theories and H(igher)OLDS-theories as polymorphic structures with a single
+parameter `\Carrier : S` (see unbounded quantifers above).
+
+Generalized algebraic theories without equations on sorts can now be described as algebraic
+theories with dependent sorts ALDS, while bi-directionally presentable type theories are
+ALDS with infinitary sort signatures inductively definied mutually with terms of the theory.
+They include the both domain-specific type theories CaTT of weak ω-categories and VETT of virtual
+equipments as well as a predicative variant of HOTT with a fixed collection (𝟘, 𝟙, 𝔹, and ℕ) of
+inductive types. We outline how to extend this presentation to the whole HOTT by utilizing large
+induction-recursion to delegate termination checking of internal type definitions to the external
+HOTT à la [“The Gentle Art of Levitation”](https://www.irif.fr/~dagand/papers/levitation.pdf).
+
+In [our fourth draft](./reedy-types) we introduce the notion of Reedy inductive types and inductive
+type families indexed over them. Reedy inductive types are the type-theoretic counterpart of Reedy
+categories. Much like in case of higher inductive types, functions defined on Reedy inductive types
+are required to specify their actions not only on the values themselves but also on the arrows
+between them, thus being functors by definition. Inductive type families over Reedy inductive types
+turn out to be presheaves.
 
 By allowing Reedy index types and functions on them to be defined simultaneously (and mutially
-recursively) with inductive type family indexed by them one gains the ability to interpret dependent
-type theories (in bi-directional presentation) as inductive types. This can be further generalized
-two-fold:
-* Extension by large induction-recursion to allow the theory to represent its own syntax by
-utilizing “external” termination checking à la “The Gentle Art of Levitation”.
-* Extension by path constructors for the type family (but not for the index) makes recursion
-motives for those types form an extension of GAT⁻ (Generalized Algebraic Theories without
-equations on sorts) we'd like to call XATs (Extended Algebraic Theories) or higher XATs depending
-on their set-truncatedness. We conjecture that XATs have natural functorial semantics in the
-doctrine of weak model categories, while higher XATs require ∞-categories. We speculate about
-possible generalization to directed higher XATs with natural semantics in ω-categories.
+recursively) with inductive type family indexed by them we gain the ability to interpret dependent
+type theories (in bi-directional presentation) as inductive types, yielding what we'll call QRIITs,
+Quotient-Reedy-Inductive-Inductive-Types, or HRIITs if the resulting types are not required to be
+set-truncated.
+
+In HOTT, algebraic theories can be characterized as (non-dependent) elimination motives of quotient
+inductive type families indexed over a canonically inductive type. We propose adress elimination
+motives of QRIITs as extended algebraic theories XAT, and these of HRIITs as higher XATs
+respectively. In our work-in-progress we are developing natural functorial semantics for XATs in
+the doctrine of weak model categories, and speculate that higher XATs have natural semantics in
+the doctrine of (∞, 1)-categories. We speculate about a possible generalization to directed XATs
+with natural semantics in ω-categories.
 
 § Finitistic Core
 -----------------
 
-Now that it is possible to represent languages of proofs directly, it makes sense to use the
+Now that it is possible to represent languages of proof terms directly, it makes sense to use the
 resulting theory for metamathematical applications, e.g. to prove cut-elimination for specific
 theories. Yet the theory is very far from being a weak finitistic core, one strives to use, when
 deriving metamathematical results. Fortunatelly, with the approach mentioned in the draft on
 unbounded quantifiers, proofs can be “compiled” into a weaker microcosm, given they don't use
 any primitives not available there. [The fifth draft](./finitistic-core) in series is concerned
 by defining such a microcosm, namely a finitistic core system metamathematical proofs are compiled
-into. There I develop a constructive version of the non-Gödelian theory of hereditary finite sets
+into. There, we develop a constructive version of the non-Gödelian theory of hereditary finite sets
 by F. Pakhomov, the only known example of a natural axiomatic system that is able to prove its
-own consistency. I develop a logic-free (type-theory like) calculus for this theory to implement
-its by-construction faithful model inside HOCC.
+own consistency. We develop a logic-free (type-theory like) calculus for this theory to implement
+its faithful by construction model in terms of canonically inductive types.
+
+§ Conclusion and Future Work
+----------------------------
+
+The massive amount of theoretical work outlined in this summary addresses all critical expressivity
+shortcomings of type theories known to the author. There are still at least two obvious directions
+how the resulting theory (which we would like to call Higher Observational Construction Calculus)
+can be further generalized: directed higher inductive types (which would make each type an
+ω-category rather than an ω-groupoid), and incorporation of linear dependent types which apparently
+makes it capable of expressing quantum computations and entanglement in general, dependent additive
+conjunction being a type of quantum fields and dependent multiplicative disjunction that of quantum
+states. Both of these extensions are too early to pursue for the purpose of implementing in any
+proof assistant of practical use. On the other hand, for practical proof assistants urgent need
+a machinery for code reuse on basis of algebraic ornamentation[Dagand-McBride2013], powerful and
+unperplexed handling of implicit conversions and subset types, robust management of typeclasses,
+and a rich, extensible and versatile syntax. There is a plenty of work to do, but the goal of a
+satisfying general purpose proof assistant is within sight.
