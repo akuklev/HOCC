@@ -68,7 +68,7 @@ can be proven in ZFC(n) if and only if there is a $CC_{obs}$ proof of `‖φ‖�
 are interpreted as bounded in `Vₙ`.
 
 The universe `Ω°` has the structure of Heyting algebra, and every Heyting algebra can be embedded
-(vie Kripke Representation) into the Heyting algebra of up-sets of some poset. It seems possible
+(via Kripke Representation) into the Heyting algebra of up-sets of some poset. It seems possible
 to interpret $CC_{obs}($n + 1$)$ in ZFC($n + 1$) in such a way that the propositions `p : Ω°` will
 be modeled by up-sets of the inaccessible cardinal $V_κ$ taken as a poset of sets ordered by
 inclusion. On the type-theoretic side we'll have the type of Aczel sets `Vₙ` modelling ZFC($n$).
@@ -82,8 +82,8 @@ for term conversions without compromizing computational properties of the system
 
 [Bezhanishvili2022]: “Axiomatization Techniques for Intermediate Logics”
 
-§ Compatibility with Univalent Equality
----------------------------------------
+§§ Compatibility with Univalent Equality
+----------------------------------------
 
 Unfortunatelly, $CC_{obs}$ fails to qualify as the ultimate foundational system for two reasons:
 * `Ω°` does not contain enough propositions to be a subobject classifier, that is the proposition
@@ -154,8 +154,8 @@ troubles. The resulting theory HOTT + `‖_‖ᶜ` is also capable of non-constr
 inside a fenced fragment and supposedly shares the attractive metamathematical properties of
 $CC_{obs}$ + `‖_‖ᶜ`.
 
-§ Typed Unbounded Quantifiers: Internalization, Large Categories and Canonical Isomorphisms
--------------------------------------------------------------------------------------------
+§§ Typed Unbounded Quantifiers: Internalization, Large Categories and Canonical Isomorphisms
+--------------------------------------------------------------------------------------------
 
 It is well known that the ZFC set theory alone poorly captures the category theory. For many
 applications in modern mathematics (algebraic geometry, algebraic number theory, homological
@@ -264,7 +264,7 @@ model categories [Henry2018], and speculate that higher XATs have natural semant
 the doctrine of (∞, 1)-categories. We speculate about a possible generalization to directed XATs
 with natural semantics in ω-categories.
 
-§ Finitistic Core
+§§ Finitistic Core
 -----------------
 
 Now once it is possible to represent languages of proof terms directly, it makes sense to use the
