@@ -1,4 +1,4 @@
-Towards Highwr Observational Construction Calculus
+Towards Higher Observational Construction Calculus
 ==================================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
@@ -289,16 +289,21 @@ shortcomings of type theories known to the author.
 
 The resulting theory, which I named Higher Observational Construction Calculus, has two directions
 for further generalisation:
-* The first would introdce directed higher inductive types which would make each type an
-ω-category rather than an ω-groupoid.
+* The first would introdce [directed higher inductive types](https://hott-uf.github.io/2022/HoTTUF_2022_paper_11.pdf)
+which would make each type an ω-category rather than an ∞-groupoid and each universe an ω-cosmos
+rather than an ∞-topos, presumably an ω-variant of virtual equipments with some yet unknown closure
+properties and enough classifiers of yet unknown sort.
 * The second would introduce the notion of linear dependent types which apparently makes the system
 capable of expressing quantum computations and entanglement in general, dependent additive
 conjunction being a type of quantum fields and dependent multiplicative disjunction that of quantum
 states.
+* The third is to develop a resource-aware non-Gödelian variant of the theory, where strictly
+increasing functions can be only shown to exist contitionally on availability of enough
+“computational budget”.
 
-Both of these extensions are too early to pursue for the purpose of implementing in any
-proof assistant of practical use. On the other hand, proof assistants urgently need solutions to
-the more practical issues, including
+All of these extensions are too early to pursue for the purpose of implementing in any proof
+assistant of practical use. On the other hand, proof assistants urgently need solutions to the
+more practical issues, including
 * machinery facilitating composability and reusability of proofs and constructions on basis of
 algebraic ornamentation [Dagand-McBride2013];
 * robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions),
