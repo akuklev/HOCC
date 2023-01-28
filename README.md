@@ -77,16 +77,24 @@ $s ∈ V_κ$ in the model, finalizing the circle.
 
 [Bezhanishvili2022]: “Axiomatization Techniques for Intermediate Logics”  Since
 
+§ Reconciling Equality and Identifiability
+------------------------------------------
 
-$CC_{obs}$ fails to qualify as the ultimate foundational system for two reasons:
+Unfortunatelly, $CC_{obs}$ fails to qualify as the ultimate foundational system for two reasons:
 * `Ω°` does not contain enough propositions to be a subobject classifier, that is the proposition
 “`y : T` belongs to the image of the function `f`” is not always representable by a definitionally
 atomic `P : T → Ω°`, and conversely not every provably functional relation `R : X → Y → Ω°`can be
 turned into a function;
-* the “literal” equality `X ~ᵁ Y` is too restrictive for types, and thus for everything lying
-beyond the first universe 𝒰. In the original formulation, `Ω°` is not an isolated universe, but a
-subuniverse of all other universes `Ω° ⊂ 𝒰ⁿ`, which makes it possible to require “literal equality”
-as a condition for theorems and constructions violating the Structure Identity Principle (SIP).
+* $CC_{obs}$ fails to respect the structural principle of equivalence: no constructions or theorems
+should be able to tell apart isomorphic groups, homeomorphic spaces, equivalent categories, etc.
+In the original formulation of $CC_{obs}$, the universe `Ω°` is not an isolated universe, but a
+subuniverse of all other universes `Ω° ⊂ 𝒰ⁿ`, thus it is possible to state a theorem for, say a
+group that is “literally” equal to ℤ₂ instead of being merely isomorphic to it.
+
+At the time observational equality underlying $CC_{obs}$ was introduced [Altenkirch-McBride2007],
+everyone assumed that the respective notions of equivalence for various mathematical structures
+have to be defined by hand for each one separately: isomorphisms for groups, homeomorphsisms
+for topological spaces, equivalences for categories, bisimularity for automata, etc.
 
 
 § Handling Large Categories and Internalization: Typed Unbounded Quantifiers
