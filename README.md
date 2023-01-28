@@ -40,7 +40,7 @@ entire higher-order constructive logic, or intuitionistic type theories if they 
 its predicative fragment. The common core of all those systems is the intuitionistic type theory
 containing basic inductive types (at least 𝟘, 𝟙, 𝔹 = {ff, tt}, and ℕ of natural numbers), and a
 cummulative hierarchy of universes 𝒰 : 𝒰⁺ : 𝒰⁺⁺ : ··· closed under forming dependent sums Σ and
-products Π, so that every type (and every finite collection of types) liese inside some universe.
+products Π, so that every type (and every finite collection of types) lies inside some universe.
 
 The Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022] extends the core ITT
 by an impredicative universe of definitionally atomic types `Ω° : 𝒰`, and a relation of strict
@@ -75,10 +75,13 @@ conjuntions, it seems possible to translate each `s : Vₙ` into the respective 
 canonical formula `φₛ : Ω°` [Bezhanishvili2022] that will be in interpreted precisely by the set
 $s ∈ V_κ$ in the model, finalizing the circle.
 
-[Bezhanishvili2022]: “Axiomatization Techniques for Intermediate Logics”  Since
+Intriguingly, this model seems to validate that non-constructive proofs of equality `p : ‖a ~ b‖ᶜ`
+can be used for term conversions without compromizing computational properties of the system.
 
-§ Reconciling Equality and Identifiability
-------------------------------------------
+[Bezhanishvili2022]: “Axiomatization Techniques for Intermediate Logics”
+
+§ Compatibility with Univalent Equality
+---------------------------------------
 
 Unfortunatelly, $CC_{obs}$ fails to qualify as the ultimate foundational system for two reasons:
 * `Ω°` does not contain enough propositions to be a subobject classifier, that is the proposition
@@ -107,20 +110,49 @@ equality for types is known as the univalence principle.
 Discovery of this principle led to a mathematical revolution not only in the field of type
 theories, but also in higher category theory and foundations of mathematics. As a result of
 large collaborative program the so called Homotopy Type Theory was born in 2014. As a byproduct,
-one solved the longstanding problem of dealing constructively with analytic notion of real numbers.
+one solved the longstanding problem of dealing constructively with analytic notion of real numbers
+and Turing-complete partial functions.
 
-It took over a decade to develop a constructive type theory incorporating the univalence principle.
-The resulting theory HOTT (in all capitals, Higher Observational Type Theory) was presented in
-early 2022 in a series of talks by M. Shulman, and then later by A. Kaposi at TYPES 2022
-conference.
+It took over a decade to develop a constructive system incorporating the univalence principle. It
+was first presented in early 2022 in a series of talks by M. Shulman, and then later by A. Kaposi
+at the TYPES 2022 conference, and goes by the name Higher Observational Type Theory HOTT in all
+capitals.
 
-In the third draft we outline how to combine the HOTT, `Ω°`, `‖_‖ᶜ`, and unbounded quantifiers.
-The resulting system (together with propositional resizing and dependent coinductive types) deserves
-to be called Higher Observational Construction Calculus, the namesake for this project.
+HOTT solves the both problems mentioned in the first paragraph: it respects structural equivalence
+and (in presence of dependent coinductive types and propositional resizing) also has a type of all
+propositions `Ω` that contains all inductively and coinductively definable propositions and while
+being closed under all logical connectives and quantifiers. It has enough propositions for all
+purposes and is in particular a proper subobject classifier, i.e. subsets of a type `T` faithfully
+defined as predicates `p : T → Ω`).
 
+In this system the notion of equality is substituted by that of identifiability. There, `a ~ᵀ b`
+is in general not a proposition, but a type populated by identifications between `a` and `b`.
+For example, for two groups `G` and `H` the type `(G = H)` is populated by their isomorphisms,
+and there often many inequivalent identifications between the same objects. Indeed, for any type
+`T` we can define the type `T! = (T = T)` of its self-identifications, and for the finite types
+`Fin(n)` with $n$ elements, the types `( Fin(n) )!` are the permutation groups containing exactly
+$n!$ distinct elements.
 
-§ Handling Large Categories and Internalization: Typed Unbounded Quantifiers
-----------------------------------------------------------------------------
+The strict equality `X ~ᵁ Y` of $CC_{obs}$ essentially allows to treat terms of the type `X` as if
+they were also terms of the type `Y`, but precludes the types `(X × Y) × Z` and `X × (Y × Z)` to
+be equal. In HOTT we certainly have the identification `regroup : (X × Y) × Z = X × (Y × Z)`, but
+it only allows to transport terms of the first type into the second type along the specified
+identification `regroup`, resulting in cumbersome identification bookkeeping even in the cases
+where it is certainly avoidable. The necessity to track identifications even in case of equal
+type expressions `Fin(n + m) ~ Fin(m + n)` and canonical isomorphisms `(X × Y) × Z = X × (Y × Z)`
+is a deterrent annoyance.
+
+Thus it is still desirable to augment HOTT by `Ω°` as an isolated universe containing the strict
+equality relations. By removing cumulativity `Ω° ⊂ 𝒰ⁿ` one can preclude definitions that violate
+structural principle of equivalence. But since strict equality still can be used for conversions,
+most of identification bookkeeping can be avoided. In the next section we'll also outline how to
+avoid it for the case of canonical isomorphisms. In the draft on non-constructive modality we also
+show how to adapt it to univalent setting without causing any troubles, thus the resulting theory
+HOTT + `‖_‖ᶜ` is also capable of non-constructive reasoning inside a fenced fragment and supposedly
+shares the attractive metamathematical properties of $CC_{obs}$ + `‖_‖ᶜ`.
+
+§ Typed Unbounded Quantifiers: Internalization, Large Categories and Canonical Isomorphisms
+-------------------------------------------------------------------------------------------
 
 It is well known that the ZFC set theory alone poorly captures the category theory. For many
 applications in modern mathematics (algebraic geometry, algebraic number theory, homological
@@ -145,37 +177,24 @@ categories for free, with all proofs about groups and constructions on groups au
 appliable to group objects, if all proof/construction elements are expressable in finitely
 complete categories.
 
-§ Reconciling Equality and Identifiability
-------------------------------------------
-
-Unfortunatelly, the theory $CC_{obs}$ fails to faithfully capture the equality between types, as
-well as types endowed with some additional structure (e.g. groups, rings, and topological spaces).
-At the time observational equality underlying $CC_{obs}$ was introduced [Altenkirch-McBride2007],
-everyone assumed that the respective notions of equivalence for various mathematical structures
-have to be defined by hand for each one separately: isomorphisms for groups, homeomorphsisms
-for topological spaces, equivalences for categories, bisimularity for automata, etc.
-
-In 2010 V. Voevodsky made a buffling discovery: if we are to define equality between any pair of
-types `A : U` and `B : U` as effectively 1-to-1 correspondence (that is, a type `Corr : A × B → U`,
-together with a left inverse function and a right inverse function), the natural notions of
-equality (or, better to say, identifiability) for each type of mathematical objects is implied by
-their respective definitions. There is no need to define isomorphisms, homeomorphisms, equivalences,
-etc. manually, as they all arize as “generalized equality”. The aforementioned definition of
-equality for types is known as the univalence principle.
-
-Discovery of this principle led to a mathematical revolution not only in the field of type
-theories, but also in higher category theory and foundations of mathematics. As a result of
-large collaborative program the so called Homotopy Type Theory was born in 2014. As a byproduct,
-one solved the longstanding problem of dealing constructively with analytic notion of real numbers.
-
-It took over a decade to develop a constructive type theory incorporating the univalence principle.
-The resulting theory HOTT (in all capitals, Higher Observational Type Theory) was presented in
-early 2022 in a series of talks by M. Shulman, and then later by A. Kaposi at TYPES 2022
-conference.
-
-In the third draft we outline how to combine the HOTT, `Ω°`, `‖_‖ᶜ`, and unbounded quantifiers.
-The resulting system (together with propositional resizing and dependent coinductive types) deserves
-to be called Higher Observational Construction Calculus, the namesake for this project.
+Together with impredicative universe `Ω°` one can treat internal parametricity as a form of
+internalization. For example, take any polymorphic function `f : ⋃(\T : *) T → T` and
+specialize it to the predicate `Pₓ : (_~ x)`:
+```
+f[Pₓ] : ∀(\t : T) (t ~ x) → (f(t) ~ x)
+```
+thus
+```
+(\x : T ↦ f[Pₓ](x)(reflₓ)) : ∀(\x : T) f(x) ~ x
+```
+we have shown that every polymorphic function `f : ⋃(\T : *) T → T` is equal to the polymorphic
+function `id[\T : *] := (\x : T ↦ x)`. Thus the type `⋃(\T : *) T → T` is contractible and the
+function `id` can be said to be the canonical `⋃(\T : *) T → T`. Analogously we can show that
+`regroup` is the canonical isomorphism of the type `⋃(\X \Y \Z : *) (X × Y) × Z = X × (Y × Z)`.
+Now that the notion of canonical identification can be established, one can also provide the
+machinery to handle transport over canonical identifictaions without cumbersome bookkeeping,
+which used to be the primary hindrance to widespread adoption of the univalent approach for
+practical proof assistants.
 
 §§ Expressing Dependently Typed Languages
 -----------------------------------------
