@@ -1,4 +1,4 @@
-Towards Higher Observational Construction Calculus
+Towards Highwr Observational Construction Calculus
 ==================================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
@@ -43,11 +43,13 @@ cummulative hierarchy of universes 𝒰 : 𝒰⁺ : 𝒰⁺⁺ : ··· closed u
 products Π, so that every type (and every finite collection of types) lies inside some universe.
 
 The Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022] extends the core ITT
-by an impredicative universe of definitionally atomic types `Ω° : 𝒰`, and a relation of strict
-observational equality `a ~ᵀ b : Ω°` for every type `T`. For plain types `T`, `a ~ᵀ b` reflects
-observational equality between elements `\a \b : T`. For example for functions `\f \g : ℕ → ℕ`,
-observational equality is the pointwise equality `(f ~ g) := ∀(\n : ℕ) f(n) ~ g(n)`. For types
+by an impredicative universe of computationally irrelevant propositions `Ω° : 𝒰`, and a relation
+of observational substitutivity `a ~ᵀ b : Ω°` for every type `T`. For plain types `T`, `a ~ᵀ b`
+reflects indiscernibility of elements `\a \b : T` by any observations. For example, for functions
+`\f \g : ℕ → ℕ` it is the pointwise equality: `(f ~ g) := ∀(\n : ℕ) f(n) ~ g(n)`. For the types
 `\X \Y : 𝒰ⁿ` themselves `(X ~ Y)` reflects “literal” equality, e.g. `(X × Y) × Z ≁ X × (Y × Z)`.
+Otherwise one would be allowed to substitute `X × (Y × Z)` as type for `((x, y), z) : (X × Y) × Z`,
+which is syntatically incorrect.
 
 The type `Ω°` has a remarkable property that the logical power of impredicativity is locked inside.
 
@@ -75,8 +77,8 @@ conjuntions, it seems possible to translate each `s : Vₙ` into the respective 
 canonical formula `φₛ : Ω°` [Bezhanishvili2022] that will be in interpreted precisely by the set
 $s ∈ V_κ$ in the model, finalizing the circle.
 
-Intriguingly, this model seems to validate that non-constructive proofs of equality `p : ‖a ~ b‖ᶜ`
-can be used for term conversions without compromizing computational properties of the system.
+Intriguingly, this model seems to validate that non-constructive proofs `p : ‖a ~ b‖ᶜ` can be used
+for term conversions without compromizing computational properties of the system.
 
 [Bezhanishvili2022]: “Axiomatization Techniques for Intermediate Logics”
 
@@ -85,16 +87,16 @@ can be used for term conversions without compromizing computational properties o
 
 Unfortunatelly, $CC_{obs}$ fails to qualify as the ultimate foundational system for two reasons:
 * `Ω°` does not contain enough propositions to be a subobject classifier, that is the proposition
-“`y : T` belongs to the image of the function `f`” is not always representable by a definitionally
-atomic `P : T → Ω°`, and conversely not every provably functional relation `R : X → Y → Ω°`can be
-turned into a function;
+“`y : T` belongs to the image of the function `f`” is not always representable by a computationally
+irrelevant `P : T → Ω°`, and conversely not every provably functional relation `R : X → Y → Ω°`can
+be turned into a function;
 * $CC_{obs}$ fails to respect the structural principle of equivalence: no constructions or theorems
 should be able to tell apart isomorphic groups, homeomorphic spaces, equivalent categories, etc.
 In the original formulation of $CC_{obs}$, the universe `Ω°` is not an isolated universe, but a
 subuniverse of all other universes `Ω° ⊂ 𝒰ⁿ`, thus it is possible to state a theorem for, say a
 group that is “literally” equal to ℤ₂ instead of being merely isomorphic to it.
 
-At the time observational equality underlying $CC_{obs}$ was introduced [Altenkirch-McBride2007],
+At the time observational “equality” underlying $CC_{obs}$ was introduced [Altenkirch-McBride2007],
 everyone assumed that the respective notions of equivalence for various mathematical structures
 have to be defined by hand for each one separately: isomorphisms for groups, homeomorphsisms
 for topological spaces, equivalences for categories, bisimularity for automata, etc.
@@ -133,23 +135,24 @@ and there often many inequivalent identifications between the same objects. Inde
 `Fin(n)` with $n$ elements, the types `( Fin(n) )!` are the permutation groups containing exactly
 $n!$ distinct elements.
 
-The strict equality `X ~ᵁ Y` of $CC_{obs}$ essentially allows to treat terms of the type `X` as if
-they were also terms of the type `Y`, but precludes the types `(X × Y) × Z` and `X × (Y × Z)` to
-be equal. In HOTT we certainly have the identification `regroup : (X × Y) × Z = X × (Y × Z)`, but
-it only allows to transport terms of the first type into the second type along the specified
+The observational substitutivity `X ~ᵁ Y` of $CC_{obs}$ allows to treat terms of the type `X` as if
+they were also terms of the type `Y`, but precludes the types `(X × Y) × Z` and `X × (Y × Z)` to be
+equal. In HOTT we certainly have the identification `regroup : (X × Y) × Z = X × (Y × Z)`, but it
+only allows to transport terms of the first type into the second type along the specified
 identification `regroup`, resulting in cumbersome identification bookkeeping even in the cases
 where it is certainly avoidable. The necessity to track identifications even in case of equal
 type expressions `Fin(n + m) ~ Fin(m + n)` and canonical isomorphisms `(X × Y) × Z = X × (Y × Z)`
 is a deterrent annoyance.
 
-Thus it is still desirable to augment HOTT by `Ω°` as an isolated universe containing the strict
-equality relations. By removing cumulativity `Ω° ⊂ 𝒰ⁿ` one can preclude definitions that violate
-structural principle of equivalence. But since strict equality still can be used for conversions,
-most of identification bookkeeping can be avoided. In the next section we'll also outline how to
-avoid it for the case of canonical isomorphisms. In the draft on non-constructive modality we also
-show how to adapt it to univalent setting without causing any troubles, thus the resulting theory
-HOTT + `‖_‖ᶜ` is also capable of non-constructive reasoning inside a fenced fragment and supposedly
-shares the attractive metamathematical properties of $CC_{obs}$ + `‖_‖ᶜ`.
+Thus it is still desirable to augment HOTT by `Ω°` as an isolated universe harbouring the relations
+of observational substitutivity for all types. By removing cumulativity `Ω° ⊂ 𝒰ⁿ` one precludes
+definitions violating structural principle of equivalence. But since observational substitutivity
+`X ~ Y` still can be used __inside__ the proofs, most of identification bookkeeping can be avoided.
+In the next section we'll also outline how to avoid it for the case of canonical isomorphisms. The
+non-constructive modality can be also adapted to the univalent setting without causing any
+troubles. The resulting theory HOTT + `‖_‖ᶜ` is also capable of non-constructive reasoning
+inside a fenced fragment and supposedly shares the attractive metamathematical properties of
+$CC_{obs}$ + `‖_‖ᶜ`.
 
 § Typed Unbounded Quantifiers: Internalization, Large Categories and Canonical Isomorphisms
 -------------------------------------------------------------------------------------------
@@ -172,7 +175,7 @@ also interpreted internally to any category that admits all universal constructi
 their defintions.
 
 In a form of type theory with “unbounded“ universal quantifiers, internalization can be mechanized.
-With a usual the definition of a group one gets the defintion of group objects in finitely complete
+With the usual definition of a group one gets the defintion of group objects in finitely complete
 categories for free, with all proofs about groups and constructions on groups automatically
 appliable to group objects, if all proof/construction elements are expressable in finitely
 complete categories.
@@ -188,12 +191,12 @@ thus
 (\x : T ↦ f[Pₓ](x)(reflₓ)) : ∀(\x : T) f(x) ~ x
 ```
 we have shown that every polymorphic function `f : ⋃(\T : *) T → T` is equal to the polymorphic
-function `id[\T : *] := (\x : T ↦ x)`. Thus the type `⋃(\T : *) T → T` is contractible and the
-function `id` can be said to be the canonical `⋃(\T : *) T → T`. Analogously we can show that
+function `id[\T : *] := (\x : T ↦ x)`. Thus, the type `⋃(\T : *) T → T` is contractible and the
+function `id` can be said to be the canonical `⋃(\T : *) T → T`. Analogously, we can show that
 `regroup` is the canonical isomorphism of the type `⋃(\X \Y \Z : *) (X × Y) × Z = X × (Y × Z)`.
 Now that the notion of canonical identification can be established, one can also provide the
-machinery to handle transport over canonical identifictaions without cumbersome bookkeeping,
-which used to be the primary hindrance to widespread adoption of the univalent approach for
+machinery to handle transport over canonical identifications without cumbersome bookkeeping,
+which used to be the primary hindrance to widespread adoption of the univalent approach ton
 practical proof assistants.
 
 §§ Expressing Dependently Typed Languages
@@ -203,24 +206,25 @@ Higher algebra and higher category theory in particular are the branches of math
 probably benefit the most from HOTT-based proof assistants. In recent years, two higher algebraic
 notions of extreme importance have been described as domain-specific type theories, namely the
 Grothendieck-Maltsiniotis [weak ω-categories](https://arxiv.org/abs/1706.02866) [Finster-Mimram207]
-and [virtual equipments](https://arxiv.org/abs/2210.08663)[New-Licata2022]. HOTT has to be extended
+and [virtual equipments](https://arxiv.org/abs/2210.08663) [New-Licata2022]. HOTT has to be extended
 to enable handling of such domain-specific type theories as internal objects. Optimally, it should
 also be able to capture its own syntax as an inductive type internally, which is known under the
-slogan “Type Theory should eat itself”.
+slogan [“Type Theory should eat itself”](https://homotopytypetheory.org/2014/03/03/hott-should-eat-itself/).
 
 Proof assistants should also be able to handle metamathematical proofs which are carried out by
-structural indution over formulas and derivations of theories being studied. Thus, those formulas
+structural indution over formulaev and derivations of theories being studied. Thus, those formulae
 and derivations have to be expressable as inductive types.
 
 The language of proof terms in any first-order theory is already too complex to be naturally
-expressable by means of basic inductive types. The language of __formulas__ of single-sorted
+expressable by means of basic inductive types. The language of __formulae__ of single-sorted
 first-order theories can be expressed as an inductive type family `Formula(\n : Nat)`, where
-`n` is the number of free variables. However, even in this case the index begs to be not just
-a type, but an inductively generated direct category `Δ⁺`, which greatly simplifies the context
-and variable management[McBride2021]. For a multi-sorted first-order theory one needs the type
-family `Formula(\context : Δ⁺[S])`, where `S` is the type of sorts. The language of proof terms
-needs to be indexed over both contexts (number of free variables in single-sorted case) and
-formulas they prove: `ProofTerm(\ctx : Δ⁺[S], \statement : Formula(ctx))`. Now assume we want
+`n` is the number of free variables. However, it would be useful if the index is not just a type,
+but an inductively generated direct category `Δ⁺`, as it would greatly simplify the management of
+variables [McBride2021]. For a single-sorted theory, we should have `Formula(\n : Δ⁺)`, for a
+a multi-sorted first-order theory, one needs the type family `Formula(\context : Δ⁺[S])`, where
+`S` is the type of sorts. The language of proof terms needs to be indexed over both contexts (or
+just the number of free variables in single-sorted case) and formulae they prove:
+`ProofTerm(\ctx : Δ⁺[S], \statement : Formula(ctx))`. Now assume we want
 to generalize this approach to first-order theories with dependent sorts (FOLDS). To manage
 dependencies in the type of contexts, instead of `Δ⁺` one needs the type of indexes to be
 an inductively generated Reedy category tracking both thinnings and dependencies:
@@ -233,61 +237,72 @@ parameter `\Carrier : S` (see unbounded quantifers above).
 Generalized algebraic theories without equations on sorts can now be described as algebraic
 theories with dependent sorts ALDS, while bi-directionally presentable type theories are
 ALDS with infinitary sort signatures inductively definied mutually with terms of the theory.
-They include the both domain-specific type theories CaTT of weak ω-categories and VETT of virtual
+They include both domain-specific type theories CaTT of weak ω-categories and VETT of virtual
 equipments as well as a predicative variant of HOTT with a fixed collection (𝟘, 𝟙, 𝔹, and ℕ) of
-inductive types. We outline how to extend this presentation to the whole HOTT by utilizing large
+inductive types. We outline how to extend this presentation to the entire HOTT by utilizing large
 induction-recursion to delegate termination checking of internal type definitions to the external
 HOTT à la [“The Gentle Art of Levitation”](https://www.irif.fr/~dagand/papers/levitation.pdf).
 
-In [our fourth draft](./reedy-types) we introduce the notion of Reedy inductive types and inductive
+In [our fourth draft](./reedy-types), we introduce the notion of Reedy inductive types and inductive
 type families indexed over them. Reedy inductive types are the type-theoretic counterpart of Reedy
-categories. Much like in case of higher inductive types, functions defined on Reedy inductive types
-are required to specify their actions not only on the values themselves but also on the arrows
+categories. Much like in the case of higher inductive types, functions defined on Reedy inductive
+types are required to specify their actions not only on the values themselves but also on the arrows
 between them, thus being functors by definition. Inductive type families over Reedy inductive types
 turn out to be presheaves.
 
 By allowing Reedy index types and functions on them to be defined simultaneously (and mutially
-recursively) with inductive type family indexed by them we gain the ability to interpret dependent
-type theories (in bi-directional presentation) as inductive types, yielding what we'll call QRIITs,
-Quotient-Reedy-Inductive-Inductive-Types, or HRIITs if the resulting types are not required to be
-set-truncated.
+recursively) with inductive type family indexed by them, we gain the ability to interpret
+bi-directionally presented dependent type theories as inductive types, yielding what we call
+QRIITs, Quotient-Reedy-Inductive-Inductive-Types, or HRIITs if the resulting types are not required
+to be set-truncated.
 
 In HOTT, algebraic theories can be characterized as (non-dependent) elimination motives of quotient
-inductive type families indexed over a canonically inductive type. We propose adress elimination
-motives of QRIITs as extended algebraic theories XAT, and these of HRIITs as higher XATs
-respectively. In our work-in-progress we are developing natural functorial semantics for XATs in
-the doctrine of weak model categories, and speculate that higher XATs have natural semantics in
+inductive type families indexed over a canonically inductive type. We propose to address the
+elimination motives of QRIITs as extended algebraic theories XAT, and these of HRIITs as higher
+XATs respectively. We are developing natural functorial semantics for XATs in the doctrine of weak
+model categories [Henry2018], and speculate that higher XATs have natural semantics in
 the doctrine of (∞, 1)-categories. We speculate about a possible generalization to directed XATs
 with natural semantics in ω-categories.
 
 § Finitistic Core
 -----------------
 
-Now that it is possible to represent languages of proof terms directly, it makes sense to use the
-resulting theory for metamathematical applications, e.g. to prove cut-elimination for specific
-theories. Yet the theory is very far from being a weak finitistic core, one strives to use, when
-deriving metamathematical results. Fortunatelly, with the approach mentioned in the draft on
-unbounded quantifiers, proofs can be “compiled” into a weaker microcosm, given they don't use
-any primitives not available there. [The fifth draft](./finitistic-core) in series is concerned
-by defining such a microcosm, namely a finitistic core system metamathematical proofs are compiled
-into. There, we develop a constructive version of the non-Gödelian theory of hereditary finite sets
-by F. Pakhomov, the only known example of a natural axiomatic system that is able to prove its
-own consistency. We develop a logic-free (type-theory like) calculus for this theory to implement
-its faithful by construction model in terms of canonically inductive types.
+Now once it is possible to represent languages of proof terms directly, it makes sense to use the
+resulting theory for metamathematical applications, e.g. to prove cut-elimination and establish
+set-theoreitc models for specific theories. Yet our system is very far from being a weak finitistic
+core one strives to use to derive metamathematical results. Fortunatelly, unilizing the approach
+mentioned in [the draft on unbounded quantifiers](./star-is-more), proofs can be internalized in
+(“compiled into”) any category with enough additional structure to interpret all constructions used
+in those proofs. [The fifth draft](./finitistic-core) in series is concerned with establishing of a
+finitistic core system that metamathematical proofs could be compiled into, namely a constructive
+version of the non-Gödelian theory of hereditarily finite sets by F. Pakhomov, which is the only
+known example of a natural axiomatic system that is able to prove its own consistency. We develop
+a logic-free type-theory like calculus for this theory to implement its faithful by construction
+model in terms of canonically inductive types.
 
 § Conclusion and Future Work
 ----------------------------
 
-The massive amount of theoretical work outlined in this summary addresses all critical expressivity
-shortcomings of type theories known to the author. There are still at least two obvious directions
-how the resulting theory (which we would like to call Higher Observational Construction Calculus)
-can be further generalized: directed higher inductive types (which would make each type an
-ω-category rather than an ω-groupoid), and incorporation of linear dependent types which apparently
-makes it capable of expressing quantum computations and entanglement in general, dependent additive
+
+The large body of theoretical work outlined in this summary addresses all critical expressivity
+shortcomings of type theories known to the author.
+
+The resulting theory, which I named Higher Observational Construction Calculus, has two directions
+for further generalisation:
+* The first would introdce directed higher inductive types which would make each type an
+ω-category rather than an ω-groupoid.
+* The second would introduce the notion of linear dependent types which apparently makes the system
+capable of expressing quantum computations and entanglement in general, dependent additive
 conjunction being a type of quantum fields and dependent multiplicative disjunction that of quantum
-states. Both of these extensions are too early to pursue for the purpose of implementing in any
-proof assistant of practical use. On the other hand, for practical proof assistants urgent need
-a machinery for code reuse on basis of algebraic ornamentation[Dagand-McBride2013], powerful and
-unperplexed handling of implicit conversions and subset types, robust management of typeclasses,
-and a rich, extensible and versatile syntax. There is a plenty of work to do, but the goal of a
-satisfying general purpose proof assistant is within sight.
+states.
+
+Both of these extensions are too early to pursue for the purpose of implementing in any
+proof assistant of practical use. On the other hand, proof assistants urgently need
+* machinery facilitating composability and reusability of proofs and constructions on basis of
+algebraic ornamentation [Dagand-McBride2013];
+* robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions),
+* powerful and unperplexed handling of implicit conversions and subset types;
+* and a rich, extensible and versatile syntax.
+
+There is a plenty of work to do, but the goal of a satisfying general purpose proof assistant is
+within sight.
