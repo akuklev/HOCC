@@ -30,51 +30,64 @@ the expressivity problems of the foundational systems underlying modern proof as
 In the present series of drafts, I outline the solutions to the most critical expressivity
 problems.
 
-§§ Backwards Compatibility: The Non-Constructive Modality
----------------------------------------------------------
+§§ Backwards Compatibility: The Non-Constructive Modality concervative over ZFC
+-------------------------------------------------------------------------------
 
 Traditionally, set theories were used as the foundational system for mathematics. However, in the
 late 1970s, the modern approach based on higher-order categorical logic started to gain momentum.
-This approach was first plagued by issues handling equality and the universe of propositions.
+Foundational systems of this kind are known as Construction Calculi in case they incorporate the
+entire higher-order constructive logic, or intuitionistic type theories if they only incorporate
+its predicative fragment. The common core of all those systems is the intuitionistic type theory
+containing basic inductive types (at least 𝟘, 𝟙, 𝔹 = {ff, tt}, and ℕ of natural numbers), and a
+cummulative hierarchy of universes 𝒰 : 𝒰⁺ : 𝒰⁺⁺ : ··· closed under forming dependent sums Σ and
+products Π, so that every type (and every finite collection of types) liese inside some universe.
 
-A series of more than a dozen incremental improvements over the last 30 years recently culminated
-in the Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022]. There, one extends
-the core intuitionistic type theory with basic inductive types and a hierarchy of universes by an
-impredicative universe of definitionally atomic types `Ω° : 𝒰⁰` containing strict equality
-types for every type. The universe `Ω°` fails to reflect all propositions, but it captures the
-relation of “literal” equality between types and observational equality on their elements. In the
-original formulation, `Ω°` is the subuniverse of all other universes, which makes it possible to
-require “literal equality” as a condition for theorems and constructions, thus violating the
-Structure Identity Principle (SIP). By removing cummulativity `Ω° ⊂ 𝒰ⁿ` (thus making it an isolate
-universe) one restores the SIP, while retaining the comfort of utilizing literal equality and type
-casts within proofs.
+The Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022] extends the core ITT
+by an impredicative universe of definitionally atomic types `Ω° : 𝒰`, and a relation of strict
+observational equality `a ~ᵀ b : Ω°` for every type `T`. For plain types `T`, `a ~ᵀ b` reflects
+observational equality between elements `\a \b : T`. For example for functions `\f \g : ℕ → ℕ`,
+observational equality is the pointwise equality `(f ~ g) := ∀(\n : ℕ) f(n) ~ g(n)`. For types
+`\X \Y : 𝒰ⁿ` themselves `(X ~ Y)` reflects “literal” equality, e.g. `(X × Y) × Z ≁ X × (Y × Z)`.
 
 The type `Ω°` has a remarkable property that the logical power of impredicativity is locked inside.
 
-[The first draft](./choice) in the series utilizes this property to introduces the non-constructive
+[The first draft](./choice) in the series utilizes this property to introduce the non-constructive
 modality `‖_‖ᶜ`. This modality allows to employ non-constructive methods, including the Axiom of
-Choice, inside a fenced fragment of the otherwise constructive framework.
-Non-constructive modality does not compromise the decidability of typechecking and effectiveness
-of evaluation. That is, both the algorithm verifying proofs and the algorithm evaluating a closed
-expression of the type `ℕ` (or any other purely inductive type) are guaranteed to terminate in
-a finite time and produce a specific result. By adapting the results of B. Werner, M. Ratjen, and
-S. Tupailo, it can be shown that the theory $CC_{obs}$ + `‖_‖ᶜ` has a model of the standard set
-theory ZFC which is faithful for all mathematical formulae in the sense of Rathjen and Tupailo:
-a generalized mathematical formula φ can be proven in ZFC if and only if there is a proof of
-`‖φ‖ᶜ` in $CC_{obs}$. We also describe how to define `‖_‖ᶜ` in way that no incompatibility with
-univalence principle (see below) can arize.
+Choice, inside a fenced fragment of the otherwise constructive framework. Non-constructive modality
+does not compromise the decidability of typechecking and effectiveness of evaluation. That is, both
+the algorithm validating proofs and the algorithm evaluating closed expressions of a canonically
+inductive type (such as the type `ℕ` of natural numbers) are guaranteed to terminate in a finite
+time and produce a specific result.
 
-It also does not seem out of the reach to demonstrate `‖_‖ᶜ`-conservativity of $CC_{obs}$ with
-a $n$ universes over ZFC(n), the ZFC with a $n$ inaccessibles. In order to achieve that, we will be
-constructing a model of the $CC_{obs}(n)$ in ZFC(n). `Ω°` has a structure of Heyting algebra, and
-every Heyting algebra can be embedded (vie Kripke Representation) into the Heyting algebra of up-sets
-of some posets. Thus, we'll be striving to interpret $CC_{obs}(n)$ in ZFC(n) in such a way that
-the propositions `p : Ω°` will be modeled by up-sets of the inaccessible cardinal $V_κ$. On the
-type-theoretic side we'll have the type of Aczel sets `V` modelling ZFC(n - 1). Utilizing the
-impredicative universal quantifier of `Ω°` to represent both finitary and infinitary conjuntions,
-it seems possible to translate each `s : V` into the respective Zakharyaschev subframe canonical
-formula `φₛ : Ω°`, that will be in interpreted precisely by the set $s ∈ V_κ$ in the model
-(see “Axiomatization Techniques for Intermediate Logics” [Bezhanishvili2022]).
+By adapting the results of P. Aczel and B. Werner, we show that $CC_{obs}$ + `‖_‖ᶜ` with at least
+$n + 1$ universes has a model `Vₙ` of the standard set theory ZFC($n$) with at least $n$
+Grothendieck universes. We seek to prove that this model is faithful in the sense that a formula φ
+can be proven in ZFC(n) if and only if there is a $CC_{obs}$ proof of `‖φ‖ᶜ` where all quantifiers
+are interpreted as bounded in `Vₙ`.
+
+The universe `Ω°` has the structure of Heyting algebra, and every Heyting algebra can be embedded
+(vie Kripke Representation) into the Heyting algebra of up-sets of some poset. It seems possible
+to interpret $CC_{obs}($n + 1$)$ in ZFC($n + 1$) in such a way that the propositions `p : Ω°` will
+be modeled by up-sets of the inaccessible cardinal $V_κ$ taken as a poset of sets ordered by
+inclusion. On the type-theoretic side we'll have the type of Aczel sets `Vₙ` modelling ZFC($n$).
+Utilizing the impredicative universal quantifier of `Ω°` to represent both finitary and infinitary
+conjuntions, it seems possible to translate each `s : Vₙ` into the respective Zakharyaschev subframe
+canonical formula `φₛ : Ω°` [Bezhanishvili2022] that will be in interpreted precisely by the set
+$s ∈ V_κ$ in the model, finalizing the circle.
+
+[Bezhanishvili2022]: “Axiomatization Techniques for Intermediate Logics”  Since
+
+
+$CC_{obs}$ fails to qualify as the ultimate foundational system for two reasons:
+* `Ω°` does not contain enough propositions to be a subobject classifier, that is the proposition
+“`y : T` belongs to the image of the function `f`” is not always representable by a definitionally
+atomic `P : T → Ω°`, and conversely not every provably functional relation `R : X → Y → Ω°`can be
+turned into a function;
+* the “literal” equality `X ~ᵁ Y` is too restrictive for types, and thus for everything lying
+beyond the first universe 𝒰. In the original formulation, `Ω°` is not an isolated universe, but a
+subuniverse of all other universes `Ω° ⊂ 𝒰ⁿ`, which makes it possible to require “literal equality”
+as a condition for theorems and constructions violating the Structure Identity Principle (SIP).
+
 
 § Handling Large Categories and Internalization: Typed Unbounded Quantifiers
 ----------------------------------------------------------------------------
@@ -131,8 +144,8 @@ early 2022 in a series of talks by M. Shulman, and then later by A. Kaposi at TY
 conference.
 
 In the third draft we outline how to combine the HOTT, `Ω°`, `‖_‖ᶜ`, and unbounded quantifiers.
-The resulting system (together with propositional resizing) deserves to be called Higher Observational
-Construction Calculus and gives the name to this project.
+The resulting system (together with propositional resizing and dependent coinductive types) deserves
+to be called Higher Observational Construction Calculus, the namesake for this project.
 
 §§ Expressing Dependently Typed Languages
 -----------------------------------------
@@ -168,9 +181,9 @@ By allowing Reedy index types and functions on them to be defined simultaneously
 recursively) with inductive type family indexed by them one gains the ability to interpret dependent
 type theories (in bi-directional presentation) as inductive types. This can be further generalized
 two-fold:
-* * Extension by large induction-recursion to allow the theory to represent its own syntax by
+* Extension by large induction-recursion to allow the theory to represent its own syntax by
 utilizing “external” termination checking à la “The Gentle Art of Levitation”.
-* * Extension by path constructors for the type family (but not for the index) makes recursion
+* Extension by path constructors for the type family (but not for the index) makes recursion
 motives for those types form an extension of GAT⁻ (Generalized Algebraic Theories without
 equations on sorts) we'd like to call XATs (Extended Algebraic Theories) or higher XATs depending
 on their set-truncatedness. We conjecture that XATs have natural functorial semantics in the

@@ -215,3 +215,19 @@ as witnesses for associativity of composition and cancellability of units.
 
 In its definition it only uses Σ types, and identification types, thus it can be actually
 interpreted not only in any universe but in any (∞,1)-category with enough pullbacks.
+
+Show that for `a : ⋃(\T : *) T → T` holds `a = id`. Proof:
+```
+[\T : *](\c : T)
+let P : (T → Ω°) := (\x : T) ↦ (x ~ c)
+then a[P] : P[T](x) → P[T](a(x))
+: ∀(\x : T) (x ~ c) → (a(x) ~ c)
+
+that is, the term pr1 := ([\T : *] (\c : T) ↦ a[(\x : T) ↦ (x ~ c))] has type
+⋃(\T : *) ∀(\c : T) ∀(\x : T) (x ~ c) → (a(x) ~ c)
+
+[\T : *] (\x : T) pr1[T](x)(x)(refl(x)) : ⋃(\T : *) ∀(\x : T) a(x) = x
+
+id[T] ~ a[T] = ∀(\x : T) a(x) = id(x)
+= ∀(\x : T) a(x) = x
+```
