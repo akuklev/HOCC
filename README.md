@@ -297,7 +297,8 @@ conjunction being a type of quantum fields and dependent multiplicative disjunct
 states.
 
 Both of these extensions are too early to pursue for the purpose of implementing in any
-proof assistant of practical use. On the other hand, proof assistants urgently need
+proof assistant of practical use. On the other hand, proof assistants urgently need solutions to
+the more practical issues, including
 * machinery facilitating composability and reusability of proofs and constructions on basis of
 algebraic ornamentation [Dagand-McBride2013];
 * robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions),
