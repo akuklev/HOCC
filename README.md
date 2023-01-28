@@ -96,6 +96,28 @@ everyone assumed that the respective notions of equivalence for various mathemat
 have to be defined by hand for each one separately: isomorphisms for groups, homeomorphsisms
 for topological spaces, equivalences for categories, bisimularity for automata, etc.
 
+In 2010 V. Voevodsky made a buffling discovery: if we are to define equality between any pair of
+types `A : U` and `B : U` as effectively 1-to-1 correspondence (that is, a type `Corr : A × B → U`,
+together with a left inverse function and a right inverse function), the natural notions of
+equality (or, better to say, identifiability) for each type of mathematical objects is implied by
+their respective definitions. There is no need to define isomorphisms, homeomorphisms, equivalences,
+etc. manually, as they all arize as “generalized equality”. The aforementioned definition of
+equality for types is known as the univalence principle.
+
+Discovery of this principle led to a mathematical revolution not only in the field of type
+theories, but also in higher category theory and foundations of mathematics. As a result of
+large collaborative program the so called Homotopy Type Theory was born in 2014. As a byproduct,
+one solved the longstanding problem of dealing constructively with analytic notion of real numbers.
+
+It took over a decade to develop a constructive type theory incorporating the univalence principle.
+The resulting theory HOTT (in all capitals, Higher Observational Type Theory) was presented in
+early 2022 in a series of talks by M. Shulman, and then later by A. Kaposi at TYPES 2022
+conference.
+
+In the third draft we outline how to combine the HOTT, `Ω°`, `‖_‖ᶜ`, and unbounded quantifiers.
+The resulting system (together with propositional resizing and dependent coinductive types) deserves
+to be called Higher Observational Construction Calculus, the namesake for this project.
+
 
 § Handling Large Categories and Internalization: Typed Unbounded Quantifiers
 ----------------------------------------------------------------------------
@@ -133,12 +155,12 @@ everyone assumed that the respective notions of equivalence for various mathemat
 have to be defined by hand for each one separately: isomorphisms for groups, homeomorphsisms
 for topological spaces, equivalences for categories, bisimularity for automata, etc.
 
-In 2010 V. Voevodsky made a buffling discovery. If we are to define equality between any pair of
+In 2010 V. Voevodsky made a buffling discovery: if we are to define equality between any pair of
 types `A : U` and `B : U` as effectively 1-to-1 correspondence (that is, a type `Corr : A × B → U`,
 together with a left inverse function and a right inverse function), the natural notions of
 equality (or, better to say, identifiability) for each type of mathematical objects is implied by
-their respective definitions. There is no need to define and manually enforce isomorphisms,
-homeomorphisms, equivalence, etc as “generalized equality”. The aforementioned definition of
+their respective definitions. There is no need to define isomorphisms, homeomorphisms, equivalences,
+etc. manually, as they all arize as “generalized equality”. The aforementioned definition of
 equality for types is known as the univalence principle.
 
 Discovery of this principle led to a mathematical revolution not only in the field of type
