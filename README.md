@@ -308,7 +308,7 @@ more practical issues, including
 algebraic ornamentation [Dagand-McBride2013];
 * robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions),
 * powerful and unperplexed handling of implicit conversions and subset types;
-* and a rich, extensible and versatile syntax.
+* and a rich, extensible and versatile syntax ([view pdf](https://github.com/akuklev/akuklev/blob/master/Sketch_for_a_Common_Syntax%20(1).pdf)).
 
 There is a plenty of work to do, but the goal of a satisfying general purpose proof assistant is
 within sight.
