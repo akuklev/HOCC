@@ -291,8 +291,7 @@ The resulting theory, which I named Higher Observational Construction Calculus, 
 for further generalisation:
 * The first would introdce [directed higher inductive types](https://hott-uf.github.io/2022/HoTTUF_2022_paper_11.pdf)
 which would make each type an ω-category rather than an ∞-groupoid and each universe an ω-cosmos
-rather than an ∞-topos, presumably an ω-variant of virtual equipments with some yet unknown closure
-properties and enough classifiers of yet unknown sort.
+rather than an ∞-topos, presumably an ω-variant of virtual equipments with extra structure.
 * The second would introduce the notion of linear dependent types which apparently makes the system
 capable of expressing [concurrency, quantum computations and entanglement](./lin-types).
 * The third is to develop a resource-aware (hopefully non-Gödelian) variant of the theory, where strictly
