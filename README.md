@@ -243,7 +243,7 @@ inductive types. We outline how to extend this presentation to the entire HOTT b
 induction-recursion to delegate termination checking of internal type definitions to the external
 HOTT à la [“The Gentle Art of Levitation”](https://www.irif.fr/~dagand/papers/levitation.pdf).
 
-In [our fourth draft](./reedy-types), we introduce the notion of Reedy inductive types and inductive
+In [our third draft](./reedy-types), we introduce the notion of Reedy inductive types and inductive
 type families indexed over them. Reedy inductive types are the type-theoretic counterpart of Reedy
 categories. Much like in the case of higher inductive types, functions defined on Reedy inductive
 types are required to specify their actions not only on the values themselves but also on the arrows
@@ -273,7 +273,7 @@ set-theoreitc models for specific theories. Yet our system is very far from bein
 core one strives to use to derive metamathematical results. Fortunatelly, unilizing the approach
 mentioned in [the draft on unbounded quantifiers](./star-is-more), proofs can be internalized in
 (“compiled into”) any category with enough additional structure to interpret all constructions used
-in those proofs. [The fifth draft](./finitistic-core) in series is concerned with establishing of a
+in those proofs. [The fourth draft](./finitistic-core) in series is concerned with establishing of a
 finitistic core system that metamathematical proofs could be compiled into, namely a constructive
 version of the non-Gödelian theory of hereditarily finite sets by F. Pakhomov, which is the only
 known example of a natural axiomatic system that is able to prove its own consistency. We develop
