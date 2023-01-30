@@ -177,8 +177,8 @@ can lead to the actor `X` being stuck. The handler of `X ⅋ Y` is knows how to 
 independently, so it will feed a value of the type `A` into the actor `Y`, so that `X` can go on,
 and eventually its result will be also processed by the handler of `X ⅋ Y`.
 
-§ Element Classifier 𝔽₁
------------------------
+§ Element Classifier 𝔽₁ and Superposition Quantifier ⅋
+------------------------------------------------------
 
 Subsets of a type `T` are classified by functions `p : T → Ω`, where `Ω` is the type of all
 propositions, also known as subobject classifier. In our generalized setting we can have the
@@ -191,66 +191,33 @@ will exactly correspond to elements of `T`. As `Ω` naturally has a structure of
 `𝔽₁` will naturally have a structure similar to a field, albeit with one element, see
 [https://en.wikipedia.org/wiki/Field_with_one_element].
 
+That means, for a function `v : T ⊸ 𝔽₁` and a family `f : T → X` there will be a pairing
+`v ⇃ f : X`, and for each element `t : T` there will be a function `ξ(t) : T ⊸ 𝔽₁`, such
+that `ξ(t) ⇃ f = f(t)`.
 
+Imagine that `𝔽₁` can act on processes by either terminating them (case of 0) or letting them run
+(case of 1). That is, for each `q : 𝔽₁` and `p : P` we have `qp : qP` where the action of `q` on
+types is given by `(0₁)P = 𝟙`, and otherwise `qP = P`.
+
+Now if we have a process factory `f : Π(\t : T) Q(t)` and a function `v : T ⊸ 𝔽₁`, we pair them
+to obtain `p := ⸮(\t : T ↦ (v t)(f t)) : ⅋(\t : T) (v t)Q(t)`.
+
+We can define the following operations on the type `𝔽₁`:
 ```
----------
- 𝔽₁ : 𝓛
-
-     Γ ⊢ Δ
--------------- We can always create an instance of 𝔽₁
- Γ ⊢ Δ, 0₁ : 𝔽₁
-
-Thus we have
-0₁ : 𝟙 ⊸ 𝔽₁
-
- Γ ⊢ Δ, a : 𝔽₁, b : 𝔽₁
----------------------- Any two instances can be joined additively
-  Γ ⊢ Δ, a + b : 𝔽₁
-
-Thus we have
+0₁ : ?𝔽₁
 (+) : 𝔽₁ ⅋ 𝔽₁ ⊸ 𝔽₁
-
- Γ ⊢ Δ, a : 𝔽₁      Ξ ⊢ Φ, b : 𝔽₁
---------------------------------- Any two instances can be joined multiplicatively
-    Γ, Ξ ⊢ Δ, Φ, a · b : 𝔽₁
-
-Thus we have
 (·) : 𝔽₁ ⊗ 𝔽₁ ⊸ 𝔽₁
-
-... axioms stating that both multiplication and summation are
-... associative and commutative, 0 is neutral for summation,
-... absorbing for multiplication
-
-Note that since there is no rule allowing to introduce 1 : 𝔽₁, we also cannot form `2 := 1 + 1`.
-We cannot form polynomials other then sums of distinct variables: To form `2a` we would need to
-be able to write `a + a`, yet `a` is a linear variable and cannot be used twice. For the same
-reason we cannot define `a^2 := a · a`.
-
-For the same reason it is quite tricky to formulate distributivity. Let us allow
-`x : 𝔽₁` act on other processes by terminating them if `x = 0` and by identity
-otherwise.
-
- Γ ⊢ Δ, a : 𝔽₁      Ξ ⊢ Φ, p : P
---------------------------------- Action on arbitrary terms
- Γ, a : 𝔽₁ Ξ ⊢ Δ, Φ, aP : ??
-
-
-a : 𝔽₁ ⊢ ap : ??
----------------- Single a : 𝔽₁ must be 1
-    p : P
-
-a : 𝔽₁, b : 𝔽₁ ⊢ ap : ??, bp : ??
-----------------------------------
-         p + b : P
-
-
-Since it is guaranteed that there can be no two nonzero instances of 𝔽₁, it is “safe”
-to create two copies of an arbitrary term:
-
-Γ ⊢ Δ, p : P
-----------------------------------
-Γ, a : 𝔽₁, b : 𝔽₁ ⊢ Δ, ap + bp : P
 ```
+
+One can show these operations to fulfill axioms of a commutative semiring.
+
+Note that since will be is no rule allowing to introduce `1₁ : 𝔽₁`, so it is impossible to form
+`2 := 1 + 1`. The only definable polynomials are sums of distinct variables: To form `2a` one would
+need to be able to write `a + a`, yet `a` is a single use variable and cannot be used twice. For
+the same reason it is impossible to form `a^2 := a · a`. The element classifier `𝔽₁` is a field in
+the sense that every linear equation has a solution. Indeed, it is even an algebraically closed
+field in the sence that every non-constant polynomial has a solution.
+
 
 § Quantum Quantifiers
 ---------------------
