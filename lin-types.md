@@ -155,8 +155,13 @@ a value type.
 * `∀(\t : T) Q(t)` denotes a family of objects (each one has to be consumed exactly once);
 * `Π(\t : T) Q(t)` denotes a factory that yields one object of the type `Q(t)` when given a `t`.
 
-The operators `⊕`, `⊗`, `&` and `⊸` satisfy all rules of the multiplicatively-additive linear
-logic, but there is some assymetry: we have only three quantifiers instead of four. Normally,
+The operators `⊕`, `⊗`, `&` and `⊸` precisely reproduce the rules of Intuitionistic Linear Logic.
+See “Linear Logic Propositions as Session Types” by L. Caires, F. Pfenning, and B. Toninho to see
+to complete calculus including constructors how to define particular processes and interactions.
+There you will find a calculus where one can spawn new processes/actors, pass messages and
+continuations, etc.
+
+Yet, there is some assymetry: we have only three quantifiers instead of four. Normally,
 definitions of linear logic use the conjunctive sum `⅋` instead of `⊸`. Two operators are
 interdefinable by `X ⊸ Y = X⟂ ⅋ Y`, `X⟂ ⅋ Y = X⟂ ⊸ Y = Y⟂ ⊸ X`, and linear implication is far
 easier to understand. Yet only the conjunctive sum can be generalized to a quantifier by
@@ -181,6 +186,7 @@ are currently underdeveloped.
 In type theory there is still one typeformer we have not mentioned yet: the equality. As with
 all other typeformers, this one will split into two duals: independence and eventual consistency.
 
+<!--
 § Pool of Actors: Coroutines and Continuations
 ----------------------------------------------
 
@@ -283,3 +289,5 @@ To make it work, it is sufficient to have the following in the pool:
 
 §§ Coroutines: The ! and ? Modalities
 -------------------------------------
+
+-->
