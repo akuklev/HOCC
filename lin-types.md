@@ -122,9 +122,7 @@ to the other objects. Yet, objects may be non-determinisitc (e.g. a random numbe
 and might be in a state of quantum entanglement with other objects (e.g. two single-use random
 bit generators might be guaranteed to produce opposite results without without communicating
 and without being determinisitc). Deterministic objects are the ones that can be programmed
-in plain HOTT. They are nothing but deterministic state machines inside. Given a value `x : X`
-we can upcast it into an object returning such a value `⁅x⁆ : 𝟙 ⊸ X`. For any session type `I`
-and any instance of its coinductive counterpart, we have an analogous upcast operation.
+in plain HOCC. They are nothing but deterministic state machines inside.
 
 (Some coinductive types may require independence and eventual consistency conditions that are
 algebraically admissible but not satifiable by any determinisitc object. This is precisely where
@@ -177,6 +175,9 @@ can lead to the actor `X` being stuck. The handler of `X ⅋ Y` is knows how to 
 independently, so it will feed a value of the type `A` into the actor `Y`, so that `X` can go on,
 and eventually its result will be also processed by the handler of `X ⅋ Y`.
 
+In type theory there is still one typeformer we have not mentioned so far: the equality. As with
+all other typeformers, this one will split into two duals: independence and eventual consistency.
+
 § Element Classifier 𝔽₁ and Superposition Quantifier ⅋
 ------------------------------------------------------
 
@@ -217,6 +218,18 @@ need to be able to write `a + a`, yet `a` is a single use variable and cannot be
 the same reason it is impossible to form `a^2 := a · a`. The element classifier `𝔽₁` is a field in
 the sense that every linear equation has a solution. Indeed, it is even an algebraically closed
 field in the sence that every non-constant polynomial has a solution.
+
+In HOCC, non-dependent elimination motives of quotient inductive types precisely correspond to
+single-sorted algebraic theories, with quotient inductive type itself representing the initial
+“syntactic” model of the theory. $S$-sorted algebraic theories can be described by quotient
+inductive type families indexed over $S$. Recently we proposed type theories by Reedy-inductive
+types. By making $S$ a Reedy-inductive type we can accomodate algebraic theories with dependent
+and possibly infinitary dependent signatures.
+
+We conjecture that the linear counterpart of inductive types would correspond to
+[Partial Algebraic Theories](https://arxiv.org/pdf/2011.06644.pdf), that it is possible to develop
+their semantics over an arbitrary generalized field, and specializing to 𝔽₁ would recover the
+usual algebraic theories (Hopf algebra over 𝔽₁ is a group, etc.).
 
 
 § Quantum Quantifiers
@@ -301,9 +314,6 @@ dually, also`Π`) quantifiers, greatly improveing our understanding of the quant
 
 See. http://boole.stanford.edu/pub/ql.pdf, https://www.cl.cam.ac.uk/~mpf23/papers/Types/diff.pdf,
 https://ncatlab.org/nlab/files/BPSLinear.pdf, https://math.ucr.edu/home/baez/bsz_new.pdf
-
-In type theory there is still one typeformer we have not mentioned yet: the equality. As with
-all other typeformers, this one will split into two duals: independence and eventual consistency.
 
 <!--
 § Pool of Actors: Coroutines and Continuations
