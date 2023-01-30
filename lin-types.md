@@ -127,9 +127,9 @@ we can upcast it into an object returning such a value `⁅x⁆ : 𝟙 ⊸ X`. F
 and any instance of its coinductive counterpart, we have an analogous upcast operation.
 
 (Some coinductive types may require independence and eventual consistency conditions that are
-algebraically admissible but not satifiable by any determinisitc object. This is precisely the
-case when quantum entanglement is described. Entangled objects can provide eventual consistency
-without any communication.)
+algebraically admissible but not satifiable by any determinisitc object. This is precisely where
+the phenomenon of quantum entanglement manifests itself. Entangled objects can satisfy eventual
+consistency without communicating.)
 
 For objects, ownership is a great concept. Being self-enclosed, they can be seen as having
 a single owner who completely controlls them. It does not make much sense for actors though.
@@ -163,9 +163,9 @@ continuations, etc.
 
 Yet, there is some assymetry: we have only three quantifiers instead of four. Normally,
 definitions of linear logic use the conjunctive sum `⅋` instead of `⊸`. Two operators are
-interdefinable by `X ⊸ Y = X⟂ ⅋ Y`, `X⟂ ⅋ Y = X⟂ ⊸ Y = Y⟂ ⊸ X`, and linear implication is far
-easier to understand. Yet only the conjunctive sum can be generalized to a quantifier by
-virtue of being commutative and associative.
+interdefinable in presence of linear negation (`X ⊸ Y = X⟂ ⅋ Y`, `X⟂ ⅋ Y = X⟂ ⊸ Y = Y⟂ ⊸ X`),
+and linear implication is far easier to understand. Yet only the conjunctive sum can be generalized
+to a quantifier by virtue of being commutative and associative.
 
 An object of the type `w : ⅋(\t : T) Q(t)` requires the program to process all branches (as many as
 there are values `t` in `T`), with each branch consuming exactly one object `wₜ : Q(q)`. The type
@@ -176,12 +176,89 @@ can lead to the actor `X` being stuck. The handler of `X ⅋ Y` is knows how to 
 independently, so it will feed a value of the type `A` into the actor `Y`, so that `X` can go on,
 and eventually its result will be also processed by the handler of `X ⅋ Y`.
 
-In the variant of our theory supporting quantum computations, the quantifiers ∀ and ⅋ obtain a very
-special meaning. Let `𝔔` denote the interface of (possibly entangled) qbits. Then by
-`∀(_ : Fin(n)) 𝔔` we can describe a quantum register of $n$ qubits, and by `⅋(_ : S) 𝔔` a spin-½
-particle on the space `S`. Quantifiers over linear types would correspond to definitions of a
-particle over a quantum spacetime and that of a field over a quantum spacetime, both of which
-are currently underdeveloped.
+
+§ Quantum Quantifiers
+---------------------
+
+The type `⅋(\t : T) Q(t)` represents a superposition of simultaneous processes? Can we use it to
+represent superpositions of quantum states? If we somehow could, there will be a map `|f>` turning
+functions `f : T → ℂ` into states `|f> : ⅋(_ : T) 𝔽₁`, and those states can be used to ‘probe’
+objects of `ψ : ⅋(_ : T) 𝔽₁`. By probing, we force `ψ` into a new state (either `|f>` or `|-f>`)
+and get a bit value, if it was plus or minus `f`:
+```
+         ψ : ⅋(_ : T) 𝔽₁    f : T → ℂ
+-------------------------------------------------
+ ψ.measure(f) : Σ(\t : 𝔹) (ff ↦ {\ψ | ψ = |f>},
+                           tt ↦ {\ψ | ψ = |-f>})
+```
+
+If `ψ` was already equal to `|f>`, we'll always land in tht `tt` branch:
+```
+ ψ : ⅋(\t : T) Q(t)     p : ψ = |f>
+------------------------------------
+    ψ.measure(f) = (tt, |f>)
+```
+
+We have to take into account that quantum objects have non-trivial automorphisms, at least the
+“invisible” complex phase.
+
+An object `q : ℭ` is said to be a linear U(1)-torsor, if it's automorphisms space `(q)! = U(1)` and
+it can be acted on by elements of `U(1) = {\c : ℂ | |c| = 1 }` associatively:
+```
+ q : ℭ    c : U(1)
+-------------------
+     cq : ℭ
+
+ q : ℭ    b c : U(1)
+---------------------
+   b(cq) = (bc)q
+```
+
+Quantum objects belonging to the same system are equivariant with respect to simultaneous phase
+rotations. It means that all quantum objects `a, b,.., c` belonging to the system share the _same_
+object of automorphisms: `a! = b! = ··· = c!`, and it has interface `a! : ℭ`.
+
+Quantum objects are precisely the objects with automorphism type being a linear type as well.
+We'll be denoting interfaces of objects with automorphism object `c` by `ᶜI`.
+
+Only for objects sharing the same object of automorphisms we can define disjunctive sums and
+conjunctive products:
+```
+ c : ℭ    A B : 𝓛ᶜ
+--------------------
+      A ⊕ᶜ B
+
+ c : ℭ    A B : 𝓛ᶜ
+--------------------
+     A ⊗ᶜ B
+```
+
+We also have equivariant quantifiers:
+```
+ T : 𝒰    c : ℭ    t : T ⊢  Q(t) : 𝓛ᶜ
+---------------------------------------
+          Σᶜ(\t : T) Q(t)
+
+ T : 𝒰    c : ℭ    t : T ⊢  Q(t) : 𝓛ᶜ
+---------------------------------------
+          ∀ᶜ(\t : T) Q(t)
+```
+
+Let `𝔹ᶜ` denote the interface of qbits. Then `∀ᶜ(_ : Fin(n)) 𝔹ᶜ` describes a a quantum register
+of $n$ qubits. For cohesive spaces `∀ᶜ`-quantifiers describe quantum fields over a given space.
+
+Now the automorphism objects are not limited to ℭ. For spin-½ particles it should already a torsor
+`ℭ²` of `SU(2)`, but in general it can be at least any complex Lie group. In case of gauge quantum
+field theories, the automorphism object it in its turn a quantum field of gauge bosons.
+
+The interface of qubits can be defined by `𝔹ᶜ := ⅋ᶜ(_ : 𝔹) 𝔽₁`, where 𝔽₁ is the mystical field with
+one element. If `c : ℭ²`, `𝔼ᶜ := ⅋ᶜ(_ : ℝ³) 𝔽₁` is the state space of a spin-½ particle on a 3d
+space. It might turn out to be possible to define states of particles (and ultimately also fields)
+on noncommutative spacetimes, which would allow to use a linear type as the bound in `⅋` (and,
+dually, also`Π`) quantifiers, greatly improveing our understanding of the quantum field theory.
+
+See. http://boole.stanford.edu/pub/ql.pdf, https://www.cl.cam.ac.uk/~mpf23/papers/Types/diff.pdf,
+https://ncatlab.org/nlab/files/BPSLinear.pdf, https://math.ucr.edu/home/baez/bsz_new.pdf
 
 In type theory there is still one typeformer we have not mentioned yet: the equality. As with
 all other typeformers, this one will split into two duals: independence and eventual consistency.
