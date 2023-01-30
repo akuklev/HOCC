@@ -147,7 +147,7 @@ is a deterrent annoyance.
 Thus it is still desirable to augment HOTT by `Ω°` as an isolated universe harbouring the relations
 of observational substitutivity for all types. By removing cumulativity `Ω° ⊂ 𝒰ⁿ` one precludes
 definitions violating structural principle of equivalence. But since observational substitutivity
-`X ~ Y` still can be used __inside__ the proofs, most of identification bookkeeping can be avoided.
+`X ~ Y` still can be used _inside_ the proofs, most of identification bookkeeping can be avoided.
 In the next section we'll also outline how to avoid it for the case of canonical isomorphisms. The
 non-constructive modality can be also adapted to the univalent setting without causing any
 troubles. The resulting theory HOTT + `‖_‖ᶜ` is also capable of non-constructive reasoning
@@ -216,7 +216,7 @@ structural indution over formulaev and derivations of theories being studied. Th
 and derivations have to be expressable as inductive types.
 
 The language of proof terms in any first-order theory is already too complex to be naturally
-expressable by means of basic inductive types. The language of __formulae__ of single-sorted
+expressable by means of basic inductive types. The language of _formulae_ of single-sorted
 first-order theories can be expressed as an inductive type family `Formula(\n : Nat)`, where
 `n` is the number of free variables. However, it would be useful if the index is not just a type,
 but an inductively generated direct category `Δ⁺`, as it would greatly simplify the management of
@@ -285,18 +285,15 @@ model in terms of canonically inductive types.
 
 
 The large body of theoretical work outlined in this summary addresses all critical expressivity
-shortcomings of type theories known to the author.
-
-The resulting theory, which I named Higher Observational Construction Calculus, has three directions
-for further generalisation:
+shortcomings of type theories known to the author. Higher Observational Construction Calculus
+presented in this summary three anticipated directions for further generalisation:
 * [Directed higher inductive types](https://hott-uf.github.io/2022/HoTTUF_2022_paper_11.pdf)
 which would make each type an ω-category rather than an ∞-groupoid and each universe an ω-cosmos
 rather than an ∞-topos, presumably an ω-variant of virtual equipments with extra structure.
 * Linear dependent types making the system
 capable of expressing [concurrency, quantum computations and entanglement](./lin-types).
-* Resource-aware (hopefully non-Gödelian) variant of the theory, where strictly
-increasing functions can be only shown to exist contitionally on availability of enough
-“computational budget”.
+* Resource-aware (hopefully non-Gödelian) variant of the theory, where strictly increasing
+functions can be only shown to exist conditionally on availability of enough “computational budget”.
 
 While importaint in their own right, these extensions seem irrelevant to the purpose of the project
 in the next decade. On the other hand, practical convenience of proof assistants critically depents
