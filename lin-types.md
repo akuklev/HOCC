@@ -44,16 +44,16 @@ Certainly, response types can be dependent on request types:
 ```
 
 For request endpoints that are not mandatory to use, one can use a special request to close them.
-You just wrap `ReqT` into a type with additional request `Close`, and wrap the type `RespT`
-into a type with additional responce `Closed` which arizes iff the request was to close the
+You just wrap `ReqT` into a type with additional request `Terminate`, and wrap the type `RespT`
+into a type with additional responce `Terminated` which arizes iff the request was to close the
 endpoint:
 ```
 #Inductive OptionalRec[ReqT : *] : *
   Request(\r : T)
-  Close
+  Terminate
 
 #Inductive Resp[RespT : ReqT → *] : OptionalRec[ReqT] → *
-  Close ↦ Closed
+  Terminate ↦ Terminated
   Request(\req) ↦ Response(\resp : ReqT(req))
 
 now instead of `f : (\r : ReqT) ⊸ RespT(r)` you can
@@ -75,8 +75,8 @@ interface. A variable of a type `x : !I` is not single-use any more, it is allow
 any number of times. For value types `A` and `B`, the types `A → B` and `!A ⊸ B` are equivalent.
 
 By returning a single endpoint as part of the responce, endpoints can represent communication
-streams. If an endpoint has a type `I` with property `I = (\r : ReqT) ⊸ I × RespT(r)`, an endpoint `s : I`
-can be used as follows:
+streams. If an endpoint has a type `I` with property `I = (\r : ReqT) ⊸ I × RespT(r)`, an endpoint
+`s : I` can be used as follows:
 ```
 #let (s₂, response₁) := s(request₁)
 #let (s₃, response₂) := s₂(request₂)
@@ -124,7 +124,7 @@ bit generators might be guaranteed to produce opposite results without without c
 and without being determinisitc). Deterministic objects are the ones that can be programmed
 in plain HOTT. They are nothing but deterministic state machines inside. Given a value `x : X`
 we can upcast it into an object returning such a value `⁅x⁆ : 𝟙 ⊸ X`. For any session type `I`
-and any instance of its coinductive shadow, we have an analogous upcast operation.
+and any instance of its coinductive counterpart, we have an analogous upcast operation.
 
 (Some coinductive types may require independence and eventual consistency conditions that are
 algebraically admissible but not satifiable by any determinisitc object. This is precisely the
