@@ -289,20 +289,20 @@ shortcomings of type theories known to the author.
 
 The resulting theory, which I named Higher Observational Construction Calculus, has three directions
 for further generalisation:
-* The first would introdce [directed higher inductive types](https://hott-uf.github.io/2022/HoTTUF_2022_paper_11.pdf)
+* [Directed higher inductive types](https://hott-uf.github.io/2022/HoTTUF_2022_paper_11.pdf)
 which would make each type an ω-category rather than an ∞-groupoid and each universe an ω-cosmos
 rather than an ∞-topos, presumably an ω-variant of virtual equipments with extra structure.
-* The second would introduce the notion of linear dependent types which apparently makes the system
+* Linear dependent types making the system
 capable of expressing [concurrency, quantum computations and entanglement](./lin-types).
-* The third is to develop a resource-aware (hopefully non-Gödelian) variant of the theory, where strictly
+* Resource-aware (hopefully non-Gödelian) variant of the theory, where strictly
 increasing functions can be only shown to exist contitionally on availability of enough
 “computational budget”.
 
-All of these extensions are too early to pursue for the purpose of implementing in any proof
-assistant of practical use. On the other hand, practical convenience of proof assistants depents on
-several other refinements of the foundational system, including inbuilt support for algebraic
-ornamentation [Dagand-McBride2013] which facilitates composability and reusability of proofs
-and constructions, and a tractable approach to implicit conversions and subset types.
+While interesting on their own, these extensions seem irrelevant to the purpose of the project in
+the next decade at least. On the other hand, practical convenience of proof assistants critically
+depents on several other refinements of the foundational system, including support for algebraic
+ornamentation [Dagand-McBride2013] which facilitates composability and reusability of proofs and
+constructions, and a tractable approach to implicit conversions and subset types.
 
 There are also more practical issues, the author and his colleagues were also working on, including
 robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions in our
