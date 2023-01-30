@@ -30,7 +30,7 @@ the expressivity problems of the foundational systems underlying modern proof as
 In the present series of drafts, I outline the solutions to the most critical expressivity
 problems.
 
-§§ Backwards Compatibility: The Non-Constructive Modality concervative over ZFC
+§§ Backwards Compatibility: The Non-Constructive Modality conservative over ZFC
 -------------------------------------------------------------------------------
 
 Traditionally, set theories were used as the foundational system for mathematics. However, in the
@@ -287,28 +287,51 @@ model in terms of canonically inductive types.
 The large body of theoretical work outlined in this summary addresses all critical expressivity
 shortcomings of type theories known to the author.
 
-The resulting theory, which I named Higher Observational Construction Calculus, has two directions
+The resulting theory, which I named Higher Observational Construction Calculus, has three directions
 for further generalisation:
 * The first would introdce [directed higher inductive types](https://hott-uf.github.io/2022/HoTTUF_2022_paper_11.pdf)
 which would make each type an ω-category rather than an ∞-groupoid and each universe an ω-cosmos
 rather than an ∞-topos, presumably an ω-variant of virtual equipments with some yet unknown closure
 properties and enough classifiers of yet unknown sort.
 * The second would introduce the notion of linear dependent types which apparently makes the system
-capable of expressing quantum computations and entanglement in general, dependent additive
-conjunction being a type of quantum fields and dependent multiplicative disjunction that of quantum
-states.
-* The third is to develop a resource-aware non-Gödelian variant of the theory, where strictly
+capable of expressing [concurrency, quantum computations and entanglement](./lin-types).
+* The third is to develop a resource-aware (hopefully non-Gödelian) variant of the theory, where strictly
 increasing functions can be only shown to exist contitionally on availability of enough
 “computational budget”.
 
 All of these extensions are too early to pursue for the purpose of implementing in any proof
-assistant of practical use. On the other hand, proof assistants urgently need solutions to the
-more practical issues, including
-* machinery facilitating composability and reusability of proofs and constructions on basis of
-algebraic ornamentation [Dagand-McBride2013];
-* robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions),
-* powerful and unperplexed handling of implicit conversions and subset types;
-* and a rich, extensible and versatile syntax ([view pdf](https://github.com/akuklev/akuklev/blob/master/Sketch_for_a_Common_Syntax%20(1).pdf)).
+assistant of practical use. On the other hand, practical convenience of proof assistants depents on
+several other refinements of the foundational system, including inbuilt support for algebraic
+ornamentation [Dagand-McBride2013] which facilitates composability and reusability of proofs
+and constructions, and a tractable approach to implicit conversions and subset types.
+
+There are also more practical issues, the author and his colleagues were also working on, including
+robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions in our
+opition), and a rich, extensible and versatile syntax ([view pdf](https://github.com/akuklev/akuklev/blob/master/Sketch_for_a_Common_Syntax%20(1).pdf)).
+Together these solutions should provide a stable basis for future proof assistants.
 
 There is a plenty of work to do, but the goal of a satisfying general purpose proof assistant is
 within sight.
+
+<!--
+  Syntax: add lean-style comments /- -/, change “family” to “inductive” or “canonically inductive”,
+  change (\_+_) to (\+), syntax for commands !check, !reduce, !eval, !print (instead of #check),
+  use # for annotations (remove @on), allow to turn on autowhitespaces between capitals in Variables
+  section for geometric Triangle(ABC) and Triangle(\A\B\C), if all caps names are to be used, use «GRP».
+
+Numbered and nominal blocks:
+Module (instead of namespace), Section, Defintion, Theorem, Lemma, Example, Structure, Property,
+Inductive, Predicate, Instance (of a typeclass), Options (configurable defaults),
+
+Module-wide and section-wide blocks:
+Imports, Conventions (contains Variable, Universe, implicit conversions and other pragmata), Parameters
+
+Inductive allows for annotations Canonical Inductive, Reedy Inductive, Quotient Inductive, Higher Inductive,
+Directed Inductive, Large Inductive (large induction-recursion allowed). Mutual definitions as in Lean.
+
+Unnumbered:
+def, let, val, var
+
+may be public, private, protected, protected[conf]; instead of “open”, use !import, hiding and renaming
+allowed, also allowed #extend and #override.
+--->
