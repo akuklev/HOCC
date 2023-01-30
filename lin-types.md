@@ -2,7 +2,10 @@ Speculations on Linear Dependent Types: Eventual Consistency, Entanglement, Quan
 ==========================================================================================
 
 In the present document I will sketch how to extend the Higher Observational Construction
-Calculus HOCC by single-use variables and types for them.
+Calculus HOCC by single-use variables and types for them, outline how in this setting the
+univalent equality turns into entanglement and eventual consistency conditions, and
+speculate about connections to quantum computations, quantum fields and ”field with one
+element’ 𝔽₁.
 
 § Request Endpoints, Continuations, and Sessions
 ------------------------------------------------
