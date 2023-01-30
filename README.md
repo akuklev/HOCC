@@ -74,7 +74,7 @@ be modeled by up-sets of the inaccessible cardinal $V_κ$ taken as a poset of se
 inclusion. On the type-theoretic side we'll have the type of Aczel sets `Vₙ` modelling ZFC($n$).
 Utilizing the impredicative universal quantifier of `Ω°` to represent both finitary and infinitary
 conjuntions, it seems possible to translate each `s : Vₙ` into the respective Zakharyaschev subframe
-canonical formula `φₛ : Ω°` [Bezhanishvili2022] that will be in interpreted precisely by the set
+canonical formula `φₛ : Ω°` [[Bezhanishvili2022]] that will be in interpreted precisely by the set
 $s ∈ V_κ$ in the model, finalizing the circle.
 
 Intriguingly, this model seems to validate that non-constructive proofs `p : ‖a ~ b‖ᶜ` can be used
