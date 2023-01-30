@@ -298,11 +298,11 @@ capable of expressing [concurrency, quantum computations and entanglement](./lin
 increasing functions can be only shown to exist contitionally on availability of enough
 “computational budget”.
 
-While interesting on their own, these extensions seem irrelevant to the purpose of the project in
-the next decade at least. On the other hand, practical convenience of proof assistants critically
-depents on several other refinements of the foundational system, including support for algebraic
-ornamentation [Dagand-McBride2013] which facilitates composability and reusability of proofs and
-constructions, and a tractable approach to implicit conversions and subset types.
+While importaint in their own right, these extensions seem irrelevant to the purpose of the project
+in the next decade. On the other hand, practical convenience of proof assistants critically depents
+on several other refinements of the foundational system, including support for algebraic ornaments
+[Dagand-McBride2013] necessary for code reusability and composability, and a tractable approach to
+implicit conversions and subset types.
 
 There are also more practical issues, the author and his colleagues were also working on, including
 robust management of typeclasses (Arend and Scala3 provide almost satisfactory solutions in our
