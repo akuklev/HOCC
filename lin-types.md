@@ -1,8 +1,8 @@
-Linear Dependent Types, Eventual Consistency, and Entanglement
-==============================================================
+Speculations on Linear Dependent Types: Eventual Consistency, Entanglement, Quantum Fields
+==========================================================================================
 
-In present document I will sketch how to extend the Higher Observational Construction Calculus
-HOCC by single-use variables and types for them.
+In the present document I will sketch how to extend the Higher Observational Construction
+Calculus HOCC by single-use variables and types for them.
 
 § Request Endpoints, Continuations, and Sessions
 ------------------------------------------------
