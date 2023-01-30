@@ -165,7 +165,8 @@ Yet, there is some assymetry: we have only three quantifiers instead of four. No
 definitions of linear logic use the conjunctive sum `⅋` instead of `⊸`. Two operators are
 interdefinable in presence of linear negation (`X ⊸ Y = X⟂ ⅋ Y`, `X⟂ ⅋ Y = X⟂ ⊸ Y = Y⟂ ⊸ X`),
 and linear implication is far easier to understand. Yet only the conjunctive sum can be generalized
-to a quantifier by virtue of being commutative and associative.
+to a quantifier by virtue of being commutative and associative. (Besides that, we might want to
+omit negation completely to maintain totality of computations.)
 
 An object of the type `w : ⅋(\t : T) Q(t)` requires the program to process all branches (as many as
 there are values `t` in `T`), with each branch consuming exactly one object `wₜ : Q(q)`. The type
@@ -176,6 +177,80 @@ can lead to the actor `X` being stuck. The handler of `X ⅋ Y` is knows how to 
 independently, so it will feed a value of the type `A` into the actor `Y`, so that `X` can go on,
 and eventually its result will be also processed by the handler of `X ⅋ Y`.
 
+§ Element Classifier 𝔽₁
+-----------------------
+
+Subsets of a type `T` are classified by functions `p : T → Ω`, where `Ω` is the type of all
+propositions, also known as subobject classifier. In our generalized setting we can have the
+interface that classifies single elements of types.
+
+We want to define an object interface 𝔽₁ with the property that in can be only inhabited by two
+objects `0 : 𝔽₁` and `1 : 𝔽₁`, but no two 1 objects can ever exist at the same time, while at
+least one is guaranteed to exist. For an object with such properties the procedures `f : T ⊸ 𝔽₁`
+will exactly correspond to elements of `T`. As `Ω` naturally has a structure of Heyting algebra,
+`𝔽₁` will naturally have a structure similar to a field, albeit with one element, see
+[https://en.wikipedia.org/wiki/Field_with_one_element].
+
+
+```
+---------
+ 𝔽₁ : 𝓛
+
+     Γ ⊢ Δ
+-------------- We can always create an instance of 𝔽₁
+ Γ ⊢ Δ, 0₁ : 𝔽₁
+
+Thus we have
+0₁ : 𝟙 ⊸ 𝔽₁
+
+ Γ ⊢ Δ, a : 𝔽₁, b : 𝔽₁
+---------------------- Any two instances can be joined additively
+  Γ ⊢ Δ, a + b : 𝔽₁
+
+Thus we have
+(+) : 𝔽₁ ⅋ 𝔽₁ ⊸ 𝔽₁
+
+ Γ ⊢ Δ, a : 𝔽₁      Ξ ⊢ Φ, b : 𝔽₁
+--------------------------------- Any two instances can be joined multiplicatively
+    Γ, Ξ ⊢ Δ, Φ, a · b : 𝔽₁
+
+Thus we have
+(·) : 𝔽₁ ⊗ 𝔽₁ ⊸ 𝔽₁
+
+... axioms stating that both multiplication and summation are
+... associative and commutative, 0 is neutral for summation,
+... absorbing for multiplication
+
+Note that since there is no rule allowing to introduce 1 : 𝔽₁, we also cannot form `2 := 1 + 1`.
+We cannot form polynomials other then sums of distinct variables: To form `2a` we would need to
+be able to write `a + a`, yet `a` is a linear variable and cannot be used twice. For the same
+reason we cannot define `a^2 := a · a`.
+
+For the same reason it is quite tricky to formulate distributivity. Let us allow
+`x : 𝔽₁` act on other processes by terminating them if `x = 0` and by identity
+otherwise.
+
+ Γ ⊢ Δ, a : 𝔽₁      Ξ ⊢ Φ, p : P
+--------------------------------- Action on arbitrary terms
+ Γ, a : 𝔽₁ Ξ ⊢ Δ, Φ, aP : ??
+
+
+a : 𝔽₁ ⊢ ap : ??
+---------------- Single a : 𝔽₁ must be 1
+    p : P
+
+a : 𝔽₁, b : 𝔽₁ ⊢ ap : ??, bp : ??
+----------------------------------
+         p + b : P
+
+
+Since it is guaranteed that there can be no two nonzero instances of 𝔽₁, it is “safe”
+to create two copies of an arbitrary term:
+
+Γ ⊢ Δ, p : P
+----------------------------------
+Γ, a : 𝔽₁, b : 𝔽₁ ⊢ Δ, ap + bp : P
+```
 
 § Quantum Quantifiers
 ---------------------
