@@ -2,18 +2,22 @@ Non-constructive Reasoning in Computational Dependent Type Theory (draft)
 =========================================================================
 
 We extend the observational calculus of constructions $CC_{obs}$ of Pujet and Tabareau by
-a non-constructive modality ‖_‖ᶜ: an idempotent monad into the universe of definitionally
-proof-irrelevant types Ω allowing for non-constructive an ε operator in a fenced fragment
-of the calculus without compromising its good computational properties. We extend the proofs
+a non-constructive modality ‖_‖ᶜ: an idempotent monad into the universe of computationally
+irrelevant types Ω allowing for non-constructive an ε operator in a fenced fragment of the
+calculus without compromising its good computational properties. We extend the proofs
 of normalization, canonicity and decidability of type- and proof checking by original authors
 as well as their set theoretical model, so that $CC_{obs}$ + ‖_‖ᶜ with $n$ universes can be
 modelled and proven consistent in the set theory ZFC with $n$ inaccessables. We also show
 that the a particular model $V_n$ of the set theory [Werner97] inside $CC_{obs}$ + ‖_‖ᶜ with
-$n + 1$ universes models ZFC with $n$ inaccessables. Interleaving modellability establishes
-equiconsistency of $CC_{obs}$ + ‖_‖ᶜ with a countably infinite hierarchy and ZFC with ω
-inaccessables. By adapting the argument of [Rathjen-Tupailo06] we show that $V_n$ is
-‖_‖ᶜ-conservative over ZFC for CC sentences which include all “(generalised) mathematical
-formulae” as argued by Rathjen and Tupailo.
+$n + 1$ universes models ZFC with $n$ strong inaccessables.
+
+We propose to refine the set theoretic model of $CC_{obs}$ + ‖_‖ᶜ by modelling Ω with Heyting
+algebra of sets of a Grothendieck universe $V_κ$, and propose an embedding of the type-theoretic
+set model $V$ into `Ω` by Zakharyaschev subframe canonical formulae, so that sets in the
+type-theoretic model $V$ are represented precisely by the very same sets in the set theoretic
+model of $CC_{obs}$ + ‖_‖ᶜ, proving $V$ to be a ‖_‖ᶜ-faithful model of ZFC, and thus
+$CC_{obs}$ + ‖_‖ᶜ a conservative extension of ZFC with countably many strong inaccessibles.
+
 
 <!--
 
@@ -175,6 +179,7 @@ there is a proof `prf : ‖φⱽ‖ᶜ`, where is φⱽ the translation of the t
 the type-theoretic model of set theory model as proposed by Benjamin Werner in
 [Werner97].
 
+<!--
 § Completely impredicative model of sets
 ----------------------------------------
 
@@ -238,3 +243,4 @@ including Ω without ruining canonicity, and probably also not admissible for fu
 types. But we don't yet see how it could ruin computational properties if only applicable
 for the types for which we know in advance (that is can observe from the type definition)
 they have decidable equality.
+-->
