@@ -106,12 +106,12 @@ types `A : U` and `B : U` as effectively 1-to-1 correspondence (that is, a type 
 together with a left inverse function and a right inverse function), the natural notions of
 equality (or, better to say, identifiability) for each type of mathematical objects is implied by
 their respective definitions. There is no need to define isomorphisms, homeomorphisms, equivalences,
-etc. manually, as they all arisde as “generalized equality”. The aforementioned definition of
+etc. manually, as they all arise as “generalized equality”. The aforementioned definition of
 equality for types is known as the univalence principle.
 
 The discovery of this principle led to a mathematical revolution not only in the field of type
 theories but also in higher category theory and foundations of mathematics. As a result of a
-large collaborative program the so-called Homotopy Type Theory was born in 2014. As a byproduct,
+large collaborative program, the so-called Homotopy Type Theory was born in 2014. As a byproduct,
 one solved the longstanding problem of dealing constructively with the analytic notion of real
 numbers and Turing-complete partial functions.
 
@@ -147,7 +147,7 @@ is a deterrent annoyance.
 Thus it is still desirable to augment HOTT by `Ω°` as an isolated universe harboring the relations
 of observational substitutivity for all types. By removing the inclusion `Ω° ⊂ 𝒰ⁿ` one precludes
 definitions violating the structural principle of equivalence. But since observational substitutivity
-`X ~ Y` still can be used _inside_ the proofs, most pathi bookkeeping can be avoided.
+`X ~ Y` still can be used _inside_ the proofs, most path bookkeeping can be avoided.
 In the next section, we'll also outline how to avoid it in the case of canonical isomorphisms. The
 non-constructive modality can be also adapted to the univalent setting without causing any
 issues. The resulting theory HOTT + `‖_‖ᶜ` is also capable of non-constructive reasoning
@@ -232,7 +232,7 @@ an inductively generated Reedy category tracking both thinnings and dependencies
 signature of the respective FOLDS. The possibility to express sort signatures with dependencies
 (both finitary and infinitary, like in the case of the theory of ω-categories) as Reedy inductive
 types allow to define FOLDS-theories and H(igher)OLDS-theories as polymorphic structures with
-a single parameter `\Carrier : S` (see unbounded quantifiders above).
+a single parameter `\Carrier : S` (see unbounded quantifiers above).
 
 Generalized algebraic theories without equations on sorts can now be presented as algebraic
 theories with dependent sorts, while bi-directionally presentable type theories are
@@ -277,7 +277,7 @@ in those proofs. [The fourth draft](./finitistic-core) in the series is concerne
 finitistic core system that metamathematical proofs could be compiled into, namely a constructive
 version of the non-Gödelian theory of hereditarily finite sets by F. Pakhomov, which is the only
 known example of a natural axiomatic system that proves its own consistency. We develop
-a logic-free calculus for this theory to implement its by construction faithful
+a logic-free calculus for this theory to implement its by-construction faithful
 model in terms of canonically inductive types.
 
 § Conclusion and Future Work
@@ -304,7 +304,7 @@ implicit conversions and subset types.
 There are also more practical issues, the author and his colleagues were also working on, including
 robust management of type classes (Arend and Scala3 provide almost satisfactory solutions), and a
 rich, extensible, and versatile syntax ([view pdf](https://github.com/akuklev/akuklev/blob/master/Sketch_for_a_Common_Syntax%20(1).pdf)).
-Together these solutions should provide a stable basis for the future proof assistants.
+Together these solutions should provide a stable basis for the upcomming proof assistants.
 
 There is plenty of work to do, but the goal of a satisfying general-purpose proof assistant is
 within sight.
