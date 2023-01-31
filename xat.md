@@ -35,8 +35,8 @@ It arizes as the recursion motive for the following inductive type:
 #Inductive ProtoMonoid
   unit : ProtoMonoid
   concat : ProtoMonoid → ProtoMonoid → ProtoMonoid
-  unitor-l : ∀(\x : ProtoMonoid) (concat unit x) = x
-  unitor-r : ∀(\x : ProtoMonoid) (concat x unit) = x
+  canceler-l : ∀(\x : ProtoMonoid) (concat unit x) = x
+  canceler-r : ∀(\x : ProtoMonoid) (concat x unit) = x
   associator : ∀(\x \y \z : ProtoMonoid)
    (concat (concat x y) z) = (concat x ∘ (concat y z))
 ```
@@ -87,11 +87,11 @@ theoretic model of the theory in the theory itself.
 
 Annotations:
 
-@Decidable
-@Inductive Nat
+#Canonical
+#Inductive Nat
 
-@Algebraic
-@Inductive GroupPrototype -- decidable index, but is allowed to be quotient type, thus have verifiable but
+#Algebraic
+#Inductive GroupPrototype -- decidable index, but is allowed to be quotient type, thus have verifiable but
 not falsifieable equality
 
 Operation on morphism uses its shadow operation on objects

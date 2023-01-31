@@ -7,29 +7,30 @@ univalent equality turns into entanglement and eventual consistency conditions, 
 speculate about connections to quantum computations, quantum fields and ”field with one
 element’ 𝔽₁.
 
-§ Request Endpoints, Continuations, and Sessions
-------------------------------------------------
+§ Request Endpoints and Continuations
+-------------------------------------
 
 
-Assume you use HOCC as a functional programming language and seek to go beyond functions that just
-calculate. You want to write down procedures that interact with external entities called objects or
-actors. From now on we will be calling the types available in HOCC value types, because we'll be
-introducing adding a new kind of types: the interfaces, which are types of actors and objects. In
-this setting user interaction will be also modelled as interaction with an actor of specified
-interface but of unknown and unknowable internals.
+Assume you use a variant of intuitionistic type theory as a functional programming language but
+seek to go beyond functions that just calculate. You want to write down procedures that interact
+with external entities: objects and actors. From now on we will be calling the types available
+in intuitionistic type theories value types, because we'll be introducing an additional kind of
+types: the object types. In this setting user interaction will be also modelled as interaction
+with an actor of specified type but unknown and unknowable internal workings.
 
-Interaction can be implemented by performing requests and calculating with their results. For any
-to value types `ReqT : 𝓤` and `RespT : 𝓤` there will be an object interface `ReqT ⊸ RespT`
-describing request endpoints. A request endpoint `f : ReqT ⊸ RespT` can be used as you would
-normally use a function,
+Interactions can be represented by performing requests and calculating with their results. For any
+to value types `ReqT : 𝓤` and `RespT : 𝓤` there will be an object type `ReqT ⊸ RespT` describing
+request endpoints. A request endpoint `f : ReqT ⊸ RespT` can be used as you would normally use a
+function:
 ```
-let response = f(request)
+#let response = f(request)
 ```
 
-But there is one caveat: the varable `f : ReqT ⊸ RespT` is a single use variable, it can be used
-only once and it should be used at least once to avoid a dangling object. Continuations constitute
-a form of request endpoint, and you don't want to have dangling continuations.
+But there is one caveat: the varable `f : ReqT ⊸ RespT` is a single-use variable, it can be used
+only once and it must be either “consumed” or returned back to to the caller as a part of the
+return “value”.
 
+[Continuations](https://en.wikipedia.org/wiki/Continuation) constitute a form of request endpoint.
 A procedure anticipating continuation has the following signature:
 ```
 proc(normal-args : X)[\T](\cont : R ⊸ T) : T
@@ -66,15 +67,15 @@ to have a closable request endpoint.
 
 An endpoint can return another endpoints. For example, consider the following interface:
 ```
-random-number-generator : (\n : ℕ) ⊸ (𝟙 ⊸ Fin(100))^n
+random-number-generator : (\n : ℕ) ⊸ (𝟙 ⊸ Fin(100))ⁿ
 ```
 
 Given a natural number `n` it generates `n` independent endpoints, each of them has a trivial
 request type (the type `𝟙` with the single inhabitant `() : 𝟙`, and returns a number between 0
 and 99 when invoked).
 
-Endpoint factory has the type `!I`. It produces any number of independent endpoints of identical
-interface. A variable of a type `x : !I` is not single-use any more, it is allowed to be used
+Endpoint factory has the type denoted `!I`. It produces any number of independent endpoints of
+identical type. A variable of a type `x : !I` is not single-use any more, it is allowed to be used
 any number of times. For value types `A` and `B`, the types `A → B` and `!A ⊸ B` are equivalent.
 
 By returning a single endpoint as part of the responce, endpoints can represent communication
@@ -97,7 +98,7 @@ suppress induces. Then we could write code like this:
 Since there is no way to close the running endpoint, at the end of such a procedure you just return
 `console` back to the caller.
 
-In general interface of the returned endpoint could also change. Assume we have the type “State”,
+In general, type of the returned endpoint could also change. Assume we have the type “State”,
 the types `ReqT(\s : State)` and `RespT(\s : State)(\req : Req(s))` now depend on the state of
 the endpoint, and we have the function `next-state(\s : State, \r : ReqT(s)) : State`. Now we
 can define the type `I(\s : State)` with the property
@@ -114,10 +115,52 @@ These string diagrams specify required indepencence structure of returned endpoi
 as the eventual consistency structure. In other words, these are the rules specifying allowed out
 of order execution of requests.
 
+§ Double Sided Sequents: Pool of Processes
+------------------------------------------
+
+Judgements in intuitionistic type theories are one-sided sequents: there are several types on the
+left side (they represent the context), and a single type on the right side: the type of the
+expression being constructed:
+```
+x : X,..., z : Z ⊢ expr : T
+```
+
+Concurrent interactive systems can be described by double-sided sequents, that is sequents with
+multiple expressions on the right side, which represent a pool of processes running in parallel:
+
+```
+x : X,..., z : Z ⊢ proc₁ : A,..., procₙ : C
+```
+
+The context on the left side can be dependent: type annotations to the right of `x : X` can use
+`x` as a varable, and so on. Can the right side be dependent too?
+
+Let us assume, you have a procedure that requiers a request endpoint `e : 𝟙 ⊸ ℕ`. It can be viewed
+as a closes procedure that opens a single-use channel of dual type `ℕ ⊸ 𝟙` and waits for some
+other process to use this channel. That's and anti-lambda abstraction:
+```
+  Γ, e : 𝟙 ⊸ ℕ ⊢ a(e) : A, Δ
+-------------------------------
+ Γ ⊢ (ē : 𝟙 ⊸ ℕ; a(e) ) : A, Δ
+```
+
+Now the cocontext Δ can (and, actually _must_) use variable `e` defined in the first expression of
+the cocontext. Actually, the rule of inference as stated is incomplete. That's the complete version:
+```
+ Γ, e : 𝟙 ⊸ ℕ ⊢ a(e) : A, Δ     Γ', e : ℕ ⊸ 𝟙 ⊢ b(e) : B, Δ'
+-------------------------------------------------------------
+       Γ, Γ' ⊢ (ē : 𝟙 ⊸ ℕ; a(e) ) : A, b(e) : B, Δ, Δ'
+```
+
+To remain interpretable in all desired categories, we don't state that all types have duals. Yet
+all session types have them.
+
+TODO: Say that we can implement join calculus. Say a word about multiway channels and adjoint logic.
+
 § Actors and Objects
 --------------------
 
-In general interfaces classify actors. Actors may be nondetermenistic and communicate with each
+In general object types classify actors. Actors may be nondetermenistic and communicate with each
 other. That is, result of a particular request to one remote database might depend on the fact
 that we previously requested another remote database, because they cound have communicated
 behind the scenes. Objects are self-enclosed, requests to them are independent of any requests
