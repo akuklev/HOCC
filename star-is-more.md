@@ -160,18 +160,15 @@ The type `List : 𝒰 -> 𝒰` defined by
   nil : List[T]
   cons : T → List[T] → List[T]
 ```
-is not only an endomorphism on the universe 𝒰.
+is not only an endomorphism on the universe 𝒰. It can be promoted to a polymorphic construction
+on any cartesian closed category with W-types:
 
-is actually not
-limited to the fixed universe 𝒰. By means of the W operator it can be constructed in
-any universe supporting W-types.
-Thus we can view `List` as a polymorphic construction as well:
 ```
 #Inductive List[\T]
   nil : List[T]
   cons : T → List[T] → List[T]
 
-List : ⋂(\U : 𝒰) (\u : Ẅ-closed-universe(U)) → U → U
+List : ⋂(\U : 𝒰) (\u : W-CCC(U)) → U → U
 ```
 
 The inductive definition above expands into a kind of macro that defines a list type for every
@@ -183,7 +180,7 @@ types like not only in universes, but in any categories with enough structure, t
 to override the meaning of (→)-operator in the definition. Categories with enough structure
 to interpret simple W-types are actually the W-pretopoi, so we have
 ```
-List : ⋂(\U : 𝒰, \(→): U → U → 𝒰) (\u : W-pretopos(U, (→))) U → U
+List : ⋂(\U : 𝒰, \(→): U → U → 𝒰) (\u : W-Pretopos(U, (→))) U → U
 ```
 
 § Structure Types as Polymorphic Constructions
@@ -216,6 +213,9 @@ as witnesses for associativity of composition and cancellability of units.
 In its definition it only uses Σ types, and identification types, thus it can be actually
 interpreted not only in any universe but in any (∞,1)-category with enough pullbacks.
 
+§ Internal Parametricity
+------------------------
+
 Show that for `a : ⋃(\T : *) T → T` holds `a = id`. Proof:
 ```
 [\T : *](\c : T)
@@ -231,3 +231,10 @@ that is, the term pr1 := ([\T : *] (\c : T) ↦ a[(\x : T) ↦ (x ~ c))] has typ
 id[T] ~ a[T] = ∀(\x : T) a(x) = id(x)
 = ∀(\x : T) a(x) = x
 ```
+
+§ Internalization as Compilation Into a Weaker Language
+-------------------------------------------------------
+
+TODO: Few words that once an internal interpretation into ZFC + enough Grothendieck universes
+will be extablished, one can see the whole Higher Observational Constructions Calculus as an
+elaborate dependently typed language of macros over Mizar System. :-)
