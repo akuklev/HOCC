@@ -181,7 +181,7 @@ appliable to group objects, if all proof/construction elements are expressable i
 complete categories.
 
 Together with the impredicative universe `Ω°` one can treat internal parametricity as a form of
-internalization. For example, take any polymorphic function `f : ⋃(\T : *) T → T` and
+internalization. For example, take any polymorphic function `f : ⋂(\T : *) T → T` and
 specialize it to the predicate `Pₓ : (_~ x)`:
 ```
 f[Pₓ] : ∀(\t : T) (t ~ x) → (f(t) ~ x)
@@ -190,10 +190,10 @@ thus
 ```
 (\x : T ↦ f[Pₓ](x)(reflₓ)) : ∀(\x : T) f(x) ~ x
 ```
-we have shown that every polymorphic function `f : ⋃(\T : *) T → T` is equal to the polymorphic
-function `id[\T : *] := (\x : T ↦ x)`. Thus, the type `⋃(\T : *) T → T` is contractible and the
-function `id` can be said to be the canonical `⋃(\T : *) T → T`. Analogously, we can show that
-`regroup` is the canonical isomorphism of the type `⋃(\X \Y \Z : *) (X × Y) × Z = X × (Y × Z)`.
+we have shown that every polymorphic function `f : ⋂(\T : *) T → T` is equal to the polymorphic
+function `id[\T : *] := (\x : T ↦ x)`. Thus, the type `⋂(\T : *) T → T` is contractible and the
+function `id` can be said to be the canonical `⋂(\T : *) T → T`. Analogously, we can show that
+`regroup` is the canonical isomorphism of the type `⋂(\X \Y \Z : *) (X × Y) × Z = X × (Y × Z)`.
 Now that the notion of canonical identification can be established, one can also provide the
 machinery to handle transport over canonical identifications without cumbersome bookkeeping,
 which used to be the primary hindrance to the widespread adoption of the univalent approach to
