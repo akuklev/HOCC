@@ -2,21 +2,22 @@ Non-constructive Reasoning in Computational Dependent Type Theory (draft)
 =========================================================================
 
 We extend the observational calculus of constructions $CC_{obs}$ of Pujet and Tabareau by
-a non-constructive modality ‖_‖ᶜ: an idempotent monad into the universe of computationally
+a non-constructive modality `‖_‖ᶜ`: an idempotent monad into the universe of computationally
 irrelevant types Ω allowing for non-constructive an ε operator in a fenced fragment of the
 calculus without compromising its good computational properties. We extend the proofs
 of normalization, canonicity and decidability of type- and proof checking by original authors
-as well as their set theoretical model, so that $CC_{obs}$ + ‖_‖ᶜ with $n$ universes can be
+as well as their set theoretical model, so that $CC_{obs}$ + `‖_‖ᶜ` with $n$ universes can be
 modelled and proven consistent in the set theory ZFC with $n$ inaccessables. We also show
-that the a particular model $V_n$ of the set theory [Werner97] inside $CC_{obs}$ + ‖_‖ᶜ with
+that the a particular model $V_n$ of the set theory [Werner97] inside $CC_{obs}$ + `‖_‖ᶜ` with
 $n + 1$ universes models ZFC with $n$ strong inaccessables.
 
-We propose to refine the set theoretic model of $CC_{obs}$ + ‖_‖ᶜ by modelling Ω with Heyting
+We propose to refine the set theoretic model of $CC_{obs}$ + `‖_‖ᶜ` by modelling Ω with Heyting
 algebra of sets of a Grothendieck universe $V_κ$, and propose an embedding of the type-theoretic
 set model $V$ into `Ω` by Zakharyaschev subframe canonical formulae, so that sets in the
 type-theoretic model $V$ are represented precisely by the very same sets in the set theoretic
-model of $CC_{obs}$ + ‖_‖ᶜ, proving $V$ to be a ‖_‖ᶜ-faithful model of ZFC, and thus
-$CC_{obs}$ + ‖_‖ᶜ a conservative extension of ZFC with countably many strong inaccessibles.
+model of $CC_{obs}$ + `‖_‖ᶜ`, proving $V$ to be a `‖_‖ᶜ`-faithful model of ZFC, and thus
+$CC_{obs}$ + `‖_‖ᶜ` with countably infinite hierarchy of universes to be a conservative
+extension of ZFC with countably many strong inaccessibles.
 
 
 <!--
