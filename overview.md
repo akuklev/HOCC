@@ -42,7 +42,7 @@ final phase.
 ----------------------
 
 A formalized language is an artificial language for which there is a precise formal definition of
-syntax [EM43455]. Expressions of a formalized language are formal combinations of some initial
+syntax [[EM43455]]. Expressions of a formalized language are formal combinations of some initial
 symbols, formed by definite rules of formation of expressions in the given language. In contrast
 to the theory of formal langauges, theory of formalized languages does not treat expressions as
 linear strings of symbols taken from a fixed alphabet; expressions of formalized langauges are
@@ -53,7 +53,7 @@ Formalized languages are in general multi-sorted. Expresions of the language bel
 sorts, and formation rules require the constituents to be of certain sort. For example:
 ```
  a : Attribute   n : Noun-Phrase
----------------------------------
+—————————————————————————————————
         a n : Noun-Phrase
 ```
 
@@ -102,5 +102,7 @@ of the type `Nat`. They represent nothing other than themselves and are irreduci
 
 
 [Leibniz1684]: Leibniz, G. W. (1684), “Meditationes de cognitione, veritate et ideis”, Acta Eruditorum
+
 [Wiedijk2009]: Wiedijk, Freek (2009). "Formalizing Arrow's theorem". Sādhanā. 34 (1): 193–220. doi:10.1007/s12046-009-0005-1. https://hdl.handle.net/2066%2F75428
+
 [EM43455]: V.N. Grishin, “Formalized language” Encyclopedia of Mathematics. URL: http://encyclopediaofmath.org/index.php?title=Formalized_language&oldid=43455
