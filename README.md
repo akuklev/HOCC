@@ -45,9 +45,9 @@ products Π, so that every type (and every finite collection of types) lies insi
 The Observational Calculus of Constructions $CC_{obs}$ [Pujet-Tabareau2022] extends the core ITT
 by an impredicative universe of computationally irrelevant propositions `Ω° : 𝒰`, and a relation
 of observational substitutivity `a ~ᵀ b : Ω°` for every type `T`. For plain types `T`, `a ~ᵀ b`
-reflects indiscernibility of elements `\a \b : T` by any observations. For example, for functions
-`\f \g : ℕ → ℕ` it is the pointwise equality: `(f ~ g) := ∀(\n : ℕ) f(n) ~ g(n)`. For the types
-`\X \Y : 𝒰ⁿ` themselves `(X ~ Y)` reflects “literal” equality, e.g. `(X × Y) × Z ≁ X × (Y × Z)`.
+reflects indiscernibility of elements `a b : T` by any observations. For example, for functions
+`f g : ℕ → ℕ` it is the pointwise equality: `(f ~ g) := ∀(n̲ : ℕ) f(n) ~ g(n)`. For the types
+`X Y : 𝒰ⁿ` themselves `(X ~ Y)` reflects “literal” equality, e.g. `(X × Y) × Z ≁ X × (Y × Z)`.
 Otherwise, one would be allowed to substitute `X × (Y × Z)` as the type for `((x, y), z) : (X × Y) × Z`,
 which is syntactically incorrect.
 
@@ -181,19 +181,19 @@ appliable to group objects, if all proof/construction elements are expressable i
 complete categories.
 
 Together with the impredicative universe `Ω°` one can treat internal parametricity as a form of
-internalization. For example, take any polymorphic function `f : ⋂(\T : *) T → T` and
+internalization. For example, take any polymorphic function `f : ⋂(T̲ : *) T → T` and
 specialize it to the predicate `Pₓ : (_~ x)`:
 ```
-f[Pₓ] : ∀(\t : T) (t ~ x) → (f(t) ~ x)
+f[Pₓ] : ∀(t̲ : T) (t ~ x) → (f(t) ~ x)
 ```
 thus
 ```
-(\x : T ↦ f[Pₓ](x)(reflₓ)) : ∀(\x : T) f(x) ~ x
+(x̲ : T ↦ f[Pₓ](x)(reflₓ)) : ∀(x̲ : T) f(x) ~ x
 ```
-we have shown that every polymorphic function `f : ⋂(\T : *) T → T` is equal to the polymorphic
-function `id[\T : *] := (\x : T ↦ x)`. Thus, the type `⋂(\T : *) T → T` is contractible and the
-function `id` can be said to be the canonical `⋂(\T : *) T → T`. Analogously, we can show that
-`regroup` is the canonical isomorphism of the type `⋂(\X \Y \Z : *) (X × Y) × Z = X × (Y × Z)`.
+we have shown that every polymorphic function `f : ⋂(T̲ : *) T → T` is equal to the polymorphic
+function `id[T̲ : *] := (x̲ : T ↦ x)`. Thus, the type `⋂(T̲ : *) T → T` is contractible and the
+function `id` can be said to be the canonical `⋂(T̲ : *) T → T`. Analogously, we can show that
+`regroup` is the canonical isomorphism of the type `⋂(X̲ Y̲ Z̲ : *) (X × Y) × Z = X × (Y × Z)`.
 Now that the notion of canonical identification can be established, one can also provide the
 machinery to handle transport over canonical identifications without cumbersome bookkeeping,
 which used to be the primary hindrance to the widespread adoption of the univalent approach to
@@ -217,22 +217,22 @@ and derivations have to be expressable as inductive types.
 
 The language of proof terms in any first-order theory is already too complex to be naturally
 expressable with basic inductive types. The language of _formulae_ of single-sorted
-first-order theories can be expressed as an inductive type family `Formula(\n : Nat)`, where
+first-order theories can be expressed as an inductive type family `Formula(n̲ : Nat)`, where
 `n` is the number of free variables. However, it would be useful if the index is not just a type,
 but an inductively generated direct category `Δ⁺`, as it would greatly simplify the management of
-variables [McBride2021]. For a single-sorted theory, we should have `Formula(\n : Δ⁺)`, for a
-multi-sorted first-order theory, one needs the type family `Formula(\context : Δ⁺[S])`, where
+variables [McBride2021]. For a single-sorted theory, we should have `Formula(n̲ : Δ⁺)`, for a
+multi-sorted first-order theory, one needs the type family `Formula(c̲o̲n̲t̲e̲x̲t̲ : Δ⁺[S])`, where
 `S` is the type of sorts. The language of proof terms needs to be indexed over both contexts (or
 just the number of free variables in single-sorted case) and formulae they prove:
-`ProofTerm(\ctx : Δ⁺[S], \statement : Formula(ctx))`. Now assume we want
+`ProofTerm(c̲t̲x̲ : Δ⁺[S], s̲t̲a̲t̲e̲m̲e̲n̲t̲ : Formula(ctx))`. Now assume we want
 to generalize this approach to first-order theories with dependent sorts (FOLDS). To manage
 dependencies in the type of contexts, instead of `Δ⁺` one needs the type of indexes to be
 an inductively generated Reedy category tracking both thinnings and dependencies:
-`ProofTerm(\ctx : Δ[𝓢], \statement : Formula(ctx))`, where the index type `𝓢 : *ᴵ` is the sort
+`ProofTerm(c̲t̲x̲ : Δ[𝓢], s̲t̲a̲t̲e̲m̲e̲n̲t̲ : Formula(ctx))`, where the index type `𝓢 : *ᴵ` is the sort
 signature of the respective FOLDS. The possibility to express sort signatures with dependencies
 (both finitary and infinitary, like in the case of the theory of ω-categories) as Reedy inductive
 types allow to define FOLDS-theories and H(igher)OLDS-theories as polymorphic structures with
-a single parameter `\Carrier : S` (see unbounded quantifiers above).
+a single parameter `Carrier : S` (see unbounded quantifiers above).
 
 Generalized algebraic theories without equations on sorts can now be presented as algebraic
 theories with dependent sorts, while bi-directionally presentable type theories are
