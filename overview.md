@@ -102,7 +102,7 @@ of the type `Nat`. They represent nothing other than themselves and are irreduci
 
 Inductive types may be _polymorphic_, i.e. have typal _parameters_ (enclosed in square brackets):
 ```
-#Inductive List[$\underline{T}$]
+#Inductive List[T͟]
   Empty : List[T]
   (::)  : T → (List[T] → List[T])
   [t͟a͟i͟l͟]
