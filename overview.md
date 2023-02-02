@@ -103,6 +103,7 @@ of the type `Nat`. They represent nothing other than themselves and are irreduci
 
 [Leibniz1684]: Leibniz, G. W. (1684), “Meditationes de cognitione, veritate et ideis”, Acta Eruditorum
 
-[Wiedijk2009]: Wiedijk, Freek (2009). "Formalizing Arrow's theorem". Sādhanā. 34 (1): 193–220. doi:10.1007/s12046-009-0005-1. https://hdl.handle.net/2066%2F75428
+[Wiedijk2009]: Wiedijk, Freek (2009). "Formalizing Arrow's theorem". Sādhanā. 34 (1): 193–220.
+doi:10.1007/s12046-009-0005-1. https://hdl.handle.net/2066%2F75428
 
 [EM43455]: V.N. Grishin, “Formalized language” Encyclopedia of Mathematics. URL: http://encyclopediaofmath.org/index.php?title=Formalized_language&oldid=43455
