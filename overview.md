@@ -286,7 +286,7 @@ Besides inductive and behavioral types, Construction Calculi feature universes: 
 The base universe `𝒰` is guaranteed to contain all canonically inductive types and is closed under
 applications of all polymorphic type formers, both inductive and coinductive, e.g. `Nat : 𝒰`,
 `List[ Stream[Function[Nat, Nat] ] ] : 𝒰`. The universe `𝒰⁺` contains everything from the universe
-`𝒰 ⊂ 𝒰⁺`, besides that it contains ``𝒰 : 𝒰⁺` itself and is again closed under applications of any
+`𝒰 ⊂ 𝒰⁺`, besides that it contains `𝒰 : 𝒰⁺` itself and is again closed under applications of any
 polymorphic typeformers, so it contains types like `List[𝒰]` and `Function[Nat, 𝒰]`. Analogously
 we define `𝒰⁺⁺`, `𝒰⁺⁺⁺` and so on for any finite number of superscript plus signs. This way one
 achieves that any finite collection of explicitly definable types lives in a sufficiently large
