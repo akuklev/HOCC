@@ -58,9 +58,9 @@ in particular include all univalent type theories), a refined definition is requ
 where `‖_‖ : 𝒰ⁿ → 𝒰ⁿ` is the propositional truncation operator (NB: it does not move types into Ω!)
 and `‖_‖ᵁᴵᴾ : 𝒰ⁿ → 𝒰ⁿ` is the 0-truncation operator.
 This is necessary for two reasons: firstly, otherwise it would be possible to derive a contradiction
-between choice and univalence in the context containing ε's, thus rendering the sub-universe ‖_‖ᶜ of
+between choice and univalence in the context containing ε's, thus rendering the sub-universe `‖_‖ᶜ` of
 non-constructively valid propositions inconsistent (every two of them would be equal than, including
-‖1‖ᶜ = ‖0‖ᶜ). Secondly, so that is possible to derive
+`‖1‖ᶜ = ‖0‖ᶜ`). Secondly, so that is possible to derive
 ```
     prf : ∃(x̲ : X) P(x)
 ———————————————————————————
@@ -70,11 +70,11 @@ non-constructively valid propositions inconsistent (every two of them would be e
 Note that all proofs below hold for both the refined and the non-refined definition.
 
 The non-constructive modality is defined precisely as to validate the axiom of choice. Let's
-derive choice under the ‖_‖ᶜ modality in its shortest form (The HoTT Book, Lemma 3.8.2). Assume
+derive choice under the `‖_‖ᶜ` modality in its shortest form (The HoTT Book, Lemma 3.8.2). Assume
 `X` satisfies `X = ‖X‖ᵁᴵᴾ` and `Y(x)` a type family over `X` satisfying `Y(x) = ‖Y(x)‖ᵁᴵᴾ` (the last
 proposition can be only stated in this simple form because `X` satisfies UIP). Now observe
 ```
-ac : ‖Π(x̲ : X) ‖Y(x)‖ -> ‖Π(x̲ : X)Y(x)‖‖ᶜ
+ac : ‖Π(x̲ : X) ‖Y(x)‖ → ‖Π(x̲ : X)Y(x)‖‖ᶜ
 ac := | f̲ ↦ |x̲ ↦ ε (f x)| |ᶜ
 ```
 Actually, we can either remove the requirement that `Y(x) = ‖Y(x)‖ᵁᴵᴾ` is or remove the
@@ -88,7 +88,7 @@ UIP, `P` to be propositional)
 ```
 
 which reads in words, “if for each `x : X` there is `y : Y` such that `P(x, y)` holds,
-non-constructively there is a function `y : X -> Y` that assigns to each `x` a value `y(x)`
+non-constructively there is a function `y : X → Y` that assigns to each `x` a value `y(x)`
 such that `P(x, y(x))` holds”.
 
 ```
@@ -105,7 +105,7 @@ ttdo : ‖Π(x̲ : X) ∃(y̲ : Y) P(x, y) → Σ(y̲ : X → Y) Π(x̲ : X) P(x
 
 `ttdi` is the so called Type-theoretical Description Axiom from [Werner97]
 
-Let us show that ‖_‖ᶜ is idempotent and a monad:
+Let us show that `‖_‖ᶜ` is idempotent and a monad:
 ```
     p : ‖X‖ᶜ
 ————————————————
@@ -128,7 +128,7 @@ The map `(x̲ : T ↦ |x|ᶜ)` is the modal unit. The induction principle is giv
 Since ‖_‖ᶜ : Ω, unit and induction vacously satisfy monadic unit laws
 ```
 
-It is quite easy to show that ‖_‖ᶜ validates modus ponens and generalization inference rules:
+It is quite easy to show that `‖_‖ᶜ` validates modus ponens and generalization inference rules:
 
 ```
  x : ‖X‖ᶜ    f : ‖X → Y‖ᶜ
@@ -140,9 +140,9 @@ It is quite easy to show that ‖_‖ᶜ validates modus ponens and generalizati
  |x̲ : T ↦ ε(f x)|ᶜ : ‖Π(x̲ : T) P(x)‖ᶜ
 ```
 
-Now it only remains to validate Hilbert axioms P1-I9 to show that ‖_‖ᶜ implements the whole
+Now it only remains to validate Hilbert axioms P1-I9 to show that `‖_‖ᶜ` implements the whole
 classical first-order logic. Since all of them except P4 are valid intuitionistically, they
-can be derived by plugging the λ-terms witnessing them into |_|ᶜ.
+can be derived by plugging the λ-terms witnessing them into `|_|ᶜ`.
 
 The only remaining axiom is P4. Its proof is essentially the Diaconescu's theorem:
 ```
