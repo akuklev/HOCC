@@ -15,7 +15,7 @@ The Mizar system is based on standard set theory ZFC, but set theory is a very "
 where any non-trivial statement, let alone proof, is essentially unreadable due to the exorbitant
 length and a flood of "implementation details" that have nothing to do with the mathematical ideas
 being conveyed. To address this problem, Mizar System developed an advanced layer of macros. As it
-always the case for advanced macroassembler languages, a type system had to be introduced to
+always the case for advanced meta-programming languages, a type system had to be introduced to
 regulate composability and enforce abstraction. Eventually, high-level semantics for the macro
 language emerged, allowing to “debug” the high-level code instead of the low-level assembly code
 it elaborates into.
@@ -24,13 +24,13 @@ Languages of modern proof assistants are cross-platform high-level languages tha
 compiled into the language of ZFC, but support other “target architectures”, known as topoi.
 
 An elementary topos is a category endowed with just enough structure to faithfully model both
-first-order theries (such as graphs, groups, rings, fields, partially ordered sets, etc) and
-higher-order theories (such as topological spaces). Elementary topoi do not necessarily have
-canonical mathematical objects such as natural or real numbers. Topoi containing canonical
-natural numbers arithmetic topoi (or W-topoi). They admit construction of all countable
-combinatorial objects, countable groups, countable fields etc. If they additionally admit
-Cauchy-completions, they are called analytic topoi. Such topoi contain canonical real numbers
-and admit constructions of all separable topological spaces).
+first-order theries (such as graphs, groups, rings, fields, vector spaces, partially ordered
+sets, etc) and higher-order theories (such as topological spaces). Elementary topoi do not
+necessarily have canonical mathematical objects such as natural or real numbers. Topoi
+containing canonical natural numbers arithmetic topoi (or W-topoi). They admit construction
+of all countable combinatorial objects, countable groups, countable fields etc. If they
+additionally admit Cauchy-completions, they are called analytic topoi. Such topoi contain
+canonical real numbers and admit constructions of all separable topological spaces).
 
 The category of all ZFC sets and functions between them is a prime example of an analytic topos,
 but not the minimal one. The race to develop an elegant and effective formalized languages for
