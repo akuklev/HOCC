@@ -51,7 +51,7 @@ in particular include all univalent type theories), a refined definition is requ
 
 ```
  Γ ⊢ T    Γ, εᵀ : ‖T‖ᶜ → ‖T‖ᵁᴵᴾ ⊢ prf : ‖P‖
-——————————————————————————————————————————
+ ————————————————————————————————————————————
          Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
@@ -63,7 +63,7 @@ non-constructively valid propositions inconsistent (every two of them would be e
 ‖1‖ᶜ = ‖0‖ᶜ). Secondly, so that is possible to derive
 ```
     prf : ∃(x̲ : X) P(x)
-————————————————————————————
+———————————————————————————
  |prf|ᶜ : ‖Σ(x̲ : X) P(x)‖ᶜ
 ```
 
@@ -92,9 +92,9 @@ non-constructively there is a function `y : X -> Y` that assigns to each `x` a v
 such that `P(x, y(x))` holds”.
 
 ```
-prf : Π(x̲ : X) ∃(y̲ : Y) P(x, y)
-—————————————————————————————————————————————————————————————————————————————————————————
-|x̲ : X ↦ (ε |(prf x).fst|ᶜ), x̲ : X ↦ (prf x).snd|ᶜ : ‖Σ(y̲ : X → Y) ∀(x̲ : X) P(x, y(x))‖ᶜ
+                        prf : Π(x̲ : X) ∃(y̲ : Y) P(x, y)
+——————————————————————————————————————————————————————————————————————————————————————————
+ |x̲ : X ↦ (ε |(prf x).fst|ᶜ), x̲ : X ↦ (prf x).snd|ᶜ : ‖Σ(y̲ : X → Y) ∀(x̲ : X) P(x, y(x))‖ᶜ
 ```
 
 Let us denote the above term as `ac2`. Let
@@ -122,7 +122,7 @@ Since `‖X‖ᶜ : Ω`, these conversions are automatically inverses to each ot
 The map `(x̲ : T ↦ |x|ᶜ)` is the modal unit. The induction principle is given by
 ```
           f : Π(x̲ : A) ‖B(|x|ᶜ)‖ᶜ
-—————————————————————————————————————————————————
+———————————————————————————————————————————————
  (u̲ : ‖A‖ᶜ ↦ |f(ε u)|ᶜ ) : Π(u̲ : ‖A‖ᶜ) ‖B(u)‖ᶜ
 
 Since ‖_‖ᶜ : Ω, unit and induction vacously satisfy monadic unit laws
@@ -132,12 +132,12 @@ It is quite easy to show that ‖_‖ᶜ validates modus ponens and generalizati
 
 ```
  x : ‖X‖ᶜ    f : ‖X → Y‖ᶜ
-------------------------- ‖_‖ᶜ-MP
+————————————————————————— ‖_‖ᶜ-MP
    |ε(f) ε(x)|ᶜ : ‖X‖ᶜ
 
         f : Π(x̲ : T) ‖P(x)‖ᶜ
----------------------------------------- ‖_‖ᶜ-Gen
-  |x̲ : T ↦ ε(f x)|ᶜ : ‖Π(x̲ : T) P(x)‖ᶜ
+—————————————————————————————————————— ‖_‖ᶜ-Gen
+ |x̲ : T ↦ ε(f x)|ᶜ : ‖Π(x̲ : T) P(x)‖ᶜ
 ```
 
 Now it only remains to validate Hilbert axioms P1-I9 to show that ‖_‖ᶜ implements the whole
@@ -146,7 +146,7 @@ can be derived by plugging the λ-terms witnessing them into |_|ᶜ.
 
 The only remaining axiom is P4. Its proof is essentially the Diaconescu's theorem:
 ```
-------------------------------P4
+———————————————————————————————P4
  TODO : ‖(¬Y → ¬X) → (X → Y)‖ᶜ
 
 ```
@@ -154,13 +154,13 @@ The only remaining axiom is P4. Its proof is essentially the Diaconescu's theore
 Let us additionally show that for propositional `P` (does not work for non-propositional `P`)
 ```
  ‖Σ(x̲ : T) ¬P(x)‖ᶜ
--------------------QL
+———————————————————QL
  ‖¬Π(x̲ : T) P(x)‖ᶜ
 
 and
 
  ‖Π(x̲ : T) ¬P(x)‖ᶜ
---------------------QR
+ ——————————————————QR
  ‖¬Σ(x̲ : T) P(x)‖ᶜ
 
 QL := (s̲ : ‖Σ(x̲ : T) ¬P(x)‖ᶜ) ↦
