@@ -42,7 +42,7 @@ The non-constructive modality is a type-former `‖_‖ᶜ : ∗ → Ω` with th
 
 ```
  Γ ⊢ T    Γ, εᵀ : ‖T‖ᶜ → T ⊢ prf : P
-────────────────────────────────────────
+—————————————————————————————————————
          Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
@@ -51,7 +51,7 @@ in particular include all univalent type theories), a refined definition is requ
 
 ```
  Γ ⊢ T    Γ, εᵀ : ‖T‖ᶜ → ‖T‖ᵁᴵᴾ ⊢ prf : ‖P‖
-──────────────────────────────────────────
+——————————————————————————————————————————
          Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
@@ -62,9 +62,9 @@ between choice and univalence in the context containing ε's, thus rendering the
 non-constructively valid propositions inconsistent (every two of them would be equal than, including
 ‖1‖ᶜ = ‖0‖ᶜ). Secondly, so that is possible to derive
 ```
-    prf : ∃(\x : X) P(x)
-----------------------------
- |prf|ᶜ : ‖Σ(\x : X) P(x)‖ᶜ
+    prf : ∃(x̲ : X) P(x)
+————————————————————————————
+ |prf|ᶜ : ‖Σ(x̲ : X) P(x)‖ᶜ
 ```
 
 Note that all proofs below hold for both the refined and the non-refined definition.
@@ -74,8 +74,8 @@ derive choice under the ‖_‖ᶜ modality in its shortest form (The HoTT Book,
 `X` satisfies `X = ‖X‖ᵁᴵᴾ` and `Y(x)` a type family over `X` satisfying `Y(x) = ‖Y(x)‖ᵁᴵᴾ` (the last
 proposition can be only stated in this simple form because `X` satisfies UIP). Now observe
 ```
-ac : ‖Π(\x : X) ‖Y(x)‖ -> ‖Π(\x : X)Y(x)‖‖ᶜ
-ac := | \f ↦ |\x ↦ ε (f x)| |ᶜ
+ac : ‖Π(x̲ : X) ‖Y(x)‖ -> ‖Π(x̲ : X)Y(x)‖‖ᶜ
+ac := | f̲ ↦ |x̲ ↦ ε (f x)| |ᶜ
 ```
 Actually, we can either remove the requirement that `Y(x) = ‖Y(x)‖ᵁᴵᴾ` is or remove the
 propositional truncation on the right side, but not both.
@@ -84,7 +84,7 @@ Consider another form of axiom of choice (`X` and `Y(x)` are again required to s
 UIP, `P` to be propositional)
 
 ```
-∀(x : X) ∃(y : Y) P(x, y)   →   ‖∃(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
+∀(x̲ : X) ∃(y̲ : Y) P(x, y)   →   ‖∃(y̲ : X → Y) ∀(x̲ : X) P(x, y(x))‖ᶜ
 ```
 
 which reads in words, “if for each `x : X` there is `y : Y` such that `P(x, y)` holds,
@@ -92,15 +92,15 @@ non-constructively there is a function `y : X -> Y` that assigns to each `x` a v
 such that `P(x, y(x))` holds”.
 
 ```
-prf : Π(\x : X) ∃(\y : Y) P(x, y)
---------------------------------------------------------------------------------------------
-|\x : X ↦ (ε |(prf x).fst|ᶜ), \x : X ↦ (prf x).snd|ᶜ : ‖Σ(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
+prf : Π(x̲ : X) ∃(y̲ : Y) P(x, y)
+—————————————————————————————————————————————————————————————————————————————————————————
+|x̲ : X ↦ (ε |(prf x).fst|ᶜ), x̲ : X ↦ (prf x).snd|ᶜ : ‖Σ(y̲ : X → Y) ∀(x̲ : X) P(x, y(x))‖ᶜ
 ```
 
 Let us denote the above term as `ac2`. Let
 ```
-ttdi := |\prf ↦ ε ac|ᶜ
-ttdo : ‖Π(\x : X) ∃(\y : Y) P(x, y) → Σ(y : X → Y) ∀(x : X) P(x, y(x))‖ᶜ
+ttdi := |p̲r̲f̲ ↦ ε ac|ᶜ
+ttdo : ‖Π(x̲ : X) ∃(y̲ : Y) P(x, y) → Σ(y̲ : X → Y) Π(x̲ : X) P(x, y(x))‖ᶜ
 ```
 
 `ttdi` is the so called Type-theoretical Description Axiom from [Werner97]
@@ -108,22 +108,22 @@ ttdo : ‖Π(\x : X) ∃(\y : Y) P(x, y) → Σ(y : X → Y) ∀(x : X) P(x, y(x
 Let us show that ‖_‖ᶜ is idempotent and a monad:
 ```
     p : ‖X‖ᶜ
-----------------
+————————————————
  |p|ᶜ : ‖‖X‖ᶜ‖ᶜ
 
     p : ‖‖X‖ᶜ‖ᶜ
--------------------
+———————————————————
  |ε (ε p)|ᶜ : ‖X‖ᶜ
 
 Since `‖X‖ᶜ : Ω`, these conversions are automatically inverses to each other
 ```
 
 
-The map `(\x : T ↦ |x|ᶜ)` is the modal unit. The induction principle is given by
+The map `(x̲ : T ↦ |x|ᶜ)` is the modal unit. The induction principle is given by
 ```
-            f : Π(\x : A) ‖B(|x|ᶜ)‖ᶜ
--------------------------------------------------
- (\u : ‖A‖ᶜ ↦ |f(ε u)|ᶜ ) : Π(\u : ‖A‖ᶜ) ‖B(u)‖ᶜ
+          f : Π(x̲ : A) ‖B(|x|ᶜ)‖ᶜ
+—————————————————————————————————————————————————
+ (u̲ : ‖A‖ᶜ ↦ |f(ε u)|ᶜ ) : Π(u̲ : ‖A‖ᶜ) ‖B(u)‖ᶜ
 
 Since ‖_‖ᶜ : Ω, unit and induction vacously satisfy monadic unit laws
 ```
@@ -135,9 +135,9 @@ It is quite easy to show that ‖_‖ᶜ validates modus ponens and generalizati
 ------------------------- ‖_‖ᶜ-MP
    |ε(f) ε(x)|ᶜ : ‖X‖ᶜ
 
-          f : Π(\x : T) ‖P(x)‖ᶜ
+        f : Π(x̲ : T) ‖P(x)‖ᶜ
 ---------------------------------------- ‖_‖ᶜ-Gen
- |\x : T ↦ ε(f x)|ᶜ : ‖Π(\x : T) P(x)‖ᶜ
+  |x̲ : T ↦ ε(f x)|ᶜ : ‖Π(x̲ : T) P(x)‖ᶜ
 ```
 
 Now it only remains to validate Hilbert axioms P1-I9 to show that ‖_‖ᶜ implements the whole
@@ -153,23 +153,23 @@ The only remaining axiom is P4. Its proof is essentially the Diaconescu's theore
 
 Let us additionally show that for propositional `P` (does not work for non-propositional `P`)
 ```
- ‖Σ(\x : T) ¬P(x)‖ᶜ
- -------------------QL
- ‖¬Π(\x : T) P(x)‖ᶜ
+ ‖Σ(x̲ : T) ¬P(x)‖ᶜ
+-------------------QL
+ ‖¬Π(x̲ : T) P(x)‖ᶜ
 
 and
 
- ‖Π(\x : T) ¬P(x)‖ᶜ
- --------------------QR
- ‖¬Σ(\x : T) P(x)‖ᶜ
+ ‖Π(x̲ : T) ¬P(x)‖ᶜ
+--------------------QR
+ ‖¬Σ(x̲ : T) P(x)‖ᶜ
 
-QL := (\s : ‖Σ(\x : T) ¬P(x)‖ᶜ) ↦
-|(\p : Π(\x : T) P(x)) ↦
-(ε s) match (\x, \y) ↦ y p(x)|ᶜ
+QL := (s̲ : ‖Σ(x̲ : T) ¬P(x)‖ᶜ) ↦
+|(p̲ : Π(x̲ : T) P(x)) ↦
+(ε s) match (x̲, y̲) ↦ y p(x)|ᶜ
 
-QR := (\p : ‖Π(\x : T) ¬P(x)‖ᶜ) ↦
-|(\s : Σ(\x : T) P(x)) ↦
-\s match (\x, \p) ↦ (ε p) x p|ᶜ
+QR := (p̲ : ‖Π(x̲ : T) ¬P(x)‖ᶜ) ↦
+|(s̲ : Σ(x̲ : T) P(x)) ↦
+s̲ match (x̲, p̲) ↦ (ε p) x p|ᶜ
 ```
 
 By composing QL, QR and DNE (double negation elimination) we make the full circle,
