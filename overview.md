@@ -38,18 +38,18 @@ all arithmetic topoi and all analytic topoi respectively took three decades and 
 endgame in 2013 with the development of Homotopy Type Theory. Right now it seems to be in its
 final phase.
 
-§ Formalized Languages
+§ Formalised Languages
 ----------------------
 
-A formalized language is an artificial language for which there is a precise formal definition of
-syntax [[EM43455]]. Expressions of a formalized language are formal combinations of some initial
+A formalised language is an artificial language for which there is a precise formal definition of
+syntax [[EM43455]]. Expressions of a formalised language are formal combinations of some initial
 symbols, formed by definite rules of formation of expressions in the given language. In contrast
-to the theory of formal langauges, theory of formalized languages does not treat expressions as
-linear strings of symbols taken from a fixed alphabet; expressions of formalized langauges are
+to the theory of formal langauges, theory of formalised languages does not treat expressions as
+linear strings of symbols taken from a fixed alphabet; expressions of formalised langauges are
 taken to be abstract syntax trees, where every node is an application of some formation rule of
 the respective language.
 
-Formalized languages are in general multi-sorted. Expresions of the language belong to particular
+Formalised languages are in general multi-sorted. Expresions of the language belong to particular
 sorts, and formation rules require the constituents to be of certain sort. For example:
 ```
  a : Attribute   n : Noun-Phrase
@@ -57,7 +57,7 @@ sorts, and formation rules require the constituents to be of certain sort. For e
         a n : Noun-Phrase
 ```
 
-While some formalized languages only have a finite number of sorts, complex formalized languages
+While some formalised languages only have a finite number of sorts, complex formalised languages
 have a whole infinite algebra of types, where types can be composed by such operations as cartesian
 product or disjoint sum. In this case it becomes non-trivial to see if a particular expression has
 a required type to be used as a constituent for some particular formation rule. Algebra of types
@@ -66,8 +66,8 @@ of type `X` is allowed to be used where type `Y` is required. As it turns out, i
 being trivial to devise a formalized general-purpose typed language for mathematical proofs
 and constructions with decidable conversion.
 
-Formalized languages dealing with typed free variables are known as type theories. Formulae of
-multi-sorted first-order theories involve typed quantifiers (∃ and ∀), thus their formalized
+Formalised languages dealing with typed free variables are known as type theories. Formulae of
+multi-sorted first-order theories involve typed quantifiers (∃ and ∀), thus their formalised
 languages are type theories. The branch of mathematics studying syntax and semantics of type
 theories is somewhat inconveniently also known as type theory.
 
