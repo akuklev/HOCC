@@ -29,26 +29,26 @@ First recall that the bounded universal quantifier is represented in Martin-Löf
 the dependent product type П:
 
 ```
-Γ ⊢ X : 𝒰    Γ, x : X ⊢ Y(x) : 𝒰
----------------------------------
-       П(\x : X)Y(x) : 𝒰
+ Γ ⊢ X : 𝒰    Γ, x : X ⊢ Y(x) : 𝒰
+———————————————————————————————————
+         П(x̲ : X)Y(x) : 𝒰
 
-Γ ⊢ X : 𝒰    Γ, x : X ⊢ y(x) : Y(x)
-------------------------------------
-  (\x : X ↦ y(x)) : П(\x : X)Y(x)
+ Γ ⊢ X : 𝒰    Γ, x : X ⊢ y(x) : Y(x)
+——————————————————————————————————————
+     (x̲ : X ↦ y(x)) : П(x̲ : X)Y(x)
 ```
 
-The typed unbounded quantifier ⋂(\x : X)Y(x) will be defined the same way
+The typed unbounded quantifier `⋂(x̲ : X) Y(x)` will be defined the same way
 with only difference that x is only allowed to be used only in the type
-signatures of the terms of type ⋂(\x : X)Y(x), but not in their body:
+signatures of the terms of type `⋂(x̲ : X) Y(x)`, but not in their body:
 ```
  Γ ⊢ X : 𝒰ⁿ    Γ, x : X ⊢ Y(x) : 𝒰ᵐ
----------------------------------
-    ⋂(\x : X°)Y(x) : 𝒰ⁿᵔᵐ
+————————————————————————————————————
+       ⋂(x̲ : X°)Y(x) : 𝒰ⁿᵔᵐ
 
       Γ, x : X ⊢ y : Y(x)
---------------------------------
- ([\x : X] y) : ⋂(\x : X°) Y(x)
+————————————————————————————————
+  ([x̲ : X] y) : ⋂(x̲ : X°) Y(x)
 ```
 
 Here, the `X°` is an expression that is allowed to contain a special symbol *, turns into
@@ -58,71 +58,71 @@ equivalent to `1 → *`) including will be called kinds because they describe ki
 polymorphic typeformers (see below).
 
 How can such quantifiers be used? For example we may define the polymorphic identity
-function `id : ⋂(\T : *) T → T` by
+function `id : ⋂(T̲ : *) T → T` by
 ```
-([\T : *] (\x : T) ↦ x)
+([T̲ : *] (x̲ : T) ↦ x)
 ```
 
 Given a type `List : 𝒰 → 𝒰` one can define the function
 ```
-map : ⋂(\T : 𝒰) (T → T) → (List T) → (List T)
+map : ⋂(T̲ : 𝒰) (T → T) → (List T) → (List T)
 ```
 
-While the inhabitants of `П(\x : X)Y(x)` are called (dependent) functions, the inhabitants of
-`⋂(\x : K)Y(x)` will be called polymorphic constructions.
+While the inhabitants of `П(x̲ : X)Y(x)` are called (dependent) functions, the inhabitants of
+`⋂(x̲ : K)Y(x)` will be called polymorphic constructions.
 
 Bounds of the variables ⋂ is not necessarly universes. We will often encounter examples
-such as `⋂(\T : * → *)`, `⋂(\T : ℕ → *)`, `⋂(\T : X → X → *)` and so on.
+such as `⋂(T̲ : * → *)`, `⋂(T̲ : ℕ → *)`, `⋂(T̲ : X → X → *)` and so on.
 
 Since native universes 𝒰 only have generators but no extractors, any expression of the type
-`П(\x : X)Y(x)` with `Y(x) : 𝒰` is up to a syntactical conversion an expression of the type
-`⋂(\x : X)Y(x)`. This metathoretical fact is the type theoretical counterpart of
+`П(x̲ : X)Y(x)` with `Y(x) : 𝒰` is up to a syntactical conversion an expression of the type
+`⋂(x̲ : X)Y(x)`. This metathoretical fact is the type theoretical counterpart of
 the generalization rule.
 
 > CAVEAT: without the restriction `Y(x) : 𝒰`, that is not true. If we only require `Y(x) : 𝒰⁺`,
-we allow the expression `(\t : 𝒰 ↦ t) : П(\t : 𝒰) 𝒰` that uses its argument t not only in
+we allow the expression `(t̲ : 𝒰 ↦ t) : П(t̲ : 𝒰) 𝒰` that uses its argument t not only in
 type annotations but also in the body, and thus cannot be transformed into expression of the
-form `([\t : 𝒰] expr) : ⋂(\t : 𝒰) 𝒰`.
+form `([t̲ : 𝒰] expr) : ⋂(t̲ : 𝒰) 𝒰`.
 
 Example 1.
 
 Suppose you have a polymorphic type, endowing any type `T : *` with a desired mathematical structure
 (see below, how polymorphic types can be handled), for example
 ```
-Pointed[T : *]
+Pointed[T̲]
   unit : T
 ```
 
 Now, the universe 𝒰⁺ contains the type of all 𝒰-small pointed types
 ```
-Σ(\T : 𝒰) Pointed[T] : 𝒰⁺
+Σ(T̲ : 𝒰) Pointed[T] : 𝒰⁺
 ```
 
 Likewise it has types of all 𝒰-small monoids, 𝒰-small groups, 𝒰-small categories, etc.
 Now pretend you have proven something for all 𝒰-small groups:
 ```
-prf : (G : Σ(\T : 𝒰) Group[T]) → ...
+prf : (G̲ : Σ(T̲ : 𝒰) Group[T]) → ...
 ```
 
 You can uncurry the first argument to obtain
 ```
-pr : (\G-carrier : 𝒰) → (\G-structure : Group[G-carrier]) → ...
+pr : (G̲-̲c̲a̲r̲r̲i̲e̲r̲ : 𝒰) → (G̲-̲s̲t̲r̲u̲c̲t̲u̲r̲e̲ : Group[G-carrier]) → ...
 ```
 
 Now you can generalize to obtain the polymorphic construction proving it for all groups
 instead of 𝒰-small ones:
 
 ```
-p : ⋂(\G : *) (\g : Group[G]) → ...
+p : ⋂(G̲ : *) (g̲ : Group[G]) → ...
 
 # which also can be written as
 
-p[\G : *](\g : Group[G]) : ...
+p[G̲](g̲ : Group[G]) : ...
 ```
 
 Now let us consider the elimination rule for ⋂-quantifiers. Specialization allows to apply
 polymorphic constructions to both all native universes `𝒰ⁿ` and to the “user-defined” à la
-Tarski universes `U : 𝒰`. Specialization $c : ⋂(\x : K) Y(x)$, and a type `U : 𝒰ⁿ` equiped
+Tarski universes `U : 𝒰`. Specialization $c : ⋂(x̲ : K) Y(x)$, and a type `U : 𝒰ⁿ` equiped
 with a structure of a universe (that is, codes for types 0, 1, and 𝔹, operations Π, Σ, and Ẅ
 on codes, coherency conditions and a decoding operator). Then it replaces the unbounded quantifier
 `⋂` by `П` by replacing all instances of * in K by U and “compiling” the body of the polymorphic
@@ -156,7 +156,7 @@ interpretation into the set theory.
 
 The type `List : 𝒰 -> 𝒰` defined by
 ```
-#Inductive List[\T]
+#Inductive List[T̲]
   nil : List[T]
   cons : T → List[T] → List[T]
 ```
@@ -164,11 +164,11 @@ is not only an endomorphism on the universe 𝒰. It can be promoted to a polymo
 on any cartesian closed category with W-types:
 
 ```
-#Inductive List[\T]
+#Inductive List[T̲]
   nil : List[T]
   cons : T → List[T] → List[T]
 
-List : ⋂(\U : 𝒰) (\u : W-CCC(U)) → U → U
+List : ⋂(U̲ : 𝒰) (u̲ : W-CCC(U)) → U → U
 ```
 
 The inductive definition above expands into a kind of macro that defines a list type for every
@@ -180,7 +180,7 @@ types like not only in universes, but in any categories with enough structure, t
 to override the meaning of (→)-operator in the definition. Categories with enough structure
 to interpret simple W-types are actually the W-pretopoi, so we have
 ```
-List : ⋂(\U : 𝒰, \(→): U → U → 𝒰) (\u : W-Pretopos(U, (→))) U → U
+List : ⋂(U̲ : 𝒰, \(→): U → U → 𝒰) (u̲ : W-Pretopos(U, (→))) U → U
 ```
 
 § Structure Types as Polymorphic Constructions
@@ -189,7 +189,7 @@ List : ⋂(\U : 𝒰, \(→): U → U → 𝒰) (\u : W-Pretopos(U, (→))) U �
 The structure W-pretopos is an extension of a more simple polymorphic structure, namely that
 of category
 ```
-$Structure Cat[\Ob : 𝒰,  \Mor : Ob → Ob → 𝒰]:
+$Structure Cat[O̲b̲ : 𝒰, M̲o̲r̲ : Ob → Ob → 𝒰]:
   id : (X : Ob) → Mor[X, X]
   compose : (X Y Z : Ob) → Mor[X, Y] → Mor[Y, Z] → Mor[X, Z]
   ... axioms
@@ -197,7 +197,7 @@ $Structure Cat[\Ob : 𝒰,  \Mor : Ob → Ob → 𝒰]:
 ```
 Ignoring polymorphism we simply have
 ```
-Cat : П(\Ob : 𝒰, Mor: Ob → Ob → 𝒰) 𝒰
+Cat : П(O̲b̲ : 𝒰, M̲o̲r̲ : Ob → Ob → 𝒰) 𝒰
 ```
 
 This way we can only define small categories, i.e. the ones where the type of objects
@@ -216,20 +216,20 @@ interpreted not only in any universe but in any (∞,1)-category with enough pul
 § Internal Parametricity
 ------------------------
 
-Show that for `a : ⋂(\T : *) T → T` holds `a = id`. Proof:
+Show that for `a : ⋂(T̲ : *) T → T` holds `a = id`. Proof:
 ```
-[\T : *](\c : T)
-let P : (T → Ω°) := (\x : T) ↦ (x ~ c)
+[T̲ : *](c̲ : T)
+let P : (T → Ω°) := (x̲ : T) ↦ (x ~ c)
 then a[P] : P[T](x) → P[T](a(x))
-: ∀(\x : T) (x ~ c) → (a(x) ~ c)
+: ∀(x̲ : T) (x ~ c) → (a(x) ~ c)
 
-that is, the term pr1 := ([\T : *] (\c : T) ↦ a[(\x : T) ↦ (x ~ c))] has type
-⋂(\T : *) ∀(\c : T) ∀(\x : T) (x ~ c) → (a(x) ~ c)
+that is, the term pr1 := ([T̲ : *] (c̲ : T) ↦ a[(x̲ : T) ↦ (x ~ c))] has type
+⋂(T̲ : *) ∀(c̲ : T) ∀(x̲ : T) (x ~ c) → (a(x) ~ c)
 
-[\T : *] (\x : T) pr1[T](x)(x)(refl(x)) : ⋂(\T : *) ∀(\x : T) a(x) = x
+[T̲ : *] (x̲ : T) pr1[T](x)(x)(refl(x)) : ⋂(T̲ : *) ∀(x̲ : T) a(x) = x
 
-id[T] ~ a[T] = ∀(\x : T) a(x) = id(x)
-= ∀(\x : T) a(x) = x
+id[T] ~ a[T] = ∀(x̲ : T) a(x) = id(x)
+= ∀(x̲ : T) a(x) = x
 ```
 
 § Internalization as Compilation Into a Weaker Language
