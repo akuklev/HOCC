@@ -102,10 +102,10 @@ of the type `Nat`. They represent nothing other than themselves and are irreduci
 
 Inductive types may be _polymorphic_, i.e. have typal _parameters_ (enclosed in square brackets):
 ```
-#Inductive List[T͟]
+#Inductive List[T̲]
   Empty : List[T]
   (::)  : T → (List[T] → List[T])
-  [t͟a͟i͟l͟]
+  [t̲a̲i̲l̲]
 ```
 
 [Leibniz1684]: Leibniz, G. W. (1684), “Meditationes de cognitione, veritate et ideis”, Acta Eruditorum
