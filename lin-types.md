@@ -33,18 +33,18 @@ return “value”.
 [Continuations](https://en.wikipedia.org/wiki/Continuation) constitute a form of request endpoint.
 A routine anticipating continuation has the following signature:
 ```
-proc(normal-args : X)[\T](\cont : R ⊸ T) : T
+proc(n̲o̲r̲m̲a̲l̲-̲a̲r̲g̲s̲ : X)[T̲](c̲o̲n̲t̲ : R ⊸ T) : T
 
  equaivalently
 
-proc : Π(\normal-args : X) ⋂(\T) (R ⊸ T) ⊸ T
+proc : Π(n̲o̲r̲m̲a̲l̲-̲a̲r̲g̲s̲ : X) ⋂(T̲) (R ⊸ T) ⊸ T
 ```
 
 Certainly, response types can be dependent on request types:
 ```
  ReqT : 𝓤   (r : ReqT) ⊢ RespT(r)
------------------------------------
-    (\r : ReqT) ⊸ RespT(r) : 𝓛
+———————————————————————————————————
+    (r̲ : ReqT) ⊸ RespT(r) : 𝓛
 ```
 
 For request endpoints that are not mandatory to use, one can use a special request to close them.
@@ -52,22 +52,22 @@ You just wrap `ReqT` into a type with additional request `Terminate`, and wrap t
 into a type with additional responce `Terminated` which arizes iff the request was to close the
 endpoint:
 ```
-#Inductive OptionalRec[ReqT : *] : *
-  Request(\r : T)
+#Inductive OptionalRec[R̲e̲q̲T̲ : *] : *
+  Request(r̲ : T)
   Terminate
 
-#Inductive Resp[RespT : ReqT → *] : OptionalRec[ReqT] → *
+#Inductive Resp[R̲e̲s̲p̲T̲ : ReqT → *] : OptionalRec[ReqT] → *
   Terminate ↦ Terminated
-  Request(\req) ↦ Response(\resp : ReqT(req))
+  Request(r̲) ↦ Response(r̲e̲s̲p̲ : ReqT(r))
 
-now instead of `f : (\r : ReqT) ⊸ RespT(r)` you can
-use `f : (\r : OptionalRec(ReqT)) ⊸ Resp[RespT](r)`
+now instead of `f : (r̲ : ReqT) ⊸ RespT(r)` you can
+use `f : (r̲ : OptionalRec(ReqT)) ⊸ Resp[RespT](r)`
 to have a closable request endpoint.
 ```
 
 An endpoint can return another endpoints. For example, consider
 ```
-random-number-generator : (\n : ℕ) ⊸ (𝟙 ⊸ Fin(100))ⁿ
+random-number-generator : (n̲ : ℕ) ⊸ (𝟙 ⊸ Fin(100))ⁿ
 ```
 
 Given a natural number `n` it generates `n` independent endpoints, each of them has a trivial
@@ -79,7 +79,7 @@ identical type. A variable of a type `x : !I` is not single-use any more, it is 
 any number of times. For value types `A` and `B`, the types `A → B` and `!A ⊸ B` are equivalent.
 
 By returning a single endpoint as part of the responce, endpoints can represent communication
-streams. If an endpoint has a type `I` with property `I = (\r : ReqT) ⊸ I × RespT(r)`, an endpoint
+streams. If an endpoint has a type `I` with property `I = (r̲ : ReqT) ⊸ I × RespT(r)`, an endpoint
 `s : I` can be used as follows:
 ```
 #let (s₂, response₁) := s(request₁)
@@ -99,11 +99,11 @@ Since there is no way to close the running endpoint, at the end of such a routin
 `console` back to the caller.
 
 In general, type of the returned endpoint could also change. Assume we have the type “State”,
-the types `ReqT(\s : State)` and `RespT(\s : State)(\req : Req(s))` now depend on the state of
-the endpoint, and we have the function `next-state(\s : State, \r : ReqT(s)) : State`. Now we
-can define the type `I(\s : State)` with the property
+the types `ReqT(s̲ : State)` and `RespT(s̲ : State)(r̲ : Req(s))` now depend on the state of
+the endpoint, and we have the function `next-state(s̲ : State, r̲ : ReqT(s)) : State`. Now we
+can define the type `I(s̲ : State)` with the property
 ```
-I(s) = (\r : ReqT(s)) ⊸ I(next-state(s, r)) × RespT(s)(r)
+I(s) = (r̲ : ReqT(s)) ⊸ I(next-state(s, r)) × RespT(s)(r)
 ```
 
 Such types are called session types. One also allow an endpoint to return multiple fresh endpoints
@@ -159,10 +159,10 @@ all session types. With co-lambda abstractions it is possible to implement corou
 ---------------------------
 
 For two values types `T Q : 𝓤` one can build their cartesian product `T × Q` containing pairs
-`(t, q)` of values `t : T` and `q : Q`. We can also build dependent pair types `Σ(\t : T) Q(t)`.
+`(t, q)` of values `t : T` and `q : Q`. We can also build dependent pair types `Σ(t̲ : T) Q(t)`.
 
 This trivially generalizes to the case when `Q : 𝓛` is an agent type. It allows to define
-disjunctive sum of two agent types `Q ⊕ P := Σ(\t : 𝔹) (ff ↦ Q, tt ↦ P)`. That is, an actor of
+disjunctive sum of two agent types `Q ⊕ P := Σ(t̲ : 𝔹) (ff ↦ Q, tt ↦ P)`. That is, an actor of
 type `Q ⊕ P` is either of type `Q` or of type `P`.
 
 Now what about cartesian product of two agent types? There, we have to options:
@@ -174,8 +174,8 @@ because `w` cannot be used twice.
 
 This two binary connectives can be as well generalized to quantifiers where bounded variable is of
 a value type.
-* `∀(\t : T) Q(t)` denotes a family of agents (each one has to be consumed exactly once);
-* `Π(\t : T) Q(t)` denotes a “factory that” yields one agent of the type `Q(t)` when given a `t`.
+* `∀(t̲ : T) Q(t)` denotes a family of agents (each one has to be consumed exactly once);
+* `Π(t̲ : T) Q(t)` denotes a “factory that” yields one agent of the type `Q(t)` when given a `t`.
 
 The operators `⊕`, `⊗`, `&` and `⊸` precisely reproduce the rules of Intuitionistic Linear Logic.
 See “Linear Logic Propositions as Session Types” by L. Caires, F. Pfenning, and B. Toninho to see
@@ -189,11 +189,11 @@ for dualizable agent types: (`X ⊸ Y = X⟂ ⅋ Y`, `X⟂ ⅋ Y = X⟂ ⊸ Y = 
 
 `P ⅋ Q` stands for “a process eventually yielding a `P` and a process eventually yielding a `Q`
 running in parallel”. By virtue of being commutative and associative this binary connective can
-be also generalized to a quantifier `⅋(\t : T) Q(t)`, where `T` is a value type.
+be also generalized to a quantifier `⅋(t̲ : T) Q(t)`, where `T` is a value type.
 
-An agent of the type `w : ⅋(\t : T) Q(t)` in general requires the program to process all branches
+An agent of the type `w : ⅋(t̲ : T) Q(t)` in general requires the program to process all branches
 (as many as there are values `t` in `T`) with each branch consuming exactly one agent `wₜ : Q(q)`.
-`⅋(\t : T) Q(t)` represents a “pool” where agents are running simultaneously, concurrently and
+`⅋(t̲ : T) Q(t)` represents a “pool” where agents are running simultaneously, concurrently and
 interacting with each other. If one of the agents has type `Y = A ⊸ B`, it means that it currently
 awaits a value of the type `A` and not running, which can lead to another agent `X` in the “pool”
 stuck. The handler of `X ⅋ Y` knows how to process both actors independently, so it will feed a
@@ -256,8 +256,8 @@ Imagine that `𝔽₁` can act on processes by either terminating them (case of 
 (case of 1). That is, for each `q : 𝔽₁` and `p : P` we have `qp : qP` where the action of `q` on
 types is given by `(0₁)P = 𝟙`, and otherwise `qP = P`.
 
-Now if we have a process factory `f : Π(\t : T) Q(t)` and a function `v : T ⊸ 𝔽₁`, we pair them
-to obtain `p := ⸮(\t : T ↦ (v t)(f t)) : ⅋(\t : T) (v t)Q(t)`.
+Now if we have a process factory `f : Π(t̲ : T) Q(t)` and a function `v : T ⊸ 𝔽₁`, we pair them
+to obtain `p := ⸮(t̲ : T ↦ (v t)(f t)) : ⅋(t̲ : T) (v t)Q(t)`.
 
 We can define the following operations on the type `𝔽₁`:
 ```
@@ -292,7 +292,7 @@ usual algebraic theories (Hopf algebra over 𝔽₁ is a group, etc.).
 § Quantum Quantifiers
 ---------------------
 
-The type `⅋(\t : T) Q(t)` represents a superposition of simultaneous processes? Can we use it to
+The type `⅋(t̲ : T) Q(t)` represents a superposition of simultaneous processes? Can we use it to
 represent superpositions of quantum states? If we somehow could, there will be a map `|f>` turning
 functions `f : T → ℂ` into states `|f> : ⅋(_ : T) 𝔽₁`, and those states can be used to ‘probe’
 objects of `ψ : ⅋(_ : T) 𝔽₁`. By probing, we force `ψ` into a new state (either `|f>` or `|-f>`)
@@ -300,14 +300,14 @@ and get a bit value, if it was plus or minus `f`:
 ```
          ψ : ⅋(_ : T) 𝔽₁    f : T → ℂ
 -------------------------------------------------
- ψ.measure(f) : Σ(\t : 𝔹) (ff ↦ {\ψ | ψ = |f>},
-                           tt ↦ {\ψ | ψ = |-f>})
+ ψ.measure(f) : Σ(t̲ : 𝔹) (ff ↦ {ψ | ψ = |f>},
+                         tt ↦ {ψ | ψ = |-f>})
 ```
 
 If `ψ` was already equal to `|f>`, we'll always land in tht `tt` branch:
 ```
- ψ : ⅋(\t : T) Q(t)     p : ψ = |f>
-------------------------------------
+ ψ : ⅋(t̲ : T) Q(t)     p : ψ = |f>
+-----------------------------------
     ψ.measure(f) = (tt, |f>)
 ```
 
@@ -315,7 +315,7 @@ We have to take into account that quantum objects have non-trivial automorphisms
 “invisible” complex phase.
 
 An object `q : ℭ` is said to be a linear U(1)-torsor, if it's automorphisms space `(q)! = U(1)` and
-it can be acted on by elements of `U(1) = {\c : ℂ | |c| = 1 }` associatively:
+it can be acted on by elements of `U(1) = {c̲ : ℂ | |c| = 1 }` associatively:
 ```
  q : ℭ    c : U(1)
 -------------------
@@ -349,11 +349,11 @@ We also have equivariant quantifiers:
 ```
  T : 𝒰    c : ℭ    t : T ⊢  ᶜQ(t) : 𝓛
 ---------------------------------------
-          Σᶜ(\t : T) ᶜQ(t)
+         Σᶜ(t̲ : T) ᶜQ(t)
 
  T : 𝒰    c : ℭ    t : T ⊢  ᶜQ(t) : 𝓛
 ---------------------------------------
-          ∀ᶜ(\t : T) ᶜQ(t)
+         ∀ᶜ(t̲ : T) ᶜQ(t)
 ```
 
 Let `ᶜ𝔹` denote the type of qbits. Then `∀ᶜ(_ : Fin(n)) ᶜ𝔹` describes a a quantum register
@@ -421,7 +421,7 @@ such a value, it would fulfill the promise named `c` by this value, finish and b
 
 Assume we have a routine anticipating a continuation:
 ```
-proc[\T](\cont : R ⊸ T) : T
+proc[\T](c̲o̲n̲t̲ : R ⊸ T) : T
 ```
 
 How can the caller extract the result which is not returned, but pushed into the continuation?

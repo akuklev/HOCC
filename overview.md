@@ -206,7 +206,7 @@ of non-recursive extractors parametrized by values `x : X`:
 ```
 
 While it is customary in computer science to use the word “function” for partial functions (that might sometimes
-fail to yield a result), in mathematics and type theories by “functions” one means total and deterministic
+fail to yield a result), in mathematics and type theories by “functions” we mean total and deterministic
 functions.
 
 That's how one defines a function on `Nat`:
