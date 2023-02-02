@@ -71,7 +71,7 @@ map : ⋂(T̲ : 𝒰) (T → T) → (List T) → (List T)
 While the inhabitants of `П(x̲ : X)Y(x)` are called (dependent) functions, the inhabitants of
 `⋂(x̲ : K)Y(x)` will be called polymorphic constructions.
 
-Bounds of the variables ⋂ is not necessarly universes. We will often encounter examples
+Bounds of the variables in ⋂ is not necessarly universes. We will often encounter examples
 such as `⋂(T̲ : * → *)`, `⋂(T̲ : ℕ → *)`, `⋂(T̲ : X → X → *)` and so on.
 
 Since native universes 𝒰 only have generators but no extractors, any expression of the type
@@ -221,15 +221,15 @@ Show that for `a : ⋂(T̲ : *) T → T` holds `a = id`. Proof:
 [T̲ : *](c̲ : T)
 let P : (T → Ω°) := (x̲ : T) ↦ (x ~ c)
 then a[P] : P[T](x) → P[T](a(x))
-: ∀(x̲ : T) (x ~ c) → (a(x) ~ c)
+: Π(x̲ : T) (x ~ c) → (a(x) ~ c)
 
 that is, the term pr1 := ([T̲ : *] (c̲ : T) ↦ a[(x̲ : T) ↦ (x ~ c))] has type
-⋂(T̲ : *) ∀(c̲ : T) ∀(x̲ : T) (x ~ c) → (a(x) ~ c)
+⋂(T̲ : *) Π(c̲ : T) Π(x̲ : T) (x ~ c) → (a(x) ~ c)
 
-[T̲ : *] (x̲ : T) pr1[T](x)(x)(refl(x)) : ⋂(T̲ : *) ∀(x̲ : T) a(x) = x
+[T̲ : *] (x̲ : T) pr1[T](x)(x)(refl(x)) : ⋂(T̲ : *) Π(x̲ : T) a(x) = x
 
-id[T] ~ a[T] = ∀(x̲ : T) a(x) = id(x)
-= ∀(x̲ : T) a(x) = x
+id[T] ~ a[T] = Π(x̲ : T) a(x) = id(x)
+= Π(x̲ : T) a(x) = x
 ```
 
 § Internalization as Compilation Into a Weaker Language
