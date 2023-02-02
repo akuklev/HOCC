@@ -51,7 +51,7 @@ in particular include all univalent type theories), a refined definition is requ
 
 ```
  Γ ⊢ T    Γ, εᵀ : ‖T‖ᶜ → ‖T‖ᵁᴵᴾ ⊢ prf : ‖P‖
- ————————————————————————————————————————————
+————————————————————————————————————————————
          Γ ⊢ |prf|ᶜ : ‖P‖ᶜ
 ```
 
@@ -160,7 +160,7 @@ Let us additionally show that for propositional `P` (does not work for non-propo
 and
 
  ‖Π(x̲ : T) ¬P(x)‖ᶜ
- ——————————————————QR
+————–——————————————QR
  ‖¬Σ(x̲ : T) P(x)‖ᶜ
 
 QL := (s̲ : ‖Σ(x̲ : T) ¬P(x)‖ᶜ) ↦
