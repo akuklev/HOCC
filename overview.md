@@ -285,7 +285,7 @@ inherently open totalities.
 Besides inductive and behavioral types, Construction Calculi feature universes: the types of types.
 The base universe `𝒰` is guaranteed to contain all canonically inductive types and is closed under
 applications of all polymorphic type formers, both inductive and coinductive, e.g. `Nat : 𝒰`,
-`List[ Stream[Function[Nat, Nat] ] ] : 𝒰`. The universe `𝒰⁺` contains everything from the universe
+`List[ Stream[ Function[Nat, Nat] ] ] : 𝒰`. The universe `𝒰⁺` contains everything from the universe
 `𝒰 ⊂ 𝒰⁺`, besides that it contains `𝒰 : 𝒰⁺` itself and is again closed under applications of any
 polymorphic typeformers, so it contains types like `List[𝒰]` and `Function[Nat, 𝒰]`. Analogously
 we define `𝒰⁺⁺`, `𝒰⁺⁺⁺` and so on for any finite number of superscript plus signs. This way one
@@ -295,7 +295,152 @@ universe, without any universe living in itself, which would cause inconsistenci
 Universes are open totalities in the most strict sense: they don't have any extractors, so in
 particlar one cannot define any function from a universe by pattern matching.
 
+§§ Propositions
+---------------
 
+Consider the degenerate inductive type
+
+```
+#Inductive Empty
+  /- no constructors -/
+```
+
+This type has no constructors, and in a type theory enjoing normalization and canonicity there can be no expressions
+of the type `Empty` in empty context. At the same time, a function on this type can be defined (as it is the case
+for all inductive types) by pattern matching. Yet there are no constructors to match, such function has no body
+and still exists. In fact there is a unique function from `Empty` to any type `X`. Fortunatelly in cannot be ever
+applied because the type `Empty` has no inhabitants.
+
+In Construction Calculi logical propositions are represented by types inhabited by proofs of respective
+propositions. A function `P → Q` between two propositions by definition turns proofs of `P` into proofs of `Q` and
+therefore is a proof that `P` implies `Q`. The type `Empty` encodes the canonical false proposition: it has no
+proofs and if there were any proofs, (remember, there is a function form `Empty` into any type `X`) it would allow
+prove all propositions `P` (together with their negations `¬P`, because they are propositions as well) therefore
+trivializing the theory, which is known in logics as “ex falso quodlibet”. By the way, negation of an arbitrary
+proposition `P` can be defined as `P → Empty` (`P` is false exactly we we can derive contradiction by assuming it
+to be true).
+
+All provably false propositions can be shown to be equivalent to `Empty`. One direction (`X -> Empty`) comes from
+the definition of negation, the other direction (`Empty -> X`) comes from the fact that there is a function from
+`Empty` into any type. The same way, any true propoistion can be shown to be equivalent to the type `Unit` with
+exactly one element. Yet, one cannot show constructively that the class of all propositions `Ω` is exhausted by this
+two variants: besides provably false propositions and provably true ones there can be unsettled ones. To give a
+concrete example, existance of sets strictly larger than the set of natural numbers and strictly smaller than the
+set of natural number sequences is an example of such an unsettled proposition in the standard set theory. It is known
+as Continuum Hypothesis. Existence of such sets are neither implied nor ruled out by axioms of the set theory.
+There are models of set theory without such sets and there are other perfectly valid models where such sets exist.
+Futhermore, one cannot settle all propostions by adding more axioms. Gödel's incompleteness theorem states that any
+axiomatic theory (with finitely generated system of axioms) has unsettled propositions at least if is powerful enough
+to express natural numbers and multiplication on them as an operation.
+
+While all true propoistions are alike and all false propositions are alike, unsettled propositions are unsettled in
+their own way. It might be that one unsettled proposition is implied by another (e.g. Generalized Continuum
+Hypothesis implies the Continuum Hypothesis, yet both are independent of standard set theory), or they can be
+completely independent. Constructively, the class of all propositions `Ω` is bounded lattice ordered by implication
+`P → Q` with bottom element `Empty` (the false proposition) and top element `Unit` (the true proposition).
+
+The “class” of canonical propositions `Ω` is seen a as a type in most Construction Calculi. It is neither an
+inductive type, nor a behavioural one, and its inhabitants are themselves types (propositions are considered
+to be types inhabited by their respective proofs). Such types (types of types) are known as universes and form
+a third large group of types besides inductive and behavioral ones.
+For any type `X` there is a proposition “`X` is non-empty” that we'll denote `⁰X : Ω`.
+
+As it was already mentioned, the class of canonical propositions `Ω` contains `Empty` and `Unit` and is closed
+under forming functions: for `P Q : Ω`, `(P → Q) : Ω`. It is also closed under forming pairs: a pair of proofs,
+one for `P` and one for `Q` is precisely the proof of `P ‹and› Q`. Via implication and negation one can also define
+the logical conjunction `(‹or›)`. Together with these two logical conjunctions the type `Ω` forms a Heyting algebra,
+moreover a complete one as we will see in the next section.
+
+All constructive calculi of concern are compatible with axiom of double negation elimination `¬¬P → P` that
+trivializes all structure mentioned above to classical logic where every proposition has a definite truth value
+`true` or `false`, yet this axiom is not derivable constructively in general. Double negation elimination can be
+derived constructivly only for a very narrow class of propositions: namely, for decidable ones (these are the ones
+that can be at least in theory checked algorithmically).
+
+
+§§ Predicates, Relations and Dependent Functions
+------------------------------------------------
+
+By means of indexed inductive types one can define predicates on inductive types:
+
+```
+#Inductive (_-is-even) : Nat → *
+  zero-is-even : (0)-is even
+  suc-of-suc-is-even(n̲ : Nat) : (n)-is even → (n'')-is even
+```
+
+Here, the predicate `-is-even` on natural numbers is defined. Equivalently, for each natural number `n`
+a type `(n)-is-even` is defined, which can be either empty (which stands for false) or have an inhabitant
+(which stands for true). Here the generator `zero-is-even` populates `(0)-is even`, and the generator
+`suc-of-suc-is-even(n̲ : Nat)` populates `(n + 2)-is even` whenever `(n)-is even`.
+
+While this particular predicate is decidable (one can easily check if a given number is even), in general
+inductively defined predicates are not. For example it is still unknown (cf. Collatz conjecture) if the following
+predicate is decidable:
+```
+#Inductive Collatz-Terminating : Nat → *
+  ct-zero    : Collatz-Terminating(0)
+  ct-one     : Collatz-Terminating(1)
+  ct-half(n̲) : Collatz-Terminating(n) → Collatz-Terminating(2 · n)
+  ct-triple-plus-one(n̲) : Collatz-Terminating(3·n + 1) → Collatz-Terminating(n)
+```
+
+In dependent type theories there are so called dependent function types:
+For a type `X` and an inductive type family `Y : X -> *` indexed over it, there is a type
+`∀(x̲ : X) Y(x)`, read “for each `x` of `X` a value of the type `Y(x)`”. For example the function
+&nbsp; `f : ∀(n̲ : Nat) Vec[Nat](n)`
+must yield a vector of length `n` for each number `n`.
+
+When applied to predicates, dependent functions reassemble universal quantifier. The type
+```
+∀(n̲ : Nat) Collatz-Terminating(n)
+```
+
+is populated precisely by functions yielding a proof of `Collatz-Terminating(n)` for each `n`,
+that is precisely by constructive proofs of the proposition `∀(n̲ : Nat) Collatz-Terminating(n)`.
+
+To give an example how such proofs might look like consider an easier proposition:
+```
+∀(n̲ : Nat) ( double(n) )-is-even
+```
+
+Functions are defined by pattern matching, and we are allowed to unfold the definition of `double` while matching:
+```
+#Define prf : ∀(n̲ : Nat) ( double(n) )-is-even
+  0    ↦ zero-is-even : ( double(0) )-is-even
+  (n̲)' ↦ suc-of-suc-is-even( double(n) )(prf(n) : ( double(n) )-is-even) : ( double(n') )-is-even
+```
+
+The class of all propositions `Ω` is closed under forming arbitrary conjunctions:
+For any family of propositions `P : X → Ω` one can form `∀(x̲ : X) P(x) : Ω`, which means Ω is a complete Heyting
+algebra. Since `Ω` a complete Heyting algebra and contains any proposition definable within HOCC, subsets of any type
+`T` can be identified with predicates `P : T → Ω`. In fact, we can even introduce special syntax for subset types
+`{t̲ : T | P(t)}`, for example `{n̲ : Nat | (n)-is-even ‹and› (10 ≤ n) }`.
+
+Relations on a type can be defined as twice indexed inductive types:
+```
+#Inductive (≤) : Nat → Nat → *
+  ≤-refl(n̲) : (n ≤ n)
+  ≤-succ(n̲ m̲) : (n ≤ m) → (n ≤ m')
+```
+
+Each inductive type automatically comes with an indictively defined equality relation that exactly follows the pattern
+of its generators. For example, for the type of natural numbers the equality relation can be given as:
+```
+#Inductive (=) : Nat → Nat → *
+  0= : (0 = 0)
+  (n̲)'= : (n' = n')
+```
+
+For behavioral types, equality follows the pattern of their extractors and represents observational equivalence,
+that is two “things” are equal precisely if applying same extractors yields same values. In particular, for two
+functions `f g : X → Y` the equality is given by
+```
+pointwise : ∀(x̲ : X) f(x) = f(y)
+```
+
+In particular, in type theory two implementations of the same function are considered equal as functions if they
+yield equal results on equal arguments.
 
 
 
