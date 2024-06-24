@@ -10,14 +10,18 @@ and these rudiments cannot be avoided at all times. Their type systems are a “
 for many purposes. Oftentimes it is reasonable to retreat to dynamically types languages like Clojure or Python, because their rudimentary type system does
 not get in the way.
 
+Now what's Type Theory and why bother?
+Let's step back to statically typed languages like Java or C++.
 Besides inbuilt primitive data types such as `int32`, such languages also support composite data types, such as tagged unions  X + Y and tuples X × Y.
 These generalize algebraic operations of addition and multiplication: given two finite types X and Y with n and m inhabitants respectively,
 their tagged union X + Y has (n + m) inhabitants, and the type of pairs X × Y has (n · m) inhabitants. For this reason, such composite types are called
 polynomial data types. Algebraic datatypes generalize polynomial ones by allowing recursive definitions: `IntList := 𝟙 + Int × IntList`. It turns out,
 by starting with finite datatypes and algebraic datatype definitions, one can define lots of potentially infinite data types and data structures, such
-as true (as opposed to fixed-width int64) natural numbers, lists, binary trees, etc. Type definitions tell exactly how values of those types can be
-analysed and syntesized, they provide full and complete semantics for variables of those types which is completely independent from low level
-implementation.
+as true (as opposed to fixed-width int64) natural numbers, lists, binary trees, etc. These type definitions tell exactly how values of those types can be
+analysed and syntesized, they provide full and complete semantics for variables of those types which is independent from low level implementation.
+For algebraic data types, typing discipline is not a leaky abstraction. It is never necessary to “peep under the hood” and there is no gap between
+“runtime types” and “compile-time types”. With algebraic data types, there is no need for inbuilt array types (arrays can be modelled as lists) or
+primitive data types such as `int32` (these can be modelled as lists of bits 𝔹 := {tt, ff}). However, they are not enough: 
 
 There is one more operation
 
