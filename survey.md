@@ -1,8 +1,18 @@
-Principled General-Purpose Programming Languages: Where are we now?
-===================================================================
+Introspectable General-Purpose Programming Languages: Where are we now?
+=======================================================================
+
+You may have heard about purely functional programming languages such as Haskell, languages with a reputation for being a very academic and abstruse.  
+Agda is an even more abstruse language — it's a dependently typed total functional programming language. Agda and a few similar languages have a remarkable capability of self-introspection: they can be used not only to write programs, but also to reason about every aspect of those programs using the very same language, i.e. formulate any desired properties of programs and write formal proofs that those properties hold. Those proofs will be checked while the programs are being compiled.
+
+Agda used to be less expressive than Haskell: being a _total_ functional programming language, Agda employs a termination checker for recursive algorithms. For many algorithms, convincing the termination checker can be quite non-trivial. Recently Agda incorporated Guarded Computational Type Theory CTT⏲'2018. With this upgrade, it turned out to be possible to verify termination and correctness of notorious Hofmann's algorithm in a few pages worth of proof. This attests feasibility of expressing any Haskell algorithm in Agda. 
+
+
+Mature in principle
+
 
 A modern general-purpose programming language is a language suitable for an entire software product of arbitrary complexity, including reactive user interface, coroutines/actors, asynchronous I/O, interactions with the external world: OS, file system, databases, queues, sockets, device drivers, remote parties. Think of Kotlin, Rust, or Scala.  
-Modern general-purpose programming languages are a mess, none of them has fully specified semantics so you can reason about programs as whole. None of them is even remotely close.
+Modern general-purpose programming languages are a mess. None of them has fully specified semantics that would allow reasoning about programs. None of them is even remotely close.
+Reliable static code analysis and formal verification are available for small restricted subsets at best.
 
 In sociology, there is a phenomenon known as the Maslow's hierarchy of needs: it makes few sense solving aesthetical demands before securing one's subsistence.
 Let's try to formulate our “Maslow's hierarchy”
@@ -14,6 +24,9 @@ Let's try to formulate our “Maslow's hierarchy”
 
 Inside every general purpose programming language there is a core, a programming language suitable only for computaions and data processing.
 Getting a general-purpose programming language right presupposes getting a core programming language right first.
+
+* * *
+
 
 * * *
 
