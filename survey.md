@@ -6,6 +6,7 @@ Agda is an even more abstruse language — it's a dependently typed total functi
 
 Agda used to be less expressive than Haskell: being a _total_ functional programming language, Agda employs a termination checker for recursive algorithms. For many algorithms, convincing the termination checker can be quite non-trivial. Recently Agda incorporated Guarded Computational Type Theory CTT⏲'2018. With this upgrade, it turned out to be possible to verify termination and correctness of notorious Hofmann's algorithm in a few pages worth of proof. This attests feasibility of expressing any Haskell algorithm in Agda. 
 
+Haskell is time-proven industrially used core language.
 
 Mature in principle
 
