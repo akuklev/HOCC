@@ -4,11 +4,11 @@ Type-theory based Programming Languages: Where are we now?
 
 If you're reading this, it is safe to assume, at some point of your life you came across mainstream statically typed programming languages like C++ or Java.
 In those languages type signatures are more of a “declaration of intent” kind of thing; it is possible and sometimes unavoidable to “look under the hood”
-ignoring types. In most advanced of mainstream statically typed general-purpose languages (say, Kotlin), explicit type coersions can be avoided, yet it still
-has tripple equals operator (used to compare if two references refer to the same memory location) and similar rudiments allowing to “peep under the hood”, and
-they cannot be avoided at all times.
-
-??? LEAKY ABSTRACTION
+ignoring types. In the most advanced of mainstream statically typed general-purpose languages (say, Kotlin), explicit type coersions can be avoided, yet
+they still have tripple equals operator (compares if two references refer to the same memory location) and similar rudiments allowing to “peep under the hood”,
+and these rudiments cannot be avoided at all times. Their type systems are a “leaky abstraction”, making them disproportionately more troublesome than useful
+for many purposes. Oftentimes it is reasonable to retreat to dynamically types languages like Clojure or Python, because their rudimentary type system does
+not get in the way.
 
 Besides inbuilt primitive data types such as `int32`, such languages also support composite data types, such as tagged unions  X + Y and tuples X × Y.
 These generalize algebraic operations of addition and multiplication: given two finite types X and Y with n and m inhabitants respectively,
@@ -55,7 +55,9 @@ struct S {
   char myLetter;       // Member (char variable)
 };
 Many people, by the way, not only software developers, sometimes have to learn to program. And sometimes they come across such programming languages as C++ or Java - strictly typed, in which you can define your own types. Then these people learn about algebraic data types, and sometimes they start googling and reading something. And they learn that it turns out that there is some powerful mathematical theory behind type systems, and there are some mega-expressive type systems where you can strictly type printf.
-Then it turns out that mainstream languages can't do such things, and if they can, the abstraction leaks, and therefore it is disproportionately more troublesome than useful. So they leave to write in some Clojure or Python, because their rudimentary type system does not get in the way.
+Then it turns out that mainstream languages can't do such things, and if they can, the 
+
+
 And where are normal programming languages based on type theory? There are none yet, though there have been several attempts. And no, because you can't jump over your head, as with Maslow's pyramid - you need water, food and a roof over your head first, and then aesthetic needs. That's the pyramid we have here:
 
 
