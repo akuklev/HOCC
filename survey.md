@@ -1,5 +1,26 @@
-Type-theory based Programming Languages: Where are we now?
-==========================================================
+Principled General-Purpose Programming Languages: Where are we now?
+===================================================================
+
+A modern general-purpose programming language is a language that can be used for an entire software product of arbitrary complexity, including
+reactive user interfaces, coroutines/actors, asynchrnous I/O, interactions with external world (OS, file system, databases, queues, sockets,
+device drivers, remote parties). Modern general-purpose programming languages are a mess, none of them has a completely specified semantics so
+one can reason about programs. None of them is even remotely close.
+
+Maslow's hierarchy of needs
+
+
+
+It asynchronous inter
+
+concurrency 
+
+are a mess. They have to handle 
+Modern general-purpose programming languages 
+
+— это я имею в виду язык программирования, где можно и интерактивный пользовательский интерфейс забацать (в том числе реактивный!), и корутины/акторы есть, и взаимодействие со внешними ресурсами всевозможными.
+
+Heavenly Kotlin
+
 
 
 If you're reading this, it is safe to assume, at some point of your life you came across mainstream statically typed programming languages like C++ or Java.
