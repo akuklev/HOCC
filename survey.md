@@ -1,7 +1,8 @@
 Principled General-Purpose Programming Languages: Where are we now?
 ===================================================================
 
-A modern general-purpose programming language is a language suitable for an entire software product of arbitrary complexity, including reactive user interfaces, coroutines/actors, asynchronous I/O, interactions with the external world (OS, file system, databases, queues, sockets, device drivers, remote parties). Think of Kotlin, Rust, or Scala. Modern general-purpose programming languages are a mess, none of them has fully specified semantics so you can reason about programs as whole. None of them is even remotely close.
+A modern general-purpose programming language is a language suitable for an entire software product of arbitrary complexity, including reactive user interface, coroutines/actors, asynchronous I/O, interactions with the external world: OS, file system, databases, queues, sockets, device drivers, remote parties. Think of Kotlin, Rust, or Scala.  
+Modern general-purpose programming languages are a mess, none of them has fully specified semantics so you can reason about programs as whole. None of them is even remotely close.
 
 In sociology, there is a phenomenon known as the Maslow's hierarchy of needs: it makes few sense solving aesthetical demands before securing one's subsistence.
 Let's try to formulate our “Maslow's hierarchy”
