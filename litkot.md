@@ -130,11 +130,9 @@ We envision at least two solvers: Linear solver precisely as in Knuth's METAPOST
 ## Dual naming: verbose names and concise names
 
 Naming things is hard both in programming and in mathematics. Objects and operations should have readable and self-explanatory names. However, verbose names may heavily obstruct readability in formulas. Compare the following three variants of the same formula:
-	`n·(n + 1) / 2`,
-
-	`elementCount * (elementCount + 1) / 2`, and
-
-	`div(times(elementCount, plus(elementCount, 1)), 2)`
+- `n·(n + 1) / 2`,
+- `elementCount * (elementCount + 1) / 2`, and
+- `div(times(elementCount, plus(elementCount, 1)), 2)`
 
 Dual naming `` `verbose name`conciseName `` is a possible way to reconcile contradictory requirements.
 
