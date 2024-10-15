@@ -14,4 +14,4 @@ H<sub><ω</sub> = minimalistic base theory H₀ = {extensionality, separation, a
 - CZF(ɑ) has models of all CZF(β) with β < ɑ, moreover CZF(ɑ) = CZF₀ + Con(CZF(β)) for all β < ɑ
 - For limit ordinals ɑ, CZF(ɑ) satisfies reflection principle: has inner models for each of its finite subtheories
 
-The standard set theories ZFC/CZF, possibly with some large cardinal hypotheses, also belong to the CZF(ɑ)-family, which makes it a canonical substrate for constructing models of other formal systems and precisely measuring thir modelling capacity.
+The standard set theories ZFC/CZF and their large cardinal extensions belong to the CZF(ɑ)-family, which makes it a canonical substrate for constructing models of other formal systems and precisely measuring thir modelling capacity.
