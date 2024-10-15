@@ -9,8 +9,8 @@ In 2019 Fedor Pakhomov has developed a theory H<sub><ω</sub> of hereditarily fi
 H<sub><ω</sub> = minimalistic base theory H₀ = {extensionality, separation, and weak hierarchy} + a countably infinite family of axioms ∃0, ∃1, ∃2,... extablishing existence of all finite ordinals. We conjecture it is possible to develop a constructive set theory CZF₀, such that CZF(ɑ) = CZF₀ + ∃β for all β < ɑ has following properties:
 - CZF(ω) proves its own consistency
 - CZF(ω) proves the same facts about hereditarily finite sets as H<sub><ω</sub>
-- CZF(ɑ) does not prove wellfoundness of ɑ, i.e. proof-theoretic ordinal |CZF(ɑ)| = ɑ
-- CZF(|CZF|) = CZF, the standard constructive set theory, where |CZF| is the Bachman-Howard ordinal
+- CZF(ɑ) does not prove wellfoundness of ɑ, i.e. the proof-theoretic ordinal |CZF(ɑ)| = ɑ
+- CZF(|CZF|) = CZF, where |CZF| is the Bachman-Howard ordinal
 - CZF(ɑ) has models of all CZF(β) with β < ɑ, moreover CZF(ɑ) = CZF₀ + Con(CZF(β)) for all β < ɑ
 - For limit ordinals ɑ, CZF(ɑ) satisfies reflection principle: has inner models for each of its finite subtheories
 
