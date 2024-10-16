@@ -20,8 +20,8 @@ H<sub><ω</sub> = minimalistic base theory H₀ = {extensionality, separation, a
 - CZF(ɑ) does not prove wellfoundness of ɑ, i.e. the proof-theoretic ordinal |CZF(ɑ)| = ɑ
 - CZF(ɑ) have direct computational interpretations up to the second order arithmetic, i.e. if ɑ ≤ |PA₂|  
 - CZF(|CZF|) = CZF, the standard constructive set theory
-- CZF(ɑ) has models of all CZF(β) with β < ɑ, moreover CZF(ɑ) = CZF₀ + Con(CZF(β)) for all β < ɑ
-- For limit ordinals ɑ, CZF(ɑ) satisfies reflection principle: has inner models for each of its finite subtheories
+- CZF(ɑ) has models of all CZF(β) with β < ɑ, and thus proves their consistency
+- For limit ordinals ɑ, CZF(ɑ) satisfies the reflection principle: any finite number of derivable formulas are already satisfied in some inner model
 - Large cardinal extensions of CZF and the standard set theory ZFC with its large cardinal extensions fall into the CZF(ɑ)-hierarchy
 
 We also conjecture that it is possible to establish a quantifier-free logic-free presentation for its conservative extension CZF<sup>ω</sup>(ɑ), very similar to the logic-free presentation of primitive-recursive arithmetic PRA developed by Goodstein.
