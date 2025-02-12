@@ -1,7 +1,8 @@
 Type theories must be computational
 ===================================
 
-
+Over 50 years of developments in intuitionistic type theory can be seen as a long journey to obtain
+**A natural proof calculus for classical logic capable of structural induction over its own language.**
 
 # Lavwere algebraic theories
 
@@ -72,4 +73,3 @@ Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) ->
 constructors `e : Extensons[t]` should evaluate to maps F[e.from] -> F[e].
 ```
 
-A proof calculus for classical logic capable of structural induction over its own language.
