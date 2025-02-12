@@ -33,12 +33,35 @@ For many sorts of interest it is is not possible to algorithmically extract cano
 Тут про то, что мы можем иметь внутри теории типы — термы особого сорта *, представляющие сорта, то есть в качестве сортов мы можем использовать их нормальные формы e : |t|. Дальше сказать что у типов вместо равенства эквивалентность ххх, и она бывает разная, но мы можем поднимать выражения сдыркой вдоль identification path, как поднимали в случае значений используя доказательство равенства. И эта операция называется identification path lifting, и область математики которая описывает path lifting properties называется абстрактной теорией гомотопий — вот где эта штука вступает.
 
 ```
-Prototype is an inductive type `T : *` defined simultaneously with two following inductive-recursive types
-ReductionsForm[T] : *, .to : T, .precompose  : (x : ReductionsFrom[.to]) -> ReductionsFrom[T] with .to ≡ x.to
-  # ^ t.to be structurally simpler than t, so precompose can be defined.
+Prototypes are type-theoretical effective representations of Reedy categories.
 
-ExtensionsTo[T] : *, .from : T, .postcompose : (x : ExtensionsTo[.from]) -> ExtensionsFrom[T] with .from ≡ x.from 
-  # ^ t.to be structurally simpler than t, so postcompose can be defined.
+Prototype is an inductive type `T : *` defined simultaneously with two following inductive-recursive types:
+  ReductionsForm[T] : *, .to : T, .precompose  : (x : ReductionsFrom[.to]) -> ReductionsFrom[T] with .to ≡ x.to
+  ExtensionsTo[T] : *, .from : T, .postcompose : (x : ExtensionsTo[.from]) -> ExtensionsFrom[T] with .from ≡ x.from
+
+The definitional equalities must be checked. It is only possible if `t.to` and `t.from` are structurally smaller
+then `t`. It ensures that the arguments `x` of the functions precompose and postcompose come from a type that
+has already been defined, its constructors are known and values of .to and .from on resulting values can be
+explicitly computed. The involution T° on prototypes simply exchanges reductions and extensions.
+
+Now assume `F[t : T]` is a type dependent on the prototype `t`.
+
+Values of type `x : F[t : T]` come with actions of reductions `rx : F[r.to]`.
+Functions defined on variables `x : F[t : T]` by pattern matching must match “higher constructors”
+`e : ExtensonsTo[x]` yielding an path f(x) = f(e.from) or an extension ExtensionTo[f(x)] with .from ≡ f(e.from)
+
+Given an `x : F[t : T]` for every `r : ReductionFrom[t]` we have 
+
+
+and every `e : ExtensionTo[T]`
+
+
+Once a prototype is defined, we define types dependent on it by peculiar large elimination f : (t : T) -> *. 
+For known values
+
+
+on constructors of T itself yielding another type, but also on constructors of Extensions
+
 ```
 
 A proof calculus for classical logic capable of structural induction over its own language.
