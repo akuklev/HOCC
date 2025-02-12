@@ -35,33 +35,26 @@ For many sorts of interest it is is not possible to algorithmically extract cano
 ```
 Prototypes are type-theoretical effective representations of Reedy categories.
 
-Prototype is an inductive type `T : *` defined simultaneously with two following inductive-recursive types:
-  ReductionsForm[T] : *, .to : T, .precompose  : (x : ReductionsFrom[.to]) -> ReductionsFrom[T] with .to ≡ x.to
-  ExtensionsTo[T] : *, .from : T, .postcompose : (x : ExtensionsTo[.from]) -> ExtensionsFrom[T] with .from ≡ x.from
+Prototype T is an inductive type `|T| : *` defined simultaneously with two following inductive-recursive types:
+  Reductions[T] : *, .to : T,   .precompose  : (x : Reductions[.to])  ->  Reductions[T] with .to ≡ x.to
+  Extensions[T] : *, .from : T, .postcompose : (x : Extensions[.from]) -> Extensions[T] with .from ≡ x.from
 
 The definitional equalities must be checked. It is only possible if `t.to` and `t.from` are structurally smaller
 then `t`. It ensures that the arguments `x` of the functions precompose and postcompose come from a type that
 has already been defined, its constructors are known and values of .to and .from on resulting values can be
-explicitly computed. The involution T° on prototypes simply exchanges reductions and extensions.
+explicitly computed. Since compositions of reductions and extensions are represented by composition of functions,
+it is definitionally associative. The involution T° on prototypes simply exchanges reductions and extensions.
 
-Now assume `F[t : T]` is a type dependent on the prototype `t`.
+The type of functions `X -> Y` from a prototype is undefined unless `Y` is a universe (and a category), in
+which case `X -> Y` is a universe as well. Now assume `F[t : T]` is a type dependent on the prototype `t`.
+Values of type `x : F[t : T]` come with actions of reductions `rx : F[r.to]`, where `r : Reductions[t]`.
 
-Values of type `x : F[t : T]` come with actions of reductions `rx : F[r.to]`.
-Functions defined on variables `x : F[t : T]` by pattern matching must match “higher constructors”
-`e : ExtensonsTo[x]` yielding an path f(x) = f(e.from) or an extension ExtensionTo[f(x)] with .from ≡ f(e.from)
+Functions `f` on `F[t : T]` have to provide action on “higher constructors” `e : Extensons[x]` yielding
+either a path `f(x) = f(e.from)` or an extension `Extension[f(x)]` with .from ≡ f(e.from).
 
-Given an `x : F[t : T]` for every `r : ReductionFrom[t]` we have 
-
-
-and every `e : ExtensionTo[T]`
-
-
-Once a prototype is defined, we define types dependent on it by peculiar large elimination f : (t : T) -> *. 
-For known values
-
-
-on constructors of T itself yielding another type, but also on constructors of Extensions
-
+Type-valued functions `F[t : T]` on prototypes are defined using the following form of elimination:
+Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) -> F[r.to])`. Higher
+constructors `e : Extensons[t]` should evaluate to maps F[e.from] -> F[e].
 ```
 
 A proof calculus for classical logic capable of structural induction over its own language.
