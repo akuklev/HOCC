@@ -1,6 +1,8 @@
 Type theories must be computational
 ===================================
 
+
+
 # Lavwere algebraic theories
 
 School algebra is about transforming expressions. We learn basic operations such as addition and multiplication and basic identities they satisfy such as associativity, commutativity and distributivity. We compose basic operations to form expressions (= derived operations), and learn how to transform them by composing laws. 
@@ -23,8 +25,20 @@ In Lawvere algebraic theories, sorts are mere labels governing which expressions
 
 When generalising to allow value-dependent sorts `S(x)` we run into a problem. Values are semantic entities, so they can be equal without being represented by identical expressions. How can we even talk about sorts being identical or not if they depend on values?
 
-Well, we can if we have an operation `|_|` mapping values `x` (semantical entities) to their canonical forms `|x|` (syntactic entities). So technically, sorts depend on canonical forms, rather than values themselves. This way we can again speak of identical sorts and know when it is possible to plug expressions together. The operation `|_|` is where the computational aspekt comes into play, which didn't occur in case of algebraic theories without dependent sorts.
+Fortunately, values `x` occurring as sort arguments `S(x)` rules are not just any values, but values given by expressions of the very same theory, so it might be possible to provide an algorithm that computes canonical forms `|x|` so that equal values are mapped to identical normal forms. The operation `|_|` is where the computational aspect comes into play, which didn't occur in case of Lawvere theories.
 
-In many (actually, most) cases of interest it is not possible to algorithmically extract canonical forms from values. In fact, values might even come from an uncountable set, so that is impossible to have enough canonical forms. Fortunately, values `x` occurring as sort arguments `S(|x|)` in rules of algebraic theories are not just any values, but values given by expressions of the very same theory, and for them we often can have enough forms, but those won't be canonical anymore: equal values `x` and `y` might end up having non-identical normal forms `|x|` and `|y|`. (Not necesarlly canonical forms are called normal forms or simply forms.) However, we want to be able to somehow plug expressions of the sort `S(|x|)` into holes of the sort `S(|y|)`. While very tempting, it turns out to be in general impossible to algorithmically convert expressions of the sort `S(|x|)` into expression of the sort `S(|y|)` even if we know that `x = y`, but it is possible to turn an expression with a hole of the sort `S(|x|)`-value into an equivalent expression with the same hole having the sort `S(|y|)` given an equality proof.
+For many sorts of interest it is is not possible to algorithmically extract canonical forms from values. For instance this is impossible for `n`-ary predicates with `n > 0`: word problem for their sorts is semiundecidable in the theory of predicate logic. If two predicates are indeed equal, systematic application of all possible identities will eventually find a path from one to another, but if they are distinct, this process will simply proceed indefinitely; we cannot in general prove distinctness of two predicates due to halting problem, which precludes existence of canonical forms. In such cases we can assign non-canonical normal forms `|_|` to values and find or introduce a (doubly dependent) sort `Id(a, b)` inhabited by identification paths from `a` to `b`. In our case we luckily already have one: two predicates can be shown equivalent precisely if we have a proof of the sort `Prf((A implies B) and (B implies A))`. Now 
+
+However, in this particular case we are very fortunate to have a sort dependent sort that reflects equality of values internally. Namely, for two predicates `P` and `Q` can be shown 
+
+are equal () precisely if there 
+
+ 
+
+In fact, values might even come from an uncountable set, so that is impossible to have enough canonical forms. Fortunately, values `x` occurring as sort arguments `S(|x|)` rules are not just any values, but values given by expressions of the very same theory, and for them we often can have enough forms, but those won't be canonical anymore: equal values `x` and `y` might end up having non-identical normal forms `|x|` and `|y|`. (Not necesarlly canonical forms are called normal forms or simply forms.) However, we want to be able to somehow plug expressions of the sort `S(|x|)` into holes of the sort `S(|y|)`. While very tempting, it turns out to be in general impossible to algorithmically convert expressions of the sort `S(|x|)` into expression of the sort `S(|y|)` even if we know that `x = y`, but it is possible to turn an expression with a hole of the sort `S(|x|)`-value into an equivalent expression with the same hole having the sort `S(|y|)` given an equality proof.
 
 Тут про то, что мы можем иметь внутри теории типы — термы особого сорта *, представляющие сорта, то есть в качестве сортов мы можем использовать их нормальные формы e : |t|. Дальше сказать что у типов вместо равенства эквивалентность ххх, и она бывает разная, но мы можем поднимать выражения сдыркой вдоль identification path, как поднимали в случае значений используя доказательство равенства. И эта операция называется identification path lifting, и область математики которая описывает path lifting properties называется абстрактной теорией гомотопий — вот где эта штука вступает.
+
+
+
+A proof calculus for classical logic capable of structural induction over its own language.
