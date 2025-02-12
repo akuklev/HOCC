@@ -32,13 +32,24 @@ For many sorts of interest it is is not possible to algorithmically extract cano
 
 Тут про то, что мы можем иметь внутри теории типы — термы особого сорта *, представляющие сорта, то есть в качестве сортов мы можем использовать их нормальные формы e : |t|. Дальше сказать что у типов вместо равенства эквивалентность ххх, и она бывает разная, но мы можем поднимать выражения сдыркой вдоль identification path, как поднимали в случае значений используя доказательство равенства. И эта операция называется identification path lifting, и область математики которая описывает path lifting properties называется абстрактной теорией гомотопий — вот где эта штука вступает.
 
+* * *
+
+For `n : ℕ` let us use the notation `↓n` for the type of size n usually known as `Fin n`. Given a vector of
+types `Ts : ↓n -> U` we can define a tuple of values of the respective types as `vals : ∀(i : ↓n) Ts(i)`.
+
+Below we'll introduce the notion of prototypes and introduce a prototype Δ⁺ so that a telescope of types
+can be defined as `Ts : ↓n -> U` for `n : Δ⁺` and type of respective contexts as `∀(i : ↓n) Ts(i)`.
+Moreover, it will be possible to introduce the prototype Δ that additionally keeps track of context
+extensions `ext : Ts ⊂ Ts'` and allows extending functions on `(ctx : ∀(i : ↓n) Ts(i))` to functions on
+`(ctx : ∀(i : ↓n) Ts'(i))` along `ext` automatically.
+
+Prototypes are type-theoretical counterparts of Reedy categories.
+
+A prototype `T` is an inductive type `|T| : *` defined mutually with two following inductive-recursive types:
 ```
-Prototypes are type-theoretical effective representations of Reedy categories.
-
-Prototype T is an inductive type `|T| : *` defined simultaneously with two following inductive-recursive types:
-  Reductions[T] : *, .to : T,   .precompose  : (x : Reductions[.to])  ->  Reductions[T] with .to ≡ x.to
-  Extensions[T] : *, .from : T, .postcompose : (x : Extensions[.from]) -> Extensions[T] with .from ≡ x.from
-
+Reductions[T] : *, .to : T,   .precompose  : (x : Reductions[.to])  ->  Reductions[T] with .to ≡ x.to
+Extensions[T] : *, .from : T, .postcompose : (x : Extensions[.from]) -> Extensions[T] with .from ≡ x.from
+```
 The definitional equalities must be checked. It is only possible if `t.to` and `t.from` are structurally smaller
 then `t`. It ensures that the arguments `x` of the functions precompose and postcompose come from a type that
 has already been defined, its constructors are known and values of .to and .from on resulting values can be
