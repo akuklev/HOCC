@@ -31,20 +31,30 @@ Fortunately, values `x` occurring as sort arguments `S(x)` rules are not just an
 For many sorts of interest it is is not possible to algorithmically extract canonical forms from values. For instance this is impossible for `n`-ary predicates with `n > 0`: word problem for their sorts is semiundecidable in the theory of predicate logic. If two predicates are indeed equal, systematic application of all possible identities will eventually find a path from one to another, but if they are distinct, this process will simply proceed indefinitely; we cannot in general prove distinctness of two predicates due to halting problem, which precludes existence of canonical forms. In such cases we can assign non-canonical normal forms `|_|` to values and find or introduce a (doubly dependent) sort `Id(a, b)` inhabited by identification paths from `a` to `b`. In our case we luckily already have one: two predicates can be shown equivalent precisely if we have a proof of the sort `Prf((A implies B) and (B implies A))`. This sort has to have property that it allows to plug expressions of the sort `Prf(A)` into holes of the sort `Prf(B)` if we have `p : Id(x, y)`, that is `p : Prf((A implies B) and (B implies A))`. In simple cases can have an algorithm that syntactically transforms expressions of the sort `Prf(A)` into expressions of the sort `Prf(B)`. This is unfortunatelly not alwasy possible. What turns out to be possible is an algorithm that syntactically transform the recipient expression with hole of the sort `Prf(A)` into an equivalent expression with the corresponding hole of the sort `Prf(B)` owing to additional flexibility that this syntactic transform can also change the resulting sort of the expression into an equivalent but non-identical one. Lifting expressions along identification paths gets really tricky when we work with systems where sorts can depend on values themselves being of a dependent sort. Luckily there is a whole well-developed area of mathematics dealing with lifting equivalences over equivalences — the abstract homotopy theory. I will argue that effective algebraic theories with dependent sorts are presented by weak model categories the same way as Lawvere algebraic theories are presented by finite-product categories.
 
 Currently, we do not specify types of the variables bound by quantifiers: we can insist that some predicate holds only for natural numbers but not for, say, reals by using other predicates:
-`(∀(n) isNat(n) implies P(n) )`. If we want our proof calculus to support proofs by induction, we have to use typed quantifiers instead. Induction is a proof operator that turns a proof of `P(0)` and a proof of `P(n) implies P(n + 1)` into a proof `(Nat∀(n) isNat(n) implies P(n))`. For advanced proof calculi we'll have to introduce lots of variable types and type-specific proof operators. At some we might want to make the type system extendable by introducing a sort `Type` of variable types and introducing expressions to compose advanced types from basic ones. Sorts `Pₙ` of n-ary predicates will become n-fold dependent on the sort of variable types: `P₀, P₁(T : Type), P₂(X Y : Type),...`. There is no way going back, so eventually we'll have to internalize the notion of dependent types and thus also replicate the normalization machinery machinery by splitting sorts `Expr(T)` and `Form(T)`, including `Expr(Type)` and `Form(Type)` themselves, and applying the approach known as bi-directional typing. Eventually we'll also discover how to compute path types for types themselves (namely as doubly dependent type with left and right inverse functions) discovering computational univalence.
+`(∀(n) isNat(n) implies P(n) )`. If we want our proof calculus to support proofs by induction, we have to use typed quantifiers instead. Induction is a proof operator that turns a proof of `P(0)` and a proof of `P(n) implies P(n + 1)` into a proof `(Nat∀(n) isNat(n) implies P(n))`. For advanced proof calculi we'll have to introduce lots of variable types and type-specific proof operators. At some we might want to make the type system extendable by introducing a sort `Type` of variable types and introducing expressions to compose advanced types from basic ones. Sorts `Pₙ` of n-ary predicates will become n-fold dependent on the sort of variable types: `P₀, P₁(T : Type), P₂(X Y : Type),...`. There is no way going back, so eventually we'll have to internalize the notion of dependent types and thus also replicate the normalization which is also known as bi-directional typing discipline. Eventually we'll also discover how to compute path types for types themselves (namely as doubly dependent type with left and right inverse functions) discovering computational univalence.
 
 Now let us switch from the prose to describing the computational machinery required to present algebraic theories with dependent sorts embracing their intimidating complexity.
 
 # Introducing prototypes
 
+Now let me assume the reader to be familiar with inductive types and type families. 
+
+To present algebraic theories as above we'll have to define inductive type families like `P(context)`,
+where context is list of types of variables the predicate uses. Typically, we'll have to define the
+internal type `Ty` of variable types together with an evaluation function `|_| : Ty -> *`, both defined
+mutually with type family `P` and what not.
+
+That's how we can define the type of contexts from the type `Ty` naïvely:  
 For `n : ℕ` let us use the notation `↓n` for the type of size n usually known as `Fin n`. Given a vector of
-types `Ts : ↓n -> U` we can define a tuple of values of the respective types as `vals : ∀(i : ↓n) Ts(i)`.
+types `Con : ↓n -> Ty` we can define a tuple of values of the respective types as `vals : ∀(i : ↓n) |Con(i)|`.
 
 Below we'll introduce the notion of prototypes and introduce a prototype Δ⁺ so that a telescope of types
-can be defined as `Ts : ↓n -> U` for `n : Δ⁺` and type of respective contexts as `∀(i : ↓n) Ts(i)`.
+can be defined as `Con : ↓n -> Ty` for `n : Δ⁺` and type of respective contexts as `∀(i : ↓n) |Con(i)|`.
 Moreover, it will be possible to introduce the prototype Δ that additionally keeps track of context
-extensions `ext : Ts ⊂ Ts'` and allows extending functions on `(ctx : ∀(i : ↓n) Ts(i))` to functions on
-`(ctx : ∀(i : ↓n) Ts'(i))` along `ext` automatically.
+extensions `ext : Con ⊂ Con'` and allows extending functions on `∀(i : ↓n) |Con(i)|` to functions on
+`(∀(i : ↓n) Con'(i))` along `ext` automatically. Ideas behind extensions were entirely developed by
+Connor McBride. We don't know if he has developed the ideas regarding dependency, but we have not seen
+any of them published or presented in approachable way on his personal github and blog.
 
 Prototypes are type-theoretical counterparts of Reedy categories.
 
@@ -74,4 +84,10 @@ Type-valued functions `F[t : T]` on prototypes are defined using the following f
 Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) -> F[r.to])`. Higher
 constructors `e : Extensons[t]` should evaluate to maps `F[e.from] -> F[e]`.
 
+Now we have to describe functors (functions A (-> B -> ··· ) -> Z, where A..Z are prototypes) and
+how definitions of inductive type families over prototypes work, it'll be enough for doing “eating”
+itself. Also say a few words on how displayed types and types over prototypes are related.
+
+Ask Nikolai Kudasow how this stuff fits with rzk-lang.github.io, that deals with what we call “universes”
+here, i.e. essentially synthetic categories.
 
