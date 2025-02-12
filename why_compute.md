@@ -55,9 +55,13 @@ then `t`. It ensures that the arguments `x` of the functions precompose and post
 has already been defined, its constructors are known and values of .to and .from on resulting values can be
 explicitly computed. Since compositions of reductions and extensions are represented by composition of functions,
 it is definitionally associative. The involution T° on prototypes simply exchanges reductions and extensions.
+The prefix operator (↓ ) generates a derived downward prototype for each element `t : |T|` consisting only of
+those elements of `|T|` that t can be reduced to, and their respective reductions. The universe of derived
+downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by reductions
+and extensions in `T` acting elementwise.
 
-The type of functions `X -> Y` from a prototype is undefined unless `Y` is a universe (and a category), in
-which case `X -> Y` is a universe as well. Now assume `F[t : T]` is a type dependent on the prototype `t`.
+The type of functions `X -> Y` from a prototype is undefined unless `Y` is a universe (thus a category),
+in which case `X -> Y` is a universe as well. Now assume `F[t : T]` is a type dependent on prototype `T`.
 Values of type `x : F[t : T]` come with actions of reductions `rx : F[r.to]`, where `r : Reductions[t]`.
 
 Functions `f` on `F[t : T]` have to provide action on “higher constructors” `e : Extensons[x]` yielding
