@@ -23,12 +23,9 @@ proven serve as types of the respective proofs:
 ```
 — ‘given a proof term `a` which proves the proposition `P` and a proof term `b` which proves the proposition `Q`, we can construct a proof term denoted `(a, b)` which proves the proposition `P and Q`’. This notation for inference rules still universally used today was first introduced for natural deduction.
 
-Another forerunner of Martin-Löf type theories is Gödel's System T: it's a Simply Typed λ-calculus `STLC(ℕ)` over the inductive data type of natural numbers. In fact, it's a fragment of all Martin-Löf type theories. There, the types are data types. 
+Another forerunner of Martin-Löf type theories is Gödel's System T: it's a Simply Typed λ-calculus `STLC(ℕ)` over the inductive data type of natural numbers. In fact, it's a fragment of all Martin-Löf type theories. There, the types of expressions are data types.
 
-
-
-Martin Hofmann and Thomas Streicher 1996
-
+The other constituent of Martin-Löf type theories comes from the first type theory ever introduced, the Russell's theory of types introduced at the very beginning of XX century as a way to deal with Russell's paradox: the type universes. It was long assumed that the universes of data types in Martin-Löf type theories can be seen as data types themselves, but due to a discovery made by Martin Hofmann and Thomas Streicher in 1996 it began to become apparent that it's not the case. 
 
 
 § Introduction
