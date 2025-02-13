@@ -7,20 +7,22 @@ Type-theoretical approach to Reedy categories  (draft)
 Building upon the (mostly unpublished) ideas of C. McBride, we propose a novel extension for Martin Löf Type Theories we
 name inductive prototypes, a type-theoretical internalization of Reedy categories. Inductive type families over prototypes
 provide effective machinery to deal with syntaxes that include binding, becoming indispensable when internalizing the
-syntax and semantics of type theories themselves. Being presheaves over Reedy categories, these type families indexed over 
-inductive prototypes include (semi-)simplicial types and other (weak) test categories used to model higher objects.
+syntax and semantics of type theories themselves. Embodying presheaves over Reedy categories, these type families indexed
+over inductive prototypes include (semi-)simplicial types and other (weak) test categories used to model higher objects.
 
-Bidirectional presentations of dependent type theories turn out to be fibered inductive-inductive-recursive definitions,
-where the inductive type families of expressions and forms are defined simultaneoulsy with inductive prototypes of
-contexts they are indexed over and reduction rules framed as recursive functions on expressions. In subsequent papers
-we aim to show that fibered quotient inductive-inductive-recursive definitions encode weak model categories, with
-their elimination motives being functors in the respective doctrine. In strong analogy with functorial semantics for
-Lavwere algebraic theories, these functors themselves form a category of models (of the respective dependent type
-theory) with their natural transformaions serving as model homomorphisms. It justifies viewing type-theoretic
-presentations of [weak ω-categories](https://arxiv.org/abs/1706.02866) and [virtual equipments](https://arxiv.org/abs/2210.08663)
-as algebraic definitions in generalized sense, and uniformly solves the initiality conjecture for all kinds of
-sturctures that admit an effective bidirectionally algebraic definition. In particular, Higher Observational
-Type Theory would solve the initiality conjecture for elementary (∞,1)-toposes when finished.
+Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, 
+the inductive type families of expressions and normal forms are defined simultaneoulsy with inductive prototypes
+representing their contexts and reduction rules framed as recursive functions on expressions.
+
+Semantically, fibered quotient inductive-inductive type definitions (FQIITs) encode weak model categories, with their
+elimination motives being functors in the respective doctrine. In strong analogy with functorial semantics for Lavwere
+algebraic theories, these functors themselves form a category of models with their natural transformaions serving as
+model homomorphisms. In subsequent papers we hope to establish the existence of initial models in an any (∞,1)-topos
+thus providing semantics for FQIITs. We assume it to be conditional on a Mahlo cardinal for large FQIITs, conditional
+on existence of an inaccessible cardinal for small FQIITs, and unconditinal for finitary FQIITs. This endeavour would
+also uniformly solve the initiality conjecture for sturctures that admit an effective bidirectionally algebraic
+definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663),
+and (∞,1)-toposes once the Higher Observational Type Theory is finalized.
 
 
 § Introduction
