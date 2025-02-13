@@ -4,12 +4,35 @@ Towards Higher Observational Construction Calculus (draft)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
-We propose (a sketch of) an extension HOTT<sup>Reedy</sup> of the [Higher Observational Type
-Theory](https://ncatlab.org/nlab/show/higher+observational+type+theory) by a first-class notion of Reedy
-categories and inductive type families indexed over them. HOTT<sup>Reedy</sup> provides dependent
+Building upon the (mostly unpublished) ideas of C. McBride, we propose a novel extension for Martin Löf Type Theories we
+name inductive prototypes, a type-theoretical internalization of Reedy categories. Inductive type families over prototypes
+provide effective machinery to deal with syntaxes that include binding, becoming indispensable when internalizing the
+syntax and semantics of type theories themselves.
+
+Bidirectional presentations of dependent type theories turn out to be fibered inductive-inductive-recursive definitions,
+where the inductive type families of expressions and forms are defined simultaneoulsy with inductive prototypes of
+contexts they are indexed over and reduction rules framed as recursive functions on expressions. In subsequent papers
+we aim to show that closed fibered quotient inductive-inductive-recursive definitions encode weak model categories.
+
+
+
+Our extension 
+We show that our extension allows defining displayed types
+
+types defined coinductively 
+
+
+(semi-)simplicial types
+
+Bidirectional presentations of dependent type theories
+
+and inductive type families indexed over them. HOTT<sup>Reedy</sup> provides dependent
 session types, simplicial types and other Reedy presheafs without reccuring to any kind of non-univalent equality.
 
-Purely inductive type families indexed and fibered over simultaneously defined Reedy categories correspond precisely
+
+Purely inductive data-type families indexed 
+
+and fibered over simultaneously defined Reedy categories correspond precisely
 to bidirectional presentations of dependent type theories, which allows developing natural functorial semantics for
 such theories in strong analogy with functorial semantics of algebraic theories. This justifies viewing
 type-theoretic presentations of [weak ω-categories](https://arxiv.org/abs/1706.02866)
@@ -19,7 +42,7 @@ Further extending the theory by parametric quantifiers and a universe of computa
 we obtain what could be called higher observational construction calculus (HOCC). This combination enables flawless
 handling of higher categorical objects and naturally occuring large categories.
 
-This work heavily builds upon (mostly unpublished) ideas of C. McBride.
+
 
 § Introduction
 --------------
