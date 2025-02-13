@@ -10,8 +10,8 @@ Semantically, fibered quotient inductive-inductive type definitions (FQIITs) are
 
 In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the Higher Observation Type Theory (HOTT) is complete.
 
-§ Introduction
---------------
+§ Overview
+----------
 
 Natural deduction, an inference rule-based proof calculus can be seen as a precursor of Martin-Löf type theories.
 The inference rules of natural deduction serve as a typed generative grammar for proof terms, where the propositions being
