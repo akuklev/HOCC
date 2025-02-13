@@ -7,12 +7,10 @@ Type-theoretical approach to Reedy categories  (draft)
 Building upon the (mostly unpublished) ideas of C. McBride, we propose a novel extension for Martin Löf Type Theories we
 name inductive prototypes, a type-theoretical internalization of Reedy categories. Inductive type families over prototypes
 provide effective machinery to deal with syntaxes that include binding, becoming indispensable when internalizing the
-syntax and semantics of type theories themselves. Embodying presheaves over Reedy categories, these type families indexed
-over inductive prototypes include (semi-)simplicial types and other (weak) test categories used to model higher objects.
-
-Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, 
-the inductive type families of expressions and normal forms are defined simultaneoulsy with inductive prototypes
-representing their contexts and reduction rules framed as recursive functions on expressions.
+syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be
+inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined
+simultaneoulsy with inductive prototypes representing their contexts and reduction rules framed as recursive functions on
+expressions.
 
 Semantically, fibered quotient inductive-inductive type definitions (FQIITs) encode weak model categories, with their
 elimination motives being functors in the respective doctrine. In strong analogy with functorial semantics for Lavwere
