@@ -4,7 +4,7 @@ Type-theoretical approach to Reedy categories  (draft)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
-Building on the unpublished ideas of C. McBride, we propose a novel extension for Martin Löf type theories we'll call inductive prototypes, a type-theoretic internalization of Reedy categories. Inductive type families indexed over prototypes provide effective machinery for dealing with syntaxes that include binding, and become indispensable when internalizing the syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined simultaneously with inductive prototypes representing their contexts and reduction rules framed as recursive functions on expressions.
+Building on the unpublished ideas of C. McBride, we propose a novel extension for Martin-Löf type theories we'll call inductive prototypes, a type-theoretic internalization of Reedy categories. Inductive type families indexed over prototypes provide effective machinery for dealing with syntaxes that include binding, and become indispensable when internalizing the syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined simultaneously with inductive prototypes representing their contexts and reduction rules framed as recursive functions on expressions.
 
 Semantically, fibered quotient inductive-inductive type definitions (FQIITs) are effective presentations of weak model categories whose structure-preserving functors correspond to elimination motives. In strong analogy to the functorial semantics of Lavwere algebraic theories, these functors themselves form a category of models, with their natural transformations serving as model homomorphisms.
 
@@ -13,6 +13,21 @@ In a subsequent paper, we hope to establish the existence of initial models in a
 § Introduction
 --------------
 
+Natural deduction, an inference rule-based proof calculus can be seen as a precursor of Martin-Löf type theories.
+The inference rules of natural deduction serve as a typed generative grammar for proof terms, where the propositions being
+proven serve as types of the respective proofs:
+```
+  a : P     b : Q
+————————————————————
+ (a, b) : (P and Q)
+```
+— ‘given a proof term `a` which proves the proposition `P` and a proof term `b` which proves the proposition `Q`, we can construct a proof term denoted `(a, b)` which proves the proposition `P and Q`’. This notation for inference rules still universally used today was first introduced for natural deduction.
+
+Another forerunner of Martin-Löf type theories is Gödel's System T: it's a Simply Typed λ-calculus `STLC(ℕ)` over the inductive data type of natural numbers. In fact, it's a fragment of all Martin-Löf type theories. There, the types are data types. 
+
+
+
+Martin Hofmann and Thomas Streicher 1996
 
 
 
