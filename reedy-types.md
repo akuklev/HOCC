@@ -4,23 +4,11 @@ Type-theoretical approach to Reedy categories  (draft)
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
-Building upon the (mostly unpublished) ideas of C. McBride, we propose a novel extension for Martin Löf Type Theories we
-name inductive prototypes, a type-theoretical internalization of Reedy categories. Inductive type families over prototypes
-provide effective machinery to deal with syntaxes that include binding, becoming indispensable when internalizing the
-syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be
-inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined
-simultaneoulsy with inductive prototypes representing their contexts and reduction rules framed as recursive functions on
-expressions.
+Building on the unpublished ideas of C. McBride, we propose a novel extension for Martin Löf type theories we'll call inductive prototypes, a type-theoretic internalization of Reedy categories. Inductive type families indexed over prototypes provide effective machinery for dealing with syntaxes that include binding, and become indispensable when internalizing the syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined simultaneously with inductive prototypes representing their contexts and reduction rules framed as recursive functions on expressions.
 
-Semantically, fibered quotient inductive-inductive type definitions (FQIITs) encode weak model categories, with their
-elimination motives being functors in the respective doctrine. In strong analogy with functorial semantics for Lavwere
-algebraic theories, these functors themselves form a category of models with their natural transformaions serving as
-model homomorphisms. In subsequent papers we hope to establish the existence of initial models in an any (∞,1)-topos
-thus providing semantics for FQIITs. We assume it to be conditional on a Mahlo cardinal for large FQIITs, conditional
-on existence of an inaccessible cardinal for small FQIITs, and unconditinal for finitary FQIITs. This endeavour would
-also uniformly solve the initiality conjecture for sturctures that admit an effective bidirectionally algebraic
-definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663),
-and (∞,1)-toposes once the Higher Observational Type Theory is finalized.
+Semantically, fibered quotient inductive-inductive type definitions (FQIITs) encode weak model categories whose elimination motives are functors in the respective doctrine. In strong analogy to the functorial semantics of Lavwere algebraic theories, these functors themselves form a category of models, with their natural transformations serving as model homomorphisms.
+
+In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small and large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the Higher Observation Type Theory (HOTT) is complete.
 
 
 § Introduction
