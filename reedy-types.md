@@ -6,9 +6,14 @@ Type-theoretical approach to Reedy categories  (draft)
 
 Building on the unpublished ideas of C. McBride, we propose a novel extension for Martin Löf type theories we'll call inductive prototypes, a type-theoretic internalization of Reedy categories. Inductive type families indexed over prototypes provide effective machinery for dealing with syntaxes that include binding, and become indispensable when internalizing the syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined simultaneously with inductive prototypes representing their contexts and reduction rules framed as recursive functions on expressions.
 
-Semantically, fibered quotient inductive-inductive type definitions (FQIITs) encode weak model categories whose elimination motives are functors in the respective doctrine. In strong analogy to the functorial semantics of Lavwere algebraic theories, these functors themselves form a category of models, with their natural transformations serving as model homomorphisms.
+Semantically, fibered quotient inductive-inductive type definitions (FQIITs) are effective presentations of weak model categories whose structure-preserving functors correspond to elimination motives. In strong analogy to the functorial semantics of Lavwere algebraic theories, these functors themselves form a category of models, with their natural transformations serving as model homomorphisms.
 
-In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small and large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the Higher Observation Type Theory (HOTT) is complete.
+In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the Higher Observation Type Theory (HOTT) is complete.
+
+§ Introduction
+--------------
+
+
 
 
 § Introduction
