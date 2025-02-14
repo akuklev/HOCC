@@ -32,6 +32,7 @@ Otherwise, the extraction will be non-determinstic. However, we can introduce no
 ```
 
 For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (♢⁺, ♢⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ♢-modality! We will argue that it has a perfect computational interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will add the dual IS4 □-modality which is known to have computational interpretation of staged computation. Terms `t : □T` have the intended meaning of being closed terms of type `T`. Dually to classical reasoning under the ♢-modality we will obtain parametric reasoning under the □-modality. By establishing a set-theoretic interpretation of types under ♢-modality, we will show admissibility of the rule allowing to use closed non-constructive proofs can be used in computational context as virtual arguments:
+```
  f : (x :° X) → Y      x : □♢X
 ———————————————————————————————
           f(x) : Y
