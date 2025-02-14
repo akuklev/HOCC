@@ -49,7 +49,7 @@ We will show that this rule implies (and essentially is) the computational Marko
 
 In presence of °- and □-modality it is possible to introduce a reflective virtial universe 𝕊 and postulate existence of ordinary universes closed under any finite number of closed-definable type formers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊. These features make the proposed system an optimal foundation for a proof assistaint. For practical usability as a functional programming language, the system has to be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion, which are known to be eliminable towards of ordinary recursion and corecursion at cost of substantial complexity blowup.
 
-In a companion paper, we outline how to extend Martin-Löf type theories including the one proposed in this paper to allow structural induction over their own languages, extending the notion of types from ∞-groupoids to ω-categories as a natural by-product.
+In a [companion paper](reedy-types), we outline how to extend Martin-Löf type theories including the one proposed in this paper to allow structural induction over their own languages, extending the notion of types from ∞-groupoids to ω-categories as a natural by-product.
 
 # The closed term modality □ and virtual arguments
 ```
