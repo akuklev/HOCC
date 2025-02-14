@@ -45,6 +45,6 @@ We will show that this rule implies (and essentially is) the computational Marko
           eval(c, nonDivergencePrf) : T
 ```
 — where `Computation` is the partiality monad representing Turing-complete computations.
-The principle reads: “a closed classical proof of non-divergence allows to evaluate a computation“.
+The principle reads: “a closed classical proof of non-divergence allows to evaluate a computation“, making the proposed system an ultimate base for a total functional programming language.
 
-In presence of °- and □-modality we can also introduce a reflective virtial universe 𝕊 and postulate existence of universes closed under any finite number of closed-definable typeformers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊.
+In presence of °- and □-modality we can also introduce a reflective virtial universe 𝕊 and postulate existence of universes closed under any finite number of closed-definable typeformers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊. All these features combined make the proposed system an ultimate foundation for a versatile proof assistaint. In a companion paper we outline how to extend Martin-Löf Type Theories (including the system proposed in this paper) so as to allow structural induction over its own language, extending the notion of types from ∞-groupoids to ω-categories as a natural byproduct.
