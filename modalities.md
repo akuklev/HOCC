@@ -64,20 +64,22 @@ In a companion paper, we outline how to extend Martin-Löf type theories (includ
  Г, x :° X ⊢ y : Y(X)
 ```
 
-# The verse modality ♢ and entanglement
+# The verse modality ♢ and perceived entanglement
+
+# Versal quantifiers
 
 # The Markov principle
 
 # Unary parametricity
 
-# Embedding classical logic
+# Interpreting classical logic
 
-# Handling universes
+# Reflective universes
 
-# Normalization for the modal-free fragment
+# Embedding of the type-theoretic model of ZF-sets into ♢ by Zakharyaschev subframe canonical formulae
 
-# Set-theoretic model a la Pujet-Tabareau
+# Set-theoretic model a la Pujet-Tabareau and conservativity via back-and-fourth argument
 
-# Interpreting ZFM/𝕊 
+# Normalization for the modal-free fragment and admissibility of Markov principle
 
-# Conservativity via back-and-fourth argument
+# Future work: canonicity for □-fragment, productivity for ♢-fragment
