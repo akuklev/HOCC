@@ -1,3 +1,6 @@
+Classical and parametric reasoning under respective modalities
+==============================================================
+
 In 2016 C. McBride [introduced](https://link.springer.com/chapter/10.1007/978-3-319-30936-1_12) graded type theories, where we can have exact control over the number of usages of variables (usages in type annotations not being counted). Original version used three modes, but can be extended to the following five:
 ```
 x : X -- as often as desired
@@ -28,6 +31,17 @@ Otherwise, the extraction will be non-determinstic. However, we can introduce no
   εᵀ(prf) : ♢⁺T         εᵀ(prf) : ♢⁻T        εᵀ(prf) : ♢T
 ```
 
-For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (♢⁺, ♢⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ♢-modality! We will argue that it has a perfect computational interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will add the dual IS4 □-modality which is known to have computational interpretation of staged computation. Terms `t : □T` have the intended meaning of being closed terms of type `T`. Dually to classical reasoning under the ♢-modality we will obtain parametric reasoning under the □-modality, while the combination of these modalities allows
-deriving the computational markov rule:
+For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (♢⁺, ♢⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ♢-modality! We will argue that it has a perfect computational interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will add the dual IS4 □-modality which is known to have computational interpretation of staged computation. Terms `t : □T` have the intended meaning of being closed terms of type `T`. Dually to classical reasoning under the ♢-modality we will obtain parametric reasoning under the □-modality. By establishing a set-theoretic interpretation of types under ♢-modality, we will show admissibility of the rule allowing to use closed non-constructive proofs can be used in computational context as virtual arguments:
+ f : (x :° X) → Y      x : □♢X
+———————————————————————————————
+          f(x) : Y
+```
 
+We will show that this rule implies (and essentially is) the computational Markov principle:
+```
+ c : (Computation T)   nonDivergence : □♢(c ≠ ⊥)
+—————————————————————————————————————————————————
+          eval(c, nonDivergence) : T
+```
+— where `Computation` is the partiality monad representing Turing-complete computations.
+The principle reads: “a closed classical proof of non-divergence allows to evaluate a computation“.
