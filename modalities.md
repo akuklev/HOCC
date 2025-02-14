@@ -38,13 +38,46 @@ For the rest of this paper will not consider the substructural modes (⁻, ¹, �
           f(x) : Y
 ```
 
-We will show that this rule implies (and essentially is) the computational Markov principle:
+We will show that this rule implies (and essentially is) the computational Markov principle allowing to evaluate Turing-complete computations given a closed classical proof of their non-divergence: 
 ```
  c : (Computation T)   nonDivergencePrf : □♢(c ≠ ⊥)
 ————————————————————————————————————————————————————
           eval(c, nonDivergencePrf) : T
 ```
-— where `Computation` is the partiality monad representing Turing-complete computations.
-The principle reads: “a closed classical proof of non-divergence allows to evaluate a computation“, making the proposed system an ultimate base for a total functional programming language.
 
-In presence of °- and □-modality we can also introduce a reflective virtial universe 𝕊 and postulate existence of universes closed under any finite number of closed-definable typeformers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊. All these features combined make the proposed system an ultimate foundation for a versatile proof assistaint. In a companion paper we outline how to extend Martin-Löf Type Theories (including the system proposed in this paper) so as to allow structural induction over its own language, extending the notion of types from ∞-groupoids to ω-categories as a natural byproduct.
+In presence of °- and □-modality we can also introduce a reflective virtial universe 𝕊 and postulate existence of universes closed under any finite number of closed-definable typeformers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊. These features render the proposed system an optimal candidate for the foundation of a proof assistaint.
+
+In a companion paper, we outline how to extend Martin-Löf type theories (including the system proposed in this paper) to allow structural induction over their own languages, extending the notion of types from ∞-groupoids to ω-categories as a natural by-product.
+
+# The closed term modality □ and virtual arguments
+```
+   □Г ⊢ x : X
+————————————————
+ □Г, Δ ⊢ x : □X
+
+ Г ⊢ x : □X     Г, u :□ X ⊢ y : Y
+———————————————————————————————————
+     Г ⊢ (let u = x; y) : Y 
+
+ □Г, x : X ⊢ y : □Y(x)
+=======================
+ Г, x :° X ⊢ y : Y(X)
+```
+
+# The verse modality ♢ and entanglement
+
+# The Markov principle
+
+# Unary parametricity
+
+# Embedding classical logic
+
+# Handling universes
+
+# Normalization for the modal-free fragment
+
+# Set-theoretic model a la Pujet-Tabareau
+
+# Interpreting ZFM/𝕊 
+
+# Conservativity via back-and-fourth argument
