@@ -46,3 +46,5 @@ We will show that this rule implies (and essentially is) the computational Marko
 ```
 — where `Computation` is the partiality monad representing Turing-complete computations.
 The principle reads: “a closed classical proof of non-divergence allows to evaluate a computation“.
+
+In presence of °- and □-modality we can also introduce a reflective virtial universe 𝕊 and postulate existence of universes closed under any finite number of closed-definable typeformers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊.
