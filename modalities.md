@@ -40,9 +40,9 @@ For the rest of this paper will not consider the substructural modes (⁻, ¹, �
 
 We will show that this rule implies (and essentially is) the computational Markov principle:
 ```
- c : (Computation T)   nonDivergence : □♢(c ≠ ⊥)
-—————————————————————————————————————————————————
-          eval(c, nonDivergence) : T
+ c : (Computation T)   nonDivergencePrf : □♢(c ≠ ⊥)
+————————————————————————————————————————————————————
+          eval(c, nonDivergencePrf) : T
 ```
 — where `Computation` is the partiality monad representing Turing-complete computations.
 The principle reads: “a closed classical proof of non-divergence allows to evaluate a computation“.
