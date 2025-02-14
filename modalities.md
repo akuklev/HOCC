@@ -1,5 +1,8 @@
-Modalities for ♢Classical and □Parametric Reasoning within Martin-Löf Type Theories
+ ♢Classical and □Parametric Modalities for Martin-Löf Type Theories
 ===================================================================================
+
+[author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
+[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
 # Overview
 
