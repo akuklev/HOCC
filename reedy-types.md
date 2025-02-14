@@ -2,7 +2,9 @@ Type-theoretic approach to Reedy categories
 ===========================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
-[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
+[Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/) and Radboud University Nijmegen, Software Science
+
+[![Orcid icon](https://upload.wikimedia.org/wikipedia/commons/f/f7/Orcid_icon.png)](https://orcid.org/0009-0004-1019-4205)
 
 Building on the unpublished ideas of C. McBride, we propose a novel extension for Martin-Löf Type Theories (MLTTs) we'll call inductive prototypes, a type-theoretic internalization of Reedy categories. Inductive type families indexed over prototypes provide effective machinery for dealing with syntaxes that include binding, and become indispensable when internalizing the syntax and semantics of type theories themselves. Bidirectional presentations of dependent type theories turn out to be inductive-inductive-recursive definitions. There, the inductive type families of expressions and normal forms are defined simultaneously with inductive prototypes representing their contexts and reduction rules framed as recursive functions on expressions.
 
