@@ -26,7 +26,7 @@ Proofs by contradiction assume a negative premise `nT : ¬T` to derive a contrad
    εᵀ(prf) : T
 ```
 
-Otherwise, the extraction will be non-determinstic. However, we can introduce non-deterministic modalities ♢⁺, ♢⁻ and ♢, meaning “one or more possible outcome”, ”one or less outcomes” and “any number of possible outcomes”. With this modalities we have:
+Otherwise, the extraction will be non-determinstic. However, we can introduce modalities of spectra ♢⁺, ♢⁻ and ♢, meaning “one or more possible outcome”, ”one or less outcomes” and “any number of possible outcomes”. With this modalities we have:
 ```
  prf : ¬(nT :⁺¬T)      prf : ¬(nT :⁻¬T)        prf : ¬¬T
 ——————————————————    ——————————————————    ——————————————
@@ -66,9 +66,9 @@ In a [companion paper](reedy-types), we outline how to extend Martin-Löf type t
  Г, x :° X ⊢ y : Y(X)
 ```
 
-# The verse modality ♢ and perceived entanglement
+# The spectral modality ♢ and perceived entanglement
 
-# Versal quantifiers
+# Spectral quantifiers and parametric quantifiers
 
 # The Markov principle
 
