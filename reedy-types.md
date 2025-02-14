@@ -1,5 +1,5 @@
-Type-theoretical approach to Reedy categories  (draft)
-======================================================
+Type-theoretic approach to Reedy categories
+===========================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
@@ -75,7 +75,7 @@ If we want our proof calculus to support proofs by induction, we have to use typ
   ℕind(P, step, base) : ∀(n : ℕ) P(n)
 ```
 
-To accomodate induction we need a much more complicated system of dependent sorts featuring a sort of (internal) data types and a substantial amount of infrastructure. Fortunatelly, the flexibility provided by the notion of dependent sorts and normalization maps `|_|` turns out to be flexible enough even to internalize itself. (Apart from algorithm totality-checking. If a system contains a total “programming language” inside, it cannot be powerfull enough to encode the normalization maps used for defining the system. The only way for a system striving to define its own syntax inside, is to use “levitating” algorithms for the normalization maps, which are interpreted (and termination-checked) by the ambient system and look as black boxed from inside the system, as first introduced in “The Gentle Art of Levitation” by J Chapman.)
+To accomodate induction we need a much more complicated system of dependent sorts featuring a sort of (internal) data types and a substantial amount of infrastructure. Fortunatelly, the flexibility provided by the notion of dependent sorts and normalization maps `|_|` turns out to be flexible enough even to internalize itself. (Apart from algorithm totality-checking. If a system contains a total “programming language” inside, it cannot be powerfull enough to encode the normalization maps used for defining the system. The only way for a system striving to define its own syntax inside, is to use “levitating” algorithms for the normalization maps, which are interpreted (and termination-checked) by the ambient system and look as black boxed from inside the system, as first introduced in “The Gentle Art of Levitation” by J. Chapman.)
 
 # Introducing prototypes
 
@@ -94,9 +94,7 @@ Below we'll introduce the notion of prototypes and introduce a prototype Δ⁺ s
 can be defined as `Con : ↓n -> Ty` for `n : Δ⁺` and type of respective contexts as `∀(i : ↓n) |Con(i)|`.
 Moreover, it will be possible to introduce the prototype Δ that additionally keeps track of context
 extensions `ext : Con ⊂ Con'` and allows extending functions on `∀(i : ↓n) |Con(i)|` to functions on
-`(∀(i : ↓n) Con'(i))` along `ext` automatically. Ideas behind extensions were entirely developed by
-Connor McBride. We don't know if he has developed the ideas regarding dependency, but we have not seen
-any of them published or presented in approachable way on his personal github and blog.
+`(∀(i : ↓n) Con'(i))` along `ext` automatically.
 
 Prototypes are type-theoretical counterparts of Reedy categories.
 
@@ -123,14 +121,12 @@ Functions `f` on `F[t : T]` have to provide action on “higher constructors” 
 either a path `f(x) = f(e.from)` or an extension `Extension[f(x)]` with .from ≡ f(e.from).
 
 Type-valued functions `F[t : T]` on prototypes are defined using the following form of elimination:
-Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) -> F[r.to])`. Higher
-constructors `e : Extensons[t]` should evaluate to maps `F[e.from] -> F[e]`.
+Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) -> F[r.to])`, with inner occurences
+of `T` being transfored to `Tᵈ t`. Higher constructors `e : Extensons[t]` should evaluate to maps `F[e.from] -> F[e]`.
 
 **TODO:**
-Now we have to describe functors (functions A (-> B -> ··· ) -> Z, where A..Z are prototypes) and
-how definitions of inductive type families over prototypes work, it'll be enough for doing “eating”
-itself. Also say a few words on how displayed types and types over prototypes are related.
+
+Explicitly state induction motives for prototypes using ᵈ-transformation and show definitions of inductive type families over prototypes work. Describe functors (functions A (-> B -> ··· ) -> Z, where A..Z are prototypes), and universes of prototypes.
 
 **TODO:**
-Ask Nikolai Kudasow how this stuff fits with rzk-lang.github.io, that deals with what we call “universes”
-here, i.e. essentially synthetic categories.
+Ask Nikolai Kudasow how this stuff fits with rzk-lang.github.io, that  essentially deals with what we call “universes” here, i.e. synthetic categories.
