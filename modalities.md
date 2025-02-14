@@ -82,4 +82,4 @@ In a companion paper, we outline how to extend Martin-Löf type theories (includ
 
 # Normalization for the modal-free fragment and admissibility of Markov principle
 
-# Future work: canonicity for □-fragment, productivity for ♢-fragment
+# Canonicity for the □-fragment, productivity for the ♢-fragment
