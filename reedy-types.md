@@ -124,9 +124,7 @@ Type-valued functions `F[t : T]` on prototypes are defined using the following f
 Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) -> F[r.to])`, with inner occurences
 of `T` being transfored to `Tᵈ t`. Higher constructors `e : Extensons[t]` should evaluate to maps `F[e.from] -> F[e]`.
 
-**TODO:**
-
-Explicitly state induction motives for prototypes using ᵈ-transformation and show definitions of inductive type families over prototypes work. Describe functors (functions A (-> B -> ··· ) -> Z, where A..Z are prototypes), and universes of prototypes.
+**TODO:** Explicitly state induction motives for prototypes using ( ᵈ)-transformation and show definitions of inductive type families over prototypes work. Describe functors (functions A (-> B -> ··· ) -> Z, where A..Z are prototypes), and universes of prototypes.
 
 **TODO:**
 Ask Nikolai Kudasow how this stuff fits with rzk-lang.github.io, that  essentially deals with what we call “universes” here, i.e. synthetic categories.
