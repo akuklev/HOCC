@@ -146,8 +146,8 @@ Theorem ∀(id : □∀(T :⁰ *) T → T) id ≃ { x ↦ x }
 ```
 
 It has been shown that the equvalences (≃) on the type of `I`-algebras for an inductive type `I` turn out
-to be `I`-algebra isomorphisms. Let us now derive the type of `I`-algebra homomorphisms making their type a
-category, and the type of `I`-algebra promorphisms.
+to be `I`-algebra isomorphisms. Let us now derive the type of `I`-algebra promorphisms making it into a
+Segal-type and the type of `I`-algebra homomorphisms, making it a category.
 
 
 # Introducing prototypes
