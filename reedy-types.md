@@ -145,7 +145,10 @@ Theorem ∀(id : □∀(T :⁰ *) T → T) id ≃ { x ↦ x }
   𝟙par(m)
 ```
 
-Now let us show that we can also define the equipped category od `I`-algebras for every inductive type.
+It has been shown that the equvalences (≃) on the type of `I`-algebras for an inductive type `I` turn out
+to be `I`-algebra isomorphisms. Let us now derive the type of `I`-algebra homomorphisms making their type a
+category, and the type of `I`-algebra promorphisms.
+
 
 # Introducing prototypes
 
