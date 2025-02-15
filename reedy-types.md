@@ -10,8 +10,7 @@ Semantically, fibered quotient inductive-inductive type definitions (FQIITs) are
 
 In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the Higher Observation Type Theory (HOTT) is complete.
 
-§ Overview
-----------
+# Overview
 
 Natural deduction, an inference rule-based proof calculus can be seen as a precursor of Martin-Löf type theories.
 The inference rules of natural deduction serve as a typed generative grammar for proof terms, where the propositions being
@@ -34,7 +33,7 @@ To make the MLTTs “eat themselves” properly, we need to introduce yet anothe
 
 We conjecture, that introducing universes of prototypes, prototype functors and prototype-dependent types would somehow[^Maybe, universes `U` should come with an inbuilt notion of correspondences `(⇸)_U` (= proarrows = bimodules), so that arrows inside the given universe can be recovered as functional proarrows] reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately lead to an elegant type theory for synthetic ω-categories, a higher categorical type theory HCTT: a higher-categorical mathematical foundation system that emerges if one seeks for a natural proof calculus capable of structural induction over its own language. We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that HCTT types would turn out to be internal ω-categories.
 
-# Preliminaries
+# Motivation
 
 ## Lavwere algebraic theories
 
@@ -76,6 +75,77 @@ If we want our proof calculus to support proofs by induction, we have to use typ
 ```
 
 To accomodate induction we need a much more complicated system of dependent sorts featuring a sort of (internal) data types and a substantial amount of infrastructure. Fortunatelly, the flexibility provided by the notion of dependent sorts and normalization maps `|_|` turns out to be flexible enough even to internalize itself. (Apart from algorithm totality-checking. If a system contains a total “programming language” inside, it cannot be powerfull enough to encode the normalization maps used for defining the system. The only way for a system striving to define its own syntax inside, is to use “levitating” algorithms for the normalization maps, which are interpreted (and termination-checked) by the ambient system and look as black boxed from inside the system, as first introduced in “The Gentle Art of Levitation” by J. Chapman.)
+
+# Preliminaries
+
+# Inductive types and Derived structures
+
+Recently, M. Shulman et al. has proposed defining universes `U` of types together with recursively
+defined operations `( ᵈ) : U → U` and `(≃) : (T : U) → (x y : T) → U`. The latter one maps a type
+to the type of eqivalences between its elements, while the former one can be used to define derived
+structures. To give a concrete example let us consider the inductive type of natural numbers
+```
+inductive ℕ : *
+  0 : ℕ
+  ( ⁺) : ℕ → ℕ
+```
+
+Such inductive definition also defines the structure of respective algebras
+```
+structure ℕAlg(T : *) : *
+  base : T
+  step : T → T
+```
+the initial algebra
+```
+instance ℕobj : ℕAlg(ℕ)
+  base: 0
+  step: ( ⁺)
+```
+and the recursion operator
+```
+( ᶜ) : ℕ → ℕᶜ where
+ℕᶜ = ∀(T) ℕAlg(T) → T
+```
+
+The inductive definition also generates the respective Church encoding
+```
+instance ℕobjᶜ : ℕAlg(ℕᶜ)
+  base: 0ᶜ
+  step: ( ⁺)ᶜ
+```
+
+The derived algebra is the following structure:
+```
+structure ℕAlgᵈ (Nalg : ℕAlg) (T : |Nalg| → T) : *
+  base : T(Nalg.base)
+  step(n : |NAlg|) : T(n) → T(Nalg.step n)
+```
+allowing do define the type of induction motives
+```
+def ℕᴹ : ℕ → *
+  ℕAlgᵈ ℕobj
+```
+
+Inductive definitions are calles do because they also generate the respective induction principle
+```
+ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
+```
+
+In type theories featuring modal internal parametricity, they also come with relational parametricity principles
+```
+Ipar : (n : □Iᶜ) → (R : IAlgᵈ Iobjᶜ) → (|R| n)
+```
+that can be used for instance to derive the classical
+```
+def m : 𝟙Algᵈ 𝟙objᶜ {id : 𝟙ᶜ ↦ (id ≃ { x ↦ x } }
+  point: refl
+
+Theorem ∀(id : □∀(T :⁰ *) T → T) id ≃ { x ↦ x }
+  𝟙par(m)
+```
+
+Now let us show that we can also define the equipped category od `I`-algebras for every inductive type.
 
 # Introducing prototypes
 
