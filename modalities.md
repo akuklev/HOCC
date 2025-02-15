@@ -1,4 +1,4 @@
-♢Classical and □Parametric Modalities for Martin-Löf Type Theories
+◇Classical and □Parametric Modalities for Martin-Löf Type Theories
 ==================================================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
@@ -26,30 +26,30 @@ Proofs by contradiction assume a negative premise `nT : ¬T` to derive a contrad
    εᵀ(prf) : T
 ```
 
-Otherwise, the extraction will be non-determinstic. However, we can introduce modalities of spectra ♢⁺, ♢⁻ and ♢, meaning “one or more possible outcome”, ”one or less outcomes” and “any number of possible outcomes”. With this modalities we have:
+Otherwise, the extraction will be non-determinstic. However, we can introduce modalities of spectra ◇⁺, ♢⁻ and ♢, meaning “one or more possible outcome”, ”one or less outcomes” and “any number of possible outcomes”. With this modalities we have:
 ```
  prf : ¬(nT :⁺¬T)      prf : ¬(nT :⁻¬T)        prf : ¬¬T
 ——————————————————    ——————————————————    ——————————————
-  εᵀ(prf) : ♢⁺T         εᵀ(prf) : ♢⁻T        εᵀ(prf) : ♢T
+  εᵀ(prf) : ◇⁺T         εᵀ(prf) : ◇⁻T        εᵀ(prf) : ◇T
 ```
 
-For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (♢⁺, ♢⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ♢-modality!  `♢T` is the type of hypothetically possible inhabitants of `T`, yet will argue that it has a sound computational interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will also introduce the dual types `□T` of “manifestly neccesary” inhabitants of `T`, i.e. closed terms, yielding the well-known computational interpretation in terms of staged computability. Dually to classical reasoning under ♢-modality, we obtain parametric reasoning under □-modality, so that we can show that `{ x ↦ x }` in the only canonical endomorphism of an arbitrary type up to equivalence: `∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }`.
+For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (◇⁺, ◇⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ◇-modality!  `◇T` is the type of hypothetically possible inhabitants of `T`, yet will argue that it has a sound computational interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will also introduce the dual types `□T` of “manifestly neccesary” inhabitants of `T`, i.e. closed terms, yielding the well-known computational interpretation in terms of staged computability. Dually to classical reasoning under ◇-modality, we obtain parametric reasoning under □-modality, so that we can show that `{ x ↦ x }` in the only canonical endomorphism of an arbitrary type up to equivalence: `∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }`.
 
-By establishing a set-theoretic interpretation of types under ♢-modality, we will show admissibility of the following rule that allows using closed non-constructive proofs as virtual arguments outside of the ♢-context:
+By establishing a set-theoretic interpretation of types under ◇-modality, we will show admissibility of the following rule that allows using closed non-constructive proofs as virtual arguments outside of the ◇-context:
 ```
- f : (x :° X) → Y      x : □♢X
+ f : (x :° X) → Y      x : □◇X
 ———————————————————————————————
           f(x) : Y
 ```
 
 We will show that this rule implies (and essentially is) the computational Markov principle allowing to evaluate (potentially diverging by virtue of halting problem) computations given a closed classical proof of their non-divergence: 
 ```
- c : (Computation T)   nonDivergencePrf : □♢(c ≠ ⊥)
+ c : (Computation T)   nonDivergencePrf : □◇(c ≠ ⊥)
 ————————————————————————————————————————————————————
           eval(c, nonDivergencePrf) : T
 ```
 
-We will show that even in presence computational of Markov principle, all explicitly definable functions `f : □(X → Y)` are continuous with respect to the topology given by positively semi-decidable predicate, i.e. preimages of the open point of the computational Sierpiński space `return () : Computation Unit` which is also the usual open-ball topology for all types constructed as Cauchy completions.
+We will show that even in presence computational of Markov principle, all explicitly definable functions `f : □(X → Y)` are continuous with respect to the topology given by positively semi-decidable predicates which is also the usual open-ball topology for all types constructed as Cauchy completions.
 
 In presence of °- and □-modality it is possible to introduce a reflective virtial universe 𝕊 and postulate existence of ordinary universes closed under any finite number of closed-definable type formers, yielding a type-theoretic counterpart (and pressumably an equiconsistent conservative extension) of M. Shulman's “Set theory for category theory” ZMC/𝕊. These features make the proposed system an optimal foundation for a proof assistaint. For practical usability as a functional programming language, the system has to be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion, which are known to be eliminable towards of ordinary recursion and corecursion at cost of substantial complexity blowup.
 
@@ -70,7 +70,7 @@ In a [companion paper](reedy-types), we outline how to extend Martin-Löf type t
  Г, x :° X ⊢ y : Y(X)
 ```
 
-# The spectral modality ♢ and perceived entanglement
+# The spectral modality ◇ and perceived entanglement
 
 # Spectral quantifiers and canonical quantifiers
 
@@ -80,12 +80,27 @@ In a [companion paper](reedy-types), we outline how to extend Martin-Löf type t
 
 # Interpreting classical logic
 
+# Interpreting verse calculus
+
+Verse calculus is a functional logic programming language, which implies that a closed “program” can be evaluated:
+```
+         prgm : □◇P
+————————————————————————————————
+ eval(prgm) : PolyComputation P
+```
+
+Where PolyComputation is a monad similar to the Computation monad, but allowing to yield multiple, potentially infinutely many values, a computational stream modulo order and multiplicity of values.
+
+Such “eval“ operator gives the “all” operator of Verse Calculus, while εᵀ gives “one” operator.
+
 # Reflective universes
 
-# Embedding of the type-theoretic model of ZF-sets into ♢ by Zakharyaschev subframe canonical formulae
+# Embedding of the type-theoretic model of ZF-sets into ◇ by Zakharyaschev subframe canonical formulae
 
 # Set-theoretic model a la Pujet-Tabareau and conservativity via back-and-fourth argument
 
 # Normalization for the modal-free fragment and admissibility of Markov principle
 
-# Future work: Canonicity for the □-fragment, productivity for the ♢-fragment
+# Future work: Canonicity for the □-fragment, productivity for the ◇-fragment
+
+The former means that the “stream” `eval(prgm : □◇P)` is dense in the spectrum `◇P` with respect to the topology given by positively semi-decidable predicates.
