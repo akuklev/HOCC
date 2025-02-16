@@ -78,23 +78,22 @@ To accomodate induction we need a much more complicated system of dependent sort
 
 # Preliminaries
 
-# Inductive types and Derived structures
+# Inductive types and all their companions
 
-Recently, M. Shulman et al. has proposed defining universes `U` of types together with recursively
-defined operations `( ᵈ) : U → U` and `(≃) : (T : U) → (x y : T) → U`. The latter one maps a type
-to the type of eqivalences between its elements, while the former one can be used to define derived
-structures.
-
-Let us consider an inductive type, for example the data type of natural numbers:
+Everything below applies to every inductive type, but we'll use natural numbers as an illustrative example:
 ```
 inductive ℕ : *
   0 : ℕ
   ( ⁺) : ℕ → ℕ
 ```
 
-Such definition does not only generate the type ℕ itself, but also a number of associated types and operators.
 
-The type of the repective algebras:
+An inductive definition does not only generate the type (ℕ) itself, but also a number of associated types and operators.
+
+To write them down, we'll assume we have two recursively defined operations `( ᵈ) : U → U` and `(≃) : ∀{T : U} ∀(x y : T) U`
+on universes as recently proposed by M. Shulman et al.
+
+Every inductive type comes with the type of the repective algebras:
 ```
 structure ℕAlg<T : *> : *
   base : T
@@ -106,9 +105,10 @@ instance ℕobj : ℕAlg<ℕ>
   base: 0
   step: ( ⁺)
 ```
+
 The type of Church-numerals
 ```
-ℕᶜ = ∀(T) ℕAlg<T> → T
+ℕᶜ := ∀(T : *) ℕAlg<T> → T
 ```
 the recursion operator
 ```
@@ -146,7 +146,7 @@ def target (src : ℕAlg) (pm : ℕAlgᵈ src) : ℕAlg<Σ(n : |src|) |pm| src>
   step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
 ```
 
-We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a category.
+We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a precategory (Segal type), which turns out to be a category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕAlg}` of ℕ-algebras correspond to their isomorphisms.
 
 * * *
 
