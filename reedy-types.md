@@ -26,7 +26,7 @@ Another forerunner of Martin-Löf type theories is Gödel's System T: it's a Sim
 
 The other constituent of Martin-Löf type theories comes from the first type theory ever introduced, the Russell's theory of types introduced at the very beginning of XX century as a way to deal with Russell's paradox: the type universes. It was long assumed that the universes of data types in Martin-Löf type theories can be seen as data types themselves, but due to a discovery made by Martin Hofmann and Thomas Streicher in 1996 it began to become apparent that it's not the case: the universe of datatypes neccesarily carries additional higher structure, and ignoring this structure makes the theory either undecidable or unsound. Datatypes can be equivalent in inequivalent ways: for instance, the functions `id := { x ↦ x }` and `negate = { tt ↦ ff ; ff ↦ tt}` are nonequivalent automorphisms of the datatype `𝔹 = {tt, ff}`. Starting with the universe `U₀` of datatypes we can construct other “non-data” types, e.g. the universe of pointed data types `Σ(T : U₀) T` or the universe of `U₀`-polymorphic datatypes `U₀ → U₀`. The next type universe `U₀⁺` is obviously also a “non-data” type. Ultimately, Voevodski understood that the types of Martin-Löf type theories represent anima (also known as ∞-groupoids), with data types and propositions being special cases of 0th and -1th truncation levels respectively. Advanced forms of MLTT correctly accomodating higher structure of type universes are now known as univalent (Martin-Löf) type theories. Currently there are several implementations, each with its own minor issues, while the mature one (the Higher Observational Type Theory) is being developed. There, universes come with a recursively defined operation `(≃) : ∀{T : U} ∀(x y : T) U` that computes the type of equivalences of elements inside the types `T` inside the universe.
 
-In fact, type universes are not just ∞-groupoids: taking function types `X → Y` between their elements makes them into ∞-categories. They also come with a recursively defined operation `( ᵈ) : U → U` that computes displayed types representing binary relations `Xᵈ` from the type `X` into other types. That makes type universes into ∞-procategories. As I will show below, for every inductive type `I` we also obtain a ∞-procategory `I-Mod` of its models. (Technically, a hierarchy of ∞-procategories of its U-small models `I-Modᵁ` and a displayed ∞-procategory `I-Mod` of all its models.)
+In fact, type universes are not just ∞-groupoids: taking function types `X → Y` between their elements makes them into ∞-categories. They also come with a recursively defined operation `( ᵈ) : U → U` that computes displayed types representing binary relations `Xᵈ` from the type `X` into other types. That makes type universes into ∞-procategories. As I will show below, for every inductive type `I` we also obtain a ∞-procategory `I-Mod` of its models. (Technically, a hierarchy of ∞-procategories of its U-small models `I-Modᵁ` and a displayed ∞-procategory `I-Alg` of all its models.)
 
 Long before this realization of Voevodski's, enthusiasts of the category-theoretic approach to the foundations of mathematics wondered whether it was possible to generalize MLTTs to accomodate categories as types. Subsequently, approaches were indeed found (cf. [Type Theory for Synthetic ∞-categories](https://rzk-lang.github.io)), but as often happens in the absence of applied motivation, this developments remain rather obscure and hard to grasp. The situation changed in 2021 when C. McBride ([“Cats and Types: Best Friends?“](https://youtu.be/05IJ3YL8p0s)) presented the idea that representing syntaxes with binding begs for inductive data type families indexed over types with directed higher structure. This idea immediatelly resonated with our decade-long endeavour to conceptualize dependent type theories as an advanced forms of algebraic theories, as it seemed that type families indexed over types with inverse higher structure could represent the _very-dependent types_ introduced by Hickey and Kopylov [“Formal objects in type theory using very dependent
 types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
@@ -80,7 +80,7 @@ To accomodate induction we need a much more complicated system of dependent sort
 
 # Preliminaries
 
-# Everything around inductive types
+# Inductive types and ∞-procategories of their models
 
 Everything below applies to every inductive type, but we'll use natural numbers as an illustrative example:
 ```
@@ -95,11 +95,13 @@ An inductive definition does not only generate the type (ℕ) itself, but also a
 To write them down, we'll assume we have two recursively defined operations `( ᵈ) : U → U` and `(≃) : ∀{T : U} ∀(x y : T) U`
 on universes as recently proposed by M. Shulman et al.
 
-Every inductive type comes with the type of the repective algebras:
+Every inductive type comes with the type of the repective algebras and models:
 ```
 structure ℕAlg<T : *> : *
   base : T
   step : T → T
+
+ℕModᵁ := Σ(T : U) ℕAlg<U>
 ```
 and its canonical instance
 ```
@@ -108,22 +110,7 @@ instance ℕobj : ℕAlg<ℕ>
   step: ( ⁺)
 ```
 
-The type of Church-implementations
-```
-ℕᶜ := ∀(T : *) ℕAlg<T> → T
-```
-the recursion operator
-```
-( ᶜ) : ℕ → ℕᶜ
-```
-and the Church encoding
-```
-instance ℕobjᶜ : ℕAlg(ℕᶜ)
-  base: 0ᶜ
-  step: ( ⁺)ᶜ
-```
-
-The derived algebra is the following structure:
+The displayed algebras are given by the following structure:
 ```
 structure ℕAlgᵈ(Nalg : ℕAlg)<T : |Nalg| → *> : *
   base : T(Nalg.base)
@@ -152,16 +139,24 @@ We can define (strong) homomorphisms as the weak ones with contractible fibers `
 
 * * *
 
-In type theories featuring modal internal parametricity, they also come with relational parametricity principles
+In type theories featuring modal internal parametricity, inductive definitions also come with relational parametricity principles
 ```
-Ipar : (n : □Iᶜ) → (R : IAlgᵈ Iobjᶜ) → (|R| n)
+Ipar : (n : □Iᵁ) → (R : IAlgᵈ Iobjᵁ) → (|R| n)
 ```
+
+where `Iᵁ := ∀(T : U) ℕAlg<T> → T` is the type of Church-implementations, `( ᵁ) : ℕ → ℕᵁ` the recursion operator, and `Iobjᵁ` the Church-encoding like
+```
+instance ℕobjᶜ : ℕAlg(ℕᶜ)
+  base: 0ᶜ
+  step: ( ⁺)ᶜ
+```
+
 that can be used for instance to derive the classical
 ```
-def m : 𝟙Algᵈ 𝟙objᶜ {id : 𝟙ᶜ ↦ (id ≃ { x ↦ x } }
+def m : 𝟙Algᵈ 𝟙objᵁ {id : 𝟙ᵁ ↦ (id ≃ { x ↦ x } }
   point: refl
 
-Theorem ∀(id : □∀(T :⁰ *) T → T) id ≃ { x ↦ x }
+Theorem ∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }
   𝟙par(m)
 ```
 
