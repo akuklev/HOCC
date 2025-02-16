@@ -8,7 +8,7 @@ Building on the unpublished ideas of C. McBride, we propose a novel extension fo
 
 Semantically, fibered quotient inductive-inductive type definitions (FQIITs) are effective presentations of weak model categories whose structure-preserving functors correspond to elimination motives. In strong analogy to the functorial semantics of Lavwere algebraic theories, these functors themselves form a category of models, with their natural transformations serving as model homomorphisms.
 
-In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the Higher Observation Type Theory (HOTT) is complete.
+In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the [Higher Observation Type Theory (HOTT)](https://ncatlab.org/nlab/show/higher+observational+type+theory) is complete.
 
 # Overview
 
@@ -83,32 +83,38 @@ To accomodate induction we need a much more complicated system of dependent sort
 Recently, M. Shulman et al. has proposed defining universes `U` of types together with recursively
 defined operations `( ᵈ) : U → U` and `(≃) : (T : U) → (x y : T) → U`. The latter one maps a type
 to the type of eqivalences between its elements, while the former one can be used to define derived
-structures. To give a concrete example let us consider the inductive type of natural numbers
+structures.
+
+Let us consider an inductive type, for example the data type of natural numbers:
 ```
 inductive ℕ : *
   0 : ℕ
   ( ⁺) : ℕ → ℕ
 ```
 
-Such inductive definition also defines the structure of respective algebras
+Such definition does not only generate the type ℕ itself, but also a number of associated types and operators.
+
+The type of the repective algebras:
 ```
-structure ℕAlg(T : *) : *
+structure ℕAlg<T : *> : *
   base : T
   step : T → T
 ```
-the initial algebra
+and its canonical instance
 ```
-instance ℕobj : ℕAlg(ℕ)
+instance ℕobj : ℕAlg<ℕ>
   base: 0
   step: ( ⁺)
 ```
-and the recursion operator
+The type of Church-numerals
 ```
-( ᶜ) : ℕ → ℕᶜ where
-ℕᶜ = ∀(T) ℕAlg(T) → T
+ℕᶜ = ∀(T) ℕAlg<T> → T
 ```
-
-The inductive definition also generates the respective Church encoding
+the recursion operator
+```
+( ᶜ) : ℕ → ℕᶜ
+```
+and the Church encoding
 ```
 instance ℕobjᶜ : ℕAlg(ℕᶜ)
   base: 0ᶜ
@@ -117,7 +123,7 @@ instance ℕobjᶜ : ℕAlg(ℕᶜ)
 
 The derived algebra is the following structure:
 ```
-structure ℕAlgᵈ (Nalg : ℕAlg) (T : |Nalg| → T) : *
+structure ℕAlgᵈ(Nalg : ℕAlg)<T : |Nalg| → *> : *
   base : T(Nalg.base)
   step(n : |NAlg|) : T(n) → T(Nalg.step n)
 ```
@@ -127,10 +133,22 @@ def ℕᴹ : ℕ → *
   ℕAlgᵈ ℕobj
 ```
 
-Inductive definitions are calles do because they also generate the respective induction principle
+Inductive definitions are called so because they also generate the respective induction principle
 ```
 ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
 ```
+
+Inhabitants of the type `Σ(src : ℕAlg) (pm : ℕAlgᵈ src)` are promorphisms (weak homomorphisms) with source `src : ℕAlg`
+and target given by
+```
+def target (src : ℕAlg) (pm : ℕAlgᵈ src) : ℕAlg<Σ(n : |src|) |pm| src>
+  base: pm.base
+  step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
+```
+
+We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a category.
+
+* * *
 
 In type theories featuring modal internal parametricity, they also come with relational parametricity principles
 ```
@@ -144,11 +162,6 @@ def m : 𝟙Algᵈ 𝟙objᶜ {id : 𝟙ᶜ ↦ (id ≃ { x ↦ x } }
 Theorem ∀(id : □∀(T :⁰ *) T → T) id ≃ { x ↦ x }
   𝟙par(m)
 ```
-
-It has been shown that the equvalences (≃) on the type of `I`-algebras for an inductive type `I` turn out
-to be `I`-algebra isomorphisms. Let us now derive the type of `I`-algebra promorphisms making it into a
-Segal-type and the type of `I`-algebra homomorphisms, making it a category.
-
 
 # Introducing prototypes
 
