@@ -106,7 +106,7 @@ instance ℕobj : ℕAlg<ℕ>
   step: ( ⁺)
 ```
 
-The type of Church-numerals
+The type of Church-implementations
 ```
 ℕᶜ := ∀(T : *) ℕAlg<T> → T
 ```
