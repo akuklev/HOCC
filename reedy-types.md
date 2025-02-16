@@ -31,7 +31,7 @@ types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
 
 To make the MLTTs “eat themselves” properly, we need to introduce yet another kind of types not fitting into the landscape set by Voevodski. We start by introducing inductive prototypes, a type-theoretic internalization of Reedy categories and inductive counterparts to ( ᵈ)-coinductive types recently introduced by Kolomatskaia and Shulman: induction motives for prototypes will turn out to be ( ᵈ)-coinductive types. The raison d'être for inductive prototypes are the inductive type families indexed over such prototypes. These are a type-theoretic internalizations of Reedy presheaves, and will turn out to include (semi-)simplicial types and other (weak) test categories commonly used to provide models for higher-categorical structures. We'll also define functors between prototypes which are neccessary when defining functions on type families indexed over them. The types of those functors will have to carry prototypal structure so we can define functors of higher arity (bifunctors etc). We also give practical examples of types defined by large elimination on prototypes without studying the nature of the type universe it inhabits.
 
-We conjecture, that introducing universes of prototypes, prototype functors and prototype-dependent types would somehow[^Maybe, universes `U` should come with an inbuilt notion of correspondences `(⇸)_U` (= proarrows = bimodules), so that arrows inside the given universe can be recovered as functional proarrows] reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately lead to an elegant type theory for synthetic ω-categories, a higher categorical type theory HCTT: a higher-categorical mathematical foundation system that emerges if one seeks for a natural proof calculus capable of structural induction over its own language. We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that HCTT types would turn out to be internal ω-categories.
+We conjecture, that introducing universes of prototypes, prototype functors and prototype-dependent types would somehow[^Probably, universes `U` should generally come with an inbuilt notion of correspondences `(⇸)_U` (= proarrows = bimodules), so that arrows inside the given universe can be recovered as functional proarrows] reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately lead to an elegant type theory for synthetic ω-categories, a higher categorical type theory HCTT: a higher-categorical mathematical foundation system that emerges if one seeks for a natural proof calculus capable of structural induction over its own language. We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that HCTT types would turn out to be internal ω-categories.
 
 # Motivation
 
@@ -78,7 +78,7 @@ To accomodate induction we need a much more complicated system of dependent sort
 
 # Preliminaries
 
-# Inductive types and all their companions
+# Everything around inductive types
 
 Everything below applies to every inductive type, but we'll use natural numbers as an illustrative example:
 ```
@@ -146,7 +146,7 @@ def target (src : ℕAlg) (pm : ℕAlgᵈ src) : ℕAlg<Σ(n : |src|) |pm| src>
   step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
 ```
 
-We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a precategory (Segal type), which turns out to be a category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕAlg}` of ℕ-algebras correspond to their isomorphisms.
+We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕAlg}` of ℕ-algebras correspond to their isomorphisms.
 
 * * *
 
