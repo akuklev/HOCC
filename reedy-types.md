@@ -45,7 +45,26 @@ inductive ℕ : *
   ( ⁺) : ℕ → ℕ
 ```
 
-An inductive definition does not only generate the type (ℕ) itself, but also its dual: the structure of a ℕ-model on an arbitrary type `T`.
+An inductive definition does not only generate the type (ℕ) itself, but also coinductive dual, the type of infinite sequences:
+```
+structure (ℕ→ ) <T : *> : *
+  head : T
+  tail : ℕ→ T
+```
+and its dependent form
+```
+structure (ℕ→ ) <Ts : ℕ→ *> : *
+  head : Ts.head
+  tail : ℕ→ Ts.tail
+```
+
+These can be seen as the definitions for function and dependent function types on ℕ respectively:
+```
+(ℕ → T) := (ℕ→ T)
+∀(n : ℕ) T(n) := ℕ→ { n ↦ T(n) }
+```
+
+The inductive definition of ℕ also generates the structure of a ℕ-model on an arbitrary type `T`.
 ```
 structure ℕMod<T : *> : *
   base : T
@@ -87,8 +106,8 @@ The presented construction generalizes to all inductive types, quotient inductiv
 
 # The motivating example
 
-A homogeneous pair `p : T × T` can be equivalently described as a function `p : 𝔹 → T` on the type with two values.
-Heterogeneous pairs `p : X × Y` correspond to dependent functions `f : 𝔹 → { ff ↦ X; tt ↦ Y }`. What about dependent pairs?
+A homogeneous pair `p : T × T` can be equivalently described as a function `p : 𝔹→ T` on the type with two values.
+Heterogeneous pairs `p : X × Y` correspond to dependent functions `f : 𝔹→ { ff ↦ X; tt ↦ Y }`. What about dependent pairs?
 
 With inductive prototypes we can do that! We'll need the following one:
 ```
@@ -98,34 +117,28 @@ prototype 𝔻 : *̃
   snd [dep⟩ fst
 ```
 
-Due to directed higher structure of 𝔻, we can only define the structure of 𝔻-models on procategories `U : *̃`, a mere type `T : *` is not enougg.
+Its coinductive dual `(𝔻→ )` requires the target to be a procategory `U : *̃`, a mere type `T : *` is not enough:
 ```
-structure 𝔻Mod<U : *̃>
+structure (𝔻→ ) <U : *̃> : *̃
   fst : U
-  snd : (dep : s) →ᵁ U
+  snd : (dep : this.fst) →ᵁ U
 ```
 
-The operator (→ᵁ) referes to types of allowed morphisms in procategory U. Prototypes also come with the structure `𝔻→*` that could be defined as `𝔻Mod<*>` if we could specialize to “large types”.
+(The operator (→ᵁ) referes to hom-types of the procategory U.)
 
-Inductive types come with a type of induction motives, e.g.
+And here is the dependent coinductive dual:
 ```
-structure ℕᴹ<T : ℕ → *>
-  base : T(0)
-  step : ∀{n} T(n) → T(n⁺)
-```
-
-The prototype version looks like this:
-```
-structure 𝔻ᴹ<T : 𝔻→*>
-  fst : T.fst
-  snd : T.snd(this.fst)
+structure (𝔻→ ) <Ts : 𝔻→ *̃> : *̃
+  fst : Ts.fst
+  snd : (dep : this.fst) →ᵀˢ Ts.snd
 ```
 
-Whenever we use a `T : 𝔻→*` on the right side of colon, let us implicitly convert it to `𝔻ᴹ<T>.
+Now we dependent pairs `p : (x : X) × Y(x)` can be expressed as very dependent functions:
+```
+f : 𝔻→ { fst ↦ X, snd ↦ Y(f(fst)) }
+```
 
-Dependent pairs `p : (x : X) × Y(x)` correspond to “very dependent functions” `f : T`, where `T : 𝔻→*`.
-
-So far we have not gained anything as we already have dependent pairs. But wait, we can do the same for an infinite prototype:
+Using this approach, we can define a carrier prototype for very dependent sequences:
 ```
 prototype Δ⁻ : *̃
   0    : Δ⁻
@@ -133,17 +146,22 @@ prototype Δ⁻ : *̃
 
   (n⁺) [dep⟩ n
 
-structure Δ⁻Mod <U : *̃>
-  base : U
-  step : (dep : Z) →ᵁ Δ⁻Mod<U>
+structure (Δ⁻↦ ) <U : *̃>
+  head : U
+  tail : (dep : this.head) →ᵁ (Δ⁻↦ U)
+
+structure (Δ⁻↦ ) <Ts : Δ⁻↦ *̃>
+  head : Ts.head
+  tail : (dep : this.head) →ᵁ (Δ⁻↦ Ts.tail)
 ```
 
 We have just defined the very-dependent function types initially introduced by Kopylov et al.
 
+# Handling the telescopes
+
 Definitions of prototypes automaticaly come with types of downward subprototypes `↓n`, so we can write
 telescopes of finite length as `t : T`, where `T : (↓n)→*` for some `n : Δ⁻`.
 
-# The non-trivial example
 
 Add thinnings:
 ```
