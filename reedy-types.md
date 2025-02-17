@@ -26,14 +26,152 @@ Another forerunner of Martin-Löf type theories is Gödel's System T: it's a Sim
 
 The other constituent of Martin-Löf type theories comes from the first type theory ever introduced, the Russell's theory of types introduced at the very beginning of XX century as a way to deal with Russell's paradox: the type universes. It was long assumed that the universes of data types in Martin-Löf type theories can be seen as data types themselves, but due to a discovery made by Martin Hofmann and Thomas Streicher in 1996 it began to become apparent that it's not the case: the universe of datatypes neccesarily carries additional higher structure, and ignoring this structure makes the theory either undecidable or unsound. Datatypes can be equivalent in inequivalent ways: for instance, the functions `id := { x ↦ x }` and `negate = { tt ↦ ff ; ff ↦ tt}` are nonequivalent automorphisms of the datatype `𝔹 = {tt, ff}`. Starting with the universe `U₀` of datatypes we can construct other “non-data” types, e.g. the universe of pointed data types `Σ(T : U₀) T` or the universe of `U₀`-polymorphic datatypes `U₀ → U₀`. The next type universe `U₀⁺` is obviously also a “non-data” type. Ultimately, Voevodski understood that the types of Martin-Löf type theories represent anima (also known as ∞-groupoids), with data types and propositions being special cases of 0th and -1th truncation levels respectively. Advanced forms of MLTT correctly accomodating higher structure of type universes are now known as univalent (Martin-Löf) type theories. Currently there are several implementations, each with its own minor issues, while the mature one (the Higher Observational Type Theory) is being developed. There, universes come with a recursively defined operation `(≃) : ∀{T : U} ∀(x y : T) U` that computes the type of equivalences of elements inside the types `T` inside the universe.
 
-In fact, type universes are not just ∞-groupoids: taking function types `X → Y` between their elements makes them into ∞-categories. They also come with a recursively defined operation `( ᵈ) : U → U` that computes displayed types representing binary relations `Xᵈ` from the type `X` into other types. That makes type universes into ∞-procategories. As I will show below, for every inductive type `I` we also obtain a ∞-procategory `I-Mod` of its models. (Technically, a hierarchy of ∞-procategories of its U-small models `I-Modᵁ` and a displayed ∞-procategory `I-Alg` of all its models.)
+In fact, type universes are not just ∞-groupoids: taking function types `X → Y` between their elements makes them into ∞-categories. They also come with a recursively defined operation `( ᵈ) : U → U` that computes displayed types representing binary relations `Xᵈ` from the type `X` into other types. These binary relations make type universes into ∞-procategories. As I will show below, for every inductive type `I` we also obtain a ∞-procategory `I-Mod` of its models.^[Technically, the polymorphic type of `I-Alg<T : *>` of I-algebra structures on a type `T`, can be itself equipped with a natural structure of a displayed ∞-procategory, yielding a hierarchy of ∞-procategories of its U-small models `I-Modᵁ := Σ(T : U) I-Alg<U>`.]
 
-Long before this realization of Voevodski's, enthusiasts of the category-theoretic approach to the foundations of mathematics wondered whether it was possible to generalize MLTTs to accomodate categories as types. Subsequently, approaches were indeed found (cf. [Type Theory for Synthetic ∞-categories](https://rzk-lang.github.io)), but as often happens in the absence of applied motivation, this developments remain rather obscure and hard to grasp. The situation changed in 2021 when C. McBride ([“Cats and Types: Best Friends?“](https://youtu.be/05IJ3YL8p0s)) presented the idea that representing syntaxes with binding begs for inductive data type families indexed over types with directed higher structure. This idea immediatelly resonated with our decade-long endeavour to conceptualize dependent type theories as an advanced forms of algebraic theories, as it seemed that type families indexed over types with inverse higher structure could represent the _very-dependent types_ introduced by Hickey and Kopylov [“Formal objects in type theory using very dependent
-types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf).
+Long before this realization of Voevodski's, enthusiasts of the category-theoretic approach to the foundations of mathematics wondered whether it was possible to generalize MLTTs to accomodate categories as types. Subsequently, approaches were indeed found (cf. [Type Theory for Synthetic ∞-categories](https://rzk-lang.github.io)), but as often happens in the absence of applied motivation, this developments remain rather obscure and hard to grasp. The situation changed in 2021 when C. McBride ([“Cats and Types: Best Friends?“](https://youtu.be/05IJ3YL8p0s)) presented the idea that representing syntaxes with binding begs for inductive data type families indexed over types with directed higher structure. Complementarily, representing dependently-sorted syntaxes requires very-dependent types_ introduced by Hickey and Kopylov [“Formal objects in type theory using very dependent types.”](https://www.cs.cornell.edu/jyh/papers/fool3/paper.pdf) which can be seen as families indexed over types with inverse higher structure.
 
-To make the MLTTs “eat themselves” properly, we need to introduce yet another kind of types not fitting into the landscape set by Voevodski. We start by introducing inductive prototypes, a type-theoretic internalization of Reedy categories and inductive counterparts to ( ᵈ)-coinductive types recently introduced by Kolomatskaia and Shulman: induction motives for prototypes will turn out to be ( ᵈ)-coinductive types. The raison d'être for inductive prototypes are the inductive type families indexed over such prototypes. These are a type-theoretic internalizations of Reedy presheaves, and will turn out to include (semi-)simplicial types and other (weak) test categories commonly used to provide models for higher-categorical structures. We'll also define products of prototypes and functors between prototypes which are neccessary when defining functions on type families indexed over them and give practical examples of types defined by large elimination on prototypes without studying the nature of the type universe it inhabits.
+To make the MLTTs capable of performing structural induction over their own language (i.e. representing their own syntax in terms of inductive types, also known as “eating themselves”), we need to introduce yet another kind of types not fitting into the landscape set by Voevodski, namely types with both directed and inverse higher structure, type-theoretic internalization of Reedy categories we call inductive prototypes.
 
-We expect the higher-categorical mathematical foundation system to be emergent if one seeks for a natural proof calculus capable of structural induction over its own language. The universes of prototypes and as well as universes of functors between prototypes and dependent families over prototypes all carry structure of iterated ∞-procategories, that is, yet-to-be-defined, ω-procategories. We expect that it would be possible to reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately lead to an elegant type theory for synthetic ω-procategories that might be called Higher Categorical Type Theory HCTT^[We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that all HCTT types would turn out to be internal ω-procategories.].
+The raison d'être for inductive prototypes are the inductive families indexed over them. We'll show that these are given by ( ᵈ)-coinductive types recently introduced by Kolomatskaia and Shulman. These are a type-theoretic internalizations of Reedy presheaves, and will turn out to include (semi-)simplicial types and other (weak) test categories commonly used to provide models for higher-categorical structures. We'll show how definition of type families indexed over prototypes can be generalized to functors from prototypes to arbitrary ∞-procategories, including other prototypes which can be seen as simplest synthetic procategories. We expect the universes of Reedy prototypes, as well as functors and families over them to carry structure of iterated ∞-procategories, that is, yet-to-be-defined, ω-procategories.
+
+We conjecture that it would be possible to reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately embrace synthetic ω-(pro)categories^[We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that all HCTT types would turn out to be internal ω-procategories.], a long sought-after category-theoretic foundational framework what turns to be emergent if one seeks for a natural proof calculus capable of structural induction over its own language.
+
+# Inductive types and ∞-procategories of their models
+
+Every inductive type comes with a ∞-procategory of its models, but let's use the inductive type of natural numbers to have an illustrative example:
+```
+inductive ℕ : *
+  0 : ℕ
+  ( ⁺) : ℕ → ℕ
+```
+
+An inductive definition does not only generate the type (ℕ) itself, but also a number of associated types and operators, firstly type of the repective algebras:
+```
+structure ℕAlg<T : *> : *
+  base : T
+  step : T → T
+
+ℕModᵁ := Σ(T : U) ℕAlg<U>
+```
+and its canonical instance
+```
+instance ℕobj : ℕAlg<ℕ>
+  base: 0
+  step: ( ⁺)
+```
+
+The displayed algebras are given by the following structure:
+```
+structure ℕAlgᵈ(Nalg : ℕAlg)<T : |Nalg| → *> : *
+  base : T(Nalg.base)
+  step(n : |NAlg|) : T(n) → T(Nalg.step n)
+```
+allowing do define the type of induction motives and the induction operator:
+```
+def ℕᴹ : ℕ → *
+  ℕAlgᵈ ℕobj
+
+ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
+```
+
+Inhabitants of the type `Σ(src : ℕAlg) (pm : ℕAlgᵈ src)` are promorphisms (weak homomorphisms) with source `src : ℕAlg` and target given by
+```
+def target (src : ℕAlg) (pm : ℕAlgᵈ src) : ℕAlg<Σ(n : |src|) |pm| src>
+  base: pm.base
+  step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
+```
+
+We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕAlg}` of ℕ-algebras correspond to their isomorphisms.
+
+The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
+
+# Inductive prototypes and families over them
+
+As opposed to McBride, we only provide constructors for non-identity morphisms.
+
+Defining dependent pair:
+```
+prototype D : *̃
+  s : *̃
+  t : *̃
+  s[dep⟩ : t
+
+structure DFam
+  s : Type
+  t : s → Type
+```
+
+Defining the very dependent types:
+```
+prototype ℕ̀ : *̃
+  0    : ℕ̀
+  ( ⁺) : ℕ̀ → ℕ̀
+
+  (n⁺)[dep⟩ : n
+
+structure ℕ̀Fam
+  Z : Type
+  S : (ℕ̀Famᵈ this)
+
+structure ℕ̀Famᵈ (fam : ℕ̀Fam)
+  Z : fam.Z → Type
+  S : ???
+```
+
+With context extensions:
+```
+prototype ℕ̃ : *̃
+  0    : ℕ̃
+  ( ⁺) : ℕ̃ → ℕ̃
+
+  (n⁺)[dep⟩ : n
+  (n)⟨ext(m, f : Fin(n) inj-> Fin(m))] : m
+```
+
+To present algebraic theories as above we'll have to define inductive type families like `P(context)`,
+where context is list of types of variables the predicate uses. Typically, we'll have to define the
+internal type `Ty` of variable types together with an evaluation function `|_| : Ty -> *`, both defined
+mutually with type family `P` and what not.
+
+That's how we can define the type of contexts from the type `Ty` naïvely:  
+For `n : ℕ` let us use the notation `↓n` for the type of size n usually known as `Fin n`. Given a vector of
+types `Con : ↓n -> Ty` we can define a tuple of values of the respective types as `vals : ∀(i : ↓n) |Con(i)|`.
+
+Below we'll introduce the notion of prototypes and introduce a prototype Δ⁺ so that a telescope of types
+can be defined as `Con : ↓n -> Ty` for `n : ℕ̀` and type of respective contexts as `∀(i : ↓n) |Con(i)|`.
+Moreover, it will be possible to introduce the prototype ℕ̃ that additionally keeps track of context
+extensions `ext : Con ⊂ Con'` and allows extending functions on `∀(i : ↓n) |Con(i)|` to functions on
+`(∀(i : ↓n) Con'(i))` along `ext` automatically.
+
+```
+prototype Δ⁺ : *̃
+  0    : Δ⁺
+  ( ⁺) : Δ⁺ → Δ⁺
+
+  (n⁺)[t(f : ↓n)⟩ : (f.target)⁺
+  (n⁺)[f(f : ↓n)⟩ : f.target
+
+structure Δ⁺Fam
+  Z : Type
+  S : Z → (Δ⁺Famᵈ this)
+```
+
+Prototypes are type-theoretical counterparts of Reedy categories.
+
+A prototype `T` is an inductive type `|T| : *` defined mutually with two following inductive-recursive types:
+```
+Reductions[T] : *, .to : T,   .precompose  : (x : Reductions[.to])  ->  Reductions[T] with .to ≡ x.to
+Extensions[T] : *, .from : T, .postcompose : (x : Extensions[.from]) -> Extensions[T] with .from ≡ x.from
+```
+The definitional equalities must be checked. It is only possible if `t.to` and `t.from` are structurally smaller
+then `t`. It ensures that the arguments `x` of the functions precompose and postcompose come from a type that
+has already been defined, its constructors are known and values of .to and .from on resulting values can be
+explicitly computed. Since compositions of reductions and extensions are represented by composition of functions,
+it is definitionally associative. The involution T° on prototypes simply exchanges reductions and extensions.
+The prefix operator (↓ ) generates a derived downward prototype for each element `t : |T|` consisting only of
+those elements of `|T|` that t can be reduced to, and their respective reductions. The universe of derived
+downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by reductions
+and extensions in `T` acting elementwise.
 
 # Motivation
 
@@ -80,62 +218,7 @@ To accomodate induction we need a much more complicated system of dependent sort
 
 # Preliminaries
 
-# Inductive types and ∞-procategories of their models
 
-Everything below applies to every inductive type, but we'll use natural numbers as an illustrative example:
-```
-inductive ℕ : *
-  0 : ℕ
-  ( ⁺) : ℕ → ℕ
-```
-
-
-An inductive definition does not only generate the type (ℕ) itself, but also a number of associated types and operators.
-
-To write them down, we'll assume we have two recursively defined operations `( ᵈ) : U → U` and `(≃) : ∀{T : U} ∀(x y : T) U`
-on universes as recently proposed by M. Shulman et al.
-
-Every inductive type comes with the type of the repective algebras and models:
-```
-structure ℕAlg<T : *> : *
-  base : T
-  step : T → T
-
-ℕModᵁ := Σ(T : U) ℕAlg<U>
-```
-and its canonical instance
-```
-instance ℕobj : ℕAlg<ℕ>
-  base: 0
-  step: ( ⁺)
-```
-
-The displayed algebras are given by the following structure:
-```
-structure ℕAlgᵈ(Nalg : ℕAlg)<T : |Nalg| → *> : *
-  base : T(Nalg.base)
-  step(n : |NAlg|) : T(n) → T(Nalg.step n)
-```
-allowing do define the type of induction motives
-```
-def ℕᴹ : ℕ → *
-  ℕAlgᵈ ℕobj
-```
-
-Inductive definitions are called so because they also generate the respective induction principle
-```
-ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
-```
-
-Inhabitants of the type `Σ(src : ℕAlg) (pm : ℕAlgᵈ src)` are promorphisms (weak homomorphisms) with source `src : ℕAlg`
-and target given by
-```
-def target (src : ℕAlg) (pm : ℕAlgᵈ src) : ℕAlg<Σ(n : |src|) |pm| src>
-  base: pm.base
-  step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
-```
-
-We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕAlg}` of ℕ-algebras correspond to their isomorphisms.
 
 * * *
 
@@ -161,8 +244,6 @@ Theorem ∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }
 ```
 
 # Introducing prototypes
-
-Now let me assume the reader to be familiar with inductive types and type families. 
 
 To present algebraic theories as above we'll have to define inductive type families like `P(context)`,
 where context is list of types of variables the predicate uses. Typically, we'll have to define the
