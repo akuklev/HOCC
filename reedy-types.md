@@ -89,16 +89,18 @@ The presented construction generalizes to all inductive types, quotient inductiv
 
 As opposed to McBride, we only provide constructors for non-identity morphisms.
 
+## Cases not requiring displayed types:
+
 Defining dependent pair:
 ```
 prototype D : *̃
-  s : *̃
-  t : *̃
+  s : D
+  t : D
   s[dep⟩ : t
 
 structure DFam
   s : Type
-  t : s → Type
+  t : (dep : s) → Type
 ```
 
 Defining the very dependent types:
@@ -111,11 +113,7 @@ prototype ℕ̀ : *̃
 
 structure ℕ̀Fam
   Z : Type
-  S : (ℕ̀Famᵈ this)
-
-structure ℕ̀Famᵈ (fam : ℕ̀Fam)
-  Z : fam.Z → Type
-  S : ???
+  S : (dep : Z) → ℕ̀Fam
 ```
 
 With context extensions:
@@ -143,6 +141,8 @@ Moreover, it will be possible to introduce the prototype ℕ̃ that additionally
 extensions `ext : Con ⊂ Con'` and allows extending functions on `∀(i : ↓n) |Con(i)|` to functions on
 `(∀(i : ↓n) Con'(i))` along `ext` automatically.
 
+# Cases requiring displayed types:
+
 ```
 prototype Δ⁺ : *̃
   0    : Δ⁺
@@ -155,6 +155,8 @@ structure Δ⁺Fam
   Z : Type
   S : Z → (Δ⁺Famᵈ this)
 ```
+
+* * *
 
 Prototypes are type-theoretical counterparts of Reedy categories.
 
