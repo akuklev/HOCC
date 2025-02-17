@@ -36,6 +36,55 @@ The raison d'être for inductive prototypes are the inductive families indexed o
 
 We conjecture that it would be possible to reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately embrace synthetic ω-(pro)categories^[We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that all HCTT types would turn out to be internal ω-procategories.], a long sought-after category-theoretic foundational framework what turns to be emergent if one seeks for a natural proof calculus capable of structural induction over its own language.
 
+# Inductive types and ∞-procategories of their models
+
+Every inductive type comes with a ∞-procategory of its models, but let's use the inductive type of natural numbers to have an illustrative example:
+```
+inductive ℕ : *
+  0 : ℕ
+  ( ⁺) : ℕ → ℕ
+```
+
+An inductive definition does not only generate the type (ℕ) itself, but also its dual: the structure of a ℕ-model on an arbitrary type `T`.
+```
+structure ℕMod<T : *> : *
+  base : T
+  step : T → T
+
+ℕModᵁ := Σ(T : U) ℕMod<T>
+```
+and its canonical instance
+```
+instance ℕobj : ℕMod<ℕ>
+  base: 0
+  step: ( ⁺)
+```
+
+The displayed models are given by the following structure:
+```
+structure ℕModᵈ (src : ℕAlg) <T : |src| → *> : *
+  base : T(src.base)
+  step : ∀{n : |src|} T(n) → T(src.step n)
+```
+allowing do define the type of induction motives and the induction operator:
+```
+def ℕᴹ : ℕ → *
+  ℕModᵈ ℕobj
+
+ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
+```
+
+Inhabitants of the type `Σ(src : ℕMod) (pm : ℕModᵈ src)` are promorphisms (weak homomorphisms) with source `src : ℕMod` and target given by
+```
+def target (src : ℕMod) (pm : ℕModᵈ src) : ℕMod<Σ(n : |src|) |pm| src>
+  base: pm.base
+  step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
+```
+
+We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕMod, pm : ℕModᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕMod}` of ℕ-algebras correspond to their isomorphisms.
+
+The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
+
 # The motivating example
 
 A homogeneous pair `p : T × T` can be equivalently described as a function `p : 𝔹 → T` on the type with two values.
@@ -49,28 +98,14 @@ prototype 𝔻 : *̃
   snd [dep⟩ fst
 ```
 
-Each inductive type comes with a respective class of models, for instance
-```
-inductive ℕ : *
-  0 : ℕ
-  ( ⁺) : ℕ → ℕ
-```
-comes with
-```
-structure ℕMod<T : *> : *
-  base : T
-  step : T → T
-```
-
-That's what the respective structure for the prototype 𝔻 looks like:
+Due to directed higher structure of 𝔻, we can only define the structure of 𝔻-models on procategories `U : *̃`, a mere type `T : *` is not enougg.
 ```
 structure 𝔻Mod<U : *̃>
   fst : U
   snd : (dep : s) →ᵁ U
 ```
 
-We can equip any type with a structure of a ℕ-model, but in case of prototypes we need to have a procategory `U` instead of a type.
-It comes with its internal notion of morphisms we write (→ᵁ) above. Prototypes also come with the structure `𝔻→*` that could be defined as `𝔻Mod<*>` if we could specialize to “large types”.
+The operator (→ᵁ) referes to types of allowed morphisms in procategory U. Prototypes also come with the structure `𝔻→*` that could be defined as `𝔻Mod<*>` if we could specialize to “large types”.
 
 Inductive types come with a type of induction motives, e.g.
 ```
@@ -159,55 +194,6 @@ The prefix operator (↓ ) generates a derived downward prototype for each eleme
 those elements of `|T|` that t can be reduced to, and their respective reductions. The universe of derived
 downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by reductions
 and extensions in `T` acting elementwise.
-
-# Inductive types and ∞-procategories of their models
-
-Every inductive type comes with a ∞-procategory of its models, but let's use the inductive type of natural numbers to have an illustrative example:
-```
-inductive ℕ : *
-  0 : ℕ
-  ( ⁺) : ℕ → ℕ
-```
-
-An inductive definition does not only generate the type (ℕ) itself, but also a number of associated types and operators, firstly type of the repective algebras:
-```
-structure ℕAlg<T : *> : *
-  base : T
-  step : T → T
-
-ℕModᵁ := Σ(T : U) ℕAlg<T>
-```
-and its canonical instance
-```
-instance ℕobj : ℕAlg<ℕ>
-  base: 0
-  step: ( ⁺)
-```
-
-The displayed algebras are given by the following structure:
-```
-structure ℕAlgᵈ(Nalg : ℕAlg)<T : |Nalg| → *> : *
-  base : T(Nalg.base)
-  step(n : |NAlg|) : T(n) → T(Nalg.step n)
-```
-allowing do define the type of induction motives and the induction operator:
-```
-def ℕᴹ : ℕ → *
-  ℕAlgᵈ ℕobj
-
-ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
-```
-
-Inhabitants of the type `Σ(src : ℕAlg) (pm : ℕAlgᵈ src)` are promorphisms (weak homomorphisms) with source `src : ℕAlg` and target given by
-```
-def target (src : ℕAlg) (pm : ℕAlgᵈ src) : ℕAlg<Σ(n : |src|) |pm| src>
-  base: pm.base
-  step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
-```
-
-We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕAlg, pm : ℕAlgᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕAlg}` of ℕ-algebras correspond to their isomorphisms.
-
-The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
 
 # Motivation
 
