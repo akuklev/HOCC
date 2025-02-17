@@ -87,23 +87,36 @@ The presented construction generalizes to all inductive types, quotient inductiv
 
 # Inductive prototypes and families over them
 
-As opposed to McBride, we only provide constructors for non-identity morphisms.
-
-## Cases not requiring displayed types:
+## Linear cases (posets):
 
 Defining dependent pair:
 ```
 prototype D : *̃
-  s : D
-  t : D
-  s[dep⟩ : t
-
-structure DFam
-  s : Type
-  t : (dep : s) → Type
+  fst : D
+  snd : D
+  snd[dep⟩ : fst
 ```
 
-Defining the very dependent types:
+A category^[A category suffices for the prototypes `D` and `ℕ̀`, but in general we would require a procategory.] `U : *, (→ᵁ) : U → U → U` can be equiped with a structure of D-algebra. Instances of such algebras will
+be called `U`-valued families on `D`:
+```
+structure D→ <U : Cat>
+  fst : U
+  snd : (dep : s) →ᵁ Type
+```
+
+If U is a usual universe of types, we have `(D→ U) ≃ Σ(X : U) X → U`.
+
+Now let us define the type of induction motives:
+```
+structure Dᴹ<T : D→ *> : *
+  fst : T.fst
+  snd : T.snd this.fst
+```
+
+That's the type of dependent pairs `ᴹT = Σ(fst : T.fst) (T.snd fst)`.
+
+Now let us switch to infinitary counterpart of dependent pairs, the very dependent types:
 ```
 prototype ℕ̀ : *̃
   0    : ℕ̀
@@ -111,12 +124,16 @@ prototype ℕ̀ : *̃
 
   (n⁺)[dep⟩ : n
 
-structure ℕ̀Fam
-  Z : Type
-  S : (dep : Z) → ℕ̀Fam
+structure ℕ̀→ <U : Cat>
+  Z : U
+  S : (dep : Z) →ᵁ (ℕ̀→ U)
 ```
 
-With context extensions:
+Now we can specify very-dependent types as `T : ℕ̀→ *` and their inhabitants as `x : ℕ̀ᴹ<T>`.
+As definitions of prototypes automaticaly come with types of downward subprototypes, we can write
+type telescopes of length `n` as `T : (ℕ̀↓n)→ *` and respective tuples as `x : ᴹT`.
+
+Now let's consider prototype a better prototype of very-dependent types, the one featuring context extensions:
 ```
 prototype ℕ̃ : *̃
   0    : ℕ̃
@@ -141,7 +158,14 @@ Moreover, it will be possible to introduce the prototype ℕ̃ that additionally
 extensions `ext : Con ⊂ Con'` and allows extending functions on `∀(i : ↓n) |Con(i)|` to functions on
 `(∀(i : ↓n) Con'(i))` along `ext` automatically.
 
-# Cases requiring displayed types:
+**TODO** Say how to understand prototypes as procategories themselves, and how the types ↓n also form
+procategories, show examples of functors and show how they form procategories, define products of prototypes
+and show how bifunctors are compatible with currying. Define dependent products of prototypes and dependent
+functors, show how dependent products are dependent functors from `D`.
+
+# Cases requiring displayed types: non-posetal prototypes
+
+As opposed to McBride, we only provide constructors for non-identity morphisms.
 
 ```
 prototype Δ⁺ : *̃
