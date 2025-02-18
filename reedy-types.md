@@ -250,7 +250,7 @@ structure T
   hom : (source : *, target : *) → *
 ```
 
-Now let us define the following indexed inductive type family:
+Now let us define the following indexed quotient-inductive type family:
 ```
 inductive CatTh : (i : Δ¹)
   id : ∀{o : CatTh ob} (CatTh mor){source: o, target: o}
@@ -258,14 +258,14 @@ inductive CatTh : (i : Δ¹)
                           → (CatTh mor){source: y, target: z}
                           → (CatTh mor){source: x, target: z}
 
-  unitorL : ∀{x y} f ≃ id ▸ f
-  unitorR : ∀{x y} f ≃ f ▸ id
-  associator : ∀{f g h} (f ▸ g) ▸ h ≃ f ▸ (g ▸ h)
+  unitorL : ∀{x y} f = id ▸ f
+  unitorR : ∀{x y} f = f ▸ id
+  associator : ∀{f g h} (f ▸ g) ▸ h = f ▸ (g ▸ h)
 ```
 
 Now consider the type of models for this type:
 ```
-structure CatThMod<Ts : Δ¹→ *>
+structure CatTh-Mod<Ts : Δ¹→ *>
   id : ∀{o : Ts.ob} → Ts.mor{source: o, target: o}
   (▸) : ∀{x y z : Ts.ob} (Ts.mor){source: x, target: y}
                        → (Ts.mor){source: y, target: z}
@@ -274,10 +274,36 @@ structure CatThMod<Ts : Δ¹→ *>
 ```
 
 That's precisely the definition of a category!
+Well, actually, a precategory because we do not require univalence. But we can require univalence an embedding arrow we forgot in the definition
+of our prototype:
+```
+prototype Δ¹
+  ob : Δ¹
+  mor : Δ¹
+  mor [source⟩ ob
+  mor [target⟩ ob
 
-* * *
+  ob ⟨emb] mor with
+    ob ⟨emb][source⟩ ob
+    ob ⟨emb][target⟩ ob
+```
 
-For prototypes with an infinite number of non-unique dependencies, the duals are displayed coinductive types, i.e. require the ( ᵈ)-operation. Let us consider presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
+This way we ensure that `(o ≃ o)`-types for the objects `o : Ts.ob` are given by the respective `Ts.mor{source: o, target: o}`-types, which can be used to show  
+```
+univalence : ∀{X Y : Ts.ob} (a ≃ b) ≃ Σ(f : Ts.hom{source: X, target: Y})
+                                      Σ(g : Ts.hom{source: Y, target: X})
+                                      (f ▸ g = id) and (f ▸ g = id)            
+```
+
+The nice thing is that since we have defined categories as models for an inductive type, we automatically have the structure of a displayed category on categories:
+```
+Cat : Catᵈ
+```
+Furthermore we can iterate, and thus `Catᵈ : Catᵈᵈ` etc. And since constructions and proofs also can be lifted, any statement we have proven for all small categories `prf<C : Cat>` also can be applied to displayed categories, say like the category `Grp : Catᵈ` of all groups and the category of all categories `Cat : Catᵈ` itself. Seems like dream of size-agnostic category theory came true. Well, except we want to have the same for ω-categories `ωCat : ωCatᵈ : ωCatᵈᵈ : ···`.
+
+Defining categories required a prototype with only two inhabitants `ob hom : Δ¹`. For ω-categories we will a countably infinite hierarchy of those, in the simplest case of strict ω-categories it will be given by a prototype we have essentially already encountered. It is the opposite `Δ°` of the prototype Δ. Type families over the prototype Δ° are known as presheaves over the simplex category Δ or simplicial types.
+
+For prototypes with an infinite number of non-unique dependencies, the duals are displayed coinductive types, i.e. require the ( ᵈ)-operation. Let us consider even simpler presheaves to understand how the duals are formed. We'll take the prototype Δ⁺° that only has the face maps (opposite of thinnings) and get the so called semi-simplicial types, which can be expressed using displayed types as follows:
 ```
 structure (Δ⁺°→ )<U : *̃>
   head : U
@@ -309,7 +335,7 @@ and embeddings in `T` acting elementwise.
 ## Induction over prototypes and procategories of prototype models
 **TODO**
 
-# Inductive prototypes and algebraic theories; bidirectionalism
+# Inductive prototypes and algebraic theories
 
 ## Lavwere algebraic theories
 
@@ -384,21 +410,22 @@ By using the prototype Δ instead of ℕ we can deal with dependencies and thinn
 ## Initial algebra semantics for FQII type families
 **TODO**
 
-# A word on parametricity
+# A word about Mahloness and parametricity
 
-In type theories featuring modal internal parametricity, inductive definitions also come with relational parametricity principles
+With prototypes, we can say that all typeformers have the form `Y<X : P → *> : *`. In presence of the □-modality representing finite closed terms, it is possible to postulate that for universe `U` and any closed-definable type former `TF : □((P → U) → *)` we have a universe `U + TF` containing all inhabitants of `U`, the type `U` itself, and closed under `TF`. Therefore, any finite construction or proof (however polymorphic it may be) is reflected entirely inside some universe `U : *`. With this rule, we obtain the type-theoretic counterpart of M. Shulman’s “Set theory for category theory” ZMC/𝕊.^[Seems that the proposed rule does not only extablish internal Mahloness of the virtual universe *, but also allows constructing infinitely many extermal Mahlo universes below, making * greatly Mahlo].
+
+Additionally we can postulate modal relational parametricity for all inductive types:
 ```
 Ipar : (n : □Iᵁ) → (R : IAlgᵈ Iobjᵁ) → (|R| n)
 ```
-
-where `Iᵁ := ∀(T : U) ℕAlg<T> → T` is the type of Church-implementations, `( ᵁ) : ℕ → ℕᵁ` the recursion operator, and `Iobjᵁ` the Church-encoding like
+— where `Iᵁ := ∀(T : U) ℕAlg<T> → T` is the type of Church-implementations, `( ᵁ) : ℕ → ℕᵁ` the recursion operator, and `Iobjᵁ` the Church-encoding like
 ```
 instance ℕobjᶜ : ℕAlg(ℕᶜ)
   base: 0ᶜ
   step: ( ⁺)ᶜ
 ```
 
-They can be used for instance to derive the classical
+These operators can be used for instance to derive the classical
 ```
 def m : 𝟙Algᵈ 𝟙objᵁ {id : 𝟙ᵁ ↦ (id ≃ { x ↦ x } }
   point: refl
