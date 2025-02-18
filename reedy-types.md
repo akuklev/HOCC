@@ -8,7 +8,7 @@ Building on the unpublished ideas of C. McBride, we propose a novel extension fo
 
 Semantically, fibered quotient inductive-inductive type definitions (FQIITs) are effective presentations of weak model categories whose structure-preserving functors correspond to elimination motives. In strong analogy to the functorial semantics of Lavwere algebraic theories, these functors themselves form a category of models, with their natural transformations serving as model homomorphisms.
 
-In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic definition, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the [Higher Observation Type Theory (HOTT)](https://ncatlab.org/nlab/show/higher+observational+type+theory) is complete.
+In a subsequent paper, we hope to establish the existence of initial models in an arbitrary (∞,1)-topos, thus providing a semantics for FQIITs. We assume it to be conditional on the existence of an inaccessible/Mahlo cardinal for small/large FQIITs, respectively, and unconditional for finitary FQIITs. It would also uniformly solve the initiality conjecture for structures admitting an effective bidirectionally algebraic presentation, including [weak ω-categories](https://arxiv.org/abs/1706.02866), [virtual equipments](https://arxiv.org/abs/2210.08663), and (∞,1)-toposes once the [Higher Observation Type Theory (HOTT)](https://ncatlab.org/nlab/show/higher+observational+type+theory) is complete.
 
 # Overview
 
@@ -70,6 +70,7 @@ structure ℕMod<T : *>
   base : T
   step : T → T
 
+# We also have types of U-small models for any universe U:
 ℕModᵁ := Σ(T : U) ℕMod<T>
 ```
 and its canonical instance
@@ -104,7 +105,9 @@ We can define (strong) homomorphisms as the functional (= many-to-one) weak homo
 
 The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
 
-# The motivating example
+# Basics of inductive prototypes
+
+## The motivating example
 
 A homogeneous pair `p : T × T` can be equivalently described as a function `p : 𝔹→ T` on the type with two values.
 Heterogeneous pairs `p : X × Y` correspond to dependent functions `f : 𝔹→ { ff ↦ X; tt ↦ Y }`. What about dependent pairs?
@@ -157,7 +160,7 @@ structure (Δ⁻↦ )<Ts : Δ⁻↦ *̃>
 
 We have just defined the very-dependent function types initially introduced by Kopylov et al.
 
-# Handling the contexts and telescopes
+## Handling the contexts and telescopes
 
 Definition of a prototype `I` automatically generates its truncations, the prototypes `↓n` for `n : I`.
 In the particular case of `n : Δ⁻`, truncations can be used to describe dependent tuples `t : (↓n)→ Ts`
@@ -197,7 +200,7 @@ structure (Δ→ )<Ts : Δ→ *̃>
 procategories, show examples of functors and show how they form procategories, define products of prototypes
 and show how bifunctors are compatible with currying.
 
-# Δ° and other prototypes with non-posetal dependency structure
+## Δ° and other prototypes with non-posetal dependency structure
 
 When dependencies are non-posetal (that is, there can be more than one depencency arrow between two inhabitants), the coinductive duals of prototypes require the ( ᵈ)-operation. Let us consider presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
 ```
@@ -208,7 +211,7 @@ structure (Δ⁺°→ )<U : *̃>
 
 **TODO:** With semi-simplicial types and enough combinatorics, we can derive `(P→ )` structures for any prototypes.
 
-# Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
+## Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
 
 A prototype `T` is an inductive type `|T| : *` defined mutually with two following inductive-recursive types:
 ```
@@ -225,13 +228,13 @@ those elements of `|T|` that t can be reduced to, and their respective dependenc
 downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by embeddings
 and embeddings in `T` acting elementwise.
 
-# Definitions of inductive type families indexed over prototypes
+## Definitions of inductive type families indexed over prototypes
 **TODO**
 
-# Procategories of prototype models and families over prototypes
+## Induction over prototypes and procategories of prototype models
 **TODO**
 
-# Inductive prototypes and algebraic theories
+# Inductive prototypes and algebraic theories; bidirectionalism
 
 ## Lavwere algebraic theories
 
@@ -265,7 +268,7 @@ In simple cases can have an algorithm that syntactically transforms expressions 
 
 **TODO:** Show a real example that employs induction-recursion
 
-## Internal types
+## Internal types and Bidirectionalism
 
 The proof calculus we outlined above is internally untyped, i.e. the variables bound by quantifiers do not have type declarations. Requiring a variable to have certain data type can be implemented by logical predicates, like this `(∀(n) isNat(n) implies P(n) )`. 
 
