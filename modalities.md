@@ -33,16 +33,16 @@ Otherwise, the extraction will be non-determinstic. However, we can introduce mo
   εᵀ(prf) : ◇⁺T         εᵀ(prf) : ◇⁻T        εᵀ(prf) : ◇T
 ```
 
-For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (◇⁺, ◇⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ◇-modality!  `◇T` is the type of hypothetically possible inhabitants of `T`, yet will argue that it has a sound computational interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will also introduce the dual types `□T` of “manifestly neccesary” inhabitants of `T`, i.e. closed terms, yielding the well-known computational interpretation in terms of staged computability. Dually to classical reasoning under ◇-modality, we obtain parametric reasoning under □-modality, so that we can show that `{ x ↦ x }` in the only canonical endomorphism of an arbitrary type up to equivalence: `∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }`.
+For the rest of this paper will not consider the substructural modes (⁻, ¹, ⁺) and modal operators (◇⁺, ◇⁻), and only consider the truly remarkable third rule above. It's the classical choice operator, which means we can presummably use classical reasoning (with excluded middle and choice) under the ◇-modality!  `◇T` is the type of hypothetically possible inhabitants of `T`, yet will argue that it has a sound computational^[Versal functions only compute on introspectable (finite, closed) arguments, they cannot be applied to an “external function” (which can be applied to any value, but not introspected) nor an arbitrary (Cauchy) real number. This is in strong opposition to the total functions outside ◇-modality which are guaranteed to compute also on external entities. Verse calculus seems to provide a Krivine-type realizability interpretation for classical logic with choice, while general MLTT provide stronger Kreisel-type realizability for intuitionistic logic.] interpretation in terms of the Verse Calculus recently introduced by S. Peyton Jones et al. We will also introduce the dual types `□T` of “manifestly neccesary” inhabitants of `T`, i.e. finite closed terms, yielding the well-known computational interpretation in terms of staged computability. Dually to classical reasoning under ◇-modality, we obtain parametric reasoning under □-modality, so that we can show that `{ x ↦ x }` in the only canonical endomorphism of an arbitrary type up to equivalence: `∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }`.
 
-By establishing a set-theoretic interpretation of types under ◇-modality, we will show admissibility of the following rule that allows using closed non-constructive proofs as virtual arguments outside of the ◇-context:
+By establishing a set-theoretic interpretation of types under ◇-modality, we will show admissibility of the following rule that allows using finite closed non-constructive proofs as virtual arguments outside of the ◇-context:
 ```
  f : (x :° X) → Y      x : □◇X
 ———————————————————————————————
           f(x) : Y
 ```
 
-We will show that this rule implies (and essentially is) the computational Markov principle allowing to evaluate (potentially diverging by virtue of halting problem) computations given a closed classical proof of their non-divergence: 
+We will show that this rule implies (and essentially is) the computational Markov principle allowing to evaluate (potentially diverging by virtue of halting problem) computations given a finite closed classical proof of their non-divergence: 
 ```
  c : (Computation T)   nonDivergencePrf : □◇(c ≠ ⊥)
 ————————————————————————————————————————————————————
@@ -82,7 +82,7 @@ In a [companion paper](reedy-types), we outline how to extend Martin-Löf type t
 
 # Interpreting verse calculus
 
-Verse calculus is a functional logic programming language, which implies that a closed “program” can be evaluated:
+Verse calculus is a functional logic programming language, which implies that a finite closed “program” can be evaluated:
 ```
          prgm : □◇P
 ————————————————————————————————
@@ -103,4 +103,4 @@ Such “eval“ operator gives the “all” operator of Verse Calculus, while �
 
 # Future work: Canonicity for the □-fragment, productivity for the ◇-fragment
 
-The former means that the “stream” `eval(prgm : □◇P)` is dense in the spectrum `◇P` with respect to the topology given by positively semi-decidable predicates.
+The former means that the “stream” `eval(prgm : □◇P)` is productive and dense in the spectrum `◇P` with respect to the topology given by positively semi-decidable predicates.
