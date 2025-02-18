@@ -181,7 +181,9 @@ prototype Δ
   (n⁺) ⟨t(f : ↓n)] (f.target)⁺
   (n⁺) ⟨f(f : ↓n)] f.target
 ```
-(Differently from McBride, we only provide constructors for non-identity morphisms.)
+As arrows are constructors as well, they must act not only on plain constuctors but on other arrows of the same direcion,
+which defines precomposition for dependency arrows and postcomposition for embedding arrows, making composition of arrows
+definitionally/computationally associative. Differently from McBride, we only provide constructors for non-identity arrows.
 
 ```
 structure (Δ→ )<T : *̃>
@@ -189,39 +191,45 @@ structure (Δ→ )<T : *̃>
 
 structure (Δ→ )<Ts : Δ→ *̃>
   ..TODO
-```  
+```
 
-Presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
+**TODO** Say how to understand prototypes as procategories themselves, and how the types ↓n also form
+procategories, show examples of functors and show how they form procategories, define products of prototypes
+and show how bifunctors are compatible with currying.
+
+# Δ° and other prototypes with non-posetal dependency structure
+
+When dependencies are non-posetal (that is, there can be more than one depencency arrow between two inhabitants), the coinductive duals of prototypes require the ( ᵈ)-operation. Let us consider presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
 ```
 structure (Δ⁺°→ )<U : *̃>
   head : U
   tail : this.head →ᵁ (Δ⁺°→ᵈ this)
 ```
 
-With simplicial types and enough combinatorics, we can derive `(P→ )` structures for any prototypes.
+**TODO:** With semi-simplicial types and enough combinatorics, we can derive `(P→ )` structures for any prototypes.
 
-**TODO** Say how to understand prototypes as procategories themselves, and how the types ↓n also form
-procategories, show examples of functors and show how they form procategories, define products of prototypes
-and show how bifunctors are compatible with currying.
-
-* * *
-
-Prototypes are type-theoretical counterparts of Reedy categories.
+# Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
 
 A prototype `T` is an inductive type `|T| : *` defined mutually with two following inductive-recursive types:
 ```
-Reductions[T] : *, .to : T,   .precompose  : (x : Reductions[.to])  ->  Reductions[T] with .to ≡ x.to
-Extensions[T] : *, .from : T, .postcompose : (x : Extensions[.from]) -> Extensions[T] with .from ≡ x.from
+Deps[T] : *, .target : T, .compose : (x : Deps[.to])  ->  Deps[T] with .target ≡ x.target
+Embs[T] : *, .source : T, .compose : (x : Embs[.from]) -> Embs[T] with .source ≡ x.source
 ```
-The definitional equalities must be checked. It is only possible if `t.to` and `t.from` are structurally smaller
-then `t`. It ensures that the arguments `x` of the functions precompose and postcompose come from a type that
-has already been defined, its constructors are known and values of .to and .from on resulting values can be
-explicitly computed. Since compositions of reductions and extensions are represented by composition of functions,
-it is definitionally associative. The involution T° on prototypes simply exchanges reductions and extensions.
+The definitional equalities must be checked in compile-time. It is only possible if `t.target` and `t.source`
+are structurally smaller then `t`. It ensures that the arguments `x` of the functions precompose and postcompose
+come from a type that has already been defined, its constructors are known and values of .to and .from on resulting values can be
+explicitly computed. Since compositions of dependencies and embeddings are represented by composition of functions,
+it is definitionally associative. The involution T° on prototypes simply exchanges dependencies and embeddings.
 The prefix operator (↓ ) generates a derived downward prototype for each element `t : |T|` consisting only of
-those elements of `|T|` that t can be reduced to, and their respective reductions. The universe of derived
-downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by reductions
-and extensions in `T` acting elementwise.
+those elements of `|T|` that t can be reduced to, and their respective dependencies. The universe of derived
+downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by embeddings
+and embeddings in `T` acting elementwise.
+
+# Definitions of inductive type families indexed over prototypes
+**TODO**
+
+# Procategories of prototype models and families over prototypes
+**TODO**
 
 # Inductive prototypes and algebraic theories
 
@@ -234,6 +242,8 @@ High school algebra only deals with operations on some kind of numbers, in propo
 Classical universal algebra usually deals with the case when operations are generated by constants, unary, and binary operations, operands being of the same sort as values. It is possible to generalize to the case with multiple sorts, e.g. vectors and scalars.
 
 To generalize from propositional logic to predicate logic, we need an infinite number of sorts, namely the sort 0 of propositions, the sort 1 of propositions with one variable (unary predicates) and so forth for propositions with any finite number of variables (`n`-ary predicates). Quantifiers `∀` and `∃` bind one variable and thus decrement the sort of their operand. To state it precisely, quantifiers are not just two operations but an infinite families of operations: for any natural numbers `n < m` there is a specific variant of that accept m-ary predicates binding their `n`th hole. Binary operations like the conjunction and disjunction also turn into an infinite family. For unary predicates `R(x)` and `Q(x)` each binary operation * has two variants: it can either join the variables of predicates `R(x) * Q(x)` or leave them distinct `R(x) and Q(y)`. In the general case of an n-ary and and m-ary predicate, there will be many ways to join variables, but it is not hard to derive them all algorithmically. Thus, the set of operations is not finitely-generated anymore, but effectively generated (can be generated by an algorithm). The same applies to the set of identities, since we finite number of identities cannot govern an infinite number of primitive operations.
+
+**TODO:** Show how to handle this example using the inductive prototype Δ⁺!
 
 The gadget to deal with predicate logic algebraically is known as effectively generated Lawvere algebraic theory: it has a subcountable set of sorts, and effectively generated sets of operations and identities. As opposed to the case of finitely-generated theories, presenations of effectively generated ones include algorithms producing operations and identities, which have to be checked for termination and producing expressions of matching sorts, which requires some heavy computational machinery and is almost impossible to do by hand for nontrivial theories.
 
@@ -253,6 +263,8 @@ For many sorts of interest it is is not possible to algorithmically extract cano
 
 In simple cases can have an algorithm that syntactically transforms expressions of the sort `Prf(A)` into expressions of the sort `Prf(B)`. This is unfortunatelly not alwasy possible. What turns out to be possible is an algorithm that syntactically transform the recipient expression with hole of the sort `Prf(A)` into an equivalent expression with the corresponding hole of the sort `Prf(B)` owing to additional flexibility that this syntactic transform can also change the resulting sort of the expression into an equivalent but non-identical one. Lifting expressions along identification paths gets really tricky when we work with systems where sorts can depend on values themselves being of a dependent sort. Luckily there is a whole well-developed area of mathematics dealing with lifting equivalences over equivalences — the abstract homotopy theory. Below we will establish that effective algebraic theories with dependent sorts correspond to weak model categories the same way as Lawvere algebraic theories correspond to finite-product categories.
 
+**TODO:** Show a real example that employs induction-recursion
+
 ## Internal types
 
 The proof calculus we outlined above is internally untyped, i.e. the variables bound by quantifiers do not have type declarations. Requiring a variable to have certain data type can be implemented by logical predicates, like this `(∀(n) isNat(n) implies P(n) )`. 
@@ -266,11 +278,35 @@ If we want our proof calculus to support proofs by induction, we have to use typ
 
 To accomodate induction we need a much more complicated system of dependent sorts featuring a sort of (internal) data types and a substantial amount of infrastructure. Fortunatelly, the flexibility provided by the notion of dependent sorts and normalization maps `|_|` turns out to be flexible enough even to internalize itself. (Apart from algorithm totality-checking. If a system contains a total “programming language” inside, it cannot be powerfull enough to encode the normalization maps used for defining the system. The only way for a system striving to define its own syntax inside, is to use “levitating” algorithms for the normalization maps, which are interpreted (and termination-checked) by the ambient system and look as black boxed from inside the system, as first introduced in “The Gentle Art of Levitation” by J. Chapman.)
 
-# Preliminaries
+To present algebraic theories as above we'll have to define inductive type families like `P(context)`,
+where context is list of types of variables the predicate uses. Typically, we'll have to define the
+internal type `Ty` of variable types together with an evaluation function `|_| : Ty -> *`, both defined
+mutually with type family `P` and what not.
 
+## Handling internal dependent types
+That's how we can define the type of contexts from the type `Ty` naïvely:  
+For `n : ℕ` let us use the notation `↓n` for the type of size n usually known as `Fin n`. Given a vector of
+types `Con := (↓n) → Ty` we can define a tuple of values of the respective types as `vals : (↓n) → Con`.
 
+By using the prototype Δ instead of ℕ we can deal with dependencies and thinnings!
 
-* * *
+**TODO:** Provide an example, perhaps ML71 with `Type : Type`.
+
+# Semantics of type families over prototypes
+
+## Example of unbiased lax monoidal categories
+**TODO**
+
+## The doctrine of weak monoidal categories
+**TODO**
+
+## Constructing a weak monoidal category from an FQIIT-definition
+**TODO**
+
+## Initial algebra semantics for FQII type families
+**TODO**
+
+# A word on parametricity
 
 In type theories featuring modal internal parametricity, inductive definitions also come with relational parametricity principles
 ```
@@ -284,7 +320,7 @@ instance ℕobjᶜ : ℕAlg(ℕᶜ)
   step: ( ⁺)ᶜ
 ```
 
-that can be used for instance to derive the classical
+They can be used for instance to derive the classical
 ```
 def m : 𝟙Algᵈ 𝟙objᵁ {id : 𝟙ᵁ ↦ (id ≃ { x ↦ x } }
   point: refl
@@ -293,52 +329,4 @@ Theorem ∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }
   𝟙par(m)
 ```
 
-# Introducing prototypes
-
-To present algebraic theories as above we'll have to define inductive type families like `P(context)`,
-where context is list of types of variables the predicate uses. Typically, we'll have to define the
-internal type `Ty` of variable types together with an evaluation function `|_| : Ty -> *`, both defined
-mutually with type family `P` and what not.
-
-That's how we can define the type of contexts from the type `Ty` naïvely:  
-For `n : ℕ` let us use the notation `↓n` for the type of size n usually known as `Fin n`. Given a vector of
-types `Con : ↓n -> Ty` we can define a tuple of values of the respective types as `vals : ∀(i : ↓n) |Con(i)|`.
-
-Below we'll introduce the notion of prototypes and introduce a prototype Δ⁺ so that a telescope of types
-can be defined as `Con : ↓n -> Ty` for `n : Δ⁺` and type of respective contexts as `∀(i : ↓n) |Con(i)|`.
-Moreover, it will be possible to introduce the prototype Δ that additionally keeps track of context
-extensions `ext : Con ⊂ Con'` and allows extending functions on `∀(i : ↓n) |Con(i)|` to functions on
-`(∀(i : ↓n) Con'(i))` along `ext` automatically.
-
-Prototypes are type-theoretical counterparts of Reedy categories.
-
-A prototype `T` is an inductive type `|T| : *` defined mutually with two following inductive-recursive types:
-```
-Reductions[T] : *, .to : T,   .precompose  : (x : Reductions[.to])  ->  Reductions[T] with .to ≡ x.to
-Extensions[T] : *, .from : T, .postcompose : (x : Extensions[.from]) -> Extensions[T] with .from ≡ x.from
-```
-The definitional equalities must be checked. It is only possible if `t.to` and `t.from` are structurally smaller
-then `t`. It ensures that the arguments `x` of the functions precompose and postcompose come from a type that
-has already been defined, its constructors are known and values of .to and .from on resulting values can be
-explicitly computed. Since compositions of reductions and extensions are represented by composition of functions,
-it is definitionally associative. The involution T° on prototypes simply exchanges reductions and extensions.
-The prefix operator (↓ ) generates a derived downward prototype for each element `t : |T|` consisting only of
-those elements of `|T|` that t can be reduced to, and their respective reductions. The universe of derived
-downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by reductions
-and extensions in `T` acting elementwise.
-
-The type of functions `X -> Y` from a prototype is undefined unless `Y` is a universe (thus a category),
-in which case `X -> Y` is a universe as well. Now assume `F[t : T]` is a type dependent on prototype `T`.
-Values of type `x : F[t : T]` come with actions of reductions `rx : F[r.to]`, where `r : Reductions[t]`.
-
-Functions `f` on `F[t : T]` have to provide action on “higher constructors” `e : Extensons[x]` yielding
-either a path `f(x) = f(e.from)` or an extension `Extension[f(x)]` with .from ≡ f(e.from).
-
-Type-valued functions `F[t : T]` on prototypes are defined using the following form of elimination:
-Constructors `c : |T|` should map to types dependent on `((r : Reductions[c]) -> F[r.to])`, with inner occurences
-of `T` being transfored to `Tᵈ t`. Higher constructors `e : Extensons[t]` should evaluate to maps `F[e.from] -> F[e]`.
-
-**TODO:** Explicitly state induction motives for prototypes using ( ᵈ)-transformation and show definitions of inductive type families over prototypes work. Describe functors (functions A (-> B -> ··· ) -> Z, where A..Z are prototypes), and universes of prototypes.
-
-**TODO:**
-Ask Nikolai Kudasow how this stuff fits with rzk-lang.github.io, that  essentially deals with what we call “universes” here, i.e. synthetic categories.
+With prototypes we should be able getting parametricity of higher arity for free, and also parametricity for general records, coinductive types, and indexed coinductive types.
