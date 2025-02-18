@@ -93,14 +93,14 @@ def ℕᴹ : ℕ → *
 ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
 ```
 
-Inhabitants of the type `Σ(src : ℕMod) (pm : ℕModᵈ src)` are promorphisms (weak homomorphisms) with source `src : ℕMod` and target given by
+Inhabitants of the type `Σ(src : ℕMod) (pm : ℕModᵈ src)` are promorphisms (weak homomorphisms, many-to-many homomorphisms) with source `src : ℕMod` and target given by
 ```
 def target (src : ℕMod) (pm : ℕModᵈ src) : ℕMod<Σ(n : |src|) |pm| src>
   base: pm.base
   step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
 ```
 
-We can define (strong) homomorphisms as the weak ones with contractible fibers `Σ(src : ℕMod, pm : ℕModᵈ src) ∀(n) inContr (|pm| n)`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕMod}` of ℕ-algebras correspond to their isomorphisms.
+We can define (strong) homomorphisms as the functional (= many-to-one) weak homomorphisms `Σ(src : ℕMod, pm : ℕModᵈ src) (f : ∀(n) Σ(m : |pm| n) ∀(n' : |pm| n) n ≃ m`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕMod}` of ℕ-algebras correspond to their isomorphisms.
 
 The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
 
@@ -169,8 +169,8 @@ important difference: an expression `e : Expr<ctx : Ctx>` should be liftable to 
 `ctx' : Ctx`, along thinnings `thn : ctx ⊂ ctx'`.
 
 We will define a prototype Δ that extends Δ⁻ by inverse arows representing thinnings `m ⟨thn] n`, generating
-embeddings `thn : ↓n ⊂ ↓m` and hence `thn : (ctx : (↓n)→ *) ⊂ (ctx' : (↓n)→ *)`, and also
-`thn : Expr<ctx> ⊂ Expr<ctx'>`.
+embeddings `thn : ↓n ⊂ ↓m` and hence `thn : (ctx : (↓n)→ *) ⊂ (ctx' : (↓m)→ *)`, and also
+`thn : Expr<ctx> ⊂ Expr<ctx'>`, i.e. for every `e : Expr<ctx>` we'll have `ap ⟨thn] e : Expr<ctx'>`.
 ```
 prototype Δ
   0    : Δ
@@ -195,7 +195,7 @@ Presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are kn
 ```
 structure (Δ⁺°→ )<U : *̃>
   head : U
-  tail : this.Z →ᵁ (Δ⁺°→ )ᵈ this
+  tail : this.head →ᵁ (Δ⁺°→ᵈ this)
 ```
 
 With simplicial types and enough combinatorics, we can derive `(P→ )` structures for any prototypes.
