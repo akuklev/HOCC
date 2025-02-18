@@ -40,20 +40,20 @@ We conjecture that it would be possible to reproduce and advance developments re
 
 Every inductive type comes with a ∞-procategory of its models, but let's use the inductive type of natural numbers to have an illustrative example:
 ```
-inductive ℕ : *
+inductive ℕ
   0 : ℕ
   ( ⁺) : ℕ → ℕ
 ```
 
 An inductive definition does not only generate the type (ℕ) itself, but also coinductive dual, the type of infinite sequences:
 ```
-structure (ℕ→ ) <T : *> : *
+structure (ℕ→ )<T : *>
   head : T
   tail : ℕ→ T
 ```
 and its dependent form
 ```
-structure (ℕ→ ) <Ts : ℕ→ *> : *
+structure (ℕ→ )<Ts : ℕ→ *>
   head : Ts.head
   tail : ℕ→ Ts.tail
 ```
@@ -66,7 +66,7 @@ These can be seen as the definitions for function and dependent function types o
 
 The inductive definition of ℕ also generates the structure of a ℕ-model on an arbitrary type `T`.
 ```
-structure ℕMod<T : *> : *
+structure ℕMod<T : *>
   base : T
   step : T → T
 
@@ -81,7 +81,7 @@ instance ℕobj : ℕMod<ℕ>
 
 The displayed models are given by the following structure:
 ```
-structure ℕModᵈ (src : ℕAlg) <T : |src| → *> : *
+structure ℕModᵈ (src : ℕAlg) <T : |src| → *>
   base : T(src.base)
   step : ∀{n : |src|} T(n) → T(src.step n)
 ```
@@ -111,7 +111,7 @@ Heterogeneous pairs `p : X × Y` correspond to dependent functions `f : 𝔹→ 
 
 With inductive prototypes we can do that! We'll need the following one:
 ```
-prototype 𝔻 : *̃
+prototype 𝔻
   fst : 𝔻
   snd : 𝔻
   snd [dep⟩ fst
@@ -119,7 +119,7 @@ prototype 𝔻 : *̃
 
 Its coinductive dual `(𝔻→ )` requires the target to be a procategory `U : *̃`, a mere type `T : *` is not enough:
 ```
-structure (𝔻→ ) <U : *̃> : *̃
+structure (𝔻→ ) <U : *̃>
   fst : U
   snd : (dep : this.fst) →ᵁ U
 ```
@@ -128,7 +128,7 @@ structure (𝔻→ ) <U : *̃> : *̃
 
 And here is the dependent coinductive dual:
 ```
-structure (𝔻→ ) <Ts : 𝔻→ *̃> : *̃
+structure (𝔻→ ) <Ts : 𝔻→ *̃>
   fst : Ts.fst
   snd : (dep : this.fst) →ᵀˢ Ts.snd
 ```
@@ -140,32 +140,39 @@ f : 𝔻→ { fst ↦ X, snd ↦ Y(f(fst)) }
 
 Using this approach, we can define a carrier prototype for very dependent sequences:
 ```
-prototype Δ⁻ : *̃
+prototype Δ⁻
   0    : Δ⁻
   ( ⁺) : Δ⁻ → Δ⁻
 
   (n⁺) [dep⟩ n
 
-structure (Δ⁻↦ ) <U : *̃>
+structure (Δ⁻↦ )<U : *̃>
   head : U
   tail : (dep : this.head) →ᵁ (Δ⁻↦ U)
 
-structure (Δ⁻↦ ) <Ts : Δ⁻↦ *̃>
+structure (Δ⁻↦ )<Ts : Δ⁻↦ *̃>
   head : Ts.head
   tail : (dep : this.head) →ᵁ (Δ⁻↦ Ts.tail)
 ```
 
 We have just defined the very-dependent function types initially introduced by Kopylov et al.
 
-# Handling the telescopes
+# Handling the contexts and telescopes
 
-Definitions of prototypes automaticaly come with types of downward subprototypes `↓n`, so we can write
-telescopes of finite length as `t : T`, where `T : (↓n)→*` for some `n : Δ⁻`.
+Definition of a prototype `I` automatically generates its truncations, the prototypes `↓n` for `n : I`.
+In the particular case of `n : Δ⁻`, truncations can be used to describe dependent tuples `t : (↓n)→ Ts`
+of length `n`, where `Ts : (↓n)→ *` are the type telescopes of length `n`.
 
+When describing dependent syntaxes with bindings, we introduce types `Expr<ctx : Ctx>` of expressions
+in a given context. Contexts are almost the same as telescopes `Ts : (↓n)→ *`, with a minor but very
+important difference: an expression `e : Expr<ctx : Ctx>` should be liftable to a larger context
+`ctx' : Ctx`, along thinnings `thn : ctx ⊂ ctx'`.
 
-Add thinnings:
+We will define a prototype Δ that extends Δ⁻ by inverse arows representing thinnings `m ⟨thn] n`, generating
+embeddings `thn : ↓n ⊂ ↓m` and hence `thn : (ctx : (↓n)→ *) ⊂ (ctx' : (↓n)→ *)`, and also
+`thn : Expr<ctx> ⊂ Expr<ctx'>`.
 ```
-prototype Δ : *̃
+prototype Δ
   0    : Δ
   ( ⁺) : Δ → Δ
  
@@ -177,18 +184,21 @@ prototype Δ : *̃
 (Differently from McBride, we only provide constructors for non-identity morphisms.)
 
 ```
-structure ΔMod
+structure (Δ→ )<T : *̃>
+  ..TODO
+
+structure (Δ→ )<Ts : Δ→ *̃>
   ..TODO
 ```  
 
 Presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
 ```
-structure Δ⁺°Mod<U : *̃>
-  base : U
-  step : this.Z →ᵁ (Δ⁺°Modᵈ this)
+structure (Δ⁺°→ )<U : *̃>
+  head : U
+  tail : this.Z →ᵁ (Δ⁺°→ )ᵈ this
 ```
 
-With simplicial types and enough combinatorics, we can derive `-Mod` structures for any prototypes.
+With simplicial types and enough combinatorics, we can derive `(P→ )` structures for any prototypes.
 
 **TODO** Say how to understand prototypes as procategories themselves, and how the types ↓n also form
 procategories, show examples of functors and show how they form procategories, define products of prototypes
@@ -213,7 +223,7 @@ those elements of `|T|` that t can be reduced to, and their respective reduction
 downward prototypes comes for a fixed prototype `T` comes with a prototype structure induced by reductions
 and extensions in `T` acting elementwise.
 
-# Motivation
+# Inductive prototypes and algebraic theories
 
 ## Lavwere algebraic theories
 
