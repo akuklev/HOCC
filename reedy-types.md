@@ -36,6 +36,38 @@ The raison d'être for inductive prototypes are the inductive families indexed o
 
 We conjecture that it would be possible to reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately embrace synthetic ω-(pro)categories^[We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that all HCTT types would turn out to be internal ω-procategories.], a long sought-after category-theoretic foundational framework what turns to be emergent if one seeks for a natural proof calculus capable of structural induction over its own language.
 
+# Remark on notation
+
+Names of variables and types are not limited to alphanumerics, but can be also operators:
+```
+structure (×) (X Y : *)
+  fst : X
+  snd : Y
+```
+— here we define a type with the name `(×)` and two parameters `X` and `Y`, both types: the star `*` denotes the virtual universe of all types, which is used in polymorphic definitions. After this definition we immediatelly can use `(×)` as an infix operator, e.g. write `p : ℕ × ℕ`. 
+
+Postfix operators are written like `( ⁺)`, prefix operators like `(- )`. Whitespaces arount operators are semantically distinguishing, for instance we can have distinct operators `(+)` and `( +1)`, a postfix increment operator, making the expressions `a + 1` and `a +1` to parse differently (but in all relevant cases they'll actually mean essentially the same).
+
+We write support both infix and prefix notation for dependent pairs and functions:
+```
+(x : X) × Y(x) ≡ Σ(x : X) Y(x)
+(x : X) → Y(x) ≡ ∀(x : X) Y(x)
+```
+
+We'll write lambda expressions as { x : X ↦ y } and instances of records as {name: value, name: value}.
+
+
+In many cases, the same identifier means both a type/type family and their companion object. To disambiguage we'll use special notation `foo<Bar>` for typal parameters. An overloaded identifier should resolve to companion object unless used as a type annotation `: T` or as a typal parameter `List<T>`.
+
+We will allow using type classes (structures parametrized by a type `T : *` or a type family `Ts : I → *`) on the right side of the colon as a shorthand. Consider the following type class
+```
+structure Magma<T>
+  (•) : T → T → T
+```
+
+Now if we write `def f<M : Magma>(x y z : M)` it desugars into `def f<M : *>(implicit M : Magma<M>, x y z : M)`. The name `M` is overloaded and means either a type or its companion object depending on the usage context.
+
+
 # Inductive types and ∞-procategories of their models
 
 Every inductive type comes with a ∞-procategory of its models, but let's use the inductive type of natural numbers to have an illustrative example:
@@ -82,26 +114,26 @@ instance ℕobj : ℕMod<ℕ>
 
 The displayed models are given by the following structure:
 ```
-structure ℕModᵈ (src : ℕAlg) <T : |src| → *>
+structure ℕModᵈ <src : ℕAlg, T : src → *>
   base : T(src.base)
-  step : ∀{n : |src|} T(n) → T(src.step n)
+  step : ∀{n : src} T(n) → T(src.step n)
 ```
 allowing do define the type of induction motives and the induction operator:
 ```
 def ℕᴹ : ℕ → *
   ℕModᵈ ℕobj
 
-ℕind : ∀(P : ℕ → *) ℕᴹ → ∀(n : ℕ) P(n)
+ℕind<P : ℕ → *> : ℕᴹ → ∀(n : ℕ) P(n)
 ```
 
-Inhabitants of the type `Σ(src : ℕMod) (pm : ℕModᵈ src)` are promorphisms (weak homomorphisms, many-to-many homomorphisms) with source `src : ℕMod` and target given by
+Inhabitants of the type `Σ(src : ℕMod<T>) (pm : ℕModᵈ src)` are promorphisms (weak homomorphisms, many-to-many homomorphisms) with source `src : ℕMod` and target given by
 ```
-def target (src : ℕMod) (pm : ℕModᵈ src) : ℕMod<Σ(n : |src|) |pm| src>
+def target<src : ℕMod, pm : ℕModᵈ src> : ℕMod<(n : src) × (pm src)>
   base: pm.base
-  step: { n : |src|, x : |pm| n ↦ (src.step n, |pm| (src.step n))}
+  step: { n : src, x : (pm n) ↦ (src.step n, pm (src.step n)) }
 ```
 
-We can define (strong) homomorphisms as the functional (= many-to-one) weak homomorphisms `Σ(src : ℕMod, pm : ℕModᵈ src) (f : ∀(n) Σ(m : |pm| n) ∀(n' : |pm| n) n ≃ m`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃) {ℕMod}` of ℕ-algebras correspond to their isomorphisms.
+We can define (strong) homomorphisms as the functional (= many-to-one) weak homomorphisms `Σ(src : ℕMod<T>, pm : ℕModᵈ src) (f : ∀(n) (m : (pm n)) × ∀(n' : pm n) n ≃ m`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃)<ℕMod>` of ℕ-algebras correspond to their isomorphisms.
 
 The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
 
@@ -200,9 +232,52 @@ structure (Δ→ )<Ts : Δ→ *̃>
 procategories, show examples of functors and show how they form procategories, define products of prototypes
 and show how bifunctors are compatible with currying.
 
-## Δ° and other prototypes with non-posetal dependency structure
+## Categories as models for an inductive type
 
-When dependencies are non-posetal (that is, there can be more than one depencency arrow between two inhabitants), the coinductive duals of prototypes require the ( ᵈ)-operation. Let us consider presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
+There can be more then one dependency between two inhabitants of an inductive prototype:
+```
+prototype Δ¹
+  ob : Δ¹
+  mor : Δ¹
+  mor [source⟩ ob
+  mor [target⟩ ob
+```
+
+A family of types `T : Δ¹→ *` has the
+```
+structure T
+  ob : *
+  hom : (source : *, target : *) → *
+```
+
+Now let us define the following indexed inductive type family:
+```
+inductive CatTh : (i : Δ¹)
+  id : ∀{o : CatTh ob} (CatTh mor){source: o, target: o}
+  (▸) : ∀{x y z : CatTh ob} (CatTh mor){source: x, target: y}
+                          → (CatTh mor){source: y, target: z}
+                          → (CatTh mor){source: x, target: z}
+
+  unitorL : ∀{x y} f ≃ id ▸ f
+  unitorR : ∀{x y} f ≃ f ▸ id
+  associator : ∀{f g h} (f ▸ g) ▸ h ≃ f ▸ (g ▸ h)
+```
+
+Now consider the type of models for this type:
+```
+structure CatThMod<Ts : Δ¹→ *>
+  id : ∀{o : Ts.ob} → Ts.mor{source: o, target: o}
+  (▸) : ∀{x y z : Ts.ob} (Ts.mor){source: x, target: y}
+                       → (Ts.mor){source: y, target: z}
+                       → (Ts.mor){source: x, target: z}
+  ... subject to unitality and associativity
+```
+
+That's precisely the definition of a category!
+
+* * *
+
+For prototypes with an infinite number of non-unique dependencies, the duals are displayed coinductive types, i.e. require the ( ᵈ)-operation. Let us consider presheaves over Δ, i.e. families `Δ°→*` over the opposite prototype, are known as simplicial types. If we only take the face maps (opposite of thinnings), we get semi-simplicial types, which can be expressed using displayed types as follows
 ```
 structure (Δ⁺°→ )<U : *̃>
   head : U
