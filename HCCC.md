@@ -64,4 +64,8 @@ underlying type theory excellently suitable for performing large constructions w
 
 By introducing these modalities we also greatly enhance expressivity of the underlying theory
 taken as a programming language. While MLTTs can be understood as total functional programming
-language, adding modalities makes it into a functional logic programming language.
+language, adding modalities makes it into a functional logic programming language. 
+
+While not very relevant for mathematal applications, for practical usability as a functional programming language, the system has to be extended with
+indexed modalities for size-guarded recursion and clock-guarded corecursion, which are known to
+be eliminable towards of ordinary recursion and corecursion at cost of substantial complexity blowup.
