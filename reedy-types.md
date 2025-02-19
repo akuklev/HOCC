@@ -361,9 +361,9 @@ With enough combinatorics, it is possible to generalize the approach for any pro
 ```
 structure (I→ )<U : *̃>
   head : U
-  tail : F<this.head> →ᵁ (I→ᵈ< G<this> > U)
+  tail : F<this.head> →ᵁ (I→ᵈ< H<this> > U)
 ```
-- where `F` and `G` are some static type formers.
+- where `F` and `H` are some static type formers. For example, in the case of globes `G`, we'd have `F<T> := 𝔹`, `H<T> := Unit`.
 
 ## Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
 
