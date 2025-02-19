@@ -58,14 +58,27 @@ outline extending MLTTs by a dual pair of modalities enabling both abstractness-
 classical reasoning with choice, and also hugely expanding available algorithmic constructions
 by enabling all classically provable algorithms, without compromising its favorable computational 
 properties and decidability of typechecking. The modalities also allow convinient introduction
-of impredicative universe of propositions and reflective Mahlo universes of types, making the
+of impredicative universe of propositions and reflective Mahlo universes of types yielding a
+type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the
 underlying type theory excellently suitable for performing large constructions widely used in
 (higher) algebraic geometry. We obtain HCCC by applying these extensions to HCTT.
 
-By introducing these modalities we also greatly enhance expressivity of the underlying theory
-taken as a programming language. While MLTTs can be understood as total functional programming
-language, adding modalities makes it into a functional logic programming language. 
+## Practical considerations
 
-While not very relevant for mathematal applications, for practical usability as a functional programming language, the system has to be extended with
-indexed modalities for size-guarded recursion and clock-guarded corecursion, which are known to
-be eliminable towards of ordinary recursion and corecursion at cost of substantial complexity blowup.
+While the aforementioned features make the purposed system an optimal for a proof assistaint,
+it does not automatically make such a proof assistaint a viable alternative to hand-written proofs.
+We need a pleasent and concise syntax, and a lot of additional mechanisms that minimize the formalization
+pain: reduction of neutral terms and applications non-determinstic confluent reduction rules, support for
+algebraic ornaments together with versatile subtyping, highly configurable implicit conversions, resolution
+and derivation of implicit arguments, type inference, and proof inference (including but not limited to SMT
+solvers and specialized solvers). In [Literate Kotlin series](litkot.md) we propose a versatile syntax based
+on Kotlin, Python, Lean, and Agda simultaneously, and propose some machinery related to subtyping and inference.
+The rest is a work in progress that probably only can really start after an initial implementation of HCCC is available.
+
+While not very relevant for mathematal applications, MLTTs are at the same time total functional
+programming languages. For for practical usability as a functional programming language, HCCC has
+to be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion,
+which are known to be eliminable towards of ordinary recursion and corecursion at cost of substantial
+complexity blowup. Speaking of expressivity, the ◇ and □ modalities greatly enhance expressivity of
+the underlying theory taken as a programming language. While MLTTs can be understood as total functional
+programming language, adding modalities makes it into a functional logic programming language.
