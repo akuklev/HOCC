@@ -107,7 +107,7 @@ The theory should be desugarable into the plain HCCC by encoding objects etc. as
 (co)monads and interpreting expressions involving substructural types via do-notation.
 
 This way we'll also obtain the ultimate type system for concurrent interactive programming possibly
-making Kotlin the first thoroughly typed general purpose programming language.
+making Kotlin the first general purpose programming language thoroughly susceptable to internal reasoning.
 
 ## Embracing biconstructive proofs
 We'll discuss that in presence of affine types, we also have room for biconstructive propositions and proofs,
