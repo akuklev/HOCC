@@ -35,15 +35,23 @@ datatypes of integers, reals, formalized languages of any complexity, and dataty
 respective expressions, while expressable structures include the ones defined by arbitrary
 axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
 
-Those structures (models of axiomatic theories) come conviniently packaged into parametrized
-ω-categories together with structure-respecting correpsondences between them, expressing
+Those structures (models of axiomatic theories) come conviniently prepackaged into parametrized
+higher categories together with structure-respecting correpsondences between them, expressing
 equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and
 homomorphism  many-to-one correspondences), and also correspondences between correspondences
 themselves, so that proofs and constructions can be specialized, generalized, and transferred
-along those correspondences. In fact, the theories themselves also come packed into ω-categories,
+along those correspondences. In fact, the theories themselves also come packed into categories,
 considering theories that generate equivalent classes of models as equivalent (Morita-equivalence),
-and taking relative interpretability of theories as homomorphisms. Moreover, the ω-categories
-also form a parametrized ω-category, and parametrized ω-categories form a parametrized parametrized
-categories and so on, while all constructions and proofs about ω-categories (and any other theories)
-are also automatically applicable to their parametrized versions.
+and taking relative interpretability of theories as homomorphisms. Moreover, the higher categories
+also form a parametrized higher category, and parametrized higher categories form a parametrized
+parametrized categories and so on, while all constructions and proofs about higher categories
+(and any other theories) are also automatically applicable to their parametrized versions.
+
+In the first paper we outline how to extend Martin-Löf Type Theories by types representing 
+inductively-defined synthetic categories, and functors on those. When applied to the Higher
+Observational Type Theory by Shulman et al., we would pressumably obtain a Higher Categorical
+Type Theory, featuring native ω-categories but still interpretable in an arbitrary ∞-topos.
+
+In the second paper we outline how to extend Martin-Löf Type Theories by a dual pair of
+modalities
 
