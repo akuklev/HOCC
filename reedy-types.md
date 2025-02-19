@@ -236,23 +236,23 @@ and show how bifunctors are compatible with currying.
 
 There can be more then one dependency between two inhabitants of an inductive prototype:
 ```
-prototype Δ¹
-  ob : Δ¹
-  mor : Δ¹
+prototype Δ¹⁺
+  ob : Δ¹⁺
+  mor : Δ¹⁺
   mor [source⟩ ob
   mor [target⟩ ob
 ```
 
-A family of types `T : Δ¹→ *` has the
+A family of types `T : Δ¹⁺→ *` has the
 ```
-structure T
-  ob : *
-  hom : (source : *, target : *) → *
+structure Δ¹⁺Fam
+  Ob : *
+  Mor : (source : Ob, target : Ob) → *
 ```
 
 Now let us define the following indexed quotient-inductive type family:
 ```
-inductive CatTh : (i : Δ¹)
+inductive CatTh : (i : Δ¹⁺) → *
   id : ∀{o : CatTh ob} (CatTh mor){source: o, target: o}
   (▸) : ∀{x y z : CatTh ob} (CatTh mor){source: x, target: y}
                           → (CatTh mor){source: y, target: z}
@@ -274,7 +274,7 @@ structure CatTh-Mod<Ts : Δ¹→ *>
 ```
 
 That's precisely the definition of a category!
-Well, actually, a precategory because we do not require univalence. But we can require univalence an embedding arrow we forgot in the definition
+Well, actually, a precategory because we do not yet require univalence. But we can require univalence an embedding arrows we forgot in the definition
 of our prototype:
 ```
 prototype Δ¹
@@ -283,12 +283,18 @@ prototype Δ¹
   mor [source⟩ ob
   mor [target⟩ ob
 
-  ob ⟨emb] mor with
-    ob ⟨emb][source⟩ ob
-    ob ⟨emb][target⟩ ob
+  ob ⟨よRemb] mor       
+  ob ⟨よLemb] mor
+  [source⟩⟨よRemb] ↦ [source⟩
+  [target⟩⟨よLemb] ↦ [target⟩
 ```
 
-This way we ensure that `(o ≃ o)`-types for the objects `o : Ts.ob` are given by the respective `Ts.mor{source: o, target: o}`-types, which can be used to show  
+Now given `Ts : Δ¹→ *`, for every `o : Ts.Ob` we'll have Yoneda embeddings
+```
+o⟨よRemb] : ∀(target : Ts.Ob) Ts.Mor(source: o, target)
+o⟨よLemb] : ∀(source : Ts.Ob) Ts.Mor(source, target: o)
+```
+that allow to derive 
 ```
 univalence : ∀{X Y : Ts.ob} (a ≃ b) ≃ Σ(f : Ts.hom{source: X, target: Y})
                                       Σ(g : Ts.hom{source: Y, target: X})
@@ -301,7 +307,42 @@ Cat : Catᵈ
 ```
 Furthermore we can iterate, and thus `Catᵈ : Catᵈᵈ` etc. And since constructions and proofs also can be lifted, any statement we have proven for all small categories `prf<C : Cat>` also can be applied to displayed categories, say like the category `Grp : Catᵈ` of all groups and the category of all categories `Cat : Catᵈ` itself. Seems like dream of size-agnostic category theory came true. Well, except we want to have the same for ω-categories `ωCat : ωCatᵈ : ωCatᵈᵈ : ···`.
 
-Defining categories required a prototype with only two inhabitants `ob hom : Δ¹`. For ω-categories we will a countably infinite hierarchy of those, in the simplest case of strict ω-categories it will be given by a prototype we have essentially already encountered. It is the opposite `Δ°` of the prototype Δ. Type families over the prototype Δ° are known as presheaves over the simplex category Δ or simplicial types.
+# Higher structures
+
+Defining categories required a prototype with only two inhabitants `ob hom : Δ¹`. For ω-categories we will a countably infinite hierarchy of those. Let us start with a strict ω-categories, which use the iterated version G (Globes) of Δ¹:
+```
+prototype G⁺
+  0 : G⁺
+  ( ⁺) : G⁺
+  (n⁺) [source⟩ n
+  (n⁺) [target⟩ n
+
+  [source⟩[target⟩ ↦ [source⟩
+  [target⟩[source⟩ ↦ [target⟩
+
+structure G⁺Fam
+  Ob : *
+  Mor : (source : Ob, target : Ob) → G⁺Fam
+```
+
+A tower of cell types `Ts : G⁺Fam` also written `Ts : G⁺ → *`
+```
+objects      Ts(0)
+morphisms    T(1)(source₁ target₁ : Ts(0))
+2-morphisms  T(2)(source₁ target₁ : Ts(0))(source₂ target₂ : Ts(1)(source₁, target₁))
+3-morphisms  T(3)(source₁ target₁ : Ts(0))
+                 (source₂ target₂ : Ts(1)(source₁, target₁))
+                 (source₃ target₃ : Ts(2)(source₁, target₁)(source₂ target₂))
+...
+```
+
+With this prototype we can define the indexed inductive type family `ωStrCatTh : G⁺ → *` so that strict pre-ω-categories arise
+as the models for these inductive type families, `ωStrCatTh-Mod<Ts : G⁺ → *>`. By using the prototype G which extends G⁺ by
+including Yoneda-embeddings, we obtain the strict ω-categories `sωCat<Ts : G → *> := ωStrCatTh-Mod<Ts>`.
+
+# Beyond globes: the infamous semi-simplicial types
+
+It is the opposite `Δ°` of the prototype Δ. Type families over the prototype Δ° are known as presheaves over the simplex category Δ or simplicial types.
 
 For prototypes with an infinite number of non-unique dependencies, the duals are displayed coinductive types, i.e. require the ( ᵈ)-operation. Let us consider even simpler presheaves to understand how the duals are formed. We'll take the prototype Δ⁺° that only has the face maps (opposite of thinnings) and get the so called semi-simplicial types, which can be expressed using displayed types as follows:
 ```
