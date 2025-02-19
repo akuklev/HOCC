@@ -1,28 +1,39 @@
-Towards Higher Categorical Construction Calculus
-================================================
+Higher Categorical Construction Calculus
+========================================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
+At JetBrains, we create the most effective, convenient, and pleasurable tools for engineers and researchers.
+
+Make work more pleasent/enjoyable, fluent and productive, and ultimately contribute to the advancement of humanity
+
+unleashing their creativity, nurturing their ideas, and ultimately contribute to the advancement of humanity.
+
+We want our tools to feel like a frictionless and lightweight exoskeleton for the mind.
+
+
+Wouldn't it be great, if we could establish a database of mathematical results, definitions, conjectures,
+constructions, and proofs
 
 Almost a decade ago, the co-founder and former CEO of JetBrains Sergey Dmitriev told me about his
-long-standing ambition to establish a database of mathematical results, definitions, conjectures,
-constructions, and proofs. This database should allow content-based search and connect related
+long-standing ambition to . This database should allow content-based search and connect related
 results into a web. Ideally, it should also connect results on mathematical objects of similar
 structure even if their relatedness is not apparent and unknown to the respective authors.
-Independently, related ideas got traction inside the mathematical community over the last years,
-as exemplified by the [Formal Abstracts Project](https://formalabstracts.github.io/) by Thomas C. Hales.
 
-The prerequisite for such a database is a common formalized language for mathematics, which has to be
-syntactically appealing, comfourtable to work with and most importantly expressive enough to satisfy
-the needs of mathematicians. We made a substantial progress towards this goals by meticulously piecing
-together existing ideas, and also by developing original ones.
+The prerequisite for this vision is a common formalized language for mathematics, which has to be
+syntactically and typographically appealing, concise, comfortable to work with and most importantly
+expressive enough to satisfy the needs of mathematicians. We made a substantial progress towards
+this goals 
+
+By meticulously exploring and piecing together worthwhile features of all systems we could get our
+hands on, and developing original ones.
 
 § The HCCC Project
 ------------------
 
-Over almost a decade at JetBrains Research, I've been intensely working on expressivity the
-foundational systems underlying modern proof assistants, and came to a vision of what we call
+Over almost a decade at JetBrains Research, I've been intensely working on improving expressivity 
+of foundational systems underlying modern proof assistants, and came to a vision of what we call
 Higher Categorical Construction Calculus.
 
 On the reasoning side, HCCC is a natural deduction calculus capable of classical reasoning with
