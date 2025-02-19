@@ -75,6 +75,8 @@ solvers and specialized solvers). In [Literate Kotlin series](litkot.md) we prop
 on Kotlin, Python, Lean, and Agda simultaneously, and propose some machinery related to subtyping and inference.
 The rest is a work in progress that probably only can really start after an initial implementation of HCCC is available.
 
+# HCCC as a powerful non-interactive programming language
+
 While not very relevant for mathematal applications, MLTTs are at the same time total functional
 programming languages. For for practical usability as a functional programming language, HCCC has
 to be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion,
@@ -82,3 +84,22 @@ which are known to be eliminable towards of ordinary recursion and corecursion a
 complexity blowup. Speaking of expressivity, the ◇ and □ modalities greatly enhance expressivity of
 the underlying theory taken as a programming language. While MLTTs can be understood as total functional
 programming language, adding modalities makes it into a functional logic programming language.
+
+# Interactive programming
+
+To embrace interactive programming, we'll need to introduce substructural types (linear/)
+
+§ Conclusion and Future Work
+----------------------------
+
+
+* Extension into an interactive programming language by introducing substructural types, the `interactive`-modality (closely related)
+*
+*   `pure`- and 
+*
+* which make the system capable of expressing 
+*
+* [concurrency, quantum computations and entanglement](./lin-types).
+* Resource-aware (hopefully non-Gödelian) variant of the theory, where strictly increasing
+functions can be only shown to exist conditionally on the availability of enough “computational budget”.
+
