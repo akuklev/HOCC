@@ -47,11 +47,21 @@ also form a parametrized higher category, and parametrized higher categories for
 parametrized categories and so on, while all constructions and proofs about higher categories
 (and any other theories) are also automatically applicable to their parametrized versions.
 
-In the first paper we outline how to extend Martin-Löf Type Theories by types representing 
+In the first paper we outline extending Martin-Löf Type Theories by types representing 
 inductively-defined synthetic categories, and functors on those. When applied to the Higher
 Observational Type Theory by Shulman et al., we would pressumably obtain a Higher Categorical
-Type Theory, featuring native ω-categories but still interpretable in an arbitrary ∞-topos.
+Type Theory, featuring native ω-categories and capability to express its own syntax as an
+inductive datatype, but still interpretable in an arbitrary ∞-topos.
 
-In the second paper we outline how to extend Martin-Löf Type Theories by a dual pair of
-modalities
+In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities.md) we
+outline extending MLTTs by a dual pair of modalities enabling both abstractness-aware and
+classical reasoning with choice, and also hugely expanding available algorithmic constructions
+by enabling all classically provable algorithms, without compromising its favorable computational 
+properties and decidability of typechecking. The modalities also allow convinient introduction
+of impredicative universe of propositions and reflective Mahlo universes of types, making the
+underlying type theory excellently suitable for performing large constructions widely used in
+(higher) algebraic geometry. We obtain HCCC by applying these extensions to HCTT.
 
+By introducing these modalities we also greatly enhance expressivity of the underlying theory
+taken as a programming language. While MLTTs can be understood as total functional programming
+language, adding modalities makes it into a functional logic programming language.
