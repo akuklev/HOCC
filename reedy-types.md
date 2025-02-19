@@ -340,18 +340,30 @@ With this prototype we can define the indexed inductive type family `ωStrCatTh 
 as the models for these inductive type families, `ωStrCatTh-Mod<Ts : G⁺ → *>`. By using the prototype G which extends G⁺ by
 including Yoneda-embeddings, we obtain the strict ω-categories `sωCat<Ts : G → *> := ωStrCatTh-Mod<Ts>`.
 
-# Beyond globes: the infamous semi-simplicial types
+# Beyond globes: The infamous semi-simplicial types
 
-It is the opposite `Δ°` of the prototype Δ. Type families over the prototype Δ° are known as presheaves over the simplex category Δ or simplicial types.
+The ideas presented above were partially developed in 2015-2017 and finished up to globes by 2021. However, I was not able
+to develop a systematic rule to derive structures of `I`-families for prototypes `I` with dependence structure beyond globes. Unfortunatelly, 
+globes are not sufficient to develop general (weak) versions of higher algebraic structures such as ∞-categories or even unbiased lax monoidal
+categories, let alone weak ω-categories. For “nice” definitions we need to form families over arbitrary inductive prototypes, but the bare minimum
+to achieve workable versions are the type families over the opposite `Δ°` of the prototype Δ we have already introduced earlier to work with contexts.
+Type families over the prototype Δ° are known as presheaves over the simplex category Δ or simplicial types. To deal with non-univalent versions of
+higher structures, the semi-simplicial types `Ts : Δ⁺° → *` would be sufficient.
 
-For prototypes with an infinite number of non-unique dependencies, the duals are displayed coinductive types, i.e. require the ( ᵈ)-operation. Let us consider even simpler presheaves to understand how the duals are formed. We'll take the prototype Δ⁺° that only has the face maps (opposite of thinnings) and get the so called semi-simplicial types, which can be expressed using displayed types as follows:
+Recently, A. Kolomatskaia and M. Shulman have achieved a striking breakthrough by defining the semi-simplicial types using coinduction in conjunction with `( ᵈ)`-operation forming displayed types:
 ```
-structure (Δ⁺°→ )<U : *̃>
+structure Δ⁺°Fam
+  head : *
+  tail : this.head → Δ⁺°Famᵈ<this>
+```
+
+With enough combinatorics, it is possible to generalize the approach for any prototypes. In particular, for any ℕ-like prototype I (the one with constructors like `0` and `( ⁺)`) we'll be able to derive the coinductive duals in the form
+```
+structure (I→ )<U : *̃>
   head : U
-  tail : this.head →ᵁ (Δ⁺°→ᵈ this)
+  tail : F<this.head> →ᵁ (I→ᵈ< G<this> > U)
 ```
-
-**TODO:** With semi-simplicial types and enough combinatorics, we can derive `(P→ )` structures for any prototypes.
+- where `F` and `G` are some static type formers.
 
 ## Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
 
