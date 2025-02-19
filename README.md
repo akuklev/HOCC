@@ -6,13 +6,6 @@ Higher Categorical Construction Calculus
 
 At JetBrains, we create the most effective, convenient, and pleasurable tools for engineers and researchers.
 
-Make work more pleasent/enjoyable, fluent and productive, and ultimately contribute to the advancement of humanity
-
-unleashing their creativity, nurturing their ideas, and ultimately contribute to the advancement of humanity.
-
-We want our tools to feel like a frictionless and lightweight exoskeleton for the mind.
-
-
 Wouldn't it be great, if we could establish a database of mathematical results, definitions, conjectures,
 constructions, and proofs
 
