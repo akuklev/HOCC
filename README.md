@@ -22,31 +22,22 @@ We call it _higher categorical_, because these structures (models of axiomatic t
 - In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities) we propose to extend MLTTs by an S4-pair of modalities, allowing both abstractness-aware “parametric“ and classical reasoning with choice, and also vastly extending the available constructions by allowing all classically provable algorithms, without compromising its favorable computational properties and decidability of proof/type checking.
 - The modalities also facilitate the introduction of reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing large constructions widely used in (higher) algebraic geometry. 
 
-HOTT + Reedy + ◇/□ + reflective universes = HOCC
+<center><b>HOTT + Reedy + ◇/□ + reflective universes = HOCC</b></center>
 
-§ Syntax and amenities
-----------------------
-
-A sound theoretical foundation just the first step. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we propose a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress, Scala. 
+A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress, Scala. 
 It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
 
-Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
-- Convincing the machine that an obvious equality holds is especially frustrating, so we need to use every approach available to eliminate unneccesary type conversions: parallel reductions (“The Taming of the Rew”) and equations on neutral terms (New Equations for Neutral Terms), coersions along observational equality (“Observational Equality meets CiC”), the universe of explicitly propositional types (“Definitional proof-irrelevance without K”), and limited predicate subtyping (“Predicate Subtyping with Proof Irrelevance”).
-- The other problem are the cases where we have to redefine a construction multiple times from scratch, because the same thing is implemented by different authors using slightly different types. This issue can and should be addressed systematically by algebraic ornaments together with configurable implicit conversions. To handle the zoo of typeclasses, we need highly configurable subtyping, resolution and derivation of implicit arguments.
-- Many other cases of excessive verbosity can be addressed with an advanced system deriving implicit arguments, occasional type inference, and proof inference (including but not limited to SMT solvers and specialized solvers), and applying Liquid types.
 
-The rest is a work in progress that probably only can really start after an initial implementation of HCCC is available.
 
-§ Towards Certified Kotlin
---------------------------
+§ Mastering non-interactive programming
+---------------------------------------
 
-## Non-interactive programming
+Computantional type theories can be used as functional programming languages, and HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. Furthermore, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, adjoining the great expressiveness of functional logic programming. HCCC seems to have everything you could ever want, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility. 
 
-MLTTs can be understood as purely functional programming languages, and HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. Furthermore, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, adding the great expressiveness of functional logic programming. HCCC seems to have everything you could ever want, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility.
+To make a decent programming language, HCCC would need indexed modalities for size-guarded recursion and clock-guarded corecursion, and SMT solver-based system of liquid types.
 
-For practical use, MLTTs must be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion, and SMT solver-based liquid types.
-
-## Embracing interactive programming
+§ Embracing interactive programming
+-----------------------------------
 
 To embrace interactive programming, we'll need to introduce substructural types for
 non-discardable/non-sharable objects, and the substructural cousins of the ◇- and □-modalities:
@@ -74,9 +65,18 @@ Similar to the case of guarded (co)recursion modalities, the system remains desu
 HCCC by encoding objects as paramatrized relative (co)monads and interpreting expressions involving
 substructural types via do-notation, see [Paella: algebraic effects with parameters and their handlers](https://icfp24.sigplan.org/details/hope-2024-papers/7)
 
-# Possible extensions
+# What else?
 
 - The programming language could be extended to embrace quantum algorithms and interacting quantum automata.
 - The proof calculus could be extended to embrace biconstructive [“Affine logic for constructive mathematics” (M. Shulman)](https://arxiv.org/abs/1805.07518).
 
 As it turns out, these two topics are deeply interrelated.
+
+# A long way to go
+
+Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
+- Convincing the machine that an obvious equality holds is especially frustrating, so we need to use every approach available to eliminate unneccesary type conversions: parallel reductions (“The Taming of the Rew”) and equations on neutral terms (New Equations for Neutral Terms), coersions along observational equality (“Observational Equality meets CiC”), the universe of explicitly propositional types (“Definitional proof-irrelevance without K”), and limited predicate subtyping (“Predicate Subtyping with Proof Irrelevance”).
+- The other problem are the cases where we have to redefine a construction multiple times from scratch, because the same thing is implemented by different authors using slightly different types. This issue can and should be addressed systematically by algebraic ornaments together with configurable implicit conversions. To handle the zoo of typeclasses, we need highly configurable subtyping, resolution and derivation of implicit arguments.
+- Many other cases of excessive verbosity can be addressed with an advanced system deriving implicit arguments, occasional type inference, and proof inference (including but not limited to SMT solvers and specialized solvers), and applying Liquid types.
+
+The rest is a work in progress that probably only can really start after an initial implementation of HCCC is available.
