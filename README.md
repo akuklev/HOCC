@@ -43,7 +43,7 @@ To start with, known issues with known solution approaches have to be addressed:
 § HCCC as a programming language
 --------------------------------
 
-Computational type theories can be used as functional programming languages, and HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. In addition, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, which adds the great expressiveness of deterministic functional logic programming. HCCC seems to have everything you could ever want from a language for _non-interactive programming_, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility. 
+Computational type theories are functional programming languages capable of exhaustive internal reasoning about the programs' behavior. HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. In addition, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, which adds the great expressiveness of deterministic functional logic programming. HCCC seems to have everything you could ever want from a language for _non-interactive programming_, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility. 
 
 To make a decent programming language, HCCC would need indexed modalities for size-guarded recursion and clock-guarded corecursion, and SMT solver-based system of liquid types.
 
@@ -56,50 +56,34 @@ T : Type, size : Nat, h : Heap, r : h.MutableArray<T>(size)
 ```
 Here both `h` and `r` are references, and the type of `r` depends on the type `T`, value `size` and reference `h`. Dependence of a reference type on other reference `h` signalizes that the referred object exists within the object referred by `h` (the mutable array `r` is an entity within the heap `h` in our case) and guarantees that those references can never escape the scope where their parent objects are available. 
 
-We also get the 
+References can annotated singular and/or unique, see [Linearity and Uniqueness: An Entente Cordiale](https://granule-project.github.io/papers/esop22-paper.pdf). “Singular” annotation forbids to create secondary references, while “unique” annotation guarantees that no secondary references were created previously outside. Dually, references can be annotated obligatory and/or obligated. “Obligatory” references have to be explicitly consumed, while “obligated” references are guaranteed to be eventually consumed outside. These are crusial for suspended coroutines (that have to be eventually resumed) and resource locks (that have to be eventually released).
 
-In languages with references, the contexts of expressions keep track of available references in addition to available values, which leads 
+Bifurcation of contexts into the value and reference part, introduces reference-level cousins of ◇/□-modalities. The usual □-modality describes finite closed expressions which also can be understood as compile-time constants (written “const” in Kotlin). Its substructural cousin is the `pure` modality: pure expressions are the ones not using any references even if these are available in the context. It's dual is the `interactive` modality, which contains expressions that might have captured references, i.e. they can make use of references not present in the context. References captured as typal parameters are known as capabilities, and essentially reproduce the [Capture Checking mechanism recently proposed for Scala3](https://docs.scala-lang.org/scala3/reference/experimental/cc.html). The `interactive` modality is closely related to `suspend`-functions in Kotlin. In fact, if we only allow IO and other interactions with external shared mutable objects only happen non-blockingly via coroutines, `interactive` and `suspend` would coincide.
 
-leading to substructural cousins of ◇/□-modalities. The usual □-modality (written “const” in Kotlin) describes finite closed expressions which also can be understood as compile-time constants. Its substructural cousin is the `pure` modality: pure expressions are the ones not using any references even if these are available in the context. It's dual is the `interactive` modality, which contains expressions that might have captured references, i.e. they can make use of references not present in the context. References captured as typal parameters are known as capabilities.
+**Dependent substructural reference types together with `interactive` modality allowing to capture references provide a robust common generalization for Rustacean lifetime-based ownership management and Kotlinesque structured concurrency we call structured ressource management.**
 
-The `interactive` modality is closely related to `suspend`-functions in Kotlin. In fact, if we only allow IO and other interactions with external shared mutable objects only happen non-blockingly via coroutines, `interactive` and `suspend` would coincide.
+On the other hand, interactivity can be incapsulated: for instance, inside a pure function we can create an instance of a persistent data structure emulating a mutable one (perhaps even a heap where new mutable objects of arbitrary signature can be allocated), and run non-pure imperative programm requiring a heap against it, while still being pure from the external point of view. The same surely applies to exceptions and algebraic effects in general: as long as we handle all exceptions/effects, we're pure from the external point of view. Similar to the case of guarded (co)recursion modalities, the whole system is desugarable into plain HCCC by encoding objects as paramatrized relative (co)monads interpreting expressions involving references types via do-notation, see [Paella: algebraic effects with parameters and their handlers](https://icfp24.sigplan.org/details/hope-2024-papers/7)
 
-Interactivity can be incapsulated: for instance, inside a pure function we can create an instance of a persistent data structure emulating a mutable one (perhaps even a heap where new mutable objects of arbitrary signature can be allocated), and run non-pure imperative programm requiring a heap against it, while still being pure from the external point of view. The same surely applies to exceptions and algebraic effects in general: as long as we handle all exceptions/effects, we're pure from the external point of view.
+§ Emergent separation logic
+---------------------------
 
-To go beyond that, we'll need a concept of environment the programs can interact with and references representing the fragments of environment available for interaction. As opposed to values, reference-valued variables are substructural (not invariant under substitution) and may have usage limitations (be singular and/or obligatory), properly described in terms of quantitative type theories first introduced by C. McBride.
+So far we have only described a sound type system for interactive programs themselves, but have not addressed how to achieve exhaustive internal reasoning about the interactive programs' behavior.
 
-For instance, a blocking rw file handle would be non-parallelizable and obligatory to release, a blocking read handle parallelizable but also obligatory to release, a non-blocking read-only handle both parallelizable and non-obligagory. Dually, references may be required to be dedicated (unique) and finalizing (guaranteed to be released at some point).
+Extrinsic state of objects can be described in terms of trace monoids. When concurrency comes into play, we have to deal with incomplete information on the operational state of objects: instead of a fixed state, we have a set of possible states. Thus for the prupose of reasoning, state of an object is described by an element of a trace algebra, a unital associative algebra the boolean rig that takes the role of the trace monoid in the concurrent setting. If we launch two coroutines in parallel, and those coroutines perform actions on the same object, its algebraic state is given by a sum of possible outcomes for all possible on orders of the actions performed on the object by these two coroutines.
 
-To ensure references never excape the scope there objects they refer to exist, their types have to be dependent on those scopes.
+Object arenas such as heaps, where fresh mutable objects and arrays can be created, and coroutine contexts where jobs can be launched, and theatres where interacting actors can be launched, have very particular trace monoids generated by a partial commutative monoid of creation and substitution operators for objective and ghost states giving rise to the associated concurrent separation logic withing the type theory.
 
-
-
-We'll understand Kotlinesque structured concurrency and Rustacean structured (lifetime-based) ownership-management as instances
-of structured ressource management, where managed shared objects are understood as addressable parts
-of the state of their respective arena, which can be either an addressable part of an enclosing arena
-a captured/standalone object in its own right. We'll show how objects and arenas can be defined as
-in terms of algebraic effects/algebraic effects with parameters, and how the description of states of
-those objects in terms of trace algebras (concurrent generalization of trace monoids, algebras over
-the boolean rig) gives rise to separation logic embedded into the substructural part of the type theory.
-
-if we launch two coroutines in parallel, and those coroutines perform actions on the same location
-`ref` of an arena `A`, the state `s : ◇A` of the arena (an element of its trace algebra) is given
-by a sum of possible outcomes for all possible on orders of the actions of those two coroutines.
-
-A substructural ◇¹-modality arises in connection with concurrent programming and separation logic. There, 
-
-The resulting system embraces mutability, concurrency and interactive programming, and can be used
-as a type system for a strict variant of Kotlin, making it fully amenable for certified programming.
-
-Similar to the case of guarded (co)recursion modalities, the system remains desugarable into plain
-HCCC by encoding objects as paramatrized relative (co)monads and interpreting expressions involving
-substructural types via do-notation, see [Paella: algebraic effects with parameters and their handlers](https://icfp24.sigplan.org/details/hope-2024-papers/7)
+The resulting system would embrace mutability, concurrency and interactive programming in their in their entirety, and thus can be used
+as the foundation for the aspired Certified Kotlin.
 
 § What's missing?
 -----------------
 
 There are two major areas that are not yet covered:
-- Quantum algorithms and interacting quantum automata on the programming side;
-- The [affine logic for constructive mathematics](https://arxiv.org/abs/1805.07518) should be available on the reasoning side
 
-Remarkably, these two are deeply related: the latter one is based on truncated Chu spaces, the general form of which is known to also describe the Hilbert spaces of quantum states. It resonates with types in univalent type theories being ∞-groupoids and propositions being the truncated ones.
+- The [affine logic for constructive mathematics](https://arxiv.org/abs/1805.07518) should be available on the reasoning side;
+- Quantum algorithms and interacting quantum automata on the programming side;
+
+Trace algebras extrinsically describing states of objects can be defined in terms of their duals, the algebras of obserables, which are commutative as observations are independent of each other. A non-commutative generalization where observations are not neccesarily independent anymore would allow describing quantum where the coexistence of multiple pure states is inherent rather than due to a lack of knowledge. The non-commutative generalization of state creation and substitution algebras would respectively allow to describe quantum arenas where separated objects might be entangled. There, the objects created separately do not in general remain separable objects, and the picture of arenas being collections of distinct objects becomes fuzzy. We're cannot reason in terms of “distinct particles“ anymore, and have to reason in terms of “field quanta” with quantum arenas being the quantum fields.
+
+Remarkably, the affine logic for constructive mathematics we mentioned above is also deeply related to quantum systems being based on truncated Chu spaces, the general form of which is known to describe the Hilbert spaces of quantum states. It resonates with types of univalent type theories being ∞-groupoids and propositions being the truncated ones.
