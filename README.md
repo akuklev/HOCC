@@ -20,28 +20,18 @@ We call it a _higher categorical_, because those structures (models of axiomatic
 § HCCC = HOTT + Prototypes + ◇/□-Modalities + Reflective universes
 ------------------------------------------------------------------
 
-In the first paper we outline extending Martin-Löf Type Theories by types representing 
-inductively-defined synthetic categories, and functors on those. When applied to the Higher
-Observational Type Theory by Shulman et al., we would pressumably obtain a Higher Categorical
-Type Theory, featuring native ω-categories and capability to express its own syntax as an
-inductive datatype, but still interpretable in an arbitrary ∞-topos.
+In [Type-theoretic approach to Reedy categories](reedy-types) we outline extending Martin-Löf Type Theories by types representing inductively-defined synthetic categories, and functors on those. When applied to the Higher Observational Type Theory by Shulman et al., we would pressumably obtain a Higher Categorical Type Theory, featuring native ω-categories and capability to express its own syntax as an inductive datatype, but still interpretable in an arbitrary ∞-topos.
 
-In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities.md) we
-outline extending MLTTs by a dual pair of modalities enabling both abstractness-aware and
-classical reasoning with choice, and also hugely expanding available algorithmic constructions
-by enabling all classically provable algorithms, without compromising its favorable computational 
-properties and decidability of typechecking. The modalities also allow convinient introduction
-of impredicative universe of propositions and reflective Mahlo universes of types yielding a
-type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the
-underlying type theory excellently suitable for performing large constructions widely used in
-(higher) algebraic geometry. We obtain HCCC by applying these extensions to HCTT.
+In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities) we outline extending MLTTs by an S4-pair of modalities enabling both abstractness-aware “parametrical“ and classical reasoning with choice, and also hugely expanding available algorithmic constructions by enabling all classically provable algorithms, without compromising its favorable computational properties and decidability of typechecking.
+
+The modalities also allow convinient introduction of reflective Mahlo universes of types yielding a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory excellently suitable for performing large constructions widely used in (higher) algebraic geometry. 
+
+HCCC is obtained by integrating all of these extensions.
 
 § Syntax and amenities
 ----------------------
 
-While the aforementioned features make the purposed system an optimal for a proof assistaint,
-it does not automatically make such a proof assistaint a viable alternative to hand-written proofs.
-We need a pleasent and concise syntax, and a lot of additional mechanisms that minimize the formalization
+While the aforementioned features make the purposed system an optimal for a proof assistaint, it does not automatically make such a proof assistaint a viable alternative to hand-written proofs. We need a pleasent and concise syntax, and a lot of additional mechanisms that minimize the formalization
 pain: reduction of neutral terms and applications non-determinstic confluent reduction rules, support for
 algebraic ornaments together with versatile subtyping, highly configurable implicit conversions, resolution
 and derivation of implicit arguments, type inference, and proof inference (including but not limited to SMT
@@ -50,9 +40,10 @@ on Kotlin, Python, Lean, and Agda simultaneously, and propose some machinery rel
 and inference. The rest is a work in progress that probably only can really start after an initial
 implementation of HCCC is available.
 
-* * *
+§ Towards Certified Kotlin
+--------------------------
 
-## As a non-interactive programming language
+## HCCC a non-interactive programming language
 
 While not very relevant for mathematal applications, MLTTs are at the same time total functional
 programming languages. For for practical usability as a functional programming language, HCCC has
@@ -61,8 +52,6 @@ which are known to be eliminable towards of ordinary recursion and corecursion a
 complexity blowup. Speaking of expressivity, the ◇ and □ modalities greatly enhance expressivity of
 the underlying theory taken as a programming language. While MLTTs can be understood as total functional
 programming language, adding modalities makes it into a functional logic programming language.
-
-# Future Work
 
 ## Embracing Interactive programming
 
@@ -76,31 +65,42 @@ of structured ressource management, where managed shared objects are understood 
 of the state of their respective arena, which can be either an addressable part of an enclosing arena
 a captured/standalone object in its own right. We'll show how objects and arenas can be defined as
 in terms of algebraic effects/algebraic effects with parameters, and how the description of states of
-those objects in terms of trace rigs (concurrent generalization of trace monoids) gives rise to separation
-logic embedded into the substructural part of the type theory.
+those objects in terms of trace algebras (concurrent generalization of trace monoids, algebras over
+the boolean rig) gives rise to separation logic embedded into the substructural part of the type theory.
 
-The theory should be desugarable into the plain HCCC by encoding objects etc. as paramatrized relative
-(co)monads and interpreting expressions involving substructural types via do-notation.
+if we launch two coroutines in parallel, and those coroutines perform actions on the same location
+`ref` of an arena `A`, the state `s : ◇A` of the arena (an element of its trace algebra) is given
+by a sum of possible outcomes for all possible on orders of the actions of those two coroutines.
 
-This way we'll also obtain the ultimate type system for concurrent interactive programming possibly
-making Kotlin the first general purpose programming language thoroughly susceptable to internal reasoning.
+A substructural ◇¹-modality arises in connection with concurrent programming and separation logic. There, 
 
-## Embracing biconstructive proofs
-We'll discuss that in presence of affine types, we also have room for biconstructive propositions and proofs,
-as presented in [“Affine logic for constructive mathematics” (M. Shulman)](https://arxiv.org/abs/1805.07518).
+The resulting system embraces mutability, concurrency and interactive programming, and can be used
+as a type system for a strict variant of Kotlin, making it fully amenable for certified programming.
 
-## Quantum computation, quantum systems, and quantum logic
-We'll make conjecture how simultaneous interactions and entanglement (in the sense of Verse Calculus/◇-modality)
-allows to include a quantum programming (programming only executable on a quantum computer) into our formalism.
+Similar to the case of guarded (co)recursion modalities, the system remains desugarable into plain
+HCCC by encoding objects as paramatrized relative (co)monads and interpreting expressions involving
+substructural types via do-notation, see [Paella: algebraic effects with parameters and their handlers](https://icfp24.sigplan.org/details/hope-2024-papers/7)
 
-The types `ᴿ◇T` of possible inhabitants of substructural types `T` can be probably understood as spectra over the
-generalized rings R (algebras over the sphere spectrum, with 𝔽₁ being the initial generalized ring), connections
-to absolute geometry (Connes) and to the type theory of parametrized spectra should be studied.
+# Future Work
 
-We'll discuss how arenas allow describing interactive/interacting quantum systems and quantum fields, how the
-respective trace rigs turn into C*-algebras of those systems/fields, and how the combination of the separation
-logic generated by those C*-algebras and the notion of biconstructive proofs could shed some light on the
-nature of quantum reality.
+## Biconstructive logic and Chu spaces
+
+Classical logic allows proofs involving double negation elimination and choice. Constructive logic limits application of those proof techniques so as to guarantee that the notion of existence is effective. That is, given a constructive proof of existence `pf : ∃(x : T) P(x)` it is possible to construct such an `x` satisfying `P(x)` algorithmically. It is possible limit proof techniques even more to ensure that a proof of non-universality `pf : ¬∀(x : T) P(x)` allows to algorithmically extract a counterexample `x` satisfying `¬P(x)`. Such a restriction could be called biconstructive logic and is only possible in presence of substructural types, see [“Affine logic for constructive mathematics” (M. Shulman)](https://arxiv.org/abs/1805.07518).
+
+The universe `Chu` of biconstructive propositions turns out embrace peculiar cases of predicates (describing interacting non-deterministic automata)
+which are nither connected by an implication, nor orthogonal. Such propositions satisfy Heisenbergian uncertainty principles, making them appear as if they would describe quantum systems. Yet, the non-deterministically interacting automata do not exhibit any real quantum behaviour as long as we assume them to have fixed states that can be measured simultaneously. If we take relativity of simultaneity (Einsteins relativity) into account, it turns out they _could_ exhibit genuinely quantum behaviour: a mathematically possible state of mutual interdependency of two interacting non-determinisitc automata, which cannot be physically prepared and is inconsistent with the assumption that both systems have a fixed internal state simultaneously.
+
+## Quantum computing, quantum systems, and quantum logic
+
+Entanglement in the sense of Verse Calculus/◇-modality is a perceived behavior emerging from the properties of underlying computational system that performs backtracking to find solutions to a set of constraints. It can only emerge where backtracking is available, and thus is incompatible with interactions as these are not reversible/undoable.
+
+By making a wild conjecture that we can have arenas where interactions are somehow compatible with entanglement, we obtain a system where the impossible states from the previous section are attainable. We conjecture, that the resulting formalizm has a “computational” interpretation in the terms of quantum computation. We conjecture, that the resulting formalizm is a suitable dependently typed programming language for quantum computers, the spaces of the Chu-predicates on objects being the inner-product vector spaces of their quantum states.
+
+We'll discuss how arenas allow describing interactive/interacting quantum systems and quantum fields, how the respective trace algebras turn into C*-algebras of those systems/fields, and how the combination of the separation logic generated by those C*-algebras and the notion of biconstructive proofs could shed some light on the nature of quantum reality.
+
+We can also think about trace algebras over some rig R which is neither booleans, nor the complex numbers. Given an arena with a trace algebra over the rig
+R, let us write down its nondeterministic states as `x : ◇ᴿT`. The types `◇ᴿT` can be understood as spectra over R, and R can be a generalized rig, that is algebras over the sphere spectrum, with 𝔽₁ being the initial generalized ring. For `R = 𝔽₁`, the type `◇ᴿT = T`. Connections to the absolute geometry (Connes) and to the type theory of parametrized spectra should be studied.
+
 
 ## Dialectica type theory: A size-graded type theory with internal ∂
 
