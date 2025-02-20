@@ -28,6 +28,18 @@ We call it _higher categorical_, because these structures (models of axiomatic t
 A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress and Scala. 
 It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
 
+§ A proof language we'd enjoy using? A long way to go...
+--------------------------------------------------------
+
+Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
+
+To start with, known issues with known solution approaches have to be addressed:
+- Most frustrating are the faulty type mismatch errors caused by obvious equalities and subsumptions not holding computationally. Every available solution approach should be taken into account: parallel reductions ([“The Taming of the Rew”](https://dl.acm.org/doi/10.1145/3434341)) and equations on neutral terms ([“New Equations for Neutral Terms”](https://dl.acm.org/doi/10.1145/2502409.2502411)), coercions along observational equality ([“Observational Equality meets CiC”](https://hal.science/hal-04535982v1)), the universe of explicitly propositional types ([“Definitional proof-irrelevance without K”](https://dl.acm.org/doi/10.1145/3290316)), limited predicate subtyping ([“Predicate Subtyping with Proof Irrelevance”](https://arxiv.org/abs/2110.13704)), and maybe also automated proof synthesis.
+- The richness and flexibility of the type system lures into reinventing the wheel. Every library tends to use its own slightly different inventory of standard types and typeclasses, which massively hinders their interoperability. Luckily, this issue be addressed systematically by [algebraic ornaments](https://arxiv.org/abs/1212.3806) and [Dependent Interoperability](https://dl.acm.org/doi/abs/10.1145/2103776.2103779) in connection with a typeclass-based mechanism of contextual implicit coercions as in [Lean](https://lean-lang.org/functional_programming_in_lean/type-classes/coercion.html) and [Scala3](https://dotty.epfl.ch/docs/reference/contextual/conversions.html). Besides that, we need Fortress-style configurable inheritance (`Ring extends Monoid(::(·)), AbGroup(::(+))`) for sensible typeclass hierarchies, and a contextually configurable mechanism of instance resulution and derivation.
+- Many other cases of excessive verbosity can be addressed with [liquid types](https://dl.acm.org/doi/10.1145/3632912), as well custom solvers and tactics, including the ones handling identification along canonical isomorphisms, elaboration of ”without loss of generality” and "mutatis mutandis" arguments, separation of “general position” arguments and corner case handling.
+- Besides all that, we should look at, adopt and improve upon best practices from Lean, Agda, Coq, etc.
+
+
 § HCCC as a programming language
 --------------------------------
 
@@ -38,12 +50,9 @@ To make a decent programming language, HCCC would need indexed modalities for si
 § Embracing interactive programming
 -----------------------------------
 
-To embrace interactive programming, we'll need to introduce substructural types for
-non-discardable/non-sharable objects, and the substructural cousins of the ◇- and □-modalities:
-`interactive` and `pure`, the `interactive` being closely related to `suspend`-modality of Kotlin
-coroutines. We'll have to develop notions of (captured or standalone) objects, references and capabilities,
-the linear, cartesian, and opaque variables related to the same entity. We'll understand Kotlinesque
-structured concurrency and Rustacean structured (lifetime-based) ownership-management as instances
+Non-interactive programming languages only deal with data. To go beyond that, we'll need a concept of environment the programs can interact with and references representing the fragments of environment available for interaction. As opposed to values, reference-valued variables are substructural (not invariant under substitution) and may have usage limitations (be non-discardable and/or non-sharable), properly described in terms of quantitative type theories first introduced by C. McBride. In a language with references, the contexts of expressions keep track of available references besides available values, leading to substructural cousins of ◇/□-modalities. The usual □-modality (written “const” in Kotlin) describes finite closed expressions which also can be understood as compile-time constants. Its substructural cousing is the `pure` modality: pure expressions are the ones not using any references even if these are available in the context. It's dual is the `interactive` modality, which contains expressions that might have captured references, i.e. they can make use of references not present in the context. The `interactive` modality is closely related to `suspend`-functions in Kotlin. In fact, if we only allow IO and other interactions with external shared mutable objects only happen non-blockingly via coroutines, `interactive` and `suspend` would coincide.
+
+We'll understand Kotlinesque structured concurrency and Rustacean structured (lifetime-based) ownership-management as instances
 of structured ressource management, where managed shared objects are understood as addressable parts
 of the state of their respective arena, which can be either an addressable part of an enclosing arena
 a captured/standalone object in its own right. We'll show how objects and arenas can be defined as
@@ -64,20 +73,11 @@ Similar to the case of guarded (co)recursion modalities, the system remains desu
 HCCC by encoding objects as paramatrized relative (co)monads and interpreting expressions involving
 substructural types via do-notation, see [Paella: algebraic effects with parameters and their handlers](https://icfp24.sigplan.org/details/hope-2024-papers/7)
 
-# What's missing?
+§ What's missing?
+-----------------
 
 There are two major areas that are not yet covered:
 - Quantum algorithms and interacting quantum automata on the programming side;
 - The [affine logic for constructive mathematics](https://arxiv.org/abs/1805.07518) should be available on the reasoning side
 
 Remarkably, these two are deeply related: the latter one is based on truncated Chu spaces, the general form of which is known to also describe the Hilbert spaces of quantum states. It resonates with types in univalent type theories being ∞-groupoids and propositions being the truncated ones.
-
-# A proof language we'd enjoy using? A long way to go...
-
-Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
-
-To start with, known issues with known solution approaches have to be addressed:
-- Most frustrating are the faulty type mismatch errors caused by obvious equalities and subsumptions not holding computationally. Every available solution approach should be taken into account: parallel reductions (“The Taming of the Rew”) and equations on neutral terms (“New Equations for Neutral Terms”), coercions along observational equality (“Observational Equality meets CiC”), the universe of explicitly propositional types (“Definitional proof-irrelevance without K”), limited predicate subtyping (“Predicate Subtyping with Proof Irrelevance”), and maybe also automated proof synthesis.
-- The richness and flexibility of the type system lures into reinventing the wheel. Every library tends to use its own slightly different inventory of standard types and typeclasses, which massively hinders their interoperability. Luckily, this issue be addressed systematically by [algebraic ornaments](https://arxiv.org/abs/1212.3806) and [Dependent Interoperability](https://dl.acm.org/doi/abs/10.1145/2103776.2103779) in connection with a typeclass-based mechanism of contextual implicit coercions as in [Lean](https://lean-lang.org/functional_programming_in_lean/type-classes/coercion.html) and [Scala3](https://dotty.epfl.ch/docs/reference/contextual/conversions.html). Besides that, we need Fortress-style configurable inheritance (`Ring extends Monoid(::(·), AbGroup(::(+))`) for sensible typeclass hierarchies, and a contextually configurable mechanism of instance resulution and derivation.
-- Many other cases of excessive verbosity can be addressed with Liquid types and custom solvers and tactics, including the ones handling identification along canonical isomorphisms, elaboration of ”without loss of generality” and "mutatis mutandis" arguments, and separation of “general position” arguments and corner case handling.
-- Besides all that, we should look at, adopt and improve upon best practices from Lean, Agda, Coq, etc.
