@@ -51,7 +51,7 @@ To make a decent programming language, HCCC would need indexed modalities for si
 -----------------------------------
 
 Non-interactive programs only deal with data. Interactive programs interact with the environment and deal with references in addition to values. References point to some kind of locations or objects within environment, and all interactions involve one or more references. To deal with references, the notion of expression contexts has to be generalized: in addition to available variables and their types, they have to track available references and their types. The types of references may be dependent both on other values and on other references from the context, for instance we can have such context:
-````
+```
 T : Type, size : Nat, h : Heap, r : h.MutableArray<T>(size)
 ```
 Here both `h` and `r` are references, and the type of `r` depends on the type `T`, value `size` and reference `h`. Dependence of a reference type on other reference `h` signalizes that the referred object exists within the object referred by `h` (the mutable array `r` is an entity within the heap `h` in our case) and guarantees that those references can never escape the scope where their parent objects are available. 
