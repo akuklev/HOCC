@@ -17,17 +17,11 @@ The Higher Categorical Construction Calculus (HCCC) is a powerful univalent intu
 
 Besides, HCCC is capable of expressing canonical objects, structures, and algorithmic constructions involving them, justifying the “construction calculus” part of the name. Expressable canonical objects include the basic numeric datatypes such as (unbounded) integers, (genuine mathematical Cauchy) reals, (mathematical) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with stuctural recursion and proofs by structural induction. Expressable structures include the ones defined by arbitrary axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
 
-Those structures (models of axiomatic theories) come conviniently prepackaged into parametrized
-higher categories together with structure-respecting correpsondences between them, expressing
-equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and
-homomorphism  many-to-one correspondences), and also correspondences between correspondences
-themselves, so that proofs and constructions can be specialized, generalized, and transferred
-along those correspondences. In fact, the theories themselves also come packed into categories,
-considering theories that generate equivalent classes of models as equivalent (Morita-equivalence),
-and taking relative interpretability of theories as homomorphisms. Moreover, the higher categories
-also form a parametrized higher category, and parametrized higher categories form a parametrized
-parametrized categories and so on, while all constructions and proofs about higher categories
-(and any other theories) are also automatically applicable to their parametrized versions.
+Those structures (models of axiomatic theories) come conviniently prepackaged into parametrized higher categories together with structure-respecting correpsondences between them, expressing equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and homomorphism  many-to-one correspondences), and also correspondences between correspondences themselves, so that proofs and constructions can be specialized, generalized, and transferred along those correspondences.
+
+Higher categories themselves also form a parametrized higher category, and parametrized higher categories form a parametrized parametrized categories and so on, while all constructions and proofs about higher categories (and any other theories) are also automatically applicable to their parametrized versions.
+
+* * *
 
 In the first paper we outline extending Martin-Löf Type Theories by types representing 
 inductively-defined synthetic categories, and functors on those. When applied to the Higher
