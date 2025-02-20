@@ -30,12 +30,12 @@ HOTT + Reedy + ◇/□ + reflective universes = HOCC
 A sound theoretical foundation just the first step. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we propose a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress, Scala. 
 It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
 
-lot of additional mechanisms that minimize the formalization
-pain: reduction of neutral terms and applications non-determinstic confluent reduction rules, support for
-algebraic ornaments together with versatile subtyping, highly configurable implicit conversions, resolution
-and derivation of implicit arguments, type inference, and proof inference (including but not limited to SMT
-solvers and specialized solvers).  The rest is a work in progress that probably only can really start after an initial
-implementation of HCCC is available.
+Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
+- Convincing the machine that an obvious equality holds is especially frustrating, so we need to use every approach available to eliminate unneccesary type conversions: parallel reductions (The Taming of the Rew) and equations on neutral terms (New Equations for Neutral Terms), coersions along observational equality (Observational Equality meets CiC), the universe of explicitly propositional types, and explicit subtyping.
+- The other problem are the cases where we have to redefine a construction multiple times from scratch, because the same thing is implemented by different authors using slightly different types. This issue can and should be addressed systematically by algebraic ornaments together with configurable implicit conversions. To handle the zoo of typeclasses, we need highly configurable subtyping, resolution and derivation of implicit arguments.
+- Many other cases of excessive verbosity can be addressed with an advanced system deriving implicit arguments, occasional type inference, and proof inference (including but not limited to SMT solvers and specialized solvers), and applying Liquid types.
+
+The rest is a work in progress that probably only can really start after an initial implementation of HCCC is available.
 
 § Towards Certified Kotlin
 --------------------------
