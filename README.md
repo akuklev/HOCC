@@ -17,16 +17,12 @@ We call it a _construction calculus_, because, besides proofs, it can express ca
 
 We call it _higher categorical_, because these structures (models of axiomatic theories) come conveniently prepackaged in parametrized ω-categories, together with (towers of) structure-respecting correpsondences, expressing equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and homomorphisms (many-to-one correspondences), so that proofs and constructions can be specialized, generalized, and transferred along these correspondences. Proofs and constructions also transfer upwards, i.e., all constructions and proofs about ω-categories and any other theories also apply to their parametrized versions, which is crucial since models of an axiomatic theory, including ω-categories themselves, form a parametrized higher category, and parametrized ω-categories form a parametrized parametrized ω-category, and so on.
 
-§ HCCC = HOTT + Prototypes + ◇/□-Modalities + Reflective universes
-------------------------------------------------------------------
+- The starting point of HCCC is the third-generation univalent type theory HOTT currently being developed by Shulman et al. 
+- In [Type-theoretic approach to Reedy categories](reedy-types) we propose to extend Martin-Löf type theories by types representing Reedy categories, presheaves on them and functors between them. When applied to the Higher Observational Type Theory of Shulman et al. we would presumably obtain an autophagic computational type theory with native ω-categories still interpretable in an arbitrary ∞-topos. 
+- In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities) we propose to extend MLTTs by an S4-pair of modalities, allowing both abstractness-aware “parametric“ and classical reasoning with choice, and also vastly extending the available constructions by allowing all classically provable algorithms, without compromising its favorable computational properties and decidability of proof/type checking.
+- The modalities also facilitate the introduction of reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing large constructions widely used in (higher) algebraic geometry. 
 
-In [Type-theoretic approach to Reedy categories](reedy-types) we propose to extend Martin-Löf type theories by types representing Reedy categories, presheaves on them and functors between them. When applied to the Higher Observational Type Theory of Shulman et al. we would presumably obtain an autophagic computational type theory with native ω-categories still interpretable in an arbitrary ∞-topos. 
-
-In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities) we propose to extend MLTTs by an S4-pair of modalities, allowing both abstractness-aware “parametric“ and classical reasoning with choice, and also vastly extending the available constructions by allowing all classically provable algorithms, without compromising its favorable computational properties and decidability of proof/type checking.
-
-The modalities also facilitate the introduction of reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing large constructions widely used in (higher) algebraic geometry. 
-
-HCCC is obtained by integrating all of these extensions.
+HOTT + Reedy + ◇/□ + reflective universes = HOCC
 
 § Syntax and amenities
 ----------------------
