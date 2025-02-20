@@ -11,20 +11,20 @@ We want to make Kotlin fully amenable for certified programming, and we want a p
 § Overview
 ----------
 
-Higher Categorical Construction Calculus (HCCC) is a powerful univalent computational type theory. As a proof calculus, it is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and higher categorical reasoning. It enjoys decidable proof-checking and can be shown consistent relative to a strong form of classical set theory.
+The Higher Categorical Construction Calculus (HCCC) is a powerful univalent computational type theory. As a proof calculus, it is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and higher categorical reasoning. It enjoys decidable proof checking and can be shown consistent relative to a strong form of classical set theory.
 
-We call it a _construction calculus_, because besides proofs it can express canonical objects, structures, and algorithmic constructions involving them. Expressable canonical objects include the basic numeric datatypes such as (unbounded) integers, (genuine mathematical Cauchy) reals, (mathematical) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with stuctural recursion and proofs by structural induction. Expressable structures include the ones defined by arbitrary axiomatic theories in any formalized language. 
+We call it a _construction calculus_, because, besides proofs, it can express canonical objects, structures, and algorithmic constructions involving them. Expressable canonical objects include the basic numerical datatypes such as (unbounded) integers, (Cauchy) reals, (pure) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with structural recursion and proofs by structural induction. Expressable structures include those defined by arbitrary axiomatic theories in any formalized language. 
 
-We call it a _higher categorical_, because those structures (models of axiomatic theories) come conviniently prepackaged into parametrized ω-categories together with (towers of) structure-respecting correpsondences, expressing equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and homomorphisms (many-to-one correspondences), so that proofs and constructions can be specialized, generalized, and transferred along those correspondences. Proofs and constructions also transfer upwards, i.e. all constructions and proofs about ω-categories and any other theories also applyto their parametrized versions, which is crucial since models of an axiomatic theory, including ω-categories themselves, form a parametrized higher category, and parametrized ω-categories form a parametrized parametrized ω-categories, etc.
+We call it _higher categorical_, because these structures (models of axiomatic theories) come conveniently prepackaged in parametrized ω-categories, together with (towers of) structure-respecting correpsondences, expressing equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and homomorphisms (many-to-one correspondences), so that proofs and constructions can be specialized, generalized, and transferred along these correspondences. Proofs and constructions also transfer upwards, i.e., all constructions and proofs about ω-categories and any other theories also apply to their parametrized versions, which is crucial since models of an axiomatic theory, including ω-categories themselves, form a parametrized higher category, and parametrized ω-categories form a parametrized parametrized ω-category, and so on.
 
 § HCCC = HOTT + Prototypes + ◇/□-Modalities + Reflective universes
 ------------------------------------------------------------------
 
-In [Type-theoretic approach to Reedy categories](reedy-types) we outline extending Martin-Löf Type Theories by types representing inductively-defined synthetic categories, and functors on those. When applied to the Higher Observational Type Theory by Shulman et al., we would pressumably obtain a Higher Categorical Type Theory, featuring native ω-categories and capability to express its own syntax as an inductive datatype, but still interpretable in an arbitrary ∞-topos.
+In [Type-theoretic approach to Reedy categories](reedy-types) we propose to extend Martin-Löf type theories by types representing Reedy categories, presheaves on them and functors between them. When applied to the Higher Observational Type Theory of Shulman et al. we would presumably obtain an autophagic computational type theory with native ω-categories still interpretable in an arbitrary ∞-topos. 
 
-In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities) we outline extending MLTTs by an S4-pair of modalities enabling both abstractness-aware “parametrical“ and classical reasoning with choice, and also hugely expanding available algorithmic constructions by enabling all classically provable algorithms, without compromising its favorable computational properties and decidability of typechecking.
+In [“◇Classical and □Parametric Modalities for Martin-Löf Type Theories”](modalities) we propose to extend MLTTs by an S4-pair of modalities, allowing both abstractness-aware “parametric“ and classical reasoning with choice, and also vastly extending the available constructions by allowing all classically provable algorithms, without compromising its favorable computational properties and decidability of proof/type checking.
 
-The modalities also allow convinient introduction of reflective Mahlo universes of types yielding a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory excellently suitable for performing large constructions widely used in (higher) algebraic geometry. 
+The modalities also facilitate the introduction of reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing large constructions widely used in (higher) algebraic geometry. 
 
 HCCC is obtained by integrating all of these extensions.
 
@@ -43,17 +43,13 @@ implementation of HCCC is available.
 § Towards Certified Kotlin
 --------------------------
 
-## HCCC a non-interactive programming language
+## Non-interactive programming
 
-While not very relevant for mathematal applications, MLTTs are at the same time total functional
-programming languages. For for practical usability as a functional programming language, HCCC has
-to be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion,
-which are known to be eliminable towards of ordinary recursion and corecursion at cost of substantial
-complexity blowup. Speaking of expressivity, the ◇ and □ modalities greatly enhance expressivity of
-the underlying theory taken as a programming language. While MLTTs can be understood as total functional
-programming language, adding modalities makes it into a functional logic programming language.
+MLTTs can be understood as purely functional programming languages, and HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. Furthermore, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, adding the great expressiveness of functional logic programming. HCCC seems to have everything you could ever want, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility.
 
-## Embracing Interactive programming
+For practical use, MLTTs must be extended with indexed modalities for size-guarded recursion and clock-guarded corecursion, and SMT solver-based liquid types.
+
+## Embracing interactive programming
 
 To embrace interactive programming, we'll need to introduce substructural types for
 non-discardable/non-sharable objects, and the substructural cousins of the ◇- and □-modalities:
