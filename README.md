@@ -27,13 +27,13 @@ HOTT + Reedy + ◇/□ + reflective universes = HOCC
 § Syntax and amenities
 ----------------------
 
-While the aforementioned features make the purposed system an optimal for a proof assistaint, it does not automatically make such a proof assistaint a viable alternative to hand-written proofs. We need a pleasent and concise syntax, and a lot of additional mechanisms that minimize the formalization
+Great foundational properties are only the first step. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we propose a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress and Scala.
+
+lot of additional mechanisms that minimize the formalization
 pain: reduction of neutral terms and applications non-determinstic confluent reduction rules, support for
 algebraic ornaments together with versatile subtyping, highly configurable implicit conversions, resolution
 and derivation of implicit arguments, type inference, and proof inference (including but not limited to SMT
-solvers and specialized solvers). In [Literate Kotlin series](litkot.md) we propose a versatile syntax based
-on Kotlin, Python, Lean, and Agda simultaneously, and propose some machinery related to subtyping
-and inference. The rest is a work in progress that probably only can really start after an initial
+solvers and specialized solvers).  The rest is a work in progress that probably only can really start after an initial
 implementation of HCCC is available.
 
 § Towards Certified Kotlin
