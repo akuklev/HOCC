@@ -13,15 +13,14 @@ After 25 years of our own active research boosted by recurrent breakthroughs spr
 § Overview
 ----------
 
-The Higher Categorical Construction Calculus (HCCC) is a powerful univalent intuitionistic (Martin-Löf) type theory. As a proof calculus, HCCC is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and highern categorical reasoning. It enjoys decidable proof-checking and can be shown consistent relative to a strong form of classical set theory.
+The Higher Categorical Construction Calculus (HCCC) is a powerful univalent intuitionistic (Martin-Löf) type theory. As a proof calculus, HCCC is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and higher categorical reasoning. It enjoys decidable proof-checking and can be shown consistent relative to a strong form of classical set theory.
 
-Besides, HCCC is capable of expressing canonical objects, structures, and algorithmic constructions involving them, justifying the “construction calculus” part of the name. Expressable canonical objects include the basic numeric datatypes such as (unbounded) integers, (genuine mathematical Cauchy) reals, (mathematical) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with stuctural recursion and proofs by structural induction. Expressable structures include the ones defined by arbitrary axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
+Besides proofs, HCCC is capable of expressing canonical objects, structures, and algorithmic constructions involving them, justifying the **“- construction calculus”** part of the name. Expressable canonical objects include the basic numeric datatypes such as (unbounded) integers, (genuine mathematical Cauchy) reals, (mathematical) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with stuctural recursion and proofs by structural induction. Expressable structures include the ones defined by arbitrary axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
 
-Those structures (models of axiomatic theories) come conviniently prepackaged into parametrized higher categories together with structure-respecting correpsondences between them, expressing equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and homomorphism  many-to-one correspondences), and also correspondences between correspondences themselves, so that proofs and constructions can be specialized, generalized, and transferred along those correspondences.
+Those structures (models of axiomatic theories) come conviniently prepackaged into parametrized ω-categories together with structure-respecting correpsondences between them, expressing equivalence (one-to-one correspondences), relatedness (many-to-many correspondences), and homomorphism  many-to-one correspondences), and also correspondences between correspondences themselves, so that proofs and constructions can be specialized, generalized, and transferred along those correspondences. Proofs and constructions also transfer upwards, i.e. all constructions and proofs about ω-categories (and any other theories) are also automatically applicable to their parametrized versions, which is crucial since models of axiomatic theories (including ω-categories themselves) form a parametrized higher category, and parametrized ω-categories form a parametrized parametrized ω-categories, etc. So far the **“Higher categorical -”**.
 
-Higher categories themselves also form a parametrized higher category, and parametrized higher categories form a parametrized parametrized categories and so on, while all constructions and proofs about higher categories (and any other theories) are also automatically applicable to their parametrized versions.
-
-* * *
+§ HCCC = HOTT + Prototypes + ◇/□-Modalities + Reflective universes
+------------------------------------------------------------------
 
 In the first paper we outline extending Martin-Löf Type Theories by types representing 
 inductively-defined synthetic categories, and functors on those. When applied to the Higher
@@ -39,7 +38,8 @@ type-theoretic counterpart of M. Shulman's “Set theory for category theory” 
 underlying type theory excellently suitable for performing large constructions widely used in
 (higher) algebraic geometry. We obtain HCCC by applying these extensions to HCTT.
 
-## Practical aspects
+§ Syntax and amenities
+----------------------
 
 While the aforementioned features make the purposed system an optimal for a proof assistaint,
 it does not automatically make such a proof assistaint a viable alternative to hand-written proofs.
@@ -48,9 +48,11 @@ pain: reduction of neutral terms and applications non-determinstic confluent red
 algebraic ornaments together with versatile subtyping, highly configurable implicit conversions, resolution
 and derivation of implicit arguments, type inference, and proof inference (including but not limited to SMT
 solvers and specialized solvers). In [Literate Kotlin series](litkot.md) we propose a versatile syntax based
-on Kotlin, Python, Scala3, Lean, and Agda simultaneously, and propose some machinery related to subtyping
+on Kotlin, Python, Lean, and Agda simultaneously, and propose some machinery related to subtyping
 and inference. The rest is a work in progress that probably only can really start after an initial
 implementation of HCCC is available.
+
+* * *
 
 ## As a non-interactive programming language
 
