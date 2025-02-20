@@ -4,40 +4,18 @@ Higher Categorical Construction Calculus
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
 
-At JetBrains, we create the most effective, convenient, and pleasurable tools for engineers and researchers.
+At JetBrains, we create the most effective, convenient, and pleasurable tools for engineers and researchers, empowering the natural drive to develop to thrive and bear fruit. We dare to pursue ambitious visionary ideas. We desired to use a programming language we'd enjoy using, so we designed one, and now Kotlin is the language of choice for millions of software developers worldwide.
 
-Wouldn't it be great, if we could establish a database of mathematical results, definitions, conjectures,
-constructions, and proofs
+We want to make Kotlin fully amenable for certified programming, and we want a proof language and tooling we'd enjoy using. We are convinced that the best proof language for certified programming should be a general purpose language suitable for stating results, definitions, conjectures, constructions, and proofs in all mainstream areas of mathematics and computer science.
 
-Almost a decade ago, the co-founder and former CEO of JetBrains Sergey Dmitriev told me about his
-long-standing ambition to . This database should allow content-based search and connect related
-results into a web. Ideally, it should also connect results on mathematical objects of similar
-structure even if their relatedness is not apparent and unknown to the respective authors.
+After 25 years of our own active research boosted by recurrent breakthroughs sprout by the Univalent Foundations Program, we seem to have a blueprint for such a language.
 
-The prerequisite for this vision is a common formalized language for mathematics, which has to be
-syntactically and typographically appealing, concise, comfortable to work with and most importantly
-expressive enough to satisfy the needs of mathematicians. We made a substantial progress towards
-this goals 
+§ Overview
+----------
 
-By meticulously exploring and piecing together worthwhile features of all systems we could get our
-hands on, and developing original ones.
+The Higher Categorical Construction Calculus (HCCC) is a powerful univalent intuitionistic (Martin-Löf) type theory. As a proof calculus, HCCC is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and highern categorical reasoning. It enjoys decidable proof-checking and can be shown consistent relative to a strong form of classical set theory.
 
-§ The HCCC Project
-------------------
-
-Over almost a decade at JetBrains Research, I've been intensely working on improving expressivity 
-of foundational systems underlying modern proof assistants, and came to a vision of what we call
-Higher Categorical Construction Calculus.
-
-On the reasoning side, HCCC is a natural deduction calculus capable of classical reasoning with
-choice, abstractness-aware reasoning, structural induction over its own language, and (higher)
-categorical reasoning.
-
-On the other side, HCCC is a construction calculus capable of expressing canonical objects,
-structures, and algorithmic constructions involving them. Expressable canonical objects include
-datatypes of integers, reals, formalized languages of any complexity, and datatypes of their
-respective expressions, while expressable structures include the ones defined by arbitrary
-axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
+Besides, HCCC is capable of expressing canonical objects, structures, and algorithmic constructions involving them, justifying the “construction calculus” part of the name. Expressable canonical objects include the basic numeric datatypes such as (unbounded) integers, (genuine mathematical Cauchy) reals, (mathematical) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with stuctural recursion and proofs by structural induction. Expressable structures include the ones defined by arbitrary axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
 
 Those structures (models of axiomatic theories) come conviniently prepackaged into parametrized
 higher categories together with structure-respecting correpsondences between them, expressing
