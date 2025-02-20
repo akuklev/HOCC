@@ -27,7 +27,8 @@ HOTT + Reedy + ◇/□ + reflective universes = HOCC
 § Syntax and amenities
 ----------------------
 
-Great foundational properties are only the first step. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we propose a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress and Scala.
+A sound theoretical foundation just the first step. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we propose a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress, Scala. 
+It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
 
 lot of additional mechanisms that minimize the formalization
 pain: reduction of neutral terms and applications non-determinstic confluent reduction rules, support for
