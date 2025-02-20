@@ -66,14 +66,18 @@ substructural types via do-notation, see [Paella: algebraic effects with paramet
 
 # What's missing?
 
-There are two possible deeply related extensions we have not addressed so far:
-- HCCC the programming language could be extended to embrace quantum algorithms and interacting quantum automata.
-- HCCC the proof calculus could be extended to embrace the [“Affine logic for constructive mathematics” (M. Shulman)](https://arxiv.org/abs/1805.07518).
+There are two major areas that are not yet covered:
+- Quantum algorithms and interacting quantum automata on the programming side;
+- The [affine logic for constructive mathematics](https://arxiv.org/abs/1805.07518) should be available on the reasoning side
+
+Remarkably, these two are deeply related: the latter one is based on truncated Chu spaces, the general form of which is known to also describe the Hilbert spaces of quantum states. It resonates with types in univalent type theories being ∞-groupoids and propositions being the truncated ones.
 
 # A proof language we'd enjoy using? A long way to go...
 
 Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
-- Convincing the machine that an obvious equality holds is especially frustrating, so we need to use every approach available to eliminate unneccesary type conversions: parallel reductions (“The Taming of the Rew”) and equations on neutral terms (New Equations for Neutral Terms), coersions along observational equality (“Observational Equality meets CiC”), the universe of explicitly propositional types (“Definitional proof-irrelevance without K”), and limited predicate subtyping (“Predicate Subtyping with Proof Irrelevance”).
-- The other problem are the cases where we have to redefine a construction multiple times from scratch, because the same thing is implemented by different authors using slightly different types. This issue can and should be addressed systematically by algebraic ornaments together with configurable implicit conversions. To handle the zoo of typeclasses, we need highly configurable subtyping, resolution and derivation of implicit arguments.
-- Many other cases of excessive verbosity can be addressed with an advanced system deriving implicit arguments, occasional type inference, and proof inference (including but not limited to SMT solvers and specialized solvers), and applying Liquid types.
-- We should peek, adopt and improve best practices from Lean, Agda, Coq, etc.
+
+To start with, known issues with known solution approaches have to be addressed:
+- Most frustrating are the faulty type mismatch errors caused by obvious equalities and subsumptions not holding computationally. Every available solution approach should be taken into account: parallel reductions (“The Taming of the Rew”) and equations on neutral terms (“New Equations for Neutral Terms”), coercions along observational equality (“Observational Equality meets CiC”), the universe of explicitly propositional types (“Definitional proof-irrelevance without K”), limited predicate subtyping (“Predicate Subtyping with Proof Irrelevance”), and maybe also automated proof synthesis.
+- The richness and flexibility of the type system lures into reinventing the wheel. Every library tends to use its own slightly different inventory of standard types and typeclasses, which massively hinders their interoperability. Luckily, this issue be addressed systematically by [algebraic ornaments](https://arxiv.org/abs/1212.3806) and [Dependent Interoperability](https://dl.acm.org/doi/abs/10.1145/2103776.2103779) in connection with a typeclass-based mechanism of contextual implicit coercions as in [Lean](https://lean-lang.org/functional_programming_in_lean/type-classes/coercion.html) and [Scala3](https://dotty.epfl.ch/docs/reference/contextual/conversions.html). Besides that, we need Fortress-style configurable inheritance (`Ring extends Monoid(::(·), AbGroup(::(+))`) for sensible typeclass hierarchies, and a contextually configurable mechanism of instance resulution and derivation.
+- Many other cases of excessive verbosity can be addressed with Liquid types and custom solvers and tactics, including the ones handling identification along canonical isomorphisms, elaboration of ”without loss of generality” and "mutatis mutandis" arguments, and separation of “general position” arguments and corner case handling.
+- Besides all that, we should look at, adopt and improve upon best practices from Lean, Agda, Coq, etc.
