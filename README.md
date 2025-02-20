@@ -25,13 +25,13 @@ We call it _higher categorical_, because these structures (models of axiomatic t
 <center><b>HOTT + Reedy + ◇/□ + reflective universes = HOCC</b></center>
 
 
-A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress, Scala. 
+A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress and Scala. 
 It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
 
 § HCCC as a programming language
 --------------------------------
 
-Computantional type theories can be used as functional programming languages, and HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. Furthermore, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, adjoining the great expressiveness of functional logic programming. HCCC seems to have everything you could ever want from a language for _non-interactive programming_, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility. 
+Computational type theories can be used as functional programming languages, and HCCC is an exceptionally powerful one due to its ability to make use of classical termination proofs. Since the Turing-complete `Computation<T>`-monad is available as an inductive-inductive type, non-terminating computations can also be expressed and handled. In addition, the computational interpretation of ◇-modality is given by the recently introduced Verse Calculus, which adds the great expressiveness of deterministic functional logic programming. HCCC seems to have everything you could ever want from a language for _non-interactive programming_, but as great as it sounds in theory, programming in bare-bones intensional type theories demands for frustrating amounts of explicit proofs of termination, productivity, and convertibility. 
 
 To make a decent programming language, HCCC would need indexed modalities for size-guarded recursion and clock-guarded corecursion, and SMT solver-based system of liquid types.
 
@@ -70,7 +70,7 @@ There are two possible deeply related extensions we have not addressed so far:
 - HCCC the programming language could be extended to embrace quantum algorithms and interacting quantum automata.
 - HCCC the proof calculus could be extended to embrace the [“Affine logic for constructive mathematics” (M. Shulman)](https://arxiv.org/abs/1805.07518).
 
-# A long way to go
+# A proof language we'd enjoy using? A long way to go...
 
 Human readers understand implicit conversions immediately, forgive minor omissions, and think along with the author, so they are able to bridge nontrivial gaps and transform arguments "mutatis mutandis" once they grasp the idea. Any attempt at formalization is plagued by the pain to elaborate all of this explicitly.
 - Convincing the machine that an obvious equality holds is especially frustrating, so we need to use every approach available to eliminate unneccesary type conversions: parallel reductions (“The Taming of the Rew”) and equations on neutral terms (New Equations for Neutral Terms), coersions along observational equality (“Observational Equality meets CiC”), the universe of explicitly propositional types (“Definitional proof-irrelevance without K”), and limited predicate subtyping (“Predicate Subtyping with Proof Irrelevance”).
