@@ -6,14 +6,12 @@ Higher Categorical Construction Calculus
 
 At JetBrains, we create the most effective, convenient, and pleasurable tools for engineers and researchers, empowering the natural drive to develop to thrive and bear fruit. We dare to pursue ambitious visionary ideas. We desired to use a programming language we'd enjoy using, so we designed one, and now Kotlin is the language of choice for millions of software developers worldwide.
 
-We want to make Kotlin fully amenable for certified programming, and we want a proof language and tooling we'd enjoy using. We are convinced that the best proof language for certified programming should be a general purpose language suitable for stating results, definitions, conjectures, constructions, and proofs in all mainstream areas of mathematics and computer science.
-
-After 25 years of our own active research boosted by recurrent breakthroughs sprout by the Univalent Foundations Program, we seem to have a blueprint for such a language.
+We want to make Kotlin fully amenable for certified programming, and we want a proof language and tooling we'd enjoy using. We are convinced that the best proof language for certified programming should be a general purpose language suitable for stating results, definitions, conjectures, constructions, and proofs in all mainstream areas of mathematics and computer science. After 25 years of our own active research boosted by recurrent breakthroughs sprout by the Univalent Foundations Program, we seem to have a blueprint for such a general purpose language for formalized maths.
 
 § Overview
 ----------
 
-The Higher Categorical Construction Calculus (HCCC) is a powerful univalent intuitionistic (Martin-Löf) type theory. As a proof calculus, HCCC is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and higher categorical reasoning. It enjoys decidable proof-checking and can be shown consistent relative to a strong form of classical set theory.
+Higher Categorical Construction Calculus (HCCC) is a powerful univalent computational type theory. As a proof calculus, it is capable of classical reasoning with choice, abstractness-aware (“parametric”) reasoning, structural induction over its own language, and higher categorical reasoning. It enjoys decidable proof-checking and can be shown consistent relative to a strong form of classical set theory.
 
 Besides proofs, HCCC is capable of expressing canonical objects, structures, and algorithmic constructions involving them, justifying the **“- construction calculus”** part of the name. Expressable canonical objects include the basic numeric datatypes such as (unbounded) integers, (genuine mathematical Cauchy) reals, (mathematical) functions between and subsets of other expressable datatypes, and also datatypes of expressions/sentences for arbitrary formalized languages, allowing to provide interpretations with stuctural recursion and proofs by structural induction. Expressable structures include the ones defined by arbitrary axiomatic theories in any signature, i.e. a formalized language of underlying expressions. 
 
