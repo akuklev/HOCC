@@ -80,8 +80,7 @@ as the foundation for the aspired Certified Kotlin.
 -----------------
 
 There are two major areas that are not yet covered:
-
-- The [affine logic for constructive mathematics](https://arxiv.org/abs/1805.07518) should be available on the reasoning side;
+- The [affine logic for constructive mathematics](https://arxiv.org/abs/1805.07518) on the reasoning side;
 - Quantum algorithms and interacting quantum automata on the programming side;
 
 Trace algebras extrinsically describing states of objects can be defined in terms of their duals, the algebras of obserables, which are commutative as observations are independent of each other. A non-commutative generalization where observations are not neccesarily independent anymore would allow describing quantum where the coexistence of multiple pure states is inherent rather than due to a lack of knowledge. The non-commutative generalization of state creation and substitution algebras would respectively allow to describe quantum arenas where separated objects might be entangled. There, the objects created separately do not in general remain separable objects, and the picture of arenas being collections of distinct objects becomes fuzzy. We're cannot reason in terms of “distinct particles“ anymore, and have to reason in terms of “field quanta” with quantum arenas being the quantum fields.
