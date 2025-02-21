@@ -391,7 +391,7 @@ structure (I→ )<U : *̃>
   head : U
   tail : F<this.head> →ᵁ (I→ᵈ< H<this> > U)
 ```
-- where `F` and `H` are some static type formers. For example, in the case of globes `G`, we'd have `H<T> := 𝔹`, `H<T> := Unit`. To establish this fact we'll first construct the prototypes of observables for coinductive types as above, and then discuss how to reverse-engineer `G` and `H` to obtain any possible prototype.
+- where `F` and `H` are some static type formers. For example, in the case of globes `G`, we'd have `H<T> := 𝔹`, `H<T> := Unit`. To establish this fact we'll first construct the prototypes of observables for coinductive types as above, and then discuss how to reverse-engineer `G` and `H` to obtain any desired prototype.
 
 ## Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
 
