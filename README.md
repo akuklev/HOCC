@@ -27,7 +27,7 @@ We call it _higher categorical_, because these structures (models of axiomatic t
   - Reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing large constructions widely used in (higher) algebraic geometry;
   - all of that without compromising its favorable computational properties and decidability of proof/type checking.
 
-A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](https://akuklev.github.io/Literate_Kotlin/literate_kotlin.pdf), [Declarative Kotlin](https://akuklev.github.io/Literate_Kotlin/declarative_kotlin.pdf), [Academic Kotlin](https://akuklev.github.io/Literate_Kotlin/academic_kotlin.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress and Scala. 
+A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](kotlin_literate.pdf), [Declarative Kotlin](kotlin_declarative.pdf), [Academic Kotlin](kotlin_academic.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with some elements of Fortress and Scala. 
 It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
 
 § A proof language we'd enjoy using? A long way to go...
