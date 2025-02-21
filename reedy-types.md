@@ -247,13 +247,13 @@ an additive decomposition `s : SumsTo(list ▸length)` into a `listOfLists : Lis
 
 Now we can define the following
 ```
-prototype LM
-  compose : List<LM> → LM
+prototype LaxTh
+  compose : List<LaxTh> → LaxTh
 
   compose(l) ⟨parenthesize(s : SumsTo(l ▸length))] compose(l ▸unflatten(s))
 ```
 
-Models for this prototype are the unbiased lax monoids.
+The models `LaxTh-Mod` for this prototype are the unbiased lax monoids.
 
 
 ## Categories as models for an inductive type
@@ -325,14 +325,9 @@ univalence : ∀{X Y : Ts.ob} (a ≃ b) ≃ Σ(f : Ts.hom{source: X, target: Y})
                                       (f ▸ g = id) and (f ▸ g = id)            
 ```
 
-Definitions compose, for instance we can combine our definition of category with the above definition of lax monoids to define lax monoidal categories:
-```
-TODO: Here's how
-```
+Structures defined as models for an inductive type compose extremely well. Consider `Δ¹Fam`-valued models `LaxTh-Mod<Δ¹Fam>` of the lax monoid prototype, and then consider the `LaxTh-Mod<Δ¹Fam>`-valued models of `CatTh`. This way we obtain lax monoidal categories `CatTh-Mod<LaxTh-Mod<Δ¹Fam>>`!
 
-* * *
-
-The nice thing is that since we have defined categories as models for an inductive type, we automatically have the structure of a displayed category on categories:
+The other nice thing is that since we have defined categories as models for an inductive type, we automatically have the structure of a displayed category on categories:
 ```
 Cat : Catᵈ
 ```
