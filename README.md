@@ -50,8 +50,8 @@ structure Module<R : Rig> extends AbMonoid(::(+))
 def Algebra<R : Rig>
   Monoid(::(·)) within Module<R>
 @observe
-  Module<ℕ> ≡ AbMonoid(::(+))           # thus Module<_> <: Module<ℕ>
-  Rig ≡ Monoid(::(·)) within Module<ℕ>
+  Module<ℕ>  ≡ AbMonoid(::(+))
+  Rig        ≡ Monoid(::(·)) within Module<ℕ>
   Algebra<ℕ> ≡ Rig
 ```
 
