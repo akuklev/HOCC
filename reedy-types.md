@@ -232,6 +232,30 @@ structure (Δ→ )<Ts : Δ→ *̃>
 procategories, show examples of functors and show how they form procategories, define products of prototypes
 and show how bifunctors are compatible with currying.
 
+## Lax monoids
+
+Let us introduce the type of lists of natural numbers indexed by their sum:
+```
+inductive SumsTo : ℕ → *
+  nil : SumsTo 0
+  cons : ∀{n : ℕ} (head : ℕ, tail : SumsTo n ) → SumsTo (head + n)
+```
+
+Now we can write a function `unflatten` that takes a `list : List<T>` and
+an additive decomposition `s : SumsTo(list ▸length)` into a `listOfLists : List<List<T>>` with
+`listOfLists ▸flatten = list` and `listOfLists ▸map {.length} = s`.
+
+Now we can define the following
+```
+prototype LM
+  compose : List<LM> → LM
+
+  compose(l) ⟨parenthesize(s : SumsTo(l ▸length))] compose(l ▸unflatten(s))
+```
+
+Models for this prototype are the unbiased lax monoids.
+
+
 ## Categories as models for an inductive type
 
 There can be more then one dependency between two inhabitants of an inductive prototype:
