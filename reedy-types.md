@@ -190,7 +190,9 @@ structure (Δ⁻↦ )<Ts : Δ⁻↦ *̃>
   tail : (dep : this.head) →ᵁ (Δ⁻↦ Ts.tail)
 ```
 
-We have just defined the very-dependent function types initially introduced by Kopylov et al.
+We have just defined the very-dependent function types initially introduced by Kopylov et al. 
+
+Inductive prototypes restore the symmetry between induction and coinduction. For every coinductive type `S` we can generate an inductive prototype `I` of observables, so that elements `f : T` are functions on `I`, and for every prototype `I` we'll have a displayed coinductive type `I-Fam` of type families over `I` so that functions `f` on `I` can be typed as `f : I→ Ts` for some `Ts : I-Fam`.
 
 ## Handling the contexts and telescopes
 
@@ -389,14 +391,14 @@ structure (I→ )<U : *̃>
   head : U
   tail : F<this.head> →ᵁ (I→ᵈ< H<this> > U)
 ```
-- where `F` and `H` are some static type formers. For example, in the case of globes `G`, we'd have `F<T> := 𝔹`, `H<T> := Unit`.
+- where `F` and `H` are some static type formers. For example, in the case of globes `G`, we'd have `H<T> := 𝔹`, `H<T> := Unit`. To establish this fact we'll first construct the prototypes of observables for coinductive types as above, and then discuss how to reverse-engineer `G` and `H` to obtain any possible prototype.
 
 ## Prototype definitions as inductive-recursive definitions with compile-time checked conditions 
 
 A prototype `T` is an inductive type `|T| : *` defined mutually with two following inductive-recursive types:
 ```
-Deps[T] : *, .target : T, .compose : (x : Deps[.to])  ->  Deps[T] with .target ≡ x.target
-Embs[T] : *, .source : T, .compose : (x : Embs[.from]) -> Embs[T] with .source ≡ x.source
+Deps[T] : *, .target : T, .compose : (x : Deps[.target]) -> Deps[T] with .target ≡ x.target
+Embs[T] : *, .source : T, .compose : (x : Embs[.source]) -> Embs[T] with .source ≡ x.source
 ```
 The definitional equalities must be checked in compile-time. It is only possible if `t.target` and `t.source`
 are structurally smaller then `t`. It ensures that the arguments `x` of the functions precompose and postcompose
