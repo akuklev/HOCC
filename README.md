@@ -43,11 +43,11 @@ To start with, known issues with known solution approaches have to be addressed:
 
 **Example 1**
 ```
-structure Rig extends Monoid(::(·)), AbMonoid(::(+))
+@structure Rig extends Monoid(::(·)), AbMonoid(::(+))
   ...
-structure Module<R : Rig> extends AbMonoid(::(+))
+@structure Module<R : Rig> extends AbMonoid(::(+))
   ...
-def Algebra<R : Rig>
+@def Algebra<R : Rig>
   Monoid(::(·)) within Module<R>
 
 @observe
