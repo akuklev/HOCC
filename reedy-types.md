@@ -325,6 +325,13 @@ univalence : ∀{X Y : Ts.ob} (a ≃ b) ≃ Σ(f : Ts.hom{source: X, target: Y})
                                       (f ▸ g = id) and (f ▸ g = id)            
 ```
 
+Definitions compose, for instance we can combine our definition of category with the above definition of lax monoids to define lax monoidal categories:
+```
+TODO: Here's how
+```
+
+* * *
+
 The nice thing is that since we have defined categories as models for an inductive type, we automatically have the structure of a displayed category on categories:
 ```
 Cat : Catᵈ
