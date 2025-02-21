@@ -1,5 +1,5 @@
-Type-theoretic approach to Reedy categories
-===========================================
+Higher Categorical Type Theory
+==============================
 
 [author]: mailto:a@kuklev.com "Alexander Kuklev, JetBrains Research"
 [Alexander Kuklev](mailto:a@kuklev.com), [JetBrains Research](https://research.jetbrains.org/researchers/alexander.kuklev/)
