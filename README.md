@@ -24,7 +24,7 @@ We call it _higher categorical_, because instances of these structures, i.a. mod
   - Parametric quantifiers `∀<X : T> Y` that only allow using the parameter `X` in type annotations;
   - Abstractness-aware “parametric“ reasoning under the □ modality, for instance a proof that `∀(f : □∀<T> T → T) f(x) = x`;
   - A vast expansion of the computational power by allowing all classically provable algorithms;
-  - Reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing large constructions widely used in (higher) algebraic geometry.
+  - Reflective universes, resulting in a type-theoretic counterpart of M. Shulman's “Set theory for category theory” ZMC/𝕊, and making the underlying type theory eminently suitable for performing constructions widely used in modern algebraic geometry.
 
 A sound theoretical foundation still needs to be put into shape. In a series of short proposals ([Literate Kotlin](kotlin_literate.pdf), [Declarative Kotlin](kotlin_declarative.pdf), [Academic Kotlin](kotlin_academic.pdf), a few pages each) we develop a versatile syntax designed for excellent readability, conciseness, and typographic perfection. It is based on Kotlin, Python, Agda, and Lean, with elements of Scala and Fortress. 
 It's the culmination of over two decades of meticulous collection and evaluation of ideas, carefully assembled into a coherent system.
