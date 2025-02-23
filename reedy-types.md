@@ -40,7 +40,7 @@ We conjecture that it would be possible to reproduce and advance developments re
 
 Inductive and coinductive types are introduced with `inductive` and `structure` keywords respectively. Definitions we can simultaneously provide a pronounsible ASCII name and a consise notation.
 ```
-structure Pair `(X : *) × (Y : *)`
+structure Pair(X Y : *) `X × Y`
   fst : X
   snd : Y
 
