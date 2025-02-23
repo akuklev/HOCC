@@ -78,40 +78,38 @@ Now if we write `def f<M : Magma>(x y z : M)` it desugars into `def f<M : *>(imp
 
 # Inductive types and ∞-procategories of their models
 
-Every inductive type comes with a ∞-procategory of its models, but let's use the inductive type of natural numbers to have an illustrative example:
+Let us begin with a definition of infinite sequences:
+```
+structure Sequence<T : *>
+  head : T
+  tail : Sequence<T>
+```
+
+Given sequences of types, we can also define dependently-typed sequences:
+```
+structure Sequence<Ts : Sequence<*>>
+  head : Ts.head
+  tail : Sequence<Ts.tail>
+```
+
+Coinductive type definitions without dependencies generate (or presume) inductive definitions for the type of their observables. The types above share natural numbers as their observables:
 ```
 inductive ℕ
   0 : ℕ
   ( ⁺) : ℕ → ℕ
 ```
 
-An inductive definition does not only generate the type (ℕ) itself, but also coinductive dual, the type of infinite sequences:
+Coinductive types without dependencies can be identified with (possibly dependent) functions on their observables' types:
 ```
-structure (ℕ→ )<T : *>
-  head : T
-  tail : ℕ→ T
-```
-and its dependent form
-```
-structure (ℕ→ )<Ts : ℕ→ *>
-  head : Ts.head
-  tail : ℕ→ Ts.tail
+(ℕ → T) ≡ Sequence<T>
+∀(n : ℕ) T(n) ≡ Sequence< { n ↦ T(n) } > 
 ```
 
-These can be seen as the definitions for function and dependent function types on ℕ respectively:
-```
-(ℕ → T) := (ℕ→ T)
-∀(n : ℕ) T(n) := ℕ→ { n ↦ T(n) }
-```
-
-The inductive definition of ℕ also generates the structure of a ℕ-model on an arbitrary type `T`.
+Every inductive type comes with a ∞-procategory of its models. An inductive definition does not only generate the type (ℕ) itself, but also coinductive dual, the structure of a ℕ-model on an arbitrary type `T`.
 ```
 structure ℕMod<T : *>
   base : T
   next : T → T
-
-# We also have types of U-small models for any universe U:
-ℕModᵁ := Σ(T : U) ℕMod<T>
 ```
 and its canonical instance
 ```
@@ -134,14 +132,14 @@ def ℕᴹ : ℕ → *
 ℕind<P : ℕ → *> : ℕᴹ → ∀(n : ℕ) P(n)
 ```
 
-Inhabitants of the type `Σ(src : ℕMod<T>) (pm : ℕModᵈ src)` are promorphisms (weak homomorphisms, many-to-many homomorphisms) with source `src : ℕMod` and target given by
+Inhabitants of the type `Σ(src : ℕMod<T>) (pm : ℕModᵈ src)` are promorphisms (many-to-many corresponcences, sometimes also called weak homomorphisms) with source `src : ℕMod` and target given by
 ```
 def target<src : ℕMod, pm : ℕModᵈ src> : ℕMod<(n : src) × (pm src)>
   base: pm.base
   step: { n : src, x : (pm n) ↦ (src.step n, pm (src.step n)) }
 ```
 
-We can define (strong) homomorphisms as the functional (= many-to-one) weak homomorphisms `Σ(src : ℕMod<T>, pm : ℕModᵈ src) (f : ∀(n) (m : (pm n)) × ∀(n' : pm n) n ≃ m`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃)<ℕMod>` of ℕ-algebras correspond to their isomorphisms.
+We can define homomorphisms as the functional (= many-to-one) weak homomorphisms `Σ(src : ℕMod<T>, pm : ℕModᵈ src) (f : ∀(n) (m : (pm n)) × ∀(n' : pm n) n ≃ m`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃)<ℕMod>` of ℕ-algebras correspond to their isomorphisms.
 
 The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
 
