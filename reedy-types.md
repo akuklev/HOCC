@@ -46,16 +46,14 @@ structure Pair(X Y : *) `X × Y`
 
 inductive Nat `ℕ`
   zero `0`
-  next `(n : ℕ)⁺`
+  next(n : ℕ) `n⁺`
 ```
-where the star `*` denotes the virtual universe of all types, which is used in polymorphic definitions.
-
-After this definitions we immediatelly write `ℕ × ℕ` and `n⁺`. A word boundary around infix operators, befor prefix operators and after postfix operators are mandatory, since operators may contain alphanumerics in their names as in Agda, only exception being separating punctuation, open punctuation and close punctuation characters, which may only be followed/preceded only by characters of the same unicode category. This allows us to use bracket operators without whitespaces inside, for instance we can define
+where the star `*` denotes the virtual universe of all types, which is used in polymorphic definitions. A word boundary around infix operators, befor prefix operators and after postfix operators are mandatory, since operators may contain alphanumerics in their names as in Agda, only exception being separating punctuation, open punctuation and close punctuation characters, which may only be followed/preceded only by characters of the same unicode category. This allows us to use bracket operators without whitespaces inside, for instance we can define
 ```
-def getElementAt<T> `(l : List<T>)[(n : Fin(l.length))]`
+def List<T>.elementAt(idx : ℕ) `this[idx]`
    ...
 ```
-and use it as `foo[bar]`.
+and use it as `foo[idx]`.
 
 We write support both infix and prefix notation for dependent pairs and functions:
 ```
