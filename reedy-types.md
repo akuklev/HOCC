@@ -36,17 +36,26 @@ The raison d'être for inductive prototypes are the inductive families indexed o
 
 We conjecture that it would be possible to reproduce and advance developments related to the type theory for synthetic ∞-categories, and ultimately embrace synthetic ω-(pro)categories^[We expect that the approach developed in “Types are Internal ∞-Groupoids” by Allioux, Finster, and Sozeau to extend to show that all HCTT types would turn out to be internal ω-procategories.], a long sought-after category-theoretic foundational framework what turns to be emergent if one seeks for a natural proof calculus capable of structural induction over its own language.
 
-# Remark on notation
+# Remark on notation and terminology
 
-Names of variables and types are not limited to alphanumerics, but can be also operators:
+Inductive and coinductive types are introduced with `inductive` and `structure` keywords respectively. Definitions we can simultaneously provide a pronounsible ASCII name and a consise notation.
 ```
-structure (×) (X Y : *)
+structure Pair `(X : *) × (Y : *)`
   fst : X
   snd : Y
-```
-— here we define a type with the name `(×)` and two parameters `X` and `Y`, both types: the star `*` denotes the virtual universe of all types, which is used in polymorphic definitions. After this definition we immediatelly can use `(×)` as an infix operator, e.g. write `p : ℕ × ℕ`. 
 
-Postfix operators are written like `( ⁺)`, prefix operators like `(- )`. Whitespaces arount operators are semantically distinguishing, for instance we can have distinct operators `(+)` and `( +1)`, a postfix increment operator, making the expressions `a + 1` and `a +1` to parse differently (but in all relevant cases they'll actually mean essentially the same).
+inductive Nat `ℕ`
+  zero `0`
+  next `(n : ℕ)⁺`
+```
+where the star `*` denotes the virtual universe of all types, which is used in polymorphic definitions.
+
+After this definitions we immediatelly write `ℕ × ℕ` and `n⁺`. A word boundary around infix operators, befor prefix operators and after postfix operators are mandatory, since operators may contain alphanumerics in their names as in Agda, only exception being separating punctuation, open punctuation and close punctuation characters, which may only be followed/preceded only by characters of the same unicode category. This allows us to use bracket operators without whitespaces inside, for instance we can define
+```
+def getElementAt<T> `(l : List<T>)[(n : Fin(l.length))]`
+   ...
+```
+and use it as `foo[bar]`.
 
 We write support both infix and prefix notation for dependent pairs and functions:
 ```
@@ -54,8 +63,7 @@ We write support both infix and prefix notation for dependent pairs and function
 (x : X) → Y(x) ≡ ∀(x : X) Y(x)
 ```
 
-We'll write lambda expressions as { x : X ↦ y } and instances of records as {name: value, name: value}.
-
+We'll write lambda expressions as { x : X ↦ y } and anonymous structure instances as {name: value, name: value}.
 
 In many cases, the same identifier means both a type/type family and their companion object. To disambiguage we'll use special notation `foo<Bar>` for typal parameters. An overloaded identifier should resolve to companion object unless used as a type annotation `: T` or as a typal parameter `List<T>`.
 
@@ -100,7 +108,7 @@ The inductive definition of ℕ also generates the structure of a ℕ-model on a
 ```
 structure ℕMod<T : *>
   base : T
-  step : T → T
+  next : T → T
 
 # We also have types of U-small models for any universe U:
 ℕModᵁ := Σ(T : U) ℕMod<T>
