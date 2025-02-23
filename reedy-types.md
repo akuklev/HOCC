@@ -78,16 +78,16 @@ Now if we write `def f<M : Magma>(x y z : M)` it desugars into `def f<M : *>(imp
 
 # Inductive types and ∞-procategories of their models
 
-Let us begin with a definition of infinite sequences:
+Let us begin with the definition of infinite sequences:
 ```
-structure Sequence<T : *>
+structure Sequence<T : *> `ℕ → T`
   head : T
   tail : Sequence<T>
 ```
 
 Given sequences of types, we can also define dependently-typed sequences:
 ```
-structure Sequence<Ts : Sequence<*>>
+structure Sequence<Ts : ℕ → *> `ℕ → Ts`
   head : Ts.head
   tail : Sequence<Ts.tail>
 ```
@@ -99,47 +99,52 @@ inductive ℕ
   ( ⁺) : ℕ → ℕ
 ```
 
-Coinductive types without dependencies can be identified with (possibly dependent) functions on their observables' types:
-```
-(ℕ → T) ≡ Sequence<T>
-∀(n : ℕ) T(n) ≡ Sequence< { n ↦ T(n) } > 
-```
-
 Every inductive type comes with a ∞-procategory of its models. An inductive definition does not only generate the type (ℕ) itself, but also coinductive dual, the structure of a ℕ-model on an arbitrary type `T`.
 ```
-structure ℕMod<T : *>
+structure ℕ-Mod<T : *>
   base : T
   next : T → T
 ```
 and its canonical instance
 ```
-instance ℕobj : ℕMod<ℕ>
+instance ℕ-obj : ℕ-Mod<ℕ>
   base: 0
-  step: ( ⁺)
+  next: ( ⁺)
 ```
 
-The displayed models are given by the following structure:
+Models of single-sorted algebraic theories arise as models for quotient inductive types, for example monoids arise as models for the following type:
 ```
-structure ℕModᵈ <src : ℕAlg, T : src → *>
-  base : T(src.base)
-  step : ∀{n : src} T(n) → T(src.step n)
+inductive MonTh
+  e : MonTh
+  (∘) : MonTh → MonTh → MonTh
+
+  unitorL : x = e ∘ x
+  unitorR : x = x ∘ e
+  associator : (x ∘ y) ∘ z = x ∘ (y ∘ z)
+```
+
+To each type we can apply the ( ᵈ)-operator to obtain its displayed version. Displayed models for inductive types have the form
+```
+structure ℕ-Modᵈ <M : ℕ-Mod> <Ts : M → *>
+  base : Ts(M.base)
+  next : ∀{n : M} Ts(n) → Ts(M.next n)
 ```
 allowing do define the type of induction motives and the induction operator:
 ```
-def ℕᴹ : ℕ → *
-  ℕModᵈ ℕobj
+instance ℕᴹ : ℕ → *
+  ℕ-Modᵈ ℕ-obj
 
 ℕind<P : ℕ → *> : ℕᴹ → ∀(n : ℕ) P(n)
 ```
-
-Inhabitants of the type `Σ(src : ℕMod<T>) (pm : ℕModᵈ src)` are promorphisms (many-to-many corresponcences, sometimes also called weak homomorphisms) with source `src : ℕMod` and target given by
+ 
+For each model `M : ℕ-Mod`, the inhabitants `Pm : ℕ-Modᵈ<M>` are promorphisms (many-to-many corresponcences, sometimes also called weak homomorphisms) on `M` with the target given by
 ```
-def target<src : ℕMod, pm : ℕModᵈ src> : ℕMod<(n : src) × (pm src)>
-  base: pm.base
-  step: { n : src, x : (pm n) ↦ (src.step n, pm (src.step n)) }
+instance target : ℕ-Mod<M × Pm>
+  base: (M.base, Pm.base M.base)
+  step: { n : M, x : (Pm n) ↦ (M.step n, Pm.next (M.next n) x) }
 ```
 
-We can define homomorphisms as the functional (= many-to-one) weak homomorphisms `Σ(src : ℕMod<T>, pm : ℕModᵈ src) (f : ∀(n) (m : (pm n)) × ∀(n' : pm n) n ≃ m`, making the type of ℕ-algebras into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃)<ℕMod>` of ℕ-algebras correspond to their isomorphisms.
+We can single out homomorphisms as the functional (= many-to-one) promorphisms `Σ(src : ℕMod<T>, pm : ℕModᵈ src) (f : ∀(n) (m : (pm n)) × ∀(n' : pm n) n ≃ m`, making the type of ℕ-models into a ∞-precategory (Segal type), which turns out to be a ∞-category (Complete Segal type) as it is well-known that the equivalences `(≃)<ℕ-Mod>` of ℕ-models correspond to their isomorphisms.
 
 The presented construction generalizes to all inductive types, quotient inductive types and (quotient) inductive(-inductive-recursive) type families. We expect them to work mutatis mutandis for familes over inductive prototypes and positive fibered induction-recursion into arbitrary procategories.
 
@@ -147,8 +152,8 @@ The presented construction generalizes to all inductive types, quotient inductiv
 
 ## The motivating example
 
-A homogeneous pair `p : T × T` can be equivalently described as a function `p : 𝔹→ T` on the type with two values.
-Heterogeneous pairs `p : X × Y` correspond to dependent functions `f : 𝔹→ { ff ↦ X; tt ↦ Y }`. What about dependent pairs?
+A homogeneous pair `p : T × T` can be equivalently described as a function `p : 𝔹 → T` on the type with two values.
+Heterogeneous pairs `p : X × Y` correspond to dependent functions `f : 𝔹 → { ff ↦ X; tt ↦ Y }`. What about dependent pairs?
 
 With inductive prototypes we can do that! We'll need the following one:
 ```
@@ -158,25 +163,25 @@ prototype 𝔻
   snd [dep⟩ fst
 ```
 
-Its coinductive dual `(𝔻→ )` requires the target to be a procategory `U : *̃`, a mere type `T : *` is not enough:
+The type of “functions” on 𝔻 requires the target to be a procategory `U : *̃`, a mere type `T : *` is not enough:
 ```
-structure (𝔻→ ) <U : *̃>
+structure 𝔻-Func<U : *̃> `𝔻 → U` 
   fst : U
   snd : (dep : this.fst) →ᵁ U
 ```
 
 (The operator (→ᵁ) referes to hom-types of the procategory U.)
 
-And here is the dependent coinductive dual:
+And here is the dependent version:
 ```
-structure (𝔻→ ) <Ts : 𝔻→ *̃>
+structure 𝔻-Func<Ts : 𝔻 → *> `𝔻 → Ts`
   fst : Ts.fst
   snd : (dep : this.fst) →ᵀˢ Ts.snd
 ```
 
 Now we dependent pairs `p : (x : X) × Y(x)` can be expressed as very dependent functions:
 ```
-f : 𝔻→ { fst ↦ X, snd ↦ Y(f(fst)) }
+f : 𝔻 → { fst ↦ X, snd ↦ Y(f(fst)) }
 ```
 
 Using this approach, we can define a carrier prototype for very dependent sequences:
@@ -187,18 +192,18 @@ prototype Δ⁻
 
   (n⁺) [dep⟩ n
 
-structure (Δ⁻↦ )<U : *̃>
+structure Δ⁻-Func<U : *̃> `Δ⁻ → U`
   head : U
-  tail : (dep : this.head) →ᵁ (Δ⁻↦ U)
+  tail : (dep : this.head) →ᵁ Δ⁻-Func<U>
 
-structure (Δ⁻↦ )<Ts : Δ⁻↦ *̃>
+structure Δ⁻-Func<Ts : Δ⁻ ↦ *> `Δ⁻ → Ts`
   head : Ts.head
-  tail : (dep : this.head) →ᵁ (Δ⁻↦ Ts.tail)
+  tail : (dep : this.head) →ᵁ Δ⁻-Func<Ts.tail>
 ```
 
 We have just defined the very-dependent function types initially introduced by Kopylov et al. 
 
-Inductive prototypes restore the symmetry between induction and coinduction. For every coinductive type `S` we can generate an inductive prototype `I` of observables, so that elements `f : T` are functions on `I`, and for every prototype `I` we'll have a displayed coinductive type `I-Fam` of type families over `I` so that functions `f` on `I` can be typed as `f : I→ Ts` for some `Ts : I-Fam`.
+Inductive prototypes restore the symmetry between induction and coinduction. For every coinductive type `S` we can generate an inductive prototype `I` of observables, so that elements `f : T` are functions on `I`, and for every prototype `I` we'll have a displayed coinductive type `I → *` of type families over `I` so that functions `f` on `I` can be typed as `f : I → Ts` for some `Ts : I → *`.
 
 ## Handling the contexts and telescopes
 
@@ -229,10 +234,10 @@ which defines precomposition for dependency arrows and postcomposition for embed
 definitionally/computationally associative. Differently from McBride, we only provide constructors for non-identity arrows.
 
 ```
-structure (Δ→ )<T : *̃>
+structure Δ-Func<U : *̃>
   ..TODO
 
-structure (Δ→ )<Ts : Δ→ *̃>
+structure Δ-Func<Ts : Δ→ *̃>
   ..TODO
 ```
 
@@ -275,9 +280,9 @@ prototype Δ¹⁺
   mor [target⟩ ob
 ```
 
-A family of types `T : Δ¹⁺→ *` has the
+A family of types `T : Δ¹⁺ → *` has the following structure
 ```
-structure Δ¹⁺Fam
+structure `Δ¹⁺ → *`
   Ob : *
   Mor : (source : Ob, target : Ob) → *
 ```
@@ -297,7 +302,7 @@ inductive CatTh : (i : Δ¹⁺) → *
 
 Now consider the type of models for this type:
 ```
-structure CatTh-Mod<Ts : Δ¹→ *>
+structure CatTh-Mod<Ts : Δ¹ → *>
   id : ∀{o : Ts.ob} → Ts.mor{source: o, target: o}
   (▸) : ∀{x y z : Ts.ob} (Ts.mor){source: x, target: y}
                        → (Ts.mor){source: y, target: z}
@@ -315,16 +320,16 @@ prototype Δ¹
   mor [source⟩ ob
   mor [target⟩ ob
 
-  ob ⟨よRemb] mor       
-  ob ⟨よLemb] mor
-  [source⟩⟨よRemb] ↦ [source⟩
-  [target⟩⟨よLemb] ↦ [target⟩
+  ob ⟨よR] mor       
+  ob ⟨よL] mor
+  [source⟩⟨よR] ↦ [source⟩
+  [target⟩⟨よL] ↦ [target⟩
 ```
 
-Now given `Ts : Δ¹→ *`, for every `o : Ts.Ob` we'll have Yoneda embeddings
+Now given `Ts : Δ¹ → *`, for every `o : Ts.Ob` we'll have Yoneda embeddings
 ```
-o⟨よRemb] : ∀(target : Ts.Ob) Ts.Mor(source: o, target)
-o⟨よLemb] : ∀(source : Ts.Ob) Ts.Mor(source, target: o)
+o⟨よR] : ∀(target : Ts.Ob) Ts.Mor(source: o, target)
+o⟨よL] : ∀(source : Ts.Ob) Ts.Mor(source, target: o)
 ```
 that allow to derive 
 ```
@@ -333,7 +338,7 @@ univalence : ∀{X Y : Ts.ob} (a ≃ b) ≃ Σ(f : Ts.hom{source: X, target: Y})
                                       (f ▸ g = id) and (f ▸ g = id)            
 ```
 
-Structures defined as models for an inductive type compose extremely well. Consider `Δ¹Fam`-valued models `LaxTh-Mod<Δ¹Fam>` of the lax monoid prototype, and then consider the `LaxTh-Mod<Δ¹Fam>`-valued models of `CatTh`. This way we obtain lax monoidal categories `CatTh-Mod<LaxTh-Mod<Δ¹Fam>>`!
+Structures defined as models for an inductive type compose extremely well. Consider `Δ¹Fam`-valued models `LaxTh-Mod<Δ¹Fam>` of the lax monoid prototype, and then consider the `LaxTh-Mod<Δ¹ → *>`-valued models of `CatTh`. This way we obtain lax monoidal categories `CatTh-Mod<LaxTh-Mod<Δ¹ → *>>`!
 
 The other nice thing is that since we have defined categories as models for an inductive type, we automatically have the structure of a displayed category on categories:
 ```
@@ -354,12 +359,12 @@ prototype G⁺
   [source⟩[target⟩ ↦ [source⟩
   [target⟩[source⟩ ↦ [target⟩
 
-structure G⁺Fam
+structure `G⁺ → *`
   Ob : *
   Mor : (source : Ob, target : Ob) → G⁺Fam
 ```
 
-A tower of cell types `Ts : G⁺Fam` also written `Ts : G⁺ → *`
+A tower of cell types `Ts : G⁺ → *`
 ```
 objects      Ts(0)
 morphisms    T(1)(source₁ target₁ : Ts(0))
@@ -386,16 +391,16 @@ higher structures, the semi-simplicial types `Ts : Δ⁺° → *` would be suffi
 
 Recently, A. Kolomatskaia and M. Shulman have achieved a striking breakthrough by defining the semi-simplicial types using coinduction in conjunction with `( ᵈ)`-operation forming displayed types:
 ```
-structure Δ⁺°Fam
+structure `Δ⁺° → *`
   head : *
-  tail : this.head → Δ⁺°Famᵈ<this>
+  tail : this.head → (Δ⁺° → *)ᵈ<this>
 ```
 
 With enough combinatorics, it is possible to generalize the approach for any prototypes. In particular, for any ℕ-like prototype I (the one with constructors like `0` and `( ⁺)`) we'll be able to derive the coinductive duals in the form
 ```
-structure (I→ )<U : *̃>
+structure I-Func<U : *̃>
   head : U
-  tail : F<this.head> →ᵁ (I→ᵈ< H<this> > U)
+  tail : F<this.head> →ᵁ (I-Funcᵈ< H<this> > U)
 ```
 - where `F` and `H` are some static type formers. For example, in the case of globes `G`, we'd have `H<T> := 𝔹`, `H<T> := Unit`. To establish this fact we'll first construct the prototypes of observables for coinductive types as above, and then discuss how to reverse-engineer `G` and `H` to obtain any desired prototype.
 
@@ -503,22 +508,22 @@ With prototypes, we can say that all typeformers have the form `Y<X : P → *> :
 
 Additionally we can postulate modal relational parametricity for all inductive types:
 ```
-Ipar : (n : □Iᵁ) → (R : IAlgᵈ Iobjᵁ) → (|R| n)
+I-par : (n : □Iᵁ) → (R : I-Modᵈ<I-objᵁ>) → (R n)
 ```
-— where `Iᵁ := ∀(T : U) ℕAlg<T> → T` is the type of Church-implementations, `( ᵁ) : ℕ → ℕᵁ` the recursion operator, and `Iobjᵁ` the Church-encoding like
+— where `Iᵁ := ∀(T : U) ℕ-Mod<T> → T` is the type of Church-implementations, `( ᵁ) : ℕ → ℕᵁ` the recursion operator, and `I-objᵁ` the Church-encoding like
 ```
-instance ℕobjᶜ : ℕAlg(ℕᶜ)
+instance ℕ-objᶜ : ℕ-Mod(ℕᶜ)
   base: 0ᶜ
-  step: ( ⁺)ᶜ
+  next: ( ⁺)ᶜ
 ```
 
 These operators can be used for instance to derive the classical
 ```
-def m : 𝟙Algᵈ 𝟙objᵁ {id : 𝟙ᵁ ↦ (id ≃ { x ↦ x } }
+def m : 𝟙-Modᵈ 𝟙-objᵁ {id : 𝟙ᵁ ↦ (id ≃ { x ↦ x } }
   point: refl
 
 Theorem ∀(id : □∀(T : *) T → T) id ≃ { x ↦ x }
-  𝟙par(m)
+  𝟙-par(m)
 ```
 
 With prototypes we should be able getting parametricity of higher arity for free, and also parametricity for general records, coinductive types, and indexed coinductive types.
